@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Hayeon Song — Growth Marketer</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary)",
+            "secondary-blue": "var(--secondary-blue)",
+            soomgo: "var(--primary)",
+            nextunicorn: "var(--secondary-blue)",
+            "bg-light": "var(--bg-light)",
+            "bg-dark": "var(--bg-dark)",
+            "text-primary": "var(--text-primary)",
+            "text-secondary": "var(--text-secondary)",
+            border: "var(--border)",
+            "border-dark": "var(--border-dark)",
+          },
+          fontFamily: {
+            display: ["Poppins", "sans-serif"],
+            body: ["Pretendard", "Noto Sans KR", "system-ui", "sans-serif"],
+            mono: ["DM Mono", "monospace"],
+          },
+          maxWidth: { container: "960px" },
+          spacing: { section: "120px", "section-m": "80px" },
+          borderRadius: {
+            card: "10px",
+            pill: "9999px",
+          },
+          boxShadow: {
+            soft: "0 10px 30px rgba(0,0,0,0.06)",
+            lift: "0 18px 60px rgba(0,0,0,0.10)",
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary: #6A3AF2;
+      --secondary-blue: #0064FF;
+      --bg-light: #fcfbf9;
+      --bg-dark: #1a1a1a;
+      --text-primary: #1a1a1a;
+      --text-secondary: #666666;
+      --border: rgba(0,0,0,0.08);
+      --border-dark: rgba(255,255,255,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-light);
+      color: var(--text-primary);
+      font-feature-settings: "ss01","ss02","cv01","cv02";
+    }
+    ::-webkit-scrollbar { width: 0px; background: transparent; }
+
+    .t-h1 { font-family: "Poppins", sans-serif; font-size: 40px; line-height: 1.1; }
+    .t-h2 { font-family: "Poppins", sans-serif; font-size: 30px; line-height: 1.25; }
+    .t-h3 { font-family: "Poppins", sans-serif; font-size: 21px; line-height: 1.35; }
+    .t-body { font-size: 15px; line-height: 1.8; }
+    .t-caption { font-size: 12px; line-height: 1.5; }
+
+    /* Important chapters only */
+    .section-dark {
+      --text-primary: #fff;
+      --text-secondary: #999999;
+      --border: var(--border-dark);
+      background: var(--bg-dark);
+      color: var(--text-primary);
+    }
+    .section-dark .muted { color: var(--text-secondary); }
+    .section-dark .bordered { border-color: var(--border); }
+
+    /* Modal backdrop */
+    .backdrop {
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    /* Figure helpers */
+    .fig-grid {
+      background-image: radial-gradient(rgba(106,58,242,0.10) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+  </style>
+</head>
+
+<body class="bg-bg-light text-text-primary font-body antialiased selection:bg-black selection:text-white">
+  <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+
+    <!-- Top Nav -->
+    <header class="fixed top-0 z-50 w-full bg-bg-light/90 backdrop-blur-sm border-b border-border">
+      <div class="mx-auto max-w-container px-6 h-20 flex items-center justify-between">
+        <a href="#home" onclick="showView('home');return false;" class="flex items-center gap-2">
+          <span class="font-display font-bold text-xl tracking-tight">Hayeon Song</span>
+        </a>
+
+        <div class="flex items-center gap-8">
+          <nav class="hidden md:flex items-center gap-8">
+            <a class="text-sm font-medium text-text-secondary hover:text-black transition-colors" href="#about" onclick="showView('home');">About</a>
+            <a class="text-sm font-medium text-text-secondary hover:text-black transition-colors" href="#work" onclick="showView('home');">Work</a>
+            <a class="text-sm font-medium text-text-secondary hover:text-black transition-colors" href="#writing" onclick="showView('home');">Writing</a>
+          </nav>
+
+          <button
+            class="hidden sm:flex items-center gap-2 text-sm font-semibold border-b border-black pb-0.5 hover:opacity-70 transition-opacity"
+            onclick="showView('home'); document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
+            Contact
+            <span class="material-symbols-outlined !text-[16px]">arrow_outward</span>
+          </button>
+
+          <button class="md:hidden" aria-label="menu">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow pt-32 pb-section-m md:pb-section">
+
+      <!-- =========================
+           VIEW: HOME
+      ========================== -->
+      <div id="view-home">
+        <div class="mx-auto max-w-container px-6">
+
+          <!-- Hero -->
+          <section class="flex flex-col-reverse md:flex-row gap-12 md:gap-16 items-center mb-section-m md:mb-section">
+            <div class="flex-1 flex flex-col gap-8">
+          <h1 class="t-h1 font-bold tracking-[-0.02em]">
+                Data-driven growth,<br class="hidden md:block"/>
+                meticulously engineered.
+              </h1>
+
+              <p class="t-body text-text-secondary max-w-md">
+                실험과 데이터로 전환 병목을 해체하고, Activation → 반복 활동 → Revenue Expansion까지
+                한 시스템으로 설계합니다.
+              </p>
+
+              <div class="flex flex-wrap gap-4 pt-2">
+                <button
+                  class="h-12 px-8 bg-black text-white text-sm font-semibold hover:bg-black/85 transition-all rounded-pill flex items-center gap-2"
+                  onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});">
+                  <span>Explore Projects</span>
+                  <span class="material-symbols-outlined !text-[18px]">arrow_downward</span>
+                </button>
+
+                <button
+                  class="h-12 px-8 bg-transparent text-text-primary border border-border text-sm font-semibold hover:border-black/30 transition-all rounded-pill"
+                  onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
+                  <span>Get in Touch</span>
+                </button>
+              </div>
+
+              <div class="grid grid-cols-3 gap-4 pt-8 border-t border-border mt-4">
+                <div>
+                  <p class="font-display text-3xl font-bold">6+</p>
+                  <p class="text-xs font-mono text-text-secondary uppercase tracking-wide mt-1">Years</p>
+                </div>
+                <div>
+                  <p class="font-display text-3xl font-bold">15+</p>
+                  <p class="text-xs font-mono text-text-secondary uppercase tracking-wide mt-1">Projects</p>
+                </div>
+                <div>
+                  <p class="font-display text-3xl font-bold text-soomgo">866%</p>
+                  <p class="text-xs font-mono text-text-secondary uppercase tracking-wide mt-1">Target Achv.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full md:w-[380px] shrink-0">
+              <div class="relative aspect-[3.5/4.5] w-full overflow-hidden rounded-card bg-gray-100 shadow-lift border border-border">
+                <!-- TODO: replace with your portrait -->
+                <div class="absolute inset-0 bg-gradient-to-b from-black/0 to-black/10"></div>
+                <img
+                  alt="Professional portrait"
+                  class="h-full w-full object-cover object-top grayscale hover:grayscale-0 transition-all duration-700"
+                  src="assets/profile/portrait.jpg"
+                />
+                <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-pill px-4 py-2 border border-border shadow-soft">
+                  <span class="text-xs font-mono text-text-secondary">Currently based in Seoul</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Work -->
+          <section id="work" class="border-t border-border pt-16 md:pt-20">
+            <div class="flex items-end justify-between mb-12">
+              <div>
+                <span class="block text-xs font-bold tracking-widest uppercase text-text-secondary mb-2">Selected Works</span>
+                <h2 class="t-h2 font-bold tracking-tight">Featured Projects</h2>
+              </div>
+              <button
+                class="text-sm font-medium border-b border-gray-300 pb-0.5 hover:border-black transition-all flex items-center gap-1">
+                View all case studies
+                <span class="material-symbols-outlined !text-[16px]">arrow_forward</span>
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+              <!-- Soomgo -->
+              <button class="group text-left" onclick="showView('case');" aria-label="Open Soomgo case study">
+                <div class="relative overflow-hidden rounded-card bg-gray-50 aspect-[4/3] mb-6 shadow-soft transition-all duration-500 group-hover:shadow-lift group-hover:shadow-[rgba(106,58,242,0.15)] border border-border">
+                  <div class="absolute inset-0 bg-soomgo/5 opacity-0 group-hover:opacity-100 transition-opacity z-10 duration-500"></div>
+                  <!-- TODO: cover -->
+                  <img
+                    alt="Soomgo Case Study Cover"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    src="assets/soomgo/cover.jpg"
+                  />
+                  <div class="absolute bottom-4 right-4 bg-white rounded-pill p-3 shadow-soft z-20 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 border border-border">
+                    <span class="material-symbols-outlined !text-[20px] text-soomgo">arrow_outward</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex items-center gap-3 mb-3">
+                    <span class="size-2 rounded-full bg-soomgo"></span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-soomgo">Soomgo Marketplace</span>
+                  </div>
+                  <h3 class="t-h3 font-bold tracking-[-0.01em] mb-2 group-hover:text-soomgo transition-colors">
+                    고수 풀퍼널 성장 엔진
+                  </h3>
+                  <p class="t-body text-text-secondary">
+                    Activation(첫 견적) → 반복 활동 → Revenue Expansion(유료 전환)까지,
+                    세그먼트 기반 개입으로 전환 병목을 해결.
+                  </p>
+                </div>
+              </button>
+
+              <!-- Nextunicorn -->
+              <button class="group text-left" onclick="openSoonModal();">
+                <div class="relative overflow-hidden rounded-card bg-gray-50 aspect-[4/3] mb-6 shadow-soft transition-all duration-500 group-hover:shadow-lift group-hover:shadow-[rgba(0,100,255,0.15)] border border-border">
+                  <div class="absolute inset-0 bg-nextunicorn/5 opacity-0 group-hover:opacity-100 transition-opacity z-10 duration-500"></div>
+                  <img
+                    alt="Nextunicorn Cover"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    src="assets/nextunicorn/cover.jpg"
+                  />
+                  <div class="absolute top-4 left-4 z-20 bg-white/90 backdrop-blur-sm rounded-pill px-3 py-1 border border-border shadow-soft">
+                    <span class="text-xs font-mono text-text-secondary">COMING SOON</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex items-center gap-3 mb-3">
+                    <span class="size-2 rounded-full bg-nextunicorn"></span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-nextunicorn">Nextunicorn B2B</span>
+                  </div>
+                  <h3 class="t-h3 font-bold tracking-[-0.01em] mb-2 group-hover:text-nextunicorn transition-colors">
+                    B2B 플랫폼 그로스
+                  </h3>
+                  <p class="t-body text-text-secondary">
+                    콘텐츠/퍼포먼스/CRM을 결합해 시장 확장을 만든 성장 실험. (정리 중)
+                  </p>
+                </div>
+              </button>
+            </div>
+          </section>
+
+          <!-- Contact -->
+          <section id="contact" class="py-section-m md:py-section">
+            <div class="rounded-card border border-border bg-white p-10 md:p-12 shadow-soft">
+              <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                <div>
+                  <h2 class="t-h2 font-bold tracking-tight">Let’s build a scalable growth engine.</h2>
+                  <p class="t-body text-text-secondary mt-3 max-w-xl">
+                    포트폴리오/케이스 관련 질문이나, 성장 문제를 함께 정의하고 실험 설계를 논의하고 싶다면 언제든 연락 주세요.
+                  </p>
+                </div>
+                <a
+                  class="inline-flex items-center justify-center h-12 px-8 rounded-pill bg-black text-white text-sm font-semibold hover:bg-black/85 transition-all"
+                  href="mailto:hayeon@example.com">
+                  Email me
+                  <span class="material-symbols-outlined ml-2 !text-[18px]">arrow_outward</span>
+                </a>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <footer class="mt-auto border-t border-border bg-white py-12">
+          <div class="max-w-container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-text-secondary text-sm font-mono">© 2026 Hayeon Song. All rights reserved.</div>
+            <div class="flex gap-6">
+              <a class="text-text-secondary hover:text-black transition-colors" href="#" aria-label="LinkedIn">
+                <span class="material-symbols-outlined !text-[20px]">work</span>
+              </a>
+              <a class="text-text-secondary hover:text-black transition-colors" href="mailto:hayeon@example.com" aria-label="Email">
+                <span class="material-symbols-outlined !text-[20px]">mail</span>
+              </a>
+            </div>
+          </div>
+        </footer>
+      </div>
+
+      <!-- =========================
+           VIEW: CASE (SOOMGO)
+      ========================== -->
+      <div id="view-case" class="hidden">
+
+        <!-- Back -->
+        <div class="mx-auto max-w-container px-6">
+          <button
+            class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors"
+            onclick="showView('home')">
+            <span class="material-symbols-outlined !text-[18px]">arrow_back</span>
+            Back to Home
+          </button>
+        </div>
+
+        <!-- HERO (DARK) -->
+        <section class="section-dark mt-6 py-section-m md:py-section">
+          <div class="mx-auto max-w-container px-6">
+            <p class="text-sm muted italic border-b bordered pb-4">
+              본 문서는 지원 목적의 포트폴리오로, 비공개 서약에 따라 일부 수치·정책·내부 정보는 변형하거나 생략했습니다.
+              (현재 버전은 “수치 그대로” 반영)
+            </p>
+
+            <div class="flex items-center gap-3 mt-8 mb-6">
+              <span class="inline-flex items-center px-3 py-1 rounded-pill text-xs font-semibold bg-soomgo text-white">
+                Case Study · Soomgo
+              </span>
+              <span class="font-mono text-xs muted">Activation → 반복 활동 → Revenue Expansion</span>
+            </div>
+
+            <h1 class="t-h1 font-bold tracking-tight">
+              고수의 첫 견적부터 수익의 확장까지:<br/>
+              <span class="text-soomgo">숨고의 성장 엔진을 깨우다</span>
+            </h1>
+
+            <p class="t-body mt-6 muted max-w-2xl">
+              저는 캠페인을 나열하는 대신, 고수의 여정을 <b class="text-white">하나의 성장 시스템</b>으로 재구성했습니다.
+              <b class="text-white">‘첫 견적 이전에 멈춘 고수’</b>와 <b class="text-white">‘첫 견적 이후 확장으로 이어지지 않는 고수’</b>를 구분하고,
+              각 구간에 필요한 개입을 설계해 풀퍼널로 연결했습니다.
+            </p>
+
+            <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="rounded-card border bordered bg-white/5 p-6">
+                <p class="font-mono text-xs muted uppercase tracking-wider">Activation</p>
+                <p class="font-display text-3xl font-bold mt-2 text-soomgo">+43.3%</p>
+                <p class="text-sm muted mt-1">1일 이내 결제 전환 (p=0.0005)</p>
+              </div>
+              <div class="rounded-card border bordered bg-white/5 p-6">
+                <p class="font-mono text-xs muted uppercase tracking-wider">Diagnosis</p>
+                <p class="font-display text-3xl font-bold mt-2">QR -6.76%</p>
+                <p class="text-sm muted mt-1">OR -1.70% · CR -5.17%</p>
+              </div>
+              <div class="rounded-card border bordered bg-white/5 p-6">
+                <p class="font-mono text-xs muted uppercase tracking-wider">Expansion</p>
+                <p class="font-display text-3xl font-bold mt-2 text-soomgo">ROAS 1,249%</p>
+                <p class="text-sm muted mt-1">광고 구좌 CRM 성과</p>
+              </div>
+            </div>
+
+            <!-- FIGURE: Hero summary (optional) -->
+            <!-- ✅ 여기에 “전체 구조 한 장 요약(풀퍼널/플라이휠/타임라인)” 이미지 넣으면, 첫 화면 완성도가 확 올라갑니다 -->
+            <figure class="mt-10 rounded-card border bordered bg-white/5 overflow-hidden">
+              <img
+                class="w-full h-auto object-cover"
+                src="assets/soomgo/fig-hero-system.png"
+                alt="Soomgo full-funnel system overview"
+              />
+              <figcaption class="px-6 py-4 text-sm muted border-t bordered">
+                <span class="font-mono text-xs uppercase tracking-wider">Figure H</span>
+                <span class="mx-2 opacity-40">·</span>
+                Activation → 반복 활동 → Revenue Expansion 구조 요약 (풀퍼널 시스템 뷰)
+              </figcaption>
+            </figure>
+
+          </div>
+        </section>
+
+        <!-- BODY -->
+        <section class="py-section-m md:py-section">
+          <div class="mx-auto max-w-container px-6 grid gap-section-m md:gap-section">
+
+            <!-- 01 Context -->
+            <article>
+              <div class="flex flex-col gap-3 mb-8">
+                <span class="font-mono text-xs text-soomgo uppercase tracking-wider">01 — Context</span>
+                <h2 class="t-h2 font-bold tracking-tight">
+                  겉으로는 성장, 엔진의 효율은 하락
+                </h2>
+              </div>
+
+              <div class="t-body text-text-secondary space-y-4">
+                <p>
+                  숨고는 고객(요청)과 고수(견적)가 연결되는 서비스 마켓플레이스입니다.
+                  서비스 볼륨은 성장하고 있었지만, 신규 고수의 <b class="text-text-primary">첫 결제·첫 견적 전환</b>과 초기 리텐션은 약해지고 있었습니다.
+                </p>
+                <p>
+                  그래서 저는 “무엇을 더 할까”보다 먼저 <b class="text-text-primary">왜 떨어지는지</b>를 규명하는 것부터 시작했습니다.
+                </p>
+              </div>
+
+              <!-- FIGURE: marketplace loop -->
+              <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <figure class="rounded-card border border-border bg-white overflow-hidden shadow-soft">
+                  <img class="w-full h-auto" src="assets/soomgo/fig-marketplace-loop.png" alt="Marketplace loop diagram"/>
+                  <figcaption class="px-6 py-4 text-sm text-text-secondary border-t border-border">
+                    <span class="font-mono text-xs uppercase tracking-wider">Figure 1</span>
+                    <span class="mx-2 opacity-40">·</span>
+                    양면시장 구조: 고객(Request) ↔ 고수(Quote)
+                  </figcaption>
+                </figure>
+
+                <figure class="rounded-card border border-border bg-white overflow-hidden shadow-soft">
+                  <img class="w-full h-auto" src="assets/soomgo/fig-revenue-model.png" alt="Revenue model"/>
+                  <figcaption class="px-6 py-4 text-sm text-text-secondary border-t border-border">
+                    <span class="font-mono text-xs uppercase tracking-wider">Figure 2</span>
+                    <span class="mx-2 opacity-40">·</span>
+                    매출 구조: 견적 발송료(캐시) 기반 수익 모델
+                  </figcaption>
+                </figure>
+              </div>
+            </article>
+
+            <!-- 02 My Role -->
+            <article class="rounded-card border border-border bg-white p-10 md:p-12 shadow-soft">
+              <div class="flex flex-col gap-3 mb-6">
+                <span class="font-mono text-xs text-soomgo uppercase tracking-wider">02 — My Role</span>
+                <h2 class="t-h2 font-bold tracking-tight">
+                  풀퍼널을 오너십 있게 리드
+                </h2>
+              </div>
+              <p class="t-body text-text-secondary">
+                저는 숨고 고수의 <b class="text-text-primary">Activation(첫 견적 발송) → 반복 활동 → Revenue Expansion(유료 상품 전환)</b>
+                으로 이어지는 풀퍼널을 오너십 있게 리드했습니다.
+              </p>
+              <p class="t-body text-text-secondary mt-4">
+                또한 <b class="text-text-primary">견적 발송률 하락</b>을 출발점으로 원인을 신규/기존 고수 퍼널로 분해해 병목을 규명하고,
+                그 결과를 근거로 우선순위화해 빠르게 실행하고 반복 개선했습니다.
+              </p>
+
+              <!-- FIGURE: funnel segmentation overview -->
+              <figure class="mt-8 rounded-card border border-border bg-gray-50 overflow-hidden">
+                <div class="p-6 border-b border-border flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-soomgo">splitscreen</span>
+                    <span class="font-mono text-xs text-text-secondary uppercase tracking-wider">Key segmentation</span>
+                  </div>
+                  <span class="font-mono text-xs text-text-secondary">New vs Existing Pros</span>
+                </div>
+                <img class="w-full h-auto" src="assets/soomgo/fig-new-vs-existing.png" alt="Segmentation overview"/>
+                <figcaption class="px-6 py-4 text-sm text-text-secondary border-t border-border">
+                  <span class="font-mono text-xs uppercase tracking-wider">Figure 3</span>
+                  <span class="mx-2 opacity-40">·</span>
+                  ‘첫 성공(첫 결제·첫 견적)’ 장벽 vs ‘지속 동기(재결제·확장)’ 장벽
+                </figcaption>
+              </figure>
+            </article>
+
+            <!-- 03 Diagnosis (DARK) -->
+            <article class="section-dark rounded-card border bordered p-10 md:p-12">
+              <div class="flex flex-col gap-3 mb-8">
+                <span class="font-mono text-xs text-soomgo uppercase tracking-wider">03 — Diagnosis</span>
+                <h2 class="t-h2 font-bold tracking-tight">
+                  QR을 OR·CR로 분해해 문제를 “구간”으로 정의
+                </h2>
+              </div>
+
+              <div class="t-body muted space-y-5">
+                <p>플랫폼의 전체 견적 전환율(QR)은 다음과 같습니다.</p>
+
+                <div class="rounded-card border bordered bg-white/5 p-6 font-mono text-sm">
+                  QR = OR(요청서 오픈율) × CR(견적서 발송 전환률)
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div class="rounded-card border bordered bg-white/5 p-6">
+                    <p class="font-mono text-xs muted uppercase tracking-wider">QR YoY</p>
+                    <p class="font-display text-3xl font-bold mt-2 text-white">-6.76%</p>
+                    <p class="text-sm muted mt-1">전체 견적 전환율</p>
+                  </div>
+                  <div class="rounded-card border bordered bg-white/5 p-6">
+                    <p class="font-mono text-xs muted uppercase tracking-wider">OR</p>
+                    <p class="font-display text-3xl font-bold mt-2 text-white">-1.70%</p>
+                    <p class="text-sm muted mt-1">요청서 오픈율</p>
+                  </div>
+                  <div class="rounded-card border bordered bg-white/5 p-6">
+                    <p class="font-mono text-xs muted uppercase tracking-wider">CR</p>
+                    <p class="font-display text-3xl font-bold mt-2 text-white">-5.17%</p>
+                    <p class="text-sm muted mt-1">견적서 발송 전환률</p>
+                  </div>
+                </div>
+
+                <p>
+                  고수는 요청서 수신 후 <b class="text-white">48시간 이내</b> 견적 발송이 필요하고, 이후 만료됩니다.
+                  즉 “시간제한형 퍼널”에서 <b class="text-white">언제 개입해야 전환이 움직이는지</b>가 핵심이었습니다.
+                </p>
+
+                <p class="italic">
+                  이때부터 질문은 “왜 안 보내나”가 아니라, <b class="text-white">“언제, 누구에게, 무엇을 먼저 해결해야 보내는가”</b>로 바뀌었습니다.
+                </p>
+              </div>
+
+              <!-- FIGURE: 2024 Aug QR/OR/CR card -->
+              <figure class="mt-10 rounded-card border bordered bg-white/5 overflow-hidden">
+                <img class="w-full h-auto object-cover" src="assets/soomgo/fig-qr-or-cr-202408.png" alt="QR OR CR decomposition 2024 Aug"/>
+                <figcaption class="px-6 py-4 text-sm muted border-t bordered">
+                  <span class="font-mono text-xs uppercase tracking-wider">Figure 4</span>
+                  <span class="mx-2 opacity-40">·</span>
+                  2024.08 YoY: QR -6.76% (OR -1.70%, CR -5.17%)
+                </figcaption>
+              </figure>
+            </article>
+
+            <!-- 04 Root Cause -->
+            <article>
+              <div class="flex flex-col gap-3 mb-8">
+                <span class="font-mono text-xs text-soomgo uppercase tracking-wider">04 — Root Cause</span>
+                <h2 class="t-h2 font-bold tracking-tight">
+                  ‘무응답’이 수익 불확실성을 구조적으로 키운다
+                </h2>
+              </div>
+
+              <div class="t-body text-text-secondary space-y-4">
+                <p>
+                  UX 리서치에서 반복적으로 확인된 원인은 <b class="text-text-primary">수익 불확실성</b>, <b class="text-text-primary">노하우 학습 필요</b>,
+                  <b class="text-text-primary">요청 수 부족</b>이었습니다.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                  <div class="rounded-card border border-border bg-white p-6 shadow-soft">
+                    <p class="font-mono text-xs text-text-secondary uppercase tracking-wider">SQL Analysis</p>
+                    <p class="font-display text-3xl font-bold mt-2 text-soomgo">18.8%</p>
+                    <p class="text-sm text-text-secondary mt-1">발송된 견적 대비 응답률</p>
+                  </div>
+                  <div class="rounded-card border border-border bg-white p-6 shadow-soft">
+                    <p class="font-mono text-xs text-text-secondary uppercase tracking-wider">SQL Analysis</p>
+                    <p class="font-display text-3xl font-bold mt-2 text-soomgo">26.8%</p>
+                    <p class="text-sm text-text-secondary mt-1">오픈된 견적 대비 응답률</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FIGURE: customer non-response reasons (from UX) -->
+              <figure class="mt-10 rounded-card border border-border bg-white overflow-hidden shadow-soft">
+                <img class="w-full h-auto" src="assets/soomgo/fig-customer-no-response.png" alt="Customer no response reasons"/>
+                <figcaption class="px-6 py-4 text-sm text-text-secondary border-t border-border">
+                  <span class="font-mono text-xs uppercase tracking-wider">Figure 5</span>
+                  <span class="mx-2 opacity-40">·</span>
+                  UX 리서치: “견적 미열람(가격 불만족)” vs “열람 후 무응답(무엇을 말해야 할지 모름)”
+                </figcaption>
+              </figure>
+            </article>
+
+            <!-- 05 In-product survey -->
+            <article class="rounded-card border border-border bg-white p-10 md:p-12 shadow-soft">
+              <div class="flex flex-col gap-3 mb-6">
+                <span class="font-mono text-xs text-soomgo uppercase tracking-wider">05 — Data Collection</span>
+                <h2 class="t-h2 font-bold tracking-tight">
+                  숨고 최초 인프로덕트 모달 서베이로 “행동 직후 이유”를 수집
+                </h2>
+              </div>
+
+              <div class="t-body text-text-secondary space-y-4">
+                <p>
+                  리서치가 “가능한 이유”를 보여줬다면, 저는 이를 “행동 직후의 이유”로 검증해야 했습니다.
+                  그래서 숨고에서 <b class="text-text-primary">최초로 인프로덕트 모달 서베이</b>를 설계·운영했습니다.
+                </p>
+
+                <ul class="list-disc pl-5 space-y-2">
+                  <li><b class="text-text-primary">대상</b>: 2일 이내 받은 요청이 있음에도 견적을 발송하지 않은 고수</li>
+                  <li><b class="text-text-primary">수집</b>: ‘견적 미발송 이유’를 선택형으로 수집하고, 선택지별 해결 정보를 연결</li>
+                  <li><b class="text-text-primary">학습</b>: 같은 정보라도 <b class="text-text-primary">요청서 확인 5분 후</b> 개입에서만 전환 개선이 유의미</li>
+                </ul>
+              </div>
+
+              <!-- FIGURE: in-product modal survey (Version B) -->
+              <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <figure class="rounded-card border border-border bg-gray-50 overflow-hidden">
+                  <img class="w-full h-auto" src="assets/soomgo/fig-nonquote-modal-B.png" alt="Non-quote reason modal version B"/>
+                  <figcaption class="px-6 py-4 text-sm text-text-secondary border-t border-border">
+                    <span class="font-mono text-xs uppercase tracking-wider">Figure 6</span>
+                    <span class="mx-2 opacity-40">·</span>
+                    인프로덕트 모달 서베이 (Winner: Version B)
+                  </figcaption>
+                </figure>
+
+                <figure class="rounded-card border border-border bg-gray-50 overflow-hidden">
+                  <img class="w-full h-auto" src="assets/soomgo/fig-nonquote-modal-timing.png" alt="Timing insight"/>
+                  <figcaption class="px-6 py-4 text-sm text-text-secondary border-t border-border">
+                    <span class="font-mono text-xs uppercase tracking-wider">Figure 7</span>
+                    <span class="mx-2 opacity-40">·</span>
+                    타이밍 인사이트: 5분 후 개입에서만 성과 개선이 유의미
+                  </figcaption>
+                </figure>
+              </div>
+
+              <div class="mt-8 rounded-card border border-border bg-gray-50 p-6">
+                <p class="t-body text-text-secondary italic">
+                  이때부터 질문은 “왜 안 보내나”가 아니라, <b class="text-text-primary">“언제, 누구에게, 무엇을 먼저 해결해야 보내는가”</b>로 바뀌었습니다.
+                </p>
+              </div>
+            </article>
+
+            <!-- 06 Findings -->
+            <article>
+              <div class="flex flex-col gap-3 mb-8">
+                <span class="font-mono text-xs text-soomgo uppercase tracking-wider">06 — Findings</span>
+                <h2 class="t-h2 font-bold tracking-tight">
+                  엔진이 끊기는 지점은 ‘첫 결제’와 ‘재결제’였다
+                </h2>
+              </div>
+
+              <!-- FIGURE: New pro payment funnel / trend -->
+              <figure class="rounded-card border border-border bg-white overflow-hidden shadow-soft">
+                <img class="w-full h-auto" src="assets/soomgo/fig-first-payment-funnel.png" alt="First payment funnel"/>
+                <figcaption class="px-6 py-4 text-sm text-text-secondary border-t border-border">
+                  <span class="font-mono text-xs uppercase tracking-wider">Figure 8</span>
+                  <span class="mx-2 opacity-40">·</span>
+                  신규 고수: 7일 내 첫 결제율 15% · 1개월 결제율 YoY -6.3%p · 골든타임 24h
+                </figcaption>
+              </figure>
+            </article>
+
+            <!-- 07 Activation intervention -->
+            <article class="rounded-card border border-border bg-white p-10 md:p-12 shadow-soft">
+              <div class="flex flex-col gap-3 mb-8">
+                <span class="font-mono text-xs text-soomgo uppercase tracking-wider">07 — Intervention (Activation)</span>
+                <h2 class="t-h2 font-bold tracking-tight">
+                  캐시 부족 안내 모달 개선: 마찰은 초기에 제거해야 했다
+                </h2>
+              </div>
+
+              <div class="t-body text-text-secondary space-y-4">
+                <p>
+                  기존 구조: 견적 작성 완료 후 ‘발송’ 직전에 캐시 충전 요구 → 이탈률 56.7%
+                </p>
+                <p>
+                  To-be: 견적서 작성 이전(요청서 상세 진입 시점)으로 안내를 앞당김.
+                </p>
+              </div>
+
+              <!-- FIGURE: As-is vs To-be -->
+              <figure class="mt-10 rounded-card border border-border bg-gray-50 overflow-hidden">
+                <img class="w-full h-auto" src="assets/soomgo/fig-cash-modal-as-is-to-be.png" alt="Cash modal as-is vs to-be"/>
+                <figcaption class="px-6 py-4 text-sm text-text-secondary border-t border-border">
+                  <span class="font-mono text-xs uppercase tracking-wider">Figure 9</span>
+                  <span class="mx-2 opacity-40">·</span>
+                  캐시 충전 필요 모달: AS-IS vs TO-BE + 성과(전환 +43.3% / +37.11%)
+                </figcaption>
+              </figure>
+            </article>
+
+            <!-- 08 Repurchase interventions -->
+            <article>
+              <div class="flex flex-col gap-3 mb-8">
+                <span class="font-mono text-xs text-soomgo uppercase tracking-wider">08 — Intervention (Repurchase)</span>
+                <h2 class="t-h2 font-bold tracking-tight">
+                  ‘무응답’이 만든 불확실성을 줄여 재결제를 만든다
+                </h2>
+              </div>
+
+              <!-- FIGURE: Campaign B + C summary -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <figure class="rounded-card border border-border bg-white overflow-hidden shadow-soft">
+                  <img class="w-full h-auto" src="assets/soomgo/fig-campaign-b.png" alt="Campaign B"/>
+                  <figcaption class="px-6 py-4 text-sm text-text-secondary border-t border-border">
+                    <span class="font-mono text-xs uppercase tracking-wider">Figure 10</span>
+                    <span class="mx-2 opacity-40">·</span>
+                    Campaign B(고수): 가이드 행동 실행률 +13.93% (p=0.0002)
+                  </figcaption>
+                </figure>
+
+                <figure class="rounded-card border border-border bg-white overflow-hidden shadow-soft">
+                  <img class="w-full h-auto" src="assets/soomgo/fig-campaign-c.png" alt="Campaign C"/>
+                  <figcaption class="px-6 py-4 text-sm text-text-secondary border-t border-border">
+                    <span class="font-mono text-xs uppercase tracking-wider">Figure 11</span>
+                    <span class="mx-2 opacity-40">·</span>
+                    Campaign C(고객): 1일 내 응답률 +17.8% (p=0.0385)
+                  </figcaption>
+                </figure>
+              </div>
+            </article>
+
+            <!-- 09 Expansion (DARK) -->
+            <article class="section-dark rounded-card border bordered p-10 md:p-12">
+              <div class="flex flex-col gap-3 mb-8">
+                <span class="font-mono text-xs text-soomgo uppercase tracking-wider">09 — Revenue Expansion</span>
+                <h2 class="t-h2 font-bold tracking-tight">
+                  광고 구좌를 “확장 단계의 채택 흐름”으로 설계
+                </h2>
+              </div>
+
+              <div class="t-body muted space-y-4">
+                <p>
+                  광고 구좌는 신규 매출원으로 우선순위가 높은 전략 과제였습니다.
+                  저는 이를 “기능 안내”가 아니라 <b class="text-white">지속 발송 이후 Expansion 단계에서 자연스럽게 채택되는 흐름</b>으로 설계했습니다.
+                </p>
+              </div>
+
+              <!-- FIGURE: performance / immediate payment structural change -->
+              <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <figure class="rounded-card border bordered bg-white/5 overflow-hidden">
+                  <img class="w-full h-auto" src="assets/soomgo/fig-ads-performance.png" alt="Ads performance"/>
+                  <figcaption class="px-6 py-4 text-sm muted border-t bordered">
+                    <span class="font-mono text-xs uppercase tracking-wider">Figure 12</span>
+                    <span class="mx-2 opacity-40">·</span>
+                    광고 구좌 CRM 성과: Target vs Mass (CTR/CVR/ROAS)
+                  </figcaption>
+                </figure>
+
+                <figure class="rounded-card border bordered bg-white/5 overflow-hidden">
+                  <img class="w-full h-auto" src="assets/soomgo/fig-immediate-payment-shift.png" alt="Immediate payment shift"/>
+                  <figcaption class="px-6 py-4 text-sm muted border-t bordered">
+                    <span class="font-mono text-xs uppercase tracking-wider">Figure 13</span>
+                    <span class="mx-2 opacity-40">·</span>
+                    ‘즉시 결제’ 전환 이후: 1-day 전환 의존도 급증 & 회차 성패 구조 변화
+                  </figcaption>
+                </figure>
+              </div>
+            </article>
+
+            <!-- 10 Next -->
+            <article>
+              <div class="flex flex-col gap-3 mb-8">
+                <span class="font-mono text-xs text-soomgo uppercase tracking-wider">10 — Next</span>
+                <h2 class="t-h2 font-bold tracking-tight">
+                  다음 단계: 스마트견적 섹션(추가 예정)
+                </h2>
+              </div>
+              <div class="t-body text-text-secondary">
+                지속 발송 이후 “자동화(조건 기반 자동 발송)” 레버로 Expansion을 완성하는 후속 섹션을 추후 추가합니다.
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <footer class="mt-auto border-t border-border bg-white py-12">
+          <div class="max-w-container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-text-secondary text-sm font-mono">© 2026 Hayeon Song. All rights reserved.</div>
+            <div class="flex gap-6">
+              <button class="text-text-secondary hover:text-black transition-colors" onclick="showView('home')" aria-label="Back Home">
+                <span class="material-symbols-outlined !text-[20px]">home</span>
+              </button>
+              <a class="text-text-secondary hover:text-black transition-colors" href="mailto:hayeon@example.com" aria-label="Email">
+                <span class="material-symbols-outlined !text-[20px]">mail</span>
+              </a>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <!-- Coming Soon Modal -->
+  <div id="soonModal" class="hidden fixed inset-0 z-[100]">
+    <div class="absolute inset-0 backdrop" onclick="closeSoonModal()"></div>
+
+    <div class="relative mx-auto mt-24 w-[92%] max-w-[560px] rounded-card bg-white border border-border shadow-lift p-8">
+      <div class="flex items-start justify-between gap-6">
+        <div>
+          <p class="font-mono text-xs text-nextunicorn uppercase tracking-wider">Nextunicorn · Case Study</p>
+          <h3 class="t-h3 font-bold mt-2">B2B 플랫폼 그로스 (정리 중)</h3>
+          <p class="t-body text-text-secondary mt-3">
+            현재는 Soomgo 케이스를 중심으로 제출 준비를 마쳤고,
+            Nextunicorn 케이스는 동일한 내러티브 구조로 재편집 중입니다.
+          </p>
+        </div>
+
+        <button class="text-text-secondary hover:text-black transition-colors" onclick="closeSoonModal()" aria-label="Close">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="mt-8 flex flex-col sm:flex-row gap-3">
+        <button
+          class="h-12 px-6 rounded-pill bg-black text-white text-sm font-semibold hover:bg-black/85 transition-all w-full"
+          onclick="closeSoonModal(); showView('case');">
+          먼저 Soomgo 케이스 보기
+        </button>
+        <button
+          class="h-12 px-6 rounded-pill border border-border bg-white text-text-primary text-sm font-semibold hover:border-black/30 transition-all w-full"
+          onclick="closeSoonModal();">
+          닫기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showView(which){
+      const home = document.getElementById('view-home');
+      const cs = document.getElementById('view-case');
+      const isHome = which === 'home';
+
+      home.classList.toggle('hidden', !isHome);
+      cs.classList.toggle('hidden', isHome);
+
+      window.scrollTo(0,0);
+      history.replaceState({}, '', isHome ? '#home' : '#case');
+    }
+
+    function openSoonModal(){
+      document.getElementById('soonModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSoonModal(){
+      document.getElementById('soonModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function routeFromHash() {
+      const route = location.hash.replace('#', '');
+      showView(route === 'case' || route === 'soomgo' ? 'case' : 'home');
+    }
+    window.addEventListener('load', routeFromHash);
+    window.addEventListener('popstate', routeFromHash);
+
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') closeSoonModal();
+    });
+  </script>
+</body>
+</html>
