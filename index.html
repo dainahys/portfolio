@@ -349,6 +349,40 @@
       letter-spacing: 0.01em;
       overflow-wrap: anywhere;
     }
+    #view-nu .nu-step-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 8px;
+      margin-bottom: 18px;
+    }
+    #view-nu .nu-step-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--nu);
+      color: #fff;
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0.02em;
+    }
+    #view-nu .nu-step-title {
+      display: block;
+      max-width: 100%;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--nu);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
     #view-nu .nu-project-shell {
       max-width: 960px;
       margin-left: auto;
@@ -371,10 +405,42 @@
     #view-nu .nu-project-shell .md\:ml-\[68px\] {
       min-width: 0;
     }
+    #view-nu .nu-unified-section {
+      margin-top: 16px;
+      border: 1px solid #D9E7FF;
+      background: #F8FBFF;
+      border-radius: 24px;
+      padding: 20px;
+    }
+    #view-nu .nu-unified-section > * + * {
+      margin-top: 16px;
+    }
+    #view-nu .nu-unified-section > .nu-project-divider,
+    #view-nu .nu-unified-section > .nu-funnel,
+    #view-nu .nu-unified-section > .nu-acquisition-pie {
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 0;
+      padding-right: 0;
+      box-sizing: border-box;
+    }
+    #view-nu .nu-unified-section > .nu-project-divider {
+      margin-top: 8px;
+      margin-bottom: 0;
+      padding-top: 20px;
+    }
+    #view-nu .nu-unified-section > .nu-acquisition-pie {
+      margin-top: 12px;
+      margin-bottom: 0;
+    }
+    #view-nu .nu-unified-section > .nu-acquisition-pie + .nu-step-divider {
+      margin-top: 4px;
+    }
 
     .nu-diagram-block {
       width: 100%;
-      max-width: 844px;
+      max-width: 422px;
       margin: 32px auto 40px;
     }
 
@@ -384,7 +450,7 @@
       height: auto;
     }
     .nu-diagram-block.nu-pie-block {
-      max-width: 640px;
+      max-width: 320px;
       margin: 24px auto 0;
       padding: 0;
       background: transparent;
@@ -392,15 +458,15 @@
 
     .nu-diagram-block.nu-pie-block .nu-pie-svg {
       display: block;
-      width: min(640px, 100%);
-      max-width: 640px;
+      width: min(320px, 100%);
+      max-width: 320px;
       height: auto;
       margin: 0 auto;
     }
 
     .nu-acquisition-pie {
       width: 100%;
-      max-width: 420px;
+      max-width: 210px;
       margin: 28px auto 0;
       padding: 0;
       background: transparent !important;
@@ -409,7 +475,7 @@
     .nu-acquisition-pie svg {
       display: block;
       width: 100% !important;
-      max-width: 420px !important;
+      max-width: 210px !important;
       height: auto !important;
       margin: 0 auto;
       background: transparent !important;
@@ -417,7 +483,7 @@
 
     .nu-funnel {
       width: 100%;
-      max-width: 844px;
+      max-width: 422px;
       margin: 24px auto 0;
       padding: 0;
       background: transparent;
@@ -587,11 +653,11 @@
     }
 
     .nu-paid-visual-image--primary {
-      max-height: 560px;
+      max-height: 280px;
     }
 
     .nu-paid-visual-image--secondary {
-      max-height: 460px;
+      max-height: 230px;
     }
 
     .nu-paid-visual-caption {
@@ -612,7 +678,7 @@
     }
 
     .nu-channel-test-feature .nu-paid-visual-image {
-      max-height: 360px;
+      max-height: 180px;
     }
 
     .nu-channel-test-grid {
@@ -622,7 +688,7 @@
     }
 
     .nu-channel-test-grid .nu-paid-visual-image {
-      max-height: 420px;
+      max-height: 210px;
     }
 
     @media (max-width: 767px) {
@@ -637,15 +703,15 @@
       }
 
       .nu-paid-visual-image--primary {
-        max-height: 400px;
+        max-height: 200px;
       }
 
       .nu-paid-visual-image--secondary {
-        max-height: 340px;
+        max-height: 170px;
       }
 
       .nu-channel-test-feature .nu-paid-visual-image {
-        max-height: 300px;
+        max-height: 150px;
       }
 
       .nu-channel-test-grid {
@@ -654,7 +720,7 @@
       }
 
       .nu-channel-test-grid .nu-paid-visual-image {
-        max-height: 330px;
+        max-height: 165px;
       }
 
       .nu-paid-visual-caption {
@@ -988,14 +1054,14 @@
   <img
     src="assets/nextunicorn/nu-cover-logo.png"
     alt="Nextunicorn logo"
-    class="absolute left-[6%] top-1/2 -translate-y-1/2 block w-[33%] max-w-none h-auto object-contain z-[2]"
+    class="absolute left-[6%] top-1/2 -translate-y-1/2 w-[33%] max-w-none h-auto object-contain z-[2]"
     loading="lazy"
     decoding="async"
   />
   <img
     src="assets/nextunicorn/nu-cover-ui.png"
     alt="Nextunicorn product interface"
-    class="absolute right-[-10%] top-0 block w-full h-auto max-w-none z-[1]"
+    class="absolute right-[-10%] top-0 h-full w-auto max-w-none object-contain z-[1]"
     loading="lazy"
     decoding="async"
   />
@@ -1524,9 +1590,10 @@ class="block w-full h-full object-cover"
 <h2 class="font-display font-bold text-[24px] md:text-[28px] leading-[1.35] tracking-[-0.01em] text-[#1F1F2B]">
                   발송 직전의 마찰을 줄이고, 행동이 일어나는 시점에 맞춰 개입했습니다
                 </h2>
-  </div>
+</div>
 </div>
 <div class="md:ml-[68px]">
+<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">신규 고수가 첫 결제까지 빠르게 도달하도록 초기 마찰 구간을 재정의하고, 활성화 기준점을 앞당기는 구조로 설계했습니다.</p>
 <div class="mt-4 rounded-xl border border-[#D8CCFF] bg-gradient-to-br from-[#F5F0FF] to-[#FFFFFF] p-5 md:p-6">
   <div class="flex flex-col">
     <span class="font-mono text-[11px] uppercase tracking-[0.1em] text-[#6A3AF2]">Experiment Result</span>
@@ -1549,14 +1616,16 @@ class="block w-full h-full object-cover"
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 <div class="rounded-[14px] border border-[#D9CEFF] bg-[#FCFAFF] p-4">
 <p class="font-mono text-[11px] uppercase tracking-wider text-[#6A3AF2] mb-3">AS-IS</p>
-<div class="flex h-[420px] items-center justify-center">
-<img alt="AS-IS 캐시 부족 모달" class="w-full max-w-[300px] h-full object-contain object-center mx-auto" src="assets/soomgo/soomgo-modal-cashlack-asis.png"/>
+<div class="flex h-[280px] items-center justify-center overflow-hidden">
+<img alt="AS-IS 캐시 부족 모달" class="max-w-[180px] max-h-[252px] w-auto h-auto object-contain mx-auto" src="assets/soomgo/soomgo-modal-cashlack-asis.png"/>
 </div>
 <p class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">견적서 작성 후에야 캐시 부족을 알리며, 이미 리소스를 들인 뒤 이탈이 발생할 수 있었습니다.</p>
 </div>
 <div class="rounded-[14px] border border-[#D9CEFF] bg-[#FCFAFF] p-4">
 <p class="font-mono text-[11px] uppercase tracking-wider text-[#6A3AF2] mb-3">TO-BE</p>
-<img alt="TO-BE 캐시 부족 모달" class="w-full max-w-[320px] h-auto mx-auto" src="assets/soomgo/soomgo-modal-cashlack-tobe.png"/>
+<div class="flex h-[280px] items-center justify-center overflow-hidden">
+<img alt="TO-BE 캐시 부족 모달" class="max-w-full max-h-[280px] w-auto h-auto object-contain mx-auto" src="assets/soomgo/soomgo-modal-cashlack-tobe.png"/>
+</div>
 <p class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">작성 전에 캐시 부족 상태를 먼저 안내해, 스토어 진입과 캐시 충전으로 자연스럽게 연결되도록 바꿨습니다.</p>
 </div>
 </div>
@@ -1571,6 +1640,7 @@ class="block w-full h-full object-cover"
     이후에는 첫 결제 이후 고수와 기존 고수의 요청 반응 구간에서, 상태별 리마인더 개입 시점을 최적화했습니다.
   </h4>
 </div>
+<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">요청 반응 구간의 리마인더 개입 시점과 메시지 맥락을 재설계해, OR과 CR을 함께 개선하는 전환 흐름으로 연결했습니다.</p>
 <div class="mt-4 rounded-xl border border-[#D8CCFF] bg-gradient-to-br from-[#F5F0FF] to-[#FFFFFF] p-5 md:p-6">
   <span class="font-mono text-[11px] uppercase tracking-[0.1em] text-[#6A3AF2]">Experiment Result</span>
   <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -1624,7 +1694,7 @@ class="block w-full h-full object-cover"
       05
     </div>
     <div class="flex flex-col gap-2 flex-1 pt-1">
-    <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-[#6A3AF2] font-semibold">OUTCOME</span>
+    <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-[#6A3AF2] font-semibold">RESULT</span>
     <h2 class="font-display font-bold text-[24px] md:text-[28px] leading-[1.35] tracking-[-0.01em] text-[#1F1F2B]">
       신규 고수의 초기 안착과 요청 반응 전환 구간 모두에서 전환 효율을 회복했습니다
     </h2>
@@ -1634,50 +1704,6 @@ class="block w-full h-full object-cover"
     <p class="mt-6 text-[15px] leading-[1.8] text-text-secondary max-w-3xl">
       신규 고수의 초기 안착과 기존 고수를 포함한 반응 전환 구간을 동시에 개선하며, 성장 엔진의 시작점과 반복 구간 모두에서 전환 효율을 회복했습니다. 이후 첫 결제를 활성화의 기준점으로 다시 정의하고, 발송 직전의 마찰을 줄이고, 행동이 일어나는 시점에 맞춰 개입하면서 엔진의 시작점과 마지막 구간을 함께 개선했습니다.
     </p>
-
-    <div class="mt-8 grid grid-cols-1 xl:grid-cols-[0.95fr_1.55fr] gap-5">
-      <div class="rounded-xl border border-[#CBB9FF] bg-[#FCFAFF] p-4 md:p-5">
-        <p class="font-mono text-[11px] uppercase tracking-[0.08em] text-[#9B8CC4]">WORKSTREAM 1</p>
-        <h4 class="mt-3 font-display text-[20px] leading-[1.5] tracking-[-0.01em] text-[#1F1F2B]">
-          New Pro Activation
-        </h4>
-        <div class="mt-5 rounded-[14px] border border-[#D9CEFF] bg-white px-5 py-5">
-          <p class="font-mono text-[11px] uppercase tracking-[0.08em] text-[#9B8CC4]">Activation</p>
-          <p class="mt-3 font-display text-[32px] leading-none text-soomgo">+43.3%</p>
-          <p class="mt-2 text-[14px] leading-[1.6] text-[#5B5670]">가입 당일 구매 전환율</p>
-        </div>
-      </div>
-
-      <div class="rounded-xl border border-[#CBB9FF] bg-[#FCFAFF] p-4 md:p-5">
-        <p class="font-mono text-[11px] uppercase tracking-[0.08em] text-[#9B8CC4]">WORKSTREAM 2</p>
-        <h4 class="mt-3 font-display text-[20px] leading-[1.5] tracking-[-0.01em] text-[#1F1F2B]">
-          Response &amp; Conversion
-        </h4>
-        <p class="mt-2 text-[14px] leading-[1.7] text-[#5B5670]">
-          OR과 CR을 함께 개선해 최종 QR까지 끌어올렸습니다.
-        </p>
-        <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="rounded-[14px] border border-[#D9CEFF] bg-white px-5 py-5">
-            <p class="font-mono text-[11px] uppercase tracking-[0.08em] text-[#9B8CC4]">OR</p>
-            <p class="mt-3 font-display text-[32px] leading-none text-soomgo">+24.55%</p>
-            <p class="mt-2 text-[14px] leading-[1.6] text-[#5B5670]">견적서 오픈 비율</p>
-          </div>
-
-          <div class="rounded-[14px] border border-[#D9CEFF] bg-white px-5 py-5">
-            <p class="font-mono text-[11px] uppercase tracking-[0.08em] text-[#9B8CC4]">CR</p>
-            <p class="mt-3 font-display text-[32px] leading-none text-soomgo">+6.19%</p>
-            <p class="mt-2 text-[14px] leading-[1.6] text-[#5B5670]">요청서 확인 후 견적 발송</p>
-          </div>
-
-          <div class="rounded-[14px] border border-[#D9CEFF] bg-white px-5 py-5">
-            <p class="font-mono text-[11px] uppercase tracking-[0.08em] text-[#9B8CC4]">QR</p>
-            <p class="mt-3 font-display text-[32px] leading-none text-soomgo">+32%</p>
-            <p class="mt-2 text-[14px] leading-[1.6] text-[#5B5670]">견적 전환율</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <p class="mt-8 text-[16px] leading-[1.8] font-medium text-[#1F1F2B] max-w-3xl">
       결과적으로 이 프로젝트는 단순한 알림 보강이 아니라, 고수가 첫 결제 이후 실제 행동으로 빠르게 이어지고 반복적으로 반응하도록 전환 구조를 다시 설계한 작업이었습니다.
     </p>
@@ -1719,9 +1745,11 @@ class="block w-full h-full object-cover"
   <div class="flex flex-col gap-2 flex-1 pt-1">
 <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-[#6A3AF2] font-semibold">DIAGNOSIS</span>
 <h2 class="font-display font-bold text-[24px] md:text-[28px] leading-[1.35] tracking-[-0.01em] text-[#1F1F2B]">퍼널 밖에 있던 행동 장벽이 전환을 멈추게 하고 있었습니다</h2>
-  </div>
+</div>
 </div>
 <div class="md:ml-[68px]">
+<p class="text-[15px] leading-[1.8] text-text-secondary">메시지 전달 시점 변경으로 구매 전환율은 개선됐지만, 고수가 왜 견적을 보내지 않는지는 여전히 정량 데이터만으로는 보이지 않았습니다.</p>
+<p class="mt-5 text-[15px] leading-[1.8] text-text-secondary">그래서 빠르게 정성 zero-party 데이터를 수집하고자 했습니다. 별도 프로덕트 개발 없이 Braze 인앱 메시지 커스텀 코드로 서베이 모달을 직접 구현해, 버튼 클릭 반응을 통해 고수가 실제로 겪는 페인포인트를 파악했습니다.</p>
 <figure class="mx-auto max-w-[760px]">
 <img alt="실제 노출한 견적 미발송 사유 수집 및 가이드 모달" class="w-full h-auto mx-auto" src="assets/soomgo/soomgo-modal-1-clean.png"/>
 <figcaption class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">
@@ -1761,7 +1789,7 @@ class="block w-full h-full object-cover"
 </figure>
 <div class="mt-6 rounded-[16px] border border-[#D9CEFF] bg-[#FCFAFF] px-5 py-4 md:px-6 md:py-5">
 <p class="font-display font-bold text-[18px] md:text-[20px] leading-[1.45] tracking-tight text-[#1F1F2B]">
-                  퍼널 밖에 있던 행동 장벽이 전환을 멈추게 하고 있었습니다.
+                  같은 미발송이라도, 신규에게는 시작의 부담이, 기존에게는 판단의 부담이 더 컸습니다.
                 </p>
 </div>
 <div class="mt-5 rounded-xl border border-[#D9CEFF] bg-[#F1ECFF] p-5 md:p-6">
@@ -1786,12 +1814,14 @@ class="block w-full h-full object-cover"
 </div>
 <p class="mt-5 text-[15px] leading-[1.8] text-text-secondary">유저 인터뷰와 서베이를 통해 확인한 결과, 전환을 가로막고 있던 것은 기능 부족이 아니라 결과에 대한 불확실성과 행동 장벽이었습니다.</p>
 
-<div class="mt-4 rounded-[14px] border border-[#CBB9FF] bg-[#F1ECFF] p-5 md:p-6">
-  <p class="font-mono text-[11px] uppercase tracking-[0.08em] text-soomgo">Defined Problem</p>
-  <p class="mt-3 font-display text-[24px] md:text-[28px] leading-[1.45] tracking-[-0.01em] text-[#1F1F2B]">
-    정량 지표는 보였지만, 고수가 멈추는 행동 장벽은 정의되지 않은 상태였습니다.
+<div class="mt-4 rounded-[16px] border border-[#CBB9FF] bg-[#F1ECFF] px-5 py-5 md:px-6 md:py-6 shadow-soft">
+  <p class="font-mono text-[10px] uppercase tracking-[0.12em] text-[#6A3AF2]">DEFINED PROBLEM</p>
+  <p class="mt-3 font-display font-bold text-[21px] md:text-[24px] leading-[1.55] tracking-[-0.01em] text-[#1F1F2B]">
+    고수의 미발송은 단순 이탈이 아니라 발송 직전 맥락에서 발생하는 행동 장벽의 문제였고, 이 장벽이 전환 개선의 병목으로 작동하고 있었습니다.
   </p>
 </div>
+<p class="mt-5 text-[15px] leading-[1.8] text-text-secondary">신규 고수에게는 '일단 한 번 보내볼 수 있는 상태'를, 기존 고수에게는 요청 확인 직후 가격 판단과 발송 결정을 더 빠르게 할 수 있는 구조를 만드는 것이 목표였습니다. 해결 전략의 핵심은 단순 노출 확대가 아니라, 발송 직전의 장벽을 더 정밀하게 제거하는 데 있었습니다.</p>
+<p class="mt-5 text-[15px] leading-[1.8] text-text-secondary">서베이 목적으로 노출한 모달이었지만, 예상치 못한 결과가 나타났습니다. CTA를 클릭해 가이드 콘텐츠로 이동한 고수는 모달을 닫은 고수 대비 1시간 이내 견적 발송 전환율이 약 9% 높게 나타났습니다. 정보의 부재가 아니라, 필요한 정보를 행동 직전에 연결해주는 전달 장치의 부재가 더 큰 문제라고 판단했습니다.</p>
 </div>
 </div>
 
@@ -1815,30 +1845,51 @@ class="block w-full h-full object-cover"
   <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-[#6A3AF2] text-white font-bold text-[18px] relative z-10">
     04
   </div>
-  <div class="flex flex-col gap-2 flex-1 pt-1">
+<div class="flex flex-col gap-2 flex-1 pt-1">
 <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-[#6A3AF2] font-semibold">EXECUTION</span>
 <h2 class="font-display font-bold text-[24px] md:text-[28px] leading-[1.35] tracking-[-0.01em] text-[#1F1F2B]">행동이 멈추는 이유를 기준으로 타겟과 메시지를 정교하게 나눴습니다</h2>
   </div>
 </div>
 <div class="md:ml-[68px]">
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">문제를 하나의 메시지로 해결하기보다, 장벽 유형에 따라 다른 접근이 필요하다고 보고 개입 구조를 다시 설계했습니다.</p>
+<div class="mt-4 rounded-xl border border-[#D8CCFF] bg-gradient-to-br from-[#F5F0FF] to-[#FFFFFF] p-5 md:p-6">
+  <div class="flex flex-col gap-5">
+    <div class="flex flex-col gap-2">
+      <span class="font-mono text-[11px] uppercase tracking-[0.1em] text-[#6A3AF2]">Experiment Result</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="rounded-[14px] border border-[#D9CEFF] bg-white px-5 py-5">
+        <span class="font-mono text-[11px] uppercase tracking-[0.08em] text-[#9B8CC4]">QR</span>
+        <span class="mt-3 block text-[34px] md:text-[40px] font-display font-bold leading-none text-[#6A3AF2]">+9.26%</span>
+        <span class="mt-2 block text-[13px] leading-[1.6] text-[#6B5FA7]">견적 발송 전환율</span>
+      </div>
+      <div class="rounded-[14px] border border-[#D9CEFF] bg-white px-5 py-5">
+        <span class="font-mono text-[11px] uppercase tracking-[0.08em] text-[#9B8CC4]">Response</span>
+        <span class="mt-3 block text-[34px] md:text-[40px] font-display font-bold leading-none text-[#6A3AF2]">+17.8%</span>
+        <span class="mt-2 block text-[13px] leading-[1.6] text-[#6B5FA7]">견적서 오픈 후 1일 내 고객 응답률</span>
+      </div>
+    </div>
+  </div>
+</div>
 <figure class="mt-5 rounded-[16px] border border-[#D9CEFF] bg-[#F7F4FF] p-5 md:p-6">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
 <div class="rounded-[16px] border border-[#D9CEFF] bg-[#FCFAFF] p-4 md:p-5">
 <p class="font-mono text-[12px] tracking-[0.08em] text-[#6A3AF2] mb-3">AS-IS</p>
-<img alt="AS-IS 가이드 모달" class="w-full max-w-[320px] h-auto rounded-[12px] mx-auto" src="assets/soomgo/soomgo-modal-guide-asis.png"/>
+<div class="flex h-[240px] items-center justify-center overflow-hidden">
+<img alt="AS-IS 가이드 모달" class="max-w-full max-h-[240px] w-auto h-auto rounded-[12px] mx-auto" src="assets/soomgo/soomgo-modal-guide-asis.png"/>
+</div>
 <p class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">기존 시스템 모달은 정보량은 있었지만, 행동으로 이어지는 가이드 역할은 충분하지 않았습니다.</p>
 </div>
 <div class="rounded-[16px] border border-[#D9CEFF] bg-[#FCFAFF] p-4 md:p-5">
 <p class="font-mono text-[12px] tracking-[0.08em] text-[#6A3AF2] mb-3">TO-BE</p>
-<img alt="TO-BE 가이드 모달" class="w-full max-w-[320px] h-auto rounded-[12px] mx-auto" src="assets/soomgo/soomgo-modal-guide-tobe.png"/>
+<div class="flex h-[240px] items-center justify-center overflow-hidden">
+<img alt="TO-BE 가이드 모달" class="max-w-full max-h-[240px] w-auto h-auto rounded-[12px] mx-auto" src="assets/soomgo/soomgo-modal-guide-tobe.png"/>
+</div>
 <p class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">개선 모달은 견적가 산정과 견적서 작성이라는 핵심 장벽을 더 직접적으로 안내하도록 바꿨습니다.</p>
 </div>
 </div>
 <figcaption class="mt-4 text-[13px] leading-[1.7] text-[#5B5670]">Figure — 견적 작성 가이드 모달 개선: AS-IS vs TO-BE</figcaption>
 </figure>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">이 결과를 바탕으로, 신규 고수의 첫 결제와 첫 견적 발송 이탈의 주요 원인인 '견적가 산정'과 '견적서 작성'의 어려움을 실제로 해결할 수 있는 장치가 있는지 추가로 확인했습니다. 그 결과, 기존에 고수의 견적 작성 전에 노출되던 시스템 AS-IS 모달은 유저에게 필요한 정보와 행동 가이드를 충분히 전달하지 못하고 있었고, 이를 개선한 가이드 모달 캠페인으로 이어졌습니다.</p>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">발송된 견적 대비 고객 응답률은 18.8%, 오픈된 견적 대비로도 26.8%에 그쳤습니다. 무응답은 실제로 반복 전환을 약화시키는 구조적 문제였습니다.</p>
+<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">이 결과를 바탕으로 신규 고수의 첫 결제와 첫 견적 발송 이탈의 주요 원인인 '견적가 산정'과 '견적서 작성'의 어려움을 실제로 완화할 수 있는 장치가 있는지 추가로 점검했습니다. 그 결과, 기존에 견적 작성 전에 노출되던 AS-IS 시스템 모달은 필요한 정보와 행동 가이드를 충분히 전달하지 못하고 있었고, 이를 개선한 가이드 모달 캠페인으로 이어졌습니다. 개선 실험에서 견적 발송 전환율은 9.26% 유의미하게 개선됐습니다.</p>
 <figure class="mt-5 rounded-[16px] border border-[#D9CEFF] bg-[#F7F4FF] p-5 md:p-6">
 <div class="rounded-[14px] border border-[#D9CEFF] bg-[#FCFAFF] p-4 md:p-5">
 <p class="font-display font-bold text-[17px] text-[#1F1F2B] mb-4">재결제 전환 비교</p>
@@ -1864,6 +1915,7 @@ class="block w-full h-full object-cover"
 </div>
 </div>
 </figure>
+<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">활성화 개선 이후에도 과제가 남아 있었습니다. 첫 결제를 유도해도 반복으로 이어지지 않았습니다. 가입 후 7일 이내 재결제 전환율은 7%, 첫 결제 고수 중 재결제 비율도 30%에 불과했습니다.</p>
 <figure class="mt-5 rounded-[16px] border border-[#D9CEFF] bg-[#F7F4FF] p-5 md:p-6">
 <div class="rounded-[14px] border border-[#D9CEFF] bg-[#FCFAFF] p-4 md:p-5">
 <p class="font-display font-bold text-[17px] text-[#1F1F2B] mb-4">신규 고수의 재결제 이탈 사유 조사 응답</p>
@@ -1917,9 +1969,9 @@ class="block w-full h-full object-cover"
 </svg>
 </section>
 </div>
-<figcaption class="mt-4 text-[13px] leading-[1.7] text-[#5B5670]">Figure — 견적 발송 이후 고객 응답률: 발송 기준 18.8%(7,149,630건), 오픈 기준 26.8%(5,025,221건)</figcaption>
+<figcaption class="mt-4 text-[13px] leading-[1.7] text-[#5B5670]">Figure — 견적 발송 이후 고객 응답률: 발송 기준 18.8%, 오픈 기준 26.8%</figcaption>
 </figure>
-<p class="mt-3 text-[15px] leading-[1.8] text-text-secondary">데이터팀과 분석한 결과, 재결제를 가른 것은 첫 결제 속도가 아니라 그 이후의 경험이었습니다. 견적 발송량, 요청서 오픈율, 고객 반응 경험 여부가 핵심 변수였습니다.</p>
+<p class="mt-3 text-[15px] leading-[1.8] text-text-secondary">리서치에서 재결제 이탈의 주요 원인은 견적 발송 후 고객의 무응답이었습니다. 발송된 견적 대비 고객 응답률은 18.8%, 오픈된 견적 대비로도 26.8%에 그쳤습니다. 무응답은 실제로 반복 전환을 약화시키는 구조적 문제였습니다.</p>
 <figure class="mt-4 rounded-xl border border-[#D9CEFF] bg-[#F7F4FF] p-5 md:p-6">
 <p class="font-display font-bold text-[17px] text-[#1F1F2B] mb-2">재결제 여부를 가른 것은 첫 결제 이후의 경험이었습니다</p>
 <p class="text-[12px] leading-[1.6] text-[#5B5670] mb-4">그래프는 재결제 여부에 따른 고객 반응 경험 비율의 분포를 보여줍니다. 재결제자는 비재결제자보다 고객 반응을 경험한 비율이 더 높게 나타났고, 이는 첫 결제 이후의 고객 반응 경험이 반복 행동과 연결될 수 있음을 시사합니다.</p>
@@ -1949,6 +2001,7 @@ class="block w-full h-full object-cover"
 </div>
 <figcaption class="mt-4 text-[13px] leading-[1.7] text-[#5B5670]">Figure — 재결제 여부에 따른 첫 결제 이후 행동 경험 비교</figcaption>
 </figure>
+<p class="mt-3 text-[15px] leading-[1.8] text-text-secondary">데이터팀과 추가로 분석한 결과에서도, 재결제를 가른 것은 첫 결제 속도가 아니라 그 이후의 경험이었습니다. 견적 발송량, 요청서 오픈율, 고객 반응 경험 여부가 핵심 변수였습니다.</p>
 <h3 class="mt-5 font-display font-bold text-[24px] leading-[1.35] tracking-tight text-[#1F1F2B]">고객은 왜 응답하지 않을까?</h3>
 <p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">고객이 응답하지 않는 이유는 두 가지였습니다. 견적을 열지 않는 경우는 가격 불만족, 열람 후 응답하지 않는 경우는 무엇을 어떻게 말해야 할지 모르는 경우가 많았습니다. 고객이 원하는 정보(가격 비교 범위, 견적 상세)와 플랫폼이 제공하는 정보 사이의 간극이 응답을 막고 있었습니다.</p>
 <figure class="mt-4 rounded-xl border border-[#D9CEFF] bg-[#F7F4FF] px-5 py-5 md:px-6 md:py-6 text-center">
@@ -1975,82 +2028,101 @@ class="block w-full h-full object-cover"
 <h3 class="mt-6 font-display font-bold text-[24px] leading-[1.35] tracking-tight text-[#1F1F2B]">그래서 고객 응답을 만들기 위해 어떤 정보를 보강해야 했을까?</h3>
 <figure class="mt-5 rounded-xl border border-[#D9CEFF] bg-[#F7F4FF] p-5 md:p-6">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-<section class="rounded-[16px] border border-[#D9CEFF] bg-[#FCFAFF] p-4 md:p-5">
+<section class="rounded-[16px] border border-[#D9CEFF] bg-[#FCFAFF] p-4 md:p-5 flex flex-col justify-center">
 <p class="font-mono text-[12px] tracking-[0.08em] text-[#6A3AF2] mb-3">고수 행동 유도</p>
-<img alt="Campaign B 가이드 모달" class="w-full max-w-[320px] h-auto rounded-[12px] mx-auto" src="assets/soomgo/soomgo-modal-guide-reply.png"/>
+<div class="flex flex-1 items-center justify-center">
+<div class="flex w-full max-w-[360px] items-center justify-center rounded-[12px] bg-white px-4 py-5">
+<img alt="Campaign B 가이드 모달" class="block max-w-[190px] max-h-[272px] w-auto h-auto mx-auto border-0 outline-none shadow-none bg-transparent" src="assets/soomgo/soomgo-modal-guide-reply.png"/>
+</div>
+</div>
 <p class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">고객 답변이 없는 고수에게, 견적가 산정과 견적 내용 보강 가이드를 다시 연결</p>
 </section>
-<section class="rounded-[16px] border border-[#D9CEFF] bg-[#FCFAFF] p-4 md:p-5">
+<section class="rounded-[16px] border border-[#D9CEFF] bg-[#FCFAFF] p-4 md:p-5 flex flex-col justify-center">
 <p class="font-mono text-[12px] tracking-[0.08em] text-[#6A3AF2] mb-3">고객 행동 유도</p>
-<div class="grid grid-cols-2 gap-3 max-w-[360px] mx-auto">
+<div class="flex flex-1 items-center justify-center">
+<div class="grid grid-cols-2 gap-3 w-full max-w-[360px] mx-auto">
 <img alt="Campaign C 앱푸시 1" class="w-full h-auto rounded-[12px]" src="assets/soomgo/soomgo-apppush-1.png"/>
 <img alt="Campaign C 앱푸시 2" class="w-full h-auto rounded-[12px]" src="assets/soomgo/soomgo-apppush-2.png"/>
+</div>
 </div>
 <p class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">고객이 받은 견적을 다시 떠올리고 응답을 시작할 수 있도록 설계한 앱푸시</p>
 </section>
 </div>
 </figure>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">해결 방향은 두 가지였습니다. 하나는 고객에게 직접 응답을 유도하는 것, 다른 하나는 고수의 매력도를 높여 고객에게 노출됐을 때 고용 경쟁력을 강화하는 것이었습니다. 고객에게는 받은 견적을 다시 떠올리고 응답을 시작하도록 앱푸시를 설계했습니다. 가격 불만족과 응답 부담이라는 두 장벽을 고려해, 단순 혜택보다 가격 비교와 견적 상세 확인 등 응답의 이유를 더 분명히 전달하는 방향으로 접근했습니다. 한편 고수는 고객이 견적을 받은 후 어떤 정보를 기준으로 고용을 결정하는지 알지 못했습니다. 고수에게는 고객의 고용 결정에 영향을 주는 핵심 정보(경력, 리뷰, 상세 설명, 견적 내용)를 더 잘 반영할 수 있도록 견적가 산정과 내용 보강 가이드를 재연결했습니다.</p>
-<p class="mt-5 text-[15px] leading-[1.8] text-text-secondary">그러나 현재 구조의 세그먼테이션으로는 최적의 세그먼트×USP 조합을 도출하는 데 한계가 있었습니다. 이에 데이터 사이언티스트·분석가와 함께 견적 발송 예측 모델 실험을 진행했습니다. 모델은 고수 × 등록 서비스 단위로 견적 발송 가능성을 예측했고, RFM 변수와 최근 행동 데이터를 입력값으로 사용했습니다.</p>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">무응답에 대한 불확실성, 응답 경험의 차이, 이탈 위험 수준에 따라 타겟을 나누고, 각 세그먼트별로 실제 반응 차이를 실험했습니다.</p>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">데이터 사이언티스트·분석가가 모델을 구축했다면, 저의 역할은 이 예측값이 실제 CRM 실험으로 이어지는 구조를 설계하는 것이었습니다. 데이터옵스팀과 협업해 모델 추출 결과를 BigQuery에 적재한 뒤, 실험에 필요한 변수를 Braze 유저 어트리뷰트로 연동하고, score_14_diff 구간별로 세그먼트를 나눠 Braze Canvas에서 메시지 실험을 집행할 수 있는 파이프라인을 구축했습니다.</p>
-<figure class="mt-6 max-w-[760px] mx-auto">
-  <img class="w-full h-auto rounded-[16px]" src="assets/soomgo/soomgo-guide-chat.png" alt="가이드 채팅방 메시지 예시" />
-</figure>
-<figure class="mt-6 rounded-[14px] border bordered bg-white/5 p-3">
-  <div class="max-w-[760px] mx-auto">
-    <img
-      src="assets/soomgo/soomgo-prediction-mart.png"
-      alt="BigQuery prediction score mart for provider and service level targeting"
-      class="w-full h-auto rounded-[12px] border bordered object-contain"
-    />
+<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">해결 방향은 두 가지였습니다. 하나는 고객에게 직접 응답을 유도하는 것, 다른 하나는 고수의 매력도를 높여 고객에게 노출됐을 때 고용 경쟁력을 강화하는 것이었습니다. 고객에게는 받은 견적을 다시 떠올리고 응답을 시작하도록 앱푸시를 설계했습니다. 가격 불만족과 응답 부담이라는 두 장벽을 고려해, 단순 혜택보다 가격 비교와 견적 상세 확인 등 응답의 이유를 더 분명히 전달하는 방향으로 접근했습니다. 한편 고수는 고객이 견적을 받은 후 어떤 정보를 기준으로 고용을 결정하는지 알지 못했습니다. 고수에게는 고객의 고용 결정에 영향을 주는 핵심 정보(경력, 리뷰, 상세 설명, 견적 내용)를 더 잘 반영할 수 있도록 견적가 산정과 내용 보강 가이드를 재연결했습니다. 실제로 이러한 정보를 충분히 입력한 고수일수록 더 많은 고객 응답을 받았고, 응답 경험은 재결제 가능성과도 연결됐습니다. Control group 대비 견적서 오픈 후 1일 이내 고객 응답률은 17.8% 증가했고, TG 고수의 가이드 안내 적용 비율도 13.93% 높게 나타났습니다. 그런데 가이드 적용률이 높아졌다는 것은, 반대로 말하면 그 전까지 신규·기존 고수 모두에게 필요한 정보가 충분히 전달되지 않고 있었다는 의미이기도 했습니다.</p>
+<div class="mt-4 rounded-xl border border-[#D8CCFF] bg-gradient-to-br from-[#F5F0FF] to-[#FFFFFF] p-5 md:p-6">
+  <div class="flex flex-col gap-5">
+    <div class="flex flex-col gap-2">
+      <span class="font-mono text-[11px] uppercase tracking-[0.1em] text-[#6A3AF2]">Experiment Result</span>
+      <span class="font-mono text-[11px] uppercase tracking-[0.08em] text-[#9B8CC4]">가이드 채팅방 — 클릭 유저 기준</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="rounded-[14px] border border-[#D9CEFF] bg-white px-5 py-5">
+        <span class="font-mono text-[11px] uppercase tracking-[0.08em] text-[#9B8CC4]">Retention</span>
+        <span class="mt-3 block text-[34px] md:text-[40px] font-display font-bold leading-none text-[#6A3AF2]">+285%</span>
+        <span class="mt-2 block text-[13px] leading-[1.6] text-[#6B5FA7]">7일 재결제율 (1.80% → 6.95%)</span>
+      </div>
+      <div class="rounded-[14px] border border-[#D9CEFF] bg-white px-5 py-5">
+        <span class="font-mono text-[11px] uppercase tracking-[0.08em] text-[#9B8CC4]">Hire</span>
+        <span class="mt-3 block text-[34px] md:text-[40px] font-display font-bold leading-none text-[#6A3AF2]">+243%</span>
+        <span class="mt-2 block text-[13px] leading-[1.6] text-[#6B5FA7]">21일 고용률 (6.42% → 22.03%)</span>
+      </div>
+    </div>
   </div>
-  <figcaption class="mt-2 text-[12px] leading-[1.6] text-text-secondary">
-    Figure — provider·service 단위 예측 score를 관리하는 BigQuery 데이터마트
-  </figcaption>
+</div>
+<figure class="mt-4 rounded-[16px] border border-[#D9CEFF] bg-[#F7F4FF] p-4 md:p-5">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <img class="w-full h-auto rounded-[12px]" src="assets/soomgo/soomgo-guidechat-1.png" alt="가이드 채팅방 — 견적 작성에 필요한 7가지 정보" />
+    <img class="w-full h-auto rounded-[12px]" src="assets/soomgo/soomgo-guidechat-2.png" alt="가이드 채팅방 — 고객에게 선택받는 프로필 작성법" />
+    <img class="w-full h-auto rounded-[12px]" src="assets/soomgo/soomgo-guidechat-3.png" alt="가이드 채팅방 — 고용률 올리는 포트폴리오 작성법" />
+    <img class="w-full h-auto rounded-[12px]" src="assets/soomgo/soomgo-guidechat-4.png" alt="가이드 채팅방 — 채팅 상담 잘 하는 4가지 방법" />
+  </div>
+  <figcaption class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">Figure — 가이드 채팅방 메시지 예시</figcaption>
 </figure>
+<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">리마인더 알림과 가이드 모달 개선으로 타이밍과 정보 전달을 각각 개선했지만, 고수가 실제로 행동에 나서려면 적절한 시점에 필요한 정보를 함께 전달하는 메시지가 필요했습니다. 최적의 타이밍과 콘텐츠의 조합을 빠르게 테스트할 수 있는 채널이 필요했고, 가이드 채팅방은 그 목적으로 설계됐습니다.</p>
+<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">그러나 가이드 채팅방 실험 결과는 기대와 달랐습니다. TG 전체 기준으로 첫 결제율, 첫 견적 발송률, 재결제율, 고용률 모두 CG 대비 소폭 하락했습니다. 그런데 세그먼트를 나눠보면 다른 그림이 나타났습니다. 클릭하지 않은 TG 유저가 전체 평균을 끌어내리고 있었고, 메시지를 클릭한 유저는 CG 대비 첫 결제율 +226%, 재결제율 +285%, 21일 고용률 +243%로 훨씬 강한 후속 행동을 보였습니다.</p>
+<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">이는 가이드 채팅방이 그 자체로 강한 성과 채널이었다기보다, 클릭이 발생했을 때 이후 전환 가능성이 높은 유저를 포착하거나 증폭시킬 수 있는 채널임을 보여줬습니다. 따라서 핵심 과제는 채널의 존재 여부보다, 어떤 콘텐츠와 구조로 클릭률을 높일 것인가에 있었습니다.</p>
 <figure class="mt-5 rounded-[16px] border border-[#D9CEFF] bg-[#F7F4FF] p-4 md:p-5">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start max-w-[860px] mx-auto">
-<section>
-<img alt="BigQuery 예측값을 Braze 유저 프로퍼티로 연동한 구조" class="w-full h-auto rounded-[12px]" src="assets/soomgo/soomgo-prediction-braze-1.png"/>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start max-w-[960px] mx-auto">
+<section class="flex flex-col">
+<div class="h-[200px] flex items-center justify-center overflow-hidden rounded-[12px]">
+<img src="assets/soomgo/soomgo-prediction-mart.png" alt="BigQuery prediction score mart for provider and service level targeting" class="max-w-full max-h-[200px] w-auto h-auto rounded-[12px] object-contain"/>
+</div>
+<p class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">provider·service 단위 예측 score를 관리하는 BigQuery 데이터마트</p>
+</section>
+<section class="flex flex-col">
+<div class="h-[200px] flex items-center justify-center overflow-hidden rounded-[12px]">
+<img alt="BigQuery 예측값을 Braze 유저 프로퍼티로 연동한 구조" class="max-w-full max-h-[200px] w-auto h-auto rounded-[12px]" src="assets/soomgo/soomgo-prediction-braze-1.png"/>
+</div>
 <p class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">BigQuery 예측값을 Braze 유저 프로퍼티로 연동한 구조</p>
 </section>
-<section>
-<img alt="Braze Canvas에서 세그먼트별 메시지와 발송 시점을 분기한 운영 구조" class="w-full h-auto rounded-[12px]" src="assets/soomgo/soomgo-prediction-braze-2.png"/>
+<section class="flex flex-col">
+<div class="h-[200px] flex items-center justify-center overflow-hidden rounded-[12px]">
+<img alt="Braze Canvas에서 세그먼트별 메시지와 발송 시점을 분기한 운영 구조" class="max-w-full max-h-[200px] w-auto h-auto rounded-[12px]" src="assets/soomgo/soomgo-prediction-braze-2.png"/>
+</div>
 <p class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">Braze Canvas에서 세그먼트별 메시지와 발송 시점을 분기한 운영 구조</p>
 </section>
 </div>
-<figcaption class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">Figure — 예측값을 실제 CRM 실험 운영 구조로 연결한 데이터·메시지 파이프라인</figcaption>
+<figcaption class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">Figure — provider·service 단위 예측 score 데이터마트 및 CRM 실험 운영 파이프라인</figcaption>
 </figure>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">
-  1차 실험의 목적은 전체 평균 기준에서 효과가 희석되는지, 그리고 score 구간별로는 실제 uplift가 존재하는지를 확인하는 것이었습니다.
-</p>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">전체 처치군 기준으로 보았을 때 전환율 변화가 의미있지 않았으나, score_14_diff 구간별로 나누면 특정 구간에서 TG uplift가 반복적으로 관찰됐습니다. 전체 평균이 효과를 흐리고 있었습니다.</p>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">
-  2차 실험에서는 score 구간에 따라 필요한 개입 목적과 메시지 톤이 달라지는지를 검증했습니다.
-</p>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">그 결과 하위권은 Win-back, 중위권은 Activation, 최상위는 Boost 성격의 반응이 관찰됐고, 유효한 메시지 톤도 구간마다 달랐습니다. 구간에 따라 개입의 목적 자체가 달라져야 했습니다.</p>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">
-  3차 실험에서는 예측 score뿐 아니라 과거 행동 경험까지 함께 반영해야 반응 차이를 더 정확히 설명할 수 있는지를 확인했습니다.
-</p>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">score_14_diff 하위 구간에서 효과가 반복 확인됐고, 견적 발송 경험 유무에 따라 반응도 달랐습니다. 같은 고수라도 상태와 경험에 따라 다른 메시지가 필요하다는 것을 가장 분명하게 보여준 실험이었습니다.</p>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">
-  이 학습을 바탕으로, 현재는 score와 행동 맥락에 따라 메시지와 타이밍을 자동 분기하는 운영 구조로 확장 적용을 탐색하고 있습니다.
-</p>
+<p class="mt-5 text-[15px] leading-[1.8] text-text-secondary">그러나 현재 구조의 세그먼테이션으로는 최적의 세그먼트×USP 조합을 도출하는 데 한계가 있었습니다. 이에 데이터 사이언티스트·분석가와 함께 견적 발송 예측 모델 실험을 진행했습니다. 모델은 고수 × 등록 서비스 단위로 견적 발송 가능성을 예측했고, RFM 변수와 최근 행동 데이터를 입력값으로 사용했습니다.</p>
+<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">도출된 예측 점수를 실제 CRM 실험으로 이어지는 구조로 설계하기 위해, 데이터옵스팀과 협업해 모델 추출 결과를 BigQuery에 적재한 뒤, 실험에 필요한 변수를 Braze 유저 어트리뷰트로 연동하고, 서비스 평균 대비 발송 가능성 변화 점수(`score_14_diff`) 구간별로 세그먼트를 나눠 Braze Canvas에서 메시지 실험을 집행할 수 있는 파이프라인을 구축했습니다. 그 결과 전체 평균에서는 효과가 희석됐지만, score_14_diff와 행동 경험 기준으로 나누면 구간별 uplift가 반복적으로 확인됐습니다. 이를 통해 같은 고수라도 상태와 경험에 따라 필요한 개입 목적과 메시지 톤이 달라진다는 점을 확인했고, 현재는 score와 행동 맥락에 따라 메시지와 타이밍을 자동 분기하는 운영 구조로 확장 적용을 탐색하고 있습니다.</p>
 <figure class="mt-5 rounded-[16px] border border-[#D9CEFF] bg-[#F7F4FF] p-4 md:p-5">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start max-w-[860px] mx-auto">
-<img alt="1차 실험 전체 CG/TG 결과" class="w-full h-auto rounded-[12px]" src="assets/soomgo/soomgo-prediction-1.png"/>
-<img alt="score_14_diff 구간별 실험 반응" class="w-full h-auto rounded-[12px]" src="assets/soomgo/soomgo-prediction-2.png"/>
+<div class="grid grid-cols-3 gap-3">
+<div class="flex flex-col gap-2">
+<img alt="1차 실험 전체 CG/TG 결과" class="w-full h-auto rounded-[10px]" src="assets/soomgo/soomgo-prediction-1.png"/>
+<p class="text-[11px] leading-[1.6] text-[#9CA3AF]">1차 — 전체 평균</p>
 </div>
-<figcaption class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">Figure — 1차 실험: 전체 평균에서는 유의미성이 약했지만, score_14_diff 구간별로는 반응 차이가 나타남</figcaption>
-</figure>
-<figure class="mt-5 rounded-[16px] border border-[#D9CEFF] bg-[#F7F4FF] p-4 md:p-5">
-<img alt="1차와 2차 실험 비교 결과" class="w-full max-w-[820px] h-auto rounded-[12px] mx-auto" src="assets/soomgo/soomgo-prediction-3.png"/>
-<figcaption class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">Figure — 1차와 2차 비교: 공통 구간은 제한적이었지만, 하위권·중위권·최상위 구간에서 서로 다른 반응 패턴이 관찰됨</figcaption>
-</figure>
-<figure class="mt-5 rounded-[16px] border border-[#D9CEFF] bg-[#F7F4FF] p-4 md:p-5">
-<img alt="3차 실험 구간 및 경험 유무별 반응 비교" class="w-full max-w-[820px] h-auto rounded-[12px] mx-auto" src="assets/soomgo/soomgo-prediction-4.png"/>
-<figcaption class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">Figure — 3차 실험: score_14_diff 구간과 견적 경험 유무에 따라 메시지 반응도가 다르게 나타남</figcaption>
+<div class="flex flex-col gap-2">
+<img alt="1차와 2차 실험 비교 결과" class="w-full h-auto rounded-[10px]" src="assets/soomgo/soomgo-prediction-3.png"/>
+<p class="text-[11px] leading-[1.6] text-[#9CA3AF]">1차·2차 — 구간별 반응 패턴</p>
+</div>
+<div class="flex flex-col gap-2">
+<img alt="3차 실험 구간 및 경험 유무별 반응 비교" class="w-full h-auto rounded-[10px]" src="assets/soomgo/soomgo-prediction-4.png"/>
+<p class="text-[11px] leading-[1.6] text-[#9CA3AF]">3차 — score 구간 × 견적 경험 유무</p>
+</div>
+</div>
+<figcaption class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">Figure — 1·2·3차 실험 결과: score_14_diff 구간 및 견적 경험에 따른 메시지 반응 비교</figcaption>
 </figure>
 </div>
 </div>
@@ -2061,39 +2133,14 @@ class="block w-full h-full object-cover"
     05
   </div>
   <div class="flex flex-col gap-2 flex-1 pt-1">
-<span class="font-mono text-[11px] uppercase tracking-[0.14em] text-[#6A3AF2] font-semibold">OUTCOME</span>
-<h2 class="font-display font-bold text-[24px] md:text-[28px] leading-[1.35] tracking-[-0.01em] text-[#1F1F2B]">행동 장벽을 줄이자, 견적 발송과 고객 반응이 함께 개선됐습니다</h2>
+<span class="font-mono text-[11px] uppercase tracking-[0.14em] text-[#6A3AF2] font-semibold">RESULT</span>
+<h2 class="font-display font-bold text-[24px] md:text-[28px] leading-[1.35] tracking-[-0.01em] text-[#1F1F2B]">첫 결제 이후 반복 행동으로 이어지는 전환 구조를 개선했습니다</h2>
   </div>
 </div>
 <div class="md:ml-[68px]">
-<div class="mt-4 rounded-xl border border-[#D8CCFF] bg-gradient-to-br from-[#F5F0FF] to-[#FFFFFF] p-5 md:p-6">
-  <div class="flex flex-col">
-    <span class="font-mono text-[11px] uppercase tracking-[0.1em] text-[#6A3AF2]">Experiment Result</span>
-    <span class="mt-3 text-[40px] md:text-[48px] font-display font-bold leading-none text-[#6A3AF2]">+9.26%</span>
-    <span class="mt-3 text-[13px] text-[#6B5FA7]">견적 발송 전환율</span>
-  </div>
-</div>
-<div class="mt-4 rounded-xl border border-[#D8CCFF] bg-gradient-to-br from-[#F5F0FF] to-[#FFFFFF] px-7 py-6 md:px-9 md:py-8 shadow-sm">
-  <span class="font-mono text-[11px] uppercase tracking-[0.1em] text-[#6A3AF2]">Experiment Result</span>
-  <div class="mt-5">
-    <div class="flex flex-col">
-      <span class="font-mono text-[11px] uppercase tracking-[0.08em] text-[#9B8CC4] mb-3">가이드 채팅방 — 클릭 유저 기준</span>
-      <div class="flex items-baseline gap-4 flex-wrap">
-        <div class="flex flex-col">
-          <span class="text-[40px] md:text-[48px] font-display font-bold leading-none text-[#6A3AF2]">+285%</span>
-          <span class="mt-2 text-[13px] text-[#6B5FA7]">7일 재결제율 (1.80% → 6.95%)</span>
-        </div>
-        <div class="flex flex-col">
-          <span class="text-[40px] md:text-[48px] font-display font-bold leading-none text-[#6A3AF2]">+243%</span>
-          <span class="mt-2 text-[13px] text-[#6B5FA7]">21일 고용률 (6.42% → 22.03%)</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">장벽을 먼저 정의하고 그에 맞는 개입을 설계한 결과, 견적 발송 전환율과 고객 응답률, 가이드 적용률이 모두 유의미하게 개선됐습니다.</p>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">서베이 목적으로 노출한 모달이었지만, 예상치 못한 결과가 나타났습니다. CTA를 클릭해 가이드 콘텐츠로 이동한 고수는 모달을 닫은 고수 대비 1시간 이내 견적 발송 전환율이 약 9% 높게 나타났습니다. 정보의 부재가 아니라, 필요한 정보를 행동 직전에 연결해주는 전달 장치의 부재가 더 큰 문제라고 판단했습니다. 이를 바탕으로 서베이에서 확인한 핵심 장벽을 직접 안내하는 가이드 모달 실험으로 이어갔고, 견적 발송 전환율이 유의미하게 개선됐습니다.</p>
-<p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">실제로 이러한 정보를 충분히 입력한 고수일수록 더 많은 고객 응답을 받았고, 응답 경험은 재결제 가능성과도 연결됐습니다. Control group 대비 견적서 오픈 후 1일 이내 고객 응답률은 17.8% 증가했고, TG 고수의 가이드 안내 적용 비율도 13.93% 높게 나타났습니다. 클릭하지 않은 TG 유저가 전체 평균을 끌어내렸지만, 메시지를 클릭한 유저는 CG 대비 첫 결제율 +226%, 재결제율 +285%, 21일 고용률 +243%로 훨씬 강한 후속 행동을 보였습니다.</p>
+  <p class="mt-6 text-[15px] leading-[1.8] text-text-secondary max-w-3xl">고수가 멈추는 이유가 다르면 같은 메시지도 다르게 작동했습니다. 그래서 이 프로젝트에서는 장벽을 유형별로 분류하고, 각 장벽에 맞는 노출 시점과 메시지를 설계해 반복 행동 구간의 전환율을 개선했습니다.</p>
+  <p class="mt-4 text-[15px] leading-[1.8] text-text-secondary max-w-3xl">예측 모델 실험에서도 전체 평균만으로 효과를 판단하기보다, 어떤 조건에서 차이가 나타나는지를 먼저 봤습니다. 서베이에서 시작한 질문이 모달 실험으로, 다시 가이드 채팅방으로 이어졌듯, 차이가 발생하는 조건을 발견한 실험은 실패가 아니라 다음 개입 구조를 설계하기 위한 학습이 되었습니다.</p>
+  <p class="mt-8 text-[16px] leading-[1.8] font-medium text-[#1F1F2B] max-w-3xl">유저가 어디서 멈추는지를 먼저 알아내고, 그 지점에 맞는 메시지를 더 정교하게 설계해 전환율을 개선한 프로젝트였습니다.</p>
 </div>
 </div>
 </div>
@@ -2148,12 +2195,12 @@ class="block w-full h-full object-cover"
     <div class="flex flex-col gap-2 flex-1 pt-1">
       <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-[#6A3AF2] font-semibold">STRATEGY</span>
       <h2 class="font-display text-[24px] md:text-[28px] leading-[1.35] tracking-[-0.01em] text-[#1F1F2B] font-bold">
-        숨고플러스는 출시 이후의 홍보가 아니라, 출시 이전의 수요 검증에서 시작했습니다
+        출시 이후 확산보다, 출시 이전 수요를 검증하고 선수요를 확보하는 구조를 먼저 설계했습니다.
       </h2>
     </div>
   </div>
   <div class="md:ml-[68px]">
-    <p class="text-[15px] leading-[1.8] text-text-secondary">대상을 먼저 좁혔습니다. BigQuery에서 고수 매출·활동 데이터를 분석해 월 매출 구간, 카테고리, 재구매 패턴을 기준으로 구독 상품의 핵심 타겟 세그먼트를 SQL로 정의한 뒤, 해당 그룹 중심으로 수요 검증을 설계했습니다.</p>
+    <p class="text-[15px] leading-[1.8] text-text-secondary">대상을 먼저 좁혔습니다. BigQuery에서 고수 매출·활동 데이터를 분석해 월 매출 구간, 카테고리, 재구매 패턴을 기준으로 구독 상품의 핵심 타겟 세그먼트를 SQL로 정의한 뒤, 해당 그룹을 중심으로 수요 검증과 선수요 확보 전략을 설계했습니다.</p>
   </div>
 </div>
 
@@ -2167,19 +2214,50 @@ class="block w-full h-full object-cover"
     </div>
   </div>
   <div class="md:ml-[68px]">
+    <figure class="mt-4 rounded-xl border border-[#D9CEFF] bg-[#F7F4FF] p-5 md:p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <section class="rounded-[16px] border border-[#D9CEFF] bg-[#FCFAFF] p-5">
+          <p class="text-[13px] leading-[1.6] text-[#5B5670]">1회차 목표 달성률</p>
+          <div class="mt-3">
+            <p class="text-[34px] leading-none font-bold text-[#6A3AF2]">109%</p>
+            <div aria-hidden="true" class="mt-3 h-2.5 rounded-full bg-[#ECE6FF] overflow-hidden">
+              <div class="h-full bg-[#6A3AF2]" style="width:100%"></div>
+            </div>
+            <p class="mt-2 text-[13px] leading-[1.6] text-[#5B5670]">목표 입찰 금액 초과 달성</p>
+          </div>
+        </section>
+        <section class="rounded-[16px] border border-[#D9CEFF] bg-[#FCFAFF] p-5">
+          <p class="text-[13px] leading-[1.6] text-[#5B5670]">오픈 알림 신청 유저 기여 비중</p>
+          <div class="mt-3 flex items-center gap-4">
+            <svg aria-label="53%" class="shrink-0" height="92" role="img" viewbox="0 0 92 92" width="92">
+              <circle cx="46" cy="46" fill="none" r="32" stroke="#ECE6FF" stroke-width="12"></circle>
+              <circle cx="46" cy="46" fill="none" r="32" stroke="#6A3AF2" stroke-dasharray="106.56 201.06" stroke-linecap="round" stroke-width="12" transform="rotate(-90 46 46)"></circle>
+            </svg>
+            <div>
+              <p class="text-[34px] leading-none font-bold text-[#6A3AF2]">53%</p>
+              <p class="mt-2 text-[13px] leading-[1.6] text-[#5B5670]">실제 입찰 구좌 중 신청 유저 비중</p>
+            </div>
+          </div>
+        </section>
+      </div>
+      <figcaption class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">Figure — 오픈 알림 신청 이벤트를 통해 확보한 초기 수요가 실제 입찰 성과로 연결됨</figcaption>
+    </figure>
+    <p class="mt-2 text-[13px] leading-[1.7] text-[#5B5670]">※ 당시 숨고플러스는 ‘최상단 고정 광고’라는 명칭으로 운영됐으며, 2주간의 입찰 기간 종료 후 낙찰자가 확정되는 구조였습니다. 현재는 입찰 방식은 유지하되, 고수가 보유한 캐시로 입찰하고 고액 입찰자 등장 시 기존 결제가 자동 취소되는 방식으로 변경되었습니다.</p>
     <div class="text-[15px] leading-[1.8] text-text-secondary space-y-4">
-      <p>숨고플러스는 런칭 초기부터 대규모 개발을 선행하기보다, 고수의 실제 수요와 반응을 빠르게 확인하는 방식으로 접근했습니다. 저는 먼저 오픈 알림 신청 이벤트를 리드하며, 기획부터 빠르게 실험할 수 있는 구조를 만드는 데 집중했습니다. 이때 핵심은 개발 리소스를 최소화하면서도 신청 의사를 안정적으로 수집하는 것이었고, 이를 위해 Braze를 활용해 별도 개발 없이 오픈 알림 신청 시스템을 구축했습니다. Braze 커스텀 어트리뷰트를 활용해 별도 개발 없이 신청 의사를 수집하고, 오픈 시점에 자동 알림이 발송되는 구조를 만들었습니다.</p>
+      <p>개발 리소스를 최소화하면서도, 신청 의사를 빠르게 수집하고 오픈 시점에 다시 연결되는 운영 구조를 만들었습니다.</p>
+      <p>저는 오픈 알림 신청 이벤트를 리드하며, 기획부터 빠르게 실험할 수 있는 구조를 만드는 데 집중했습니다. Braze 커스텀 어트리뷰트를 활용해 별도 개발 없이 신청 의사를 수집하고, 오픈 시점에 자동 알림이 발송되는 구조를 구축했습니다.</p>
       <figure class="mt-4 rounded-xl border border-[#D9CEFF] bg-[#F7F4FF] p-5 md:p-6">
         <p class="text-[15px] leading-[1.8] text-text-secondary font-medium">오픈 알림 신청 운영 구조</p>
-        <div class="mt-4 grid grid-cols-1 md:grid-cols-5 gap-3 md:gap-2">
-          <div class="rounded-[14px] border border-[#D9CEFF] bg-[#FCFAFF] px-3 py-4 text-center text-[13px] leading-[1.6] text-[#1F1F2B]">이벤트 페이지 모달 노출</div>
-          <div class="rounded-[14px] border border-[#D9CEFF] bg-[#FCFAFF] px-3 py-4 text-center text-[13px] leading-[1.6] text-[#1F1F2B]">‘예’ 클릭</div>
-          <div class="rounded-[14px] border border-[#D9CEFF] bg-[#FCFAFF] px-3 py-4 text-center text-[13px] leading-[1.6] text-[#1F1F2B]">Braze 커스텀 어트리뷰트 적재</div>
-          <div class="rounded-[14px] border border-[#D9CEFF] bg-[#FCFAFF] px-3 py-4 text-center text-[13px] leading-[1.6] text-[#1F1F2B]">오픈 시 알림톡 자동 발송</div>
-          <div class="rounded-[14px] border border-[#D9CEFF] bg-[#FCFAFF] px-3 py-4 text-center text-[13px] leading-[1.6] text-[#1F1F2B]">실제 입찰</div>
-        </div>
-        <div aria-hidden="true" class="hidden md:flex items-center justify-between px-6 mt-2 text-[#8C68F6] text-[16px]">
-          <span>→</span><span>→</span><span>→</span><span>→</span>
+        <div class="mt-4 flex flex-col md:flex-row items-center gap-2">
+          <div class="rounded-[14px] border border-[#D9CEFF] bg-[#FCFAFF] px-3 py-4 text-center text-[13px] leading-[1.6] text-[#1F1F2B] w-full md:flex-1">이벤트 페이지 모달 노출</div>
+          <span class="hidden md:block text-[#8C68F6] text-[16px] flex-shrink-0">→</span>
+          <div class="rounded-[14px] border border-[#D9CEFF] bg-[#FCFAFF] px-3 py-4 text-center text-[13px] leading-[1.6] text-[#1F1F2B] w-full md:flex-1">'예' 클릭</div>
+          <span class="hidden md:block text-[#8C68F6] text-[16px] flex-shrink-0">→</span>
+          <div class="rounded-[14px] border border-[#D9CEFF] bg-[#FCFAFF] px-3 py-4 text-center text-[13px] leading-[1.6] text-[#1F1F2B] w-full md:flex-1">Braze 커스텀 어트리뷰트 적재</div>
+          <span class="hidden md:block text-[#8C68F6] text-[16px] flex-shrink-0">→</span>
+          <div class="rounded-[14px] border border-[#D9CEFF] bg-[#FCFAFF] px-3 py-4 text-center text-[13px] leading-[1.6] text-[#1F1F2B] w-full md:flex-1">오픈 시 알림톡 자동 발송</div>
+          <span class="hidden md:block text-[#8C68F6] text-[16px] flex-shrink-0">→</span>
+          <div class="rounded-[14px] border border-[#D9CEFF] bg-[#FCFAFF] px-3 py-4 text-center text-[13px] leading-[1.6] text-[#1F1F2B] w-full md:flex-1">실제 입찰</div>
         </div>
         <figcaption class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">Figure — Braze를 활용해 별도 개발 없이 구축한 오픈 알림 신청 운영 구조</figcaption>
       </figure>
@@ -2203,28 +2281,17 @@ class="block w-full h-full object-cover"
         </p>
       </div>
       <figure class="mt-4 rounded-[14px] border bordered bg-white/5 p-3">
-        <div class="max-w-[760px] mx-auto">
-          <img
-            src="assets/soomgo/soomgo-ads-eventpage.png"
-            alt="Soomgo Plus open alert signup event using event page and in-app modal"
-            class="w-full h-auto rounded-[12px] border bordered object-contain"
-          />
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex flex-col gap-2">
+            <img src="assets/soomgo/soomgo-ads-eventpage.png" alt="Soomgo Plus open alert signup event using event page and in-app modal" class="w-full max-h-[280px] object-contain rounded-[12px] border bordered"/>
+            <p class="text-[11px] leading-[1.6] text-text-secondary">이벤트 페이지와 인앱 모달을 활용해 초기 수요를 확보</p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <img src="assets/soomgo/soomgo-ads-alrimtalk.png" alt="Soomgo Plus follow-up communication driving real bidding behavior via in-app and AlimTalk" class="w-full max-h-[280px] object-contain rounded-[12px] border bordered"/>
+            <p class="text-[11px] leading-[1.6] text-text-secondary">오픈 시점에 맞춰 인앱/알림톡으로 실제 입찰 행동을 유도</p>
+          </div>
         </div>
-        <figcaption class="mt-2 text-[12px] leading-[1.6] text-text-secondary">
-          Figure — 숨고플러스 오픈 알림 신청 이벤트: 이벤트 페이지와 인앱 모달을 활용해 초기 수요를 확보
-        </figcaption>
-      </figure>
-      <figure class="mt-4 rounded-[14px] border bordered bg-white/5 p-3">
-        <div class="max-w-[760px] mx-auto">
-          <img
-            src="assets/soomgo/soomgo-ads-alrimtalk.png"
-            alt="Soomgo Plus follow-up communication driving real bidding behavior via in-app and AlimTalk"
-            class="w-full h-auto rounded-[12px] border bordered object-contain"
-          />
-        </div>
-        <figcaption class="mt-2 text-[12px] leading-[1.6] text-text-secondary">
-          Figure — 신청 완료 후 오픈 시점에 맞춰 인앱/알림톡으로 실제 입찰 행동을 유도한 운영 커뮤니케이션
-        </figcaption>
+        <figcaption class="mt-3 text-[12px] leading-[1.6] text-text-secondary">Figure — 숨고플러스 오픈 알림 신청 이벤트 및 운영 커뮤니케이션</figcaption>
       </figure>
       <p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">세그먼트 × 소구점 실험을 반복하며, 이후에는 서비스·지역 정보를 결합한 메시지 파이프라인을 구축해 시장 유형별 USP를 자동으로 반영하는 구조로 고도화했습니다. 이를 위해 SQL로 서비스·지역·고수 특성 데이터를 결합한 마케팅용 테이블을 직접 생성하고, Braze Connected Content로 메시지 발송 시점에 해당 데이터를 호출하는 구조를 설계했습니다.</p>
       <div class="mt-5 rounded-xl border border-[#D9CEFF] bg-[#F7F4FF] p-5 md:p-6">
@@ -2259,40 +2326,12 @@ class="block w-full h-full object-cover"
       05
     </div>
     <div class="flex flex-col gap-2 flex-1 pt-1">
-      <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-[#6A3AF2] font-semibold">OUTCOME</span>
+      <span class="font-mono text-[11px] uppercase tracking-[0.14em] text-[#6A3AF2] font-semibold">RESULT</span>
     </div>
   </div>
   <div class="md:ml-[68px]">
-    <figure class="mt-4 rounded-xl border border-[#D9CEFF] bg-[#F7F4FF] p-5 md:p-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <section class="rounded-[16px] border border-[#D9CEFF] bg-[#FCFAFF] p-5">
-          <p class="text-[13px] leading-[1.6] text-[#5B5670]">1회차 목표 달성률</p>
-          <div class="mt-3">
-            <p class="text-[34px] leading-none font-bold text-[#6A3AF2]">109%</p>
-            <div aria-hidden="true" class="mt-3 h-2.5 rounded-full bg-[#ECE6FF] overflow-hidden">
-              <div class="h-full bg-[#6A3AF2]" style="width:100%"></div>
-            </div>
-            <p class="mt-2 text-[13px] leading-[1.6] text-[#5B5670]">목표 입찰 금액 초과 달성</p>
-          </div>
-        </section>
-        <section class="rounded-[16px] border border-[#D9CEFF] bg-[#FCFAFF] p-5">
-          <p class="text-[13px] leading-[1.6] text-[#5B5670]">오픈 알림 신청 유저 기여 비중</p>
-          <div class="mt-3 flex items-center gap-4">
-            <svg aria-label="53%" class="shrink-0" height="92" role="img" viewbox="0 0 92 92" width="92">
-              <circle cx="46" cy="46" fill="none" r="32" stroke="#ECE6FF" stroke-width="12"></circle>
-              <circle cx="46" cy="46" fill="none" r="32" stroke="#6A3AF2" stroke-dasharray="106.56 201.06" stroke-linecap="round" stroke-width="12" transform="rotate(-90 46 46)"></circle>
-            </svg>
-            <div>
-              <p class="text-[34px] leading-none font-bold text-[#6A3AF2]">53%</p>
-              <p class="mt-2 text-[13px] leading-[1.6] text-[#5B5670]">실제 입찰 구좌 중 신청 유저 비중</p>
-            </div>
-          </div>
-        </section>
-      </div>
-      <figcaption class="mt-3 text-[13px] leading-[1.7] text-[#5B5670]">Figure — 오픈 알림 신청 이벤트를 통해 확보한 초기 수요가 실제 입찰 성과로 연결됨</figcaption>
-    </figure>
-    <p class="mt-2 text-[13px] leading-[1.7] text-[#5B5670]">※ 당시 숨고플러스는 ‘최상단 고정 광고’라는 명칭으로 운영됐으며, 2주간의 입찰 기간 종료 후 낙찰자가 확정되는 구조였습니다. 현재는 입찰 방식은 유지하되, 고수가 보유한 캐시로 입찰하고 고액 입찰자 등장 시 기존 결제가 자동 취소되는 방식으로 변경되었습니다.</p>
-    <p class="mt-5 text-[15px] leading-[1.8] text-text-secondary">결제 구조가 즉시 결제로 바뀐 이후, CRM 메시지의 영향력은 크게 확대됐습니다. 환불후 기준 메시지 기여도는 1~5회차 평균 16.9%에서 6~9회차 평균 58.5%까지 상승했고, 최고치는 73.2%를 기록했습니다. 이는 메시지가 단순 리마인드가 아니라, 당일 결제 전환을 만들어내는 핵심 트리거로 작동했음을 보여줍니다. 구독 전환율과 입찰 이후 재구매율 변화는 SQL로 직접 분석하고, 커뮤니케이션 및 세그먼트 설계 개선에 반영했습니다.</p>
+    <p class="mt-5 font-display text-[24px] md:text-[28px] leading-[1.35] tracking-[-0.01em] text-[#1F1F2B] font-bold">개발 없이 초기 커뮤니케이션 구조를 구축하고, 세그먼트를 정교화해 메시지의 영향력을 높였습니다</p>
+    <p class="mt-5 text-[15px] leading-[1.8] text-text-secondary">개발 없이 Braze만으로 오픈 알림 신청과 자동 발송 구조를 구축해, 초기 커뮤니케이션을 빠르게 설계하고 안정적으로 운영할 수 있었습니다. 이후 결제 구조가 즉시 결제로 바뀐 뒤에는 CRM 메시지의 영향력이 크게 확대됐습니다. 환불후 기준 메시지 기여도는 1~5회차 평균 16.9%에서 6~9회차 평균 58.5%까지 상승했고, 최고치는 73.2%를 기록했습니다. 이는 메시지가 단순 리마인드를 넘어, 당일 결제 전환을 직접 만들어내는 핵심 트리거로 작동했음을 보여줍니다. 구독 전환율과 입찰 이후 재구매율 변화는 SQL로 직접 분석해, 이후 커뮤니케이션과 세그먼트 설계 개선에 반영했습니다.</p>
     <p class="mt-4 text-[13px] leading-[1.7] text-[#5B5670]">※ 광고 구좌 및 입찰자·낙찰자 관련 상세 수치와 세부 분석 데이터는 대외비에 해당해, 본 문서에서는 구조와 핵심 인사이트 중심으로만 정리했습니다.</p>
   </div>
 </div>
@@ -2303,7 +2342,7 @@ class="block w-full h-full object-cover"
 <div class="flex flex-col gap-2 mb-5">
 <span class="font-mono text-[12px] uppercase tracking-[0.12em] text-soomgo">Retrospective</span>
 <h2 class="font-display font-bold text-[30px] leading-[1.25] tracking-tight text-text-primary">
-  CRM을 가장 빠른 문제 발견과 검증의 채널로 보게 됐습니다
+  더 빠른 실험, 더 근본적인 질문, 그리고 다음 실험을 여는 단서
 </h2>
 </div>
 
@@ -2497,15 +2536,20 @@ class="inline-flex items-center justify-center hover:text-black transition-color
           넥스트유니콘의 유일한 마케터로 Paid, SEO, CRM, 프로모션까지 전 채널을 직접 담당했습니다. 유입(획득)부터 연결 활성화(리텐션), 그리고 구독·재구매(수익화)까지 이어지는 구조를 일관된 커뮤니케이션 전략으로 리드했습니다. PO·데이터 분석가·개발자·그래픽 디자이너와 협업해 분석 환경 구축, 실험 설계, 채널 운영을 함께 실행했습니다.
         </p>
 </div>
+<div class="nu-unified-section">
+<div class="nu-step-divider">
+<span class="nu-step-num">01</span>
+<span class="nu-step-title">THE CHALLENGE</span>
+</div>
 <div class="panel rounded-[24px] nu-panel p-7 md:p-8">
 <p class="section-label font-mono text-[12px] tracking-[0.08em] text-nextunicorn mb-3">THE CHALLENGE</p>
 <p class="type-body text-[15px] leading-[1.8] nu-body">
           넥스트유니콘 두 매출 구조는 모두 하나의 선행 조건에 달려 있었습니다. 스타트업이 투자자와 실제로 연결되는 경험입니다. 투자자 응답률이 낮으면 스타트업은 네트워킹을 포기하고, 티켓 재구매도 구독 전환도 일어나지 않는 구조였습니다.
         </p>
 </div>
-<div class="nu-project-divider">
-<span class="nu-project-num">1</span>
-<span class="nu-project-title">Measurement &amp; Channel Diagnosis</span>
+<div class="nu-step-divider">
+<span class="nu-step-num">02</span>
+<span class="nu-step-title">Measurement &amp; Channel Diagnosis</span>
 </div>
 <div class="panel rounded-[24px] nu-panel-soft p-7 md:p-8">
 <p class="section-label font-mono text-[12px] tracking-[0.08em] text-nextunicorn mb-3">Measurement &amp; Channel Diagnosis</p>
@@ -2598,14 +2642,10 @@ class="inline-flex items-center justify-center hover:text-black transition-color
 </div>
 </div>
 </div>
-<div class="nu-acquisition-pie">
-  <div>
-    <svg width="346" height="346" viewBox="0 0 346 346" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- existing SVG content unchanged -->
-    </svg>
-  </div>
+<div class="nu-step-divider">
+<span class="nu-step-num">03</span>
+<span class="nu-step-title">Channel Optimization &amp; Expansion</span>
 </div>
-
 <div class="panel rounded-[24px] nu-panel p-7 md:p-8">
 <p class="section-label font-mono text-[12px] tracking-[0.08em] text-nextunicorn mb-3">Channel Optimization &amp; Expansion</p>
 <h2 class="type-h2 font-display font-bold text-[28px] md:text-[32px] leading-[1.25] tracking-tight nu-title">
@@ -2730,17 +2770,21 @@ class="inline-flex items-center justify-center hover:text-black transition-color
 <p class="mt-6 text-[15px] leading-[1.8] nu-body">유입 구조를 개선하고 오가닉 트래픽을 확대했지만, 들어온 유저가 네트워킹에서 응답을 받지 못하면 재구매로 이어지지 않았습니다. 매출의 선행 조건인 네트워킹 활성화를 다음 과제로 삼았습니다.</p>
 </div>
 </div>
+</div>
 </section>
 
 <!-- 02 — Networking Activation -->
 <div class="nu-project-divider">
-<span class="nu-project-num">2</span>
 <span class="nu-project-title">Networking Activation &amp; CRM</span>
 </div>
 <section class="py-12 md:py-14" id="nextunicorn-networking">
 <div class="nu-project-shell">
+<div class="nu-step-divider">
+<span class="nu-step-num">01</span>
+<span class="nu-step-title">THE CHALLENGE</span>
+</div>
 <div class="panel rounded-[24px] nu-panel p-7 md:p-8">
-<p class="section-label font-mono text-[12px] tracking-[0.08em] text-nextunicorn mb-3">Networking Activation &amp; CRM</p>
+<p class="section-label font-mono text-[12px] tracking-[0.08em] text-nextunicorn mb-3">THE CHALLENGE</p>
 <h3 class="type-h2 font-display font-bold text-[28px] md:text-[32px] leading-[1.25] tracking-tight nu-title">네트워킹의 병목은 연결이 아니라 응답이었습니다</h3>
 <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
 <article class="rounded-[18px] bg-white border border-[#D9E7FF] p-5 shadow-soft">
@@ -2918,13 +2962,16 @@ class="inline-flex items-center justify-center hover:text-black transition-color
 </div>
 </section>
 <div class="nu-project-divider">
-<span class="nu-project-num">3</span>
 <span class="nu-project-title">IR Subscription &amp; Revenue</span>
 </div>
 <section class="py-12 md:py-14">
 <div class="nu-project-shell">
+<div class="nu-step-divider">
+<span class="nu-step-num">01</span>
+<span class="nu-step-title">THE CHALLENGE</span>
+</div>
 <article class="panel rounded-[24px] nu-panel p-7 md:p-8">
-<p class="section-label font-mono text-[12px] tracking-[0.08em] text-nextunicorn mb-3">IR Subscription &amp; Revenue</p>
+<p class="section-label font-mono text-[12px] tracking-[0.08em] text-nextunicorn mb-3">THE CHALLENGE</p>
 <h3 class="type-h2 font-display font-bold text-[28px] leading-[1.25] tracking-tight nu-title">
             첫 구매를 만들고, 재구매와 크로스셀링으로 매출 구조를 확장했습니다
           </h3>
