@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -94,14 +95,14 @@ function pickPrize(tier) {
 // ── Log entry component ──
 const LogEntry = ({item}) => {
   const styles = {
-    brazeBridge: {bg:'rgba(105,59,242,0.15)',border:'#693BF2',tag:'BRAZE',tc:'#C5B6FF'},
-    attr:        {bg:'rgba(16,185,129,0.12)',border:'#10B981',tag:'ATTR',tc:'#6EE7B7'},
-    event:       {bg:'rgba(59,130,246,0.12)',border:'#3B82F6',tag:'EVENT',tc:'#93C5FD'},
-    flush:       {bg:'rgba(245,158,11,0.12)',border:'#F59E0B',tag:'FLUSH',tc:'#FDE68A'},
-    page:        {bg:'rgba(168,85,247,0.12)',border:'#A855F7',tag:'PAGE',tc:'#D8B4FE'},
-    close:       {bg:'rgba(239,68,68,0.12)',border:'#EF4444',tag:'CLOSE',tc:'#FCA5A5'},
-    mock:        {bg:'rgba(148,163,184,0.08)',border:'rgba(148,163,184,0.3)',tag:'MOCK',tc:'#94A3B8'},
-    info:        {bg:'rgba(148,163,184,0.05)',border:'rgba(148,163,184,0.15)',tag:'INFO',tc:'#64748B'},
+    brazeBridge: {bg:'rgba(105,59,242,0.2)',border:'#693BF2',tag:'BRAZE',tc:'#C5B6FF'},
+    attr:        {bg:'rgba(16,185,129,0.18)',border:'#10B981',tag:'ATTR',tc:'#6EE7B7'},
+    event:       {bg:'rgba(59,130,246,0.18)',border:'#3B82F6',tag:'EVENT',tc:'#93C5FD'},
+    flush:       {bg:'rgba(245,158,11,0.18)',border:'#F59E0B',tag:'FLUSH',tc:'#FDE68A'},
+    page:        {bg:'rgba(168,85,247,0.18)',border:'#A855F7',tag:'PAGE',tc:'#D8B4FE'},
+    close:       {bg:'rgba(239,68,68,0.18)',border:'#EF4444',tag:'CLOSE',tc:'#FCA5A5'},
+    mock:        {bg:'rgba(148,163,184,0.15)',border:'rgba(148,163,184,0.5)',tag:'MOCK',tc:'#CBD5E1'},
+    info:        {bg:'rgba(148,163,184,0.1)',border:'rgba(148,163,184,0.3)',tag:'INFO',tc:'#94A3B8'},
   };
   const s = styles[item.kind] || styles.info;
   return (
@@ -110,8 +111,8 @@ const LogEntry = ({item}) => {
         <span style={{fontSize:9,fontWeight:700,color:s.tc,background:s.border+'25',padding:'1px 5px',borderRadius:3,letterSpacing:'0.06em'}}>{s.tag}</span>
         <span style={{fontSize:10,color:'#475569'}}>{item.time}</span>
       </div>
-      <div style={{fontSize:11,fontFamily:'DM Mono,monospace',color:'#CBD5E1',lineHeight:1.5,wordBreak:'break-all'}}>{item.msg}</div>
-      {item.props && <div style={{fontSize:10,fontFamily:'DM Mono,monospace',color:'#64748B',marginTop:3,lineHeight:1.5}}>{JSON.stringify(item.props,null,1)}</div>}
+      <div style={{fontSize:11,fontFamily:'DM Mono,monospace',color:'#E2E8F0',lineHeight:1.5,wordBreak:'break-all'}}>{item.msg}</div>
+      {item.props && <div style={{fontSize:10,fontFamily:'DM Mono,monospace',color:'#94A3B8',marginTop:3,lineHeight:1.5}}>{JSON.stringify(item.props,null,1)}</div>}
     </div>
   );
 };
@@ -405,7 +406,7 @@ const TermsNotice = ({onNext}) => {
 
 // ── Main App ──
 const App = () => {
-  const [tab, setTab] = useState('flow');
+  const [tab, setTab] = useState('nodrag');
   const [logs, setLogs] = useState([]);
   const [flowStep, setFlowStep] = useState('terms'); // terms | notice | chess | push
   const logRef = useRef(null);
@@ -560,14 +561,14 @@ const App = () => {
         </div>
 
         {/* Right: log */}
-        <div style={{flex:1,display:'flex',flexDirection:'column',overflow:'hidden'}}>
-          <div style={{padding:'10px 16px',borderBottom:'1px solid rgba(255,255,255,0.05)',display:'flex',alignItems:'center',gap:8,flexShrink:0}}>
+        <div style={{flex:1,display:'flex',flexDirection:'column',overflow:'hidden',background:'#1a1a2e'}}>
+          <div style={{padding:'10px 16px',borderBottom:'1px solid rgba(105,59,242,0.15)',display:'flex',alignItems:'center',gap:8,flexShrink:0,background:'#1e1e32'}}>
             <div style={{width:6,height:6,borderRadius:'50%',background:'#693BF2',animation:'hintPulse 1.5s ease-in-out infinite'}}/>
-            <span style={{fontSize:11,fontFamily:'DM Mono,monospace',color:'#6B5C8A',letterSpacing:'0.06em',textTransform:'uppercase'}}>brazeBridge Mock — 실시간 이벤트 로그</span>
+            <span style={{fontSize:11,fontFamily:'DM Mono,monospace',color:'#9B8CC4',letterSpacing:'0.06em',textTransform:'uppercase'}}>brazeBridge Mock — 실시간 이벤트 로그</span>
           </div>
           <div ref={logRef} style={{flex:1,overflowY:'auto',padding:12,display:'flex',flexDirection:'column',gap:5}}>
             {logs.length === 0 ? (
-              <div style={{textAlign:'center',color:'#2D2460',fontSize:12,fontFamily:'DM Mono,monospace',marginTop:40}}>모달과 상호작용하면 로그가 여기 표시됩니다</div>
+              <div style={{textAlign:'center',color:'#6B5C8A',fontSize:12,fontFamily:'DM Mono,monospace',marginTop:40}}>모달과 상호작용하면 로그가 여기 표시됩니다</div>
             ) : logs.map((item,i) => <LogEntry key={i} item={item}/>)}
           </div>
         </div>
