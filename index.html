@@ -1152,10 +1152,10 @@
 </div>
 <section class="mt-10">
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-<a href="javascript:void(0)" onclick="alert('준비중입니다')" class="group rounded-[20px] border bordered bg-white/5 overflow-hidden hover:bg-white/10 transition-colors">
+<div class="group rounded-[20px] border bordered bg-white/5 overflow-hidden hover:bg-white/10 transition-colors cursor-pointer" onclick="openPromoModal()">
 <div class="aspect-square bg-[#111111] overflow-hidden">
 <img
-src="assets/promtion.png"
+src="assets/promotion/promotion.png"
 alt="Promotion project thumbnail"
 class="block w-full h-full object-cover"
 />
@@ -1163,7 +1163,267 @@ class="block w-full h-full object-cover"
 <div class="border-t bordered px-4 py-4">
 <p class="text-[14px] font-medium text-text-primary text-center">Promotion</p>
 </div>
-</a>
+</div>
+
+<!-- Promotion Modal -->
+<div class="hidden fixed inset-0 z-[100]" id="promoModal">
+<div class="absolute inset-0 backdrop" onclick="closePromoModal()"></div>
+<div class="relative mx-auto mt-10 w-[96%] max-w-[900px] rounded-[16px] bg-white border border-border shadow-lift flex flex-col" style="max-height:88vh">
+
+  <!-- Modal header -->
+  <div class="flex items-start justify-between gap-4 px-6 pt-6 pb-4 border-b border-border flex-shrink-0">
+    <div>
+      <p class="font-mono text-xs text-soomgo uppercase tracking-wider">Soomgo · Promotion</p>
+      <h3 class="font-display font-bold text-[20px] leading-[1.35] mt-1">직접 기획하고 실행한 두 개의 프로모션</h3>
+    </div>
+    <button aria-label="Close" class="text-text-secondary hover:text-black transition-colors flex-shrink-0 mt-1" onclick="closePromoModal()">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+
+  <!-- Scrollable body -->
+  <div class="overflow-y-auto flex-1 px-6 py-5 space-y-4">
+
+    <!-- ── Card 1: 앱 다운로드 ── -->
+    <div class="rounded-[14px] border border-[#E0D8FF] bg-white overflow-hidden">
+      <button class="w-full text-left px-5 py-4 flex items-start justify-between gap-4" onclick="togglePromo('app')">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="font-mono text-[10px] uppercase tracking-[0.1em] text-soomgo bg-[#F3F0FF] px-2 py-0.5 rounded-full">앱 다운로드</span>
+            <span class="font-mono text-[11px] text-text-secondary">2025.01 · 기여도 100%</span>
+          </div>
+          <p class="font-display font-bold text-[16px] text-[#1F1F2B]">체크메이트 2026</p>
+          <div class="flex gap-5 mt-2.5">
+            <div><p class="font-bold text-[14px] text-soomgo">~10,000건</p><p class="text-[11px] text-text-secondary">전환</p></div>
+            <div><p class="font-bold text-[14px] text-soomgo">₩1,300</p><p class="text-[11px] text-text-secondary">CPI</p></div>
+            <div><p class="font-bold text-[14px] text-soomgo">+88% ROI</p><p class="text-[11px] text-text-secondary">BEP 163% 초과</p></div>
+          </div>
+        </div>
+        <span class="material-symbols-outlined !text-[20px] text-soomgo transition-transform duration-300 flex-shrink-0 mt-1" id="icon-app">expand_more</span>
+      </button>
+
+      <div class="overflow-hidden transition-all duration-500 ease-in-out" id="detail-app" style="max-height:0">
+        <div class="border-t border-[#E0D8FF]">
+
+          <!-- Context row -->
+          <div class="px-5 pt-4 pb-3 space-y-3">
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-soomgo mb-1">Background</p>
+              <p class="text-[13px] leading-[1.8] text-text-secondary">앱 비보유 고객(~212만명)은 웹 대비 반복 요청률이 낮습니다. 앱 유저는 미보유 유저 대비 인당 요청서 +0.31건, 인당 기대 가치 ₩2,449 높아 앱 설치를 유도해 고객 LTV를 높이는 것이 목표였습니다.</p>
+            </div>
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-soomgo mb-1">Execution</p>
+              <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
+                <li>대상: 앱 미설치/삭제 고객 (~212만명)</li>
+                <li>채널: 친구톡 6회(46.9만건) + Braze 인앱 팝업 4개 자동 운영</li>
+                <li>체스 테마 게임형 IAM — 약관 동의·푸시 권한 획득 플로우 설계</li>
+                <li>Airbridge Deferred Deep Link로 앱 설치 후 프로모션 자동 연결</li>
+              </ul>
+            </div>
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-soomgo mb-1">Result</p>
+              <p class="text-[13px] leading-[1.8] text-text-secondary">CRM 로그 + 앱 버전 역추적으로 실질 전환 13,101건 추출, 보수적으로 10,000건 산정. BEP 6,116건 대비 163% 초과 달성.</p>
+            </div>
+          </div>
+
+          <!-- Creative, IAM, Flowchart tabs -->
+          <div class="px-5 pb-5">
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-soomgo mb-3">Creative & IAM</p>
+
+            <!-- Tab bar -->
+            <div class="flex gap-2 mb-4" id="app-tabs">
+              <button onclick="switchPromoTab('app','event')" id="app-tab-event" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-[#6A3AF2] bg-[#6A3AF2] text-white transition-all">이벤트 페이지</button>
+              <button onclick="switchPromoTab('app','iam')" id="app-tab-iam" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-[#E0D8FF] text-[#9B8CC4] hover:border-[#6A3AF2] hover:text-[#6A3AF2] transition-all">IAM 데모</button>
+              <button onclick="switchPromoTab('app','flow')" id="app-tab-flow" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-[#E0D8FF] text-[#9B8CC4] hover:border-[#6A3AF2] hover:text-[#6A3AF2] transition-all">플로우차트</button>
+            </div>
+
+            <!-- Event page -->
+            <div id="app-panel-event">
+              <div class="rounded-[12px] border border-border overflow-hidden bg-[#0a0a14]" style="max-height:480px;overflow-y:auto">
+                <img src="assets/promotion/soomgo-eventpage_checkmate.png" alt="체크메이트 이벤트 페이지" class="w-full block"/>
+              </div>
+            </div>
+
+            <!-- IAM demo -->
+            <div id="app-panel-iam" style="display:none">
+              <div class="rounded-[12px] border border-[#C4B8FF] bg-[#0a0a14] flex flex-col items-center justify-center gap-4 p-6 text-center">
+                <div>
+                  <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-[#C5B6FF] mb-2">Braze IAM — 인터랙티브 데모</p>
+                  <p class="text-[12px] text-[#9B8CC4] leading-[1.6]">brazeBridge Mock이 주입된 실제 IAM 코드입니다.<br>약관 동의 → 체스 드래그앤드롭 → 경품 당첨 플로우를 직접 체험할 수 있습니다.</p>
+                </div>
+                <div class="flex flex-col gap-2 w-full">
+                  <a href="assets/promotion/iam_demo_checkmate.html" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full h-10 rounded-[8px] bg-[#693BF2] text-white text-[13px] font-semibold font-mono hover:bg-[#7c4ff5] transition-colors">
+                    <span class="material-symbols-outlined !text-[16px]">play_arrow</span>
+                    데모 실행하기
+                  </a>
+                  <p class="text-[10px] text-[#6B5C8A] font-mono">새 탭에서 열립니다 · 4개 분기 탭 전환 가능</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Flowchart -->
+            <div id="app-panel-flow" style="display:none">
+              <div class="rounded-[12px] border border-[#E0D8FF] bg-[#F8F5FF] flex flex-col items-center justify-center gap-4 p-6 text-center">
+                <div>
+                  <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-soomgo mb-2">Canvas 유저 플로우차트</p>
+                  <p class="text-[12px] text-text-secondary leading-[1.6]">5개 분기 · Braze Canvas 트리거 조건 · brazeBridge 이벤트 스펙까지 담은 플로우차트입니다.</p>
+                </div>
+                <a href="assets/promotion/flowchart_checkmate.html" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full h-10 rounded-[8px] border border-[#6A3AF2] text-[#6A3AF2] text-[13px] font-semibold font-mono hover:bg-[#F3F0FF] transition-colors">
+                  <span class="material-symbols-outlined !text-[16px]">account_tree</span>
+                  플로우차트 열기
+                </a>
+                <p class="text-[10px] text-[#9B8CC4] font-mono">새 탭에서 열립니다</p>
+              </div>
+            </div>
+
+          </div>
+
+          <script>
+          function switchPromoTab(promo, tab) {
+            ['event','iam','flow'].forEach(function(t) {
+              var panel = document.getElementById(promo+'-panel-'+t);
+              var btn = document.getElementById(promo+'-tab-'+t);
+              if (!panel || !btn) return;
+              if (t === tab) {
+                panel.style.display = '';
+                btn.classList.add('bg-[#6A3AF2]','text-white','border-[#6A3AF2]');
+                btn.classList.remove('text-[#9B8CC4]','border-[#E0D8FF]');
+              } else {
+                panel.style.display = 'none';
+                btn.classList.remove('bg-[#6A3AF2]','text-white','border-[#6A3AF2]');
+                btn.classList.add('text-[#9B8CC4]','border-[#E0D8FF]');
+              }
+            });
+          }
+          </script>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Card 2: QR 캐시백 ── -->
+    <div class="rounded-[14px] border border-[#E0D8FF] bg-white overflow-hidden">
+      <button class="w-full text-left px-5 py-4 flex items-start justify-between gap-4" onclick="togglePromo('qr')">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="font-mono text-[10px] uppercase tracking-[0.1em] text-soomgo bg-[#F3F0FF] px-2 py-0.5 rounded-full">캐시백</span>
+            <span class="font-mono text-[11px] text-text-secondary">2026.03 · 기여도 100%</span>
+          </div>
+          <p class="font-display font-bold text-[16px] text-[#1F1F2B]">QR 캐시백 프로모션</p>
+          <div class="flex gap-5 mt-2.5">
+            <div><p class="font-bold text-[14px] text-soomgo">+15% uplift</p><p class="text-[11px] text-text-secondary">목표</p></div>
+            <div><p class="font-bold text-[14px] text-soomgo">127% iROAS</p><p class="text-[11px] text-text-secondary">순효과 기준</p></div>
+            <div><p class="font-bold text-[14px] text-soomgo">+₩33.4M</p><p class="text-[11px] text-text-secondary">순효과</p></div>
+          </div>
+        </div>
+        <span class="material-symbols-outlined !text-[20px] text-soomgo transition-transform duration-300 flex-shrink-0 mt-1" id="icon-qr">expand_more</span>
+      </button>
+
+      <div class="overflow-hidden transition-all duration-500 ease-in-out" id="detail-qr" style="max-height:0">
+        <div class="border-t border-[#E0D8FF]">
+
+          <!-- Context row -->
+          <div class="px-5 pt-4 pb-3 space-y-3">
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-soomgo mb-1">Background</p>
+              <p class="text-[13px] leading-[1.8] text-text-secondary">QR(견적 반응률) 하락에 대응하기 위해 Mid-tier 고수(월 3~30건)의 견적 발송 행동을 증폭시키는 캐시백 구조를 설계했습니다. 고활성 고수(10건+)의 데드웨이트를 통제하고 실질 행동 변화 구간에 인센티브를 집중하는 것이 핵심 과제였습니다.</p>
+            </div>
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-soomgo mb-1">Execution</p>
+              <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
+                <li>BigQuery로 카테고리별 구간별 고수 인원 추출 (이사/청소·과외·외주·도배장판)</li>
+                <li>구간별 이동률 가정 + 반응함수 기반 iROAS 시뮬레이터 직접 설계</li>
+                <li>캐시백 구조: 3건+ 구간차등(3~20%), 30건 Cap, 10+구간 제외로 데드웨이트 통제</li>
+                <li>HTML 인터랙티브 예산 대시보드로 보수/낙관 시나리오 비교 보고</li>
+              </ul>
+            </div>
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-soomgo mb-1">Result</p>
+              <p class="text-[13px] leading-[1.8] text-text-secondary">데드웨이트 분석으로 전체 리워드의 99%가 이미 활성화된 고수에게 지급되는 구조를 규명, 10+구간 제외로 iROAS 36% → 262%로 개선. 자연상태 대비 전체 이동 시 iROAS 184%, 순손익 +₩299.8M.</p>
+            </div>
+          </div>
+
+          <!-- Creative & IAM tabs -->
+          <div class="px-5 pb-5">
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-soomgo mb-3">Creative & IAM</p>
+
+            <!-- Tab bar -->
+            <div class="flex gap-2 mb-4">
+              <button onclick="switchPromoTab('cashback','event')" id="cashback-tab-event" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-[#6A3AF2] bg-[#6A3AF2] text-white transition-all">이벤트 페이지</button>
+              <button onclick="switchPromoTab('cashback','iam')" id="cashback-tab-iam" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-[#E0D8FF] text-[#9B8CC4] hover:border-[#6A3AF2] hover:text-[#6A3AF2] transition-all">IAM 데모</button>
+            </div>
+
+            <!-- Event page -->
+            <div id="cashback-panel-event">
+              <div class="rounded-[12px] border border-border overflow-hidden bg-[#fdf5ff]" style="max-height:480px;overflow-y:auto">
+                <img src="assets/promotion/cashback/soomgo-eventpage_cashback.png" alt="캐시백 프로모션 이벤트 페이지" class="w-full block"/>
+              </div>
+            </div>
+
+            <!-- IAM demo -->
+            <div id="cashback-panel-iam" style="display:none">
+              <div class="rounded-[12px] border border-[#C4B8FF] bg-[#0a0a14] flex flex-col items-center justify-center gap-4 p-6 text-center">
+                <div>
+                  <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-[#C5B6FF] mb-2">Braze IAM — 인터랙티브 데모</p>
+                  <p class="text-[12px] text-[#9B8CC4] leading-[1.6]">보너스캐시 계산기 + 견적 발송 트리거 IAM 2종입니다.<br>구간 점프 시 노출 로직과 Liquid 연동을 직접 체험할 수 있습니다.</p>
+                </div>
+                <div class="flex flex-col gap-2 w-full">
+                  <a href="assets/promotion/cashback/iam_demo_cashback.html" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full h-10 rounded-[8px] bg-[#693BF2] text-white text-[13px] font-semibold font-mono hover:bg-[#7c4ff5] transition-colors">
+                    <span class="material-symbols-outlined !text-[16px]">play_arrow</span>
+                    데모 실행하기
+                  </a>
+                  <p class="text-[10px] text-[#6B5C8A] font-mono">새 탭에서 열립니다 · 2개 IAM 탭 전환 가능</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /scrollable body -->
+</div>
+</div>
+
+<script>
+function openPromoModal() {
+  document.getElementById('promoModal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+function closePromoModal() {
+  document.getElementById('promoModal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+function togglePromo(id) {
+  const detail = document.getElementById('detail-' + id);
+  const icon = document.getElementById('icon-' + id);
+  const isOpen = detail.style.maxHeight !== '0px' && detail.style.maxHeight !== '';
+  if (isOpen) {
+    detail.style.maxHeight = '0';
+    icon.style.transform = 'rotate(0deg)';
+  } else {
+    // Set to auto first to get real height, then animate
+    detail.style.maxHeight = 'none';
+    const h = detail.scrollHeight;
+    detail.style.maxHeight = '0';
+    requestAnimationFrame(() => {
+      detail.style.maxHeight = h + 'px';
+    });
+    icon.style.transform = 'rotate(180deg)';
+    // Re-expand after images load
+    const imgs = detail.querySelectorAll('img');
+    imgs.forEach(img => {
+      if (!img.complete) {
+        img.addEventListener('load', () => {
+          detail.style.maxHeight = detail.scrollHeight + 'px';
+        }, {once: true});
+      }
+    });
+  }
+}
+</script>
 <a href="javascript:void(0)" onclick="alert('준비중입니다')" class="group rounded-[20px] border bordered bg-white/5 overflow-hidden hover:bg-white/10 transition-colors">
 <div class="aspect-square bg-[#111111] overflow-hidden">
 <img
@@ -1176,18 +1436,127 @@ class="block w-full h-full object-cover"
 <p class="text-[14px] font-medium text-text-primary text-center">Creative</p>
 </div>
 </a>
-<a href="javascript:void(0)" onclick="alert('준비중입니다')" class="group rounded-[20px] border bordered bg-white/5 overflow-hidden hover:bg-white/10 transition-colors">
+<div class="group rounded-[20px] border bordered bg-white/5 overflow-hidden hover:bg-white/10 transition-colors cursor-pointer" onclick="openLeadModal()">
 <div class="aspect-square bg-[#111111] overflow-hidden">
-<img
-src="assets/leadgen.png"
-alt="Lead Generation project thumbnail"
-class="block w-full h-full object-cover"
-/>
+<img src="assets/leadgen/leadgen.png" alt="Lead Generation project thumbnail" class="block w-full h-full object-cover"/>
 </div>
 <div class="border-t bordered px-4 py-4">
 <p class="text-[14px] font-medium text-text-primary text-center">Lead Generation</p>
 </div>
-</a>
+</div>
+
+<!-- Lead Generation Modal -->
+<div class="hidden fixed inset-0 z-[100]" id="leadModal">
+  <div class="absolute inset-0 backdrop" onclick="closeLeadModal()"></div>
+  <div class="relative mx-auto mt-10 w-[96%] max-w-[720px] rounded-[16px] bg-white border border-border shadow-lift flex flex-col" style="max-height:88vh">
+
+    <!-- Modal header -->
+    <div class="flex items-start justify-between gap-4 px-6 pt-6 pb-4 border-b border-border flex-shrink-0">
+      <div>
+        <p class="font-mono text-xs text-nextunicorn uppercase tracking-wider">Nextunicorn · Lead Generation</p>
+        <h3 class="font-display font-bold text-[20px] leading-[1.35] mt-1">리드 제너레이션 & 리드 전환</h3>
+      </div>
+      <button aria-label="Close" class="text-text-secondary hover:text-black transition-colors flex-shrink-0 mt-1" onclick="closeLeadModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <!-- Scrollable body -->
+    <div class="overflow-y-auto flex-1 px-6 py-5 space-y-5">
+
+      <!-- KPI -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="rounded-[12px] bg-[#F4F8FF] border border-[#D6E6FF] px-4 py-3">
+          <p class="font-bold text-[18px] text-nextunicorn">~15,000개</p>
+          <p class="text-[11px] text-text-secondary mt-0.5">2022년 연간 리드 확보</p>
+        </div>
+        <div class="rounded-[12px] bg-[#F4F8FF] border border-[#D6E6FF] px-4 py-3">
+          <p class="font-bold text-[18px] text-nextunicorn">30%+ 전환</p>
+          <p class="text-[11px] text-text-secondary mt-0.5">가입 전환, 행사 참여 등</p>
+        </div>
+      </div>
+
+      <!-- Problem / Hypothesis -->
+      <div class="space-y-3">
+        <div class="rounded-[12px] border border-border px-4 py-4">
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-2">Problem</p>
+          <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
+            <li>각 팀 리드가 파편화되어 있고 관리가 미흡</li>
+            <li>리드 제너레이션을 위한 전용 캠페인 부재</li>
+          </ul>
+        </div>
+        <div class="rounded-[12px] border border-[#D6E6FF] bg-[#F4F8FF] px-4 py-4">
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-nextunicorn mb-2">Hypothesis</p>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">수집된 리드를 유저 롤 별로 분류해 관리하고, 롤별 USP를 세분화해 푸시하면 리드 전환율이 증가할 것이다.</p>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-3">Execution</p>
+        <div class="space-y-3">
+
+          <div class="rounded-[12px] border border-border px-4 py-4">
+            <p class="text-[13px] font-semibold text-text-primary mb-2">① 리드 제너레이션 및 전환 프로세스 확립</p>
+            <p class="text-[13px] leading-[1.8] text-text-secondary">리드 제너레이션 협업 리딩 및 프로세스 효율화. 유저 롤별 세그먼트 분리 기준 수립 및 전환 트래킹 체계 구축.</p>
+          </div>
+
+          <div class="rounded-[12px] border border-border px-4 py-4">
+            <p class="text-[13px] font-semibold text-text-primary mb-2">② Paid & Non-Paid 캠페인 집행</p>
+            <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5 mb-3">
+              <li>Paid 캠페인 집행 및 성과 개선 — 타겟 세그먼트별 소재·메시지 최적화</li>
+              <li>Non-Paid 캠페인 집행 및 성과 개선 — 오가닉 채널 활용 리드 확보</li>
+            </ul>
+            <div class="grid grid-cols-2 gap-3 mt-3">
+              <div>
+                <p class="text-[10px] font-mono text-text-secondary uppercase tracking-[0.08em] mb-1.5">Paid — Instagram 광고</p>
+                <div class="rounded-[8px] overflow-hidden border border-border">
+                  <img src="assets/leadgen/leadgen_paid.png" alt="Paid 캠페인" class="w-full block"/>
+                </div>
+              </div>
+              <div>
+                <p class="text-[10px] font-mono text-text-secondary uppercase tracking-[0.08em] mb-1.5">Non-Paid — 이메일·뉴스레터</p>
+                <div class="rounded-[8px] overflow-hidden border border-border">
+                  <img src="assets/leadgen/leadgen_nonpaid.png" alt="Non-paid 캠페인" class="w-full block"/>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-[12px] border border-border px-4 py-4">
+            <p class="text-[13px] font-semibold text-text-primary mb-2">③ 리드 세그먼트 분리 및 관리 효율화</p>
+            <p class="text-[13px] leading-[1.8] text-text-secondary mb-3">리드 관리 프로세스 정리 및 성과 관리 자동화 시트 제작. BigQuery & Python을 이용한 자동화 구현으로 리드 현황 실시간 모니터링.</p>
+            <div class="rounded-[8px] overflow-hidden border border-border">
+              <img src="assets/leadgen/leadgen_automation.png" alt="리드 관리 자동화 시트" class="w-full block"/>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- KPI definition -->
+      <div class="rounded-[12px] border border-border px-4 py-4">
+        <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-2">검증 지표</p>
+        <div class="flex gap-6">
+          <div class="flex items-center gap-2 text-[13px] text-text-secondary"><span class="w-1.5 h-1.5 rounded-full bg-nextunicorn inline-block"></span>리드 확보 수</div>
+          <div class="flex items-center gap-2 text-[13px] text-text-secondary"><span class="w-1.5 h-1.5 rounded-full bg-nextunicorn inline-block"></span>확보된 리드 전환율</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function openLeadModal() {
+  document.getElementById('leadModal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+function closeLeadModal() {
+  document.getElementById('leadModal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+</script>
 </div>
 </section>
 </section>
@@ -2402,7 +2771,7 @@ class="block w-full h-full object-cover"
   </div>
 </div>
 </div>
-<!-- 10 Retrospective -->
+<!-- 11 Retrospective -->
 <div class="mt-12 border-t border-[#E5DDFF]"></div>
 <article class="mt-8 md:ml-[68px]">
 <div class="flex flex-col gap-2 mb-5">
