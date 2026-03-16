@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -1005,7 +1006,8 @@
       margin-top: 0;
     }
   </style>
-</link></link></head>
+</link></link>
+</head>
 <body class="bg-white text-text-primary font-body antialiased selection:bg-black selection:text-white">
 <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
 <!-- Top Nav -->
@@ -1029,11 +1031,11 @@
 </div>
 </div>
 </header>
-<main class="flex-grow" style="padding-top:128px">
+<main class="flex-grow pt-32">
 <!-- =========================
            VIEW: HOME
       ========================== -->
-<div id="view-home">
+<div id="view-home" style="display:none">
 <div class="mx-auto max-w-container px-6">
 <!-- Hero -->
 <section class="flex flex-col-reverse md:flex-row gap-12 md:gap-16 items-center mb-section-m md:mb-section">
@@ -1736,7 +1738,7 @@ function closeLeadModal() {
 <!-- =========================
            VIEW: CASE (SOOMGO)
       ========================== -->
-<div class="hidden" id="view-sg">
+<div id="view-sg" style="display:none">
 <!-- Back -->
 <div class="mx-auto max-w-container px-6">
 <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home')">
@@ -2974,7 +2976,7 @@ function closeLeadModal() {
 <!-- =========================
            VIEW: CASE (NEXTUNICORN)
       ========================== -->
-<div class="hidden" id="view-nu">
+<div id="view-nu" style="display:none">
 <div class="mx-auto max-w-container px-6">
 <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home')">
 <span class="material-symbols-outlined !text-[18px]">arrow_back</span>
@@ -3919,8 +3921,8 @@ function closeLeadModal() {
 <!-- =========================
            VIEW: RESUME
       ========================== -->
-<div class="hidden" id="view-resume">
-<div class="mx-auto max-w-container px-6 pt-2 pb-4">
+<div id="view-resume" style="display:none">
+<div class="mx-auto max-w-container px-6 pt-4 pb-4">
   <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home')">
     <span class="material-symbols-outlined !text-[18px]">arrow_back</span>
     Back to Home
@@ -4213,26 +4215,19 @@ function closeLeadModal() {
 </div>
 <script>
     function showView(which){
-      const home = document.getElementById('view-home');
-      const cs = document.getElementById('view-sg');
-      const next = document.getElementById('view-nu');
-      const resume = document.getElementById('view-resume');
+      const views = {
+        home: document.getElementById('view-home'),
+        sg:   document.getElementById('view-sg'),
+        nu:   document.getElementById('view-nu'),
+        resume: document.getElementById('view-resume'),
+      };
       const main = document.querySelector('main');
 
-      home.classList.toggle('hidden', which !== 'home');
-      cs.classList.toggle('hidden', which !== 'sg');
-      next.classList.toggle('hidden', which !== 'nu');
-      resume.classList.toggle('hidden', which !== 'resume');
+      Object.keys(views).forEach(k => {
+        views[k].style.display = (k === which) ? 'block' : 'none';
+      });
 
-      // 케이스/resume 뷰는 자체 hero가 있어서 main pt를 nav 높이만큼만
-      if (which === 'home') {
-        main.style.paddingTop = '128px';
-        main.classList.remove('pt-0');
-        main.classList.add('pt-32');
-      } else {
-        main.style.paddingTop = '80px';
-        main.classList.remove('pt-32');
-      }
+      main.style.paddingTop = (which === 'home') ? '' : '0';
 
       window.scrollTo(0,0);
 
@@ -4265,7 +4260,8 @@ function closeLeadModal() {
       else showView('home');
     }
 
-    window.addEventListener('load', syncViewWithHash);
+    window.addEventListener('DOMContentLoaded', syncViewWithHash);
+    syncViewWithHash();
     window.addEventListener('popstate', syncViewWithHash);
   </script>
 </body>
