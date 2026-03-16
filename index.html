@@ -4227,8 +4227,11 @@ function closeLeadModal() {
       // 케이스/resume 뷰는 자체 hero가 있어서 main pt를 nav 높이만큼만
       if (which === 'home') {
         main.style.paddingTop = '';
+        main.classList.remove('pt-0');
+        main.classList.add('pt-32');
       } else {
         main.style.paddingTop = '80px';
+        main.classList.remove('pt-32');
       }
 
       window.scrollTo(0,0);
