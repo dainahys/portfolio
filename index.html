@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -156,10 +157,6 @@
     @media (min-width: 768px) {
       .section-block { margin-top: 64px; }
     }
-
-    /* main 기본 padding = nav 높이(128px for home, 0 for others) */
-    #main-content { padding-top: 128px; }
-    #main-content.view-case { padding-top: 0; }
 
     #view-home {
       background: #ffffff;
@@ -1008,6 +1005,28 @@
     #view-sg .project-step-flow > .relative.mt-20:first-child {
       margin-top: 0;
     }
+
+    #view-resume {
+      width: 100%;
+      padding-top: 104px !important;
+      min-height: auto !important;
+      height: auto !important;
+      background: #fff;
+    }
+    #view-resume .resume-topbar {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    #view-resume .resume-shell {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 20px 24px 64px;
+    }
+    #view-resume .resume-footer {
+      margin-top: 48px !important;
+    }
+
   </style>
 </link></link>
 </head>
@@ -1034,7 +1053,7 @@
 </div>
 </div>
 </header>
-<main class="flex-grow" id="main-content">
+<main class="flex-grow pt-32">
 <!-- =========================
            VIEW: HOME
       ========================== -->
@@ -1701,7 +1720,7 @@ function closeLeadModal() {
 </div>
 </section>
 </div>
-<footer class="mt-auto border-t border-border bg-white py-12">
+<footer class="resume-footer border-t border-border bg-white py-12">
 <div class="max-w-container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
 <div class="text-text-secondary text-sm font-mono">© 2026 Hayeon Song. All rights reserved.</div>
 <div class="flex items-center gap-5 text-text-secondary">
@@ -3919,20 +3938,23 @@ function closeLeadModal() {
 </div>
 </footer>
 </div>
+</main>
+
 <!-- =========================
            VIEW: RESUME
       ========================== -->
 <div id="view-resume" style="display:none">
-<div class="mx-auto max-w-container px-6 pt-4 pb-4">
+<div class="resume-topbar pt-2 pb-2">
   <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home')">
     <span class="material-symbols-outlined !text-[18px]">arrow_back</span>
     Back to Home
   </button>
 </div>
-<div class="mx-auto max-w-[720px] px-6 pb-20">
+<div class="resume-shell">
+
 
   <!-- Header -->
-  <div class="py-10 border-b border-border">
+  <div class="pt-4 pb-8 border-b border-border">
     <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-text-secondary mb-3">Resume</p>
     <h1 class="font-display font-bold text-[42px] leading-[1.1] tracking-tight text-text-primary">송하연</h1>
     <p class="font-display font-bold text-[22px] tracking-tight text-text-secondary mt-1">Hayeon Song</p>
@@ -4169,9 +4191,6 @@ function closeLeadModal() {
 
 </div>
 
-
-</main>
-
 <footer class="mt-auto border-t border-border bg-white py-12">
 <div class="max-w-container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
 <div class="text-text-secondary text-sm font-mono">© 2026 Hayeon Song. All rights reserved.</div>
@@ -4225,13 +4244,19 @@ function closeLeadModal() {
         nu:   document.getElementById('view-nu'),
         resume: document.getElementById('view-resume'),
       };
-      const main = document.getElementById('main-content');
+      const main = document.querySelector('main');
+      const pageShell = document.querySelector('body > div.relative');
 
       Object.keys(views).forEach(k => {
         views[k].style.display = (k === which) ? 'block' : 'none';
       });
 
-      main.classList.toggle('view-case', which !== 'home');
+      const isResume = which === 'resume';
+      main.style.display = isResume ? 'none' : '';
+      main.style.paddingTop = (which === 'home') ? '' : '0';
+      if (pageShell) {
+        pageShell.style.minHeight = isResume ? 'auto' : '';
+      }
 
       window.scrollTo(0,0);
 
