@@ -1029,7 +1029,7 @@
 </div>
 </div>
 </header>
-<main class="flex-grow pt-32">
+<main class="flex-grow" style="padding-top:128px">
 <!-- =========================
            VIEW: HOME
       ========================== -->
@@ -1491,7 +1491,7 @@ function togglePromo(id) {
       <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
         <div>
           <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">② 프로그램 운영 자동화</p>
-          <p class="text-[13px] leading-[1.8] text-text-secondary">프로그램 신청 시 DB 자동 적재 → 마케팅 수신 동의 자동 변경 → 자동 메일 발송까지 이어지는 파이프라인을 구축했습니다. BigQuery SQL로 신청자 현황을 실시간 추출하고, Google Apps Script로 후속 액션을 자동화해 운영 공수를 대폭 줄였습니다.</p>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">프로그램 신청 시 DB 자동 적재 → 마케팅 수신 동의 자동 변경 → 자동 메일 발송까지 이어지는 파이프라인을 구축했습니다. BigQuery SQL로 신청자 현황을 실시간 추출하고, Google Apps Script로 후속 액션을 자동화해 운영 공수를 최소화했습니다.</p>
         </div>
         <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:260px;overflow-y:auto">
           <img src="assets/growth-infra/growth-infra_operation.png" alt="프로그램 운영 자동화" class="w-full block"/>
@@ -1502,7 +1502,7 @@ function togglePromo(id) {
       <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
         <div>
           <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">③ 프로모션 모니터링 자동화 & 시뮬레이터</p>
-          <p class="text-[13px] leading-[1.8] text-text-secondary">프로모션별 누적 성과를 자동 집계하는 대시보드와 간트차트 기반 타임라인을 구축했습니다. 또한 구간별 이동률·iROAS를 실시간으로 계산하는 HTML 인터랙티브 시뮬레이터를 직접 구현해 예산 보고에 활용했습니다.</p>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">프로모션별 누적 성과를 자동 집계하는 대시보드와 간트차트 기반 타임라인을 구축했습니다. 또한 구간별 이동률·iROAS를 실시간으로 계산하는 HTML 인터랙티브 시뮬레이터를 직접 구현해 마케팅팀에서 동일한 기준으로 프로모션 관련 의사결정이 이루어지도록 개선했습니다.</p>
         </div>
         <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:260px;overflow-y:auto">
           <img src="assets/growth-infra/growth-infra_promotion.png" alt="프로모션 모니터링 대시보드" class="w-full block"/>
@@ -1524,7 +1524,7 @@ function togglePromo(id) {
       <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
         <div>
           <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">⑤ 데이터 파이프라인 → Braze 연동 기획</p>
-          <p class="text-[13px] leading-[1.8] text-text-secondary">BigQuery · Kafka · 클라이언트 이벤트 데이터를 Braze User Attribute로 전송하는 파이프라인을 기획했습니다. 고수의 스마트견적 캠페인 활성화/비활성화 상태를 실시간으로 Braze에 반영해 맞춤형 CRM 세그먼트 운영이 가능한 구조를 설계하고, 개발팀과 협업을 위한 Jira 스펙 문서를 직접 작성했습니다.</p>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">BigQuery · Kafka · 클라이언트 이벤트 데이터를 Braze User Attribute로 전송하는 파이프라인을 기획했습니다. 고수의 스마트견적 캠페인 활성화/비활성화 상태를 실시간으로 Braze에 반영해 맞춤형 CRM 세그먼트 운영이 가능한 구조를 설계하고, 개발팀, 프로덕트팀과 협업을 진행했습니다.</p>
         </div>
         <div class="flex flex-col gap-3">
           <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:260px;overflow-y:auto">
@@ -4226,7 +4226,7 @@ function closeLeadModal() {
 
       // 케이스/resume 뷰는 자체 hero가 있어서 main pt를 nav 높이만큼만
       if (which === 'home') {
-        main.style.paddingTop = '';
+        main.style.paddingTop = '128px';
         main.classList.remove('pt-0');
         main.classList.add('pt-32');
       } else {
