@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>체크메이트 2026 — Braze IAM 인터랙티브 데모</title>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif; background: #0f0f14; color: #e2e8f0; }
+    @keyframes knightFloat { 0%,100%{transform:translateY(0) rotate(5deg)} 50%{transform:translateY(-8px) rotate(5deg)} }
+    @keyframes hintPulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
+    @keyframes shimmerOutline { 0%,100%{opacity:0.8} 50%{opacity:0} }
+    @keyframes shimmerReal { 0%,100%{opacity:0} 50%{opacity:0.8} }
+    @keyframes knightShake { 0%,100%{transform:translate(0,0) rotate(0deg)} 20%{transform:translate(-1.5px,0) rotate(-0.8deg)} 40%{transform:translate(1.5px,0) rotate(0.8deg)} 60%{transform:translate(-1px,0) rotate(-0.5deg)} 80%{transform:translate(1px,0) rotate(0.5deg)} }
+    @keyframes prizeFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+    @keyframes prizeAppear { 0%{opacity:0;transform:scale(0.8) translateY(10px)} 100%{opacity:1;transform:scale(1) translateY(0)} }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+const { useState, useEffect, useRef, useCallback } = React;
+
+// ── Image constants ──
+const IMG = {
+  knight:       'https://braze-images.com/appboy/communication/assets/image_assets/images/69a02781c3ae69006330582b/original.png?1772103553',
+  knight_chain: 'https://braze-images.com/appboy/communication/assets/image_assets/images/69a027643c75790063246d42/original.png?1772103556',
+  knight_outline:'https://braze-images.com/appboy/communication/assets/image_assets/images/69a0278848af5f006481b275/original.png?1772103559',
+  chessboard:   'https://braze-images.com/appboy/communication/assets/image_assets/images/69a820b06bb7d100634de8d0/original.png?1772626096',
+  bg_drag:      'https://braze-images.com/appboy/communication/assets/image_assets/images/69a8201d39ba6b00638c0bca/original.png?1772625948',
+  bg_push:      'https://braze-images.com/appboy/communication/assets/image_assets/images/69a83691cd54d500635e44ed/original.png?1772631697',
+  bg_uninstall: 'https://braze-images.com/appboy/communication/assets/image_assets/images/69a777395a64dd0063bdd544/original.png?1772582712',
+  bg_nopush:    'https://braze-images.com/appboy/communication/assets/image_assets/images/69a823729b4cda00639ddeee/original.png?1772626802',
+  bg_confirm:   'https://braze-images.com/appboy/communication/assets/image_assets/images/69a832287ab4f10064aec002/original.png?1772630568',
+  macbook:      'https://braze-images.com/appboy/communication/assets/image_assets/images/69a0278f9682ac0063afcbb7/original.png?1772103567',
+  ps5:          'https://braze-images.com/appboy/communication/assets/image_assets/images/69a81eb36da2c00063631e18/original.png?1772625586',
+  dinner:       'https://braze-images.com/appboy/communication/assets/image_assets/images/69a0279b13b2b500639d63ad/original.png?1772103579',
+  gas:          'https://braze-images.com/appboy/communication/assets/image_assets/images/69a81e757bfb4b00642bbcaf/original.png?1772625525',
+  dept:         'https://braze-images.com/appboy/communication/assets/image_assets/images/69a027a5740bd300646f39b3/original.png?1772103588',
+  conv:         'https://braze-images.com/appboy/communication/assets/image_assets/images/69a027aa17905400632ae038/original.png?1772103594',
+  coupon:       'https://braze-images.com/appboy/communication/assets/image_assets/images/69a027afc00287006317d09b/original.png?1772103598',
+  won_macbook:  'https://braze-images.com/appboy/communication/assets/image_assets/images/69a8213aeed1ec007351e124/original.png?1772626233',
+  won_ps5:      'https://braze-images.com/appboy/communication/assets/image_assets/images/69a8213a24809a0072e20528/original.png?1772626233',
+  won_dept:     'https://braze-images.com/appboy/communication/assets/image_assets/images/69a8213a24809a0063e21080/original.png?1772626233',
+  won_dining:   'https://braze-images.com/appboy/communication/assets/image_assets/images/69a821394126100063ddc08d/original.png?1772626233',
+  won_conv:     'https://braze-images.com/appboy/communication/assets/image_assets/images/69a82139699bb3006335051e/original.png?1772626233',
+  won_gas:      'https://braze-images.com/appboy/communication/assets/image_assets/images/69a8213954b6010063a6c8ad/original.png?1772626233',
+  won_sg50000:  'https://braze-images.com/appboy/communication/assets/image_assets/images/69a82e5e7ab4f10064aebdda/original.png?1772629598',
+  won_sg30000:  'https://braze-images.com/appboy/communication/assets/image_assets/images/69a82e5e6c123d006367425b/original.png?1772629597',
+  won_sg10000:  'https://braze-images.com/appboy/communication/assets/image_assets/images/69a82e5ebd144b006323acf0/original.png?1772629597',
+  won_sg5000:   'https://braze-images.com/appboy/communication/assets/image_assets/images/69a82e5ea474de0073131098/original.png?1772629597',
+  won_sg1000:   'https://braze-images.com/appboy/communication/assets/image_assets/images/69a82e5de60fad00634330df/original.png?1772629597',
+};
+
+const WON_BG = {
+  macbook: IMG.won_macbook, ps5: IMG.won_ps5, dept: IMG.won_dept,
+  dinner: IMG.won_dining, conv: IMG.won_conv, gas: IMG.won_gas,
+  coupon_50000: IMG.won_sg50000, coupon_30000: IMG.won_sg30000,
+  coupon_10000: IMG.won_sg10000, coupon_5000: IMG.won_sg5000, coupon_1000: IMG.won_sg1000,
+};
+
+const PRIZES = [
+  {name:'숨고 쿠폰',detail:'숨고 쿠폰 50,000원',img:IMG.coupon,gasKey:'coupon_50000'},
+  {name:'숨고 쿠폰',detail:'숨고 쿠폰 30,000원',img:IMG.coupon,gasKey:'coupon_30000'},
+  {name:'숨고 쿠폰',detail:'숨고 쿠폰 10,000원',img:IMG.coupon,gasKey:'coupon_10000'},
+  {name:'숨고 쿠폰',detail:'숨고 쿠폰 5,000원',img:IMG.coupon,gasKey:'coupon_5000'},
+  {name:'숨고 쿠폰',detail:'숨고 쿠폰 1,000원',img:IMG.coupon,gasKey:'coupon_1000'},
+  {name:'편의점 상품권',detail:'편의점 상품권 3천 원',img:IMG.conv,gasKey:'conv'},
+  {name:'백화점 상품권',detail:'백화점 상품권 3만 원',img:IMG.dept,gasKey:'dept'},
+  {name:'주유권',detail:'SK 주유권 5만 원',img:IMG.gas,gasKey:'gas'},
+  {name:'식사권',detail:'파인다이닝 2인 식사권',img:IMG.dinner,gasKey:'dinner'},
+  {name:'맥북',detail:'Macbook Pro 14 M4',img:IMG.macbook,gasKey:'macbook'},
+  {name:'PS5',detail:'플레이스테이션 5 프로 콘솔',img:IMG.ps5,gasKey:'ps5'},
+];
+const PW = {
+  top: [100,150,500,6657,12593,30,10,5,1,1,1],
+  mid: [100,150,500,6657,12593,30,10,5,0,0,0],
+  base:[100,150,500,6657,12593,0,0,0,0,0,0],
+};
+
+function pickPrize(tier) {
+  const pw = PW[tier] || PW.base;
+  const tot = pw.reduce((a,b)=>a+b,0);
+  let rnd = Math.random()*tot, sm=0;
+  for(let i=0;i<pw.length;i++) { if(!pw[i]) continue; sm+=pw[i]; if(rnd<=sm) return PRIZES[i]; }
+  return PRIZES[0];
+}
+
+// ── Log entry component ──
+const LogEntry = ({item}) => {
+  const styles = {
+    brazeBridge: {bg:'rgba(105,59,242,0.15)',border:'#693BF2',tag:'BRAZE',tc:'#C5B6FF'},
+    attr:        {bg:'rgba(16,185,129,0.12)',border:'#10B981',tag:'ATTR',tc:'#6EE7B7'},
+    event:       {bg:'rgba(59,130,246,0.12)',border:'#3B82F6',tag:'EVENT',tc:'#93C5FD'},
+    flush:       {bg:'rgba(245,158,11,0.12)',border:'#F59E0B',tag:'FLUSH',tc:'#FDE68A'},
+    page:        {bg:'rgba(168,85,247,0.12)',border:'#A855F7',tag:'PAGE',tc:'#D8B4FE'},
+    close:       {bg:'rgba(239,68,68,0.12)',border:'#EF4444',tag:'CLOSE',tc:'#FCA5A5'},
+    mock:        {bg:'rgba(148,163,184,0.08)',border:'rgba(148,163,184,0.3)',tag:'MOCK',tc:'#94A3B8'},
+    info:        {bg:'rgba(148,163,184,0.05)',border:'rgba(148,163,184,0.15)',tag:'INFO',tc:'#64748B'},
+  };
+  const s = styles[item.kind] || styles.info;
+  return (
+    <div style={{background:s.bg,borderLeft:`2px solid ${s.border}`,borderRadius:6,padding:'7px 10px',animation:'fadeIn 0.2s ease'}}>
+      <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:2}}>
+        <span style={{fontSize:9,fontWeight:700,color:s.tc,background:s.border+'25',padding:'1px 5px',borderRadius:3,letterSpacing:'0.06em'}}>{s.tag}</span>
+        <span style={{fontSize:10,color:'#475569'}}>{item.time}</span>
+      </div>
+      <div style={{fontSize:11,fontFamily:'DM Mono,monospace',color:'#CBD5E1',lineHeight:1.5,wordBreak:'break-all'}}>{item.msg}</div>
+      {item.props && <div style={{fontSize:10,fontFamily:'DM Mono,monospace',color:'#64748B',marginTop:3,lineHeight:1.5}}>{JSON.stringify(item.props,null,1)}</div>}
+    </div>
+  );
+};
+
+// ── Chess modal component (295×295) ──
+const ChessModal = ({prizeTier, pushOn, onLog, onPage}) => {
+  const [phase, setPhase] = useState('drag'); // drag | won | top3 | confirm
+  const [prize, setPrize] = useState(null);
+  const [knightPos, setKnightPos] = useState({left:'calc(50% - 30px + 6px)', top:'45%'});
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState(null);
+  const [wonBg, setWonBg] = useState(null);
+  const [prizeVisible, setPrizeVisible] = useState(false);
+  const [ctaVisible, setCtaVisible] = useState(false);
+  const [participated, setParticipated] = useState(false);
+  const modalRef = useRef(null);
+  const knightRef = useRef(null);
+  const dropRef = useRef(null);
+
+  const getPos = (e) => {
+    const t = e.touches ? e.touches[0] : e;
+    return {x: t.clientX, y: t.clientY};
+  };
+
+  const onStart = useCallback((e) => {
+    if (participated) return;
+    e.preventDefault();
+    const pos = getPos(e);
+    const knight = knightRef.current;
+    setIsDragging(true);
+    setDragStart({
+      x: pos.x, y: pos.y,
+      origLeft: knight.offsetLeft,
+      origTop: knight.offsetTop,
+    });
+  }, [participated]);
+
+  const onMove = useCallback((e) => {
+    if (!isDragging || participated) return;
+    e.preventDefault();
+    const pos = getPos(e);
+    const modal = modalRef.current;
+    const knight = knightRef.current;
+    const nL = Math.max(0, Math.min(dragStart.origLeft + (pos.x - dragStart.x), modal.offsetWidth - knight.offsetWidth));
+    const nT = Math.max(0, Math.min(dragStart.origTop + (pos.y - dragStart.y), modal.offsetHeight - knight.offsetHeight));
+    knight.style.left = nL + 'px';
+    knight.style.top = nT + 'px';
+  }, [isDragging, dragStart, participated]);
+
+  const onEnd = useCallback((e) => {
+    if (!isDragging || participated) return;
+    setIsDragging(false);
+    const modal = modalRef.current;
+    const knight = knightRef.current;
+    const drop = dropRef.current;
+    const mr = modal.getBoundingClientRect();
+    const dr = drop.getBoundingClientRect();
+    const kx = mr.left + knight.offsetLeft + knight.offsetWidth/2;
+    const ky = mr.top + knight.offsetTop + knight.offsetHeight/2;
+    const inZone = kx >= dr.left && kx <= dr.right && ky >= dr.top && ky <= dr.bottom;
+    if (inZone) {
+      dropSuccess();
+    } else {
+      // snap back
+      knight.style.transition = 'left 0.4s cubic-bezier(.34,1.56,.64,1), top 0.4s cubic-bezier(.34,1.56,.64,1)';
+      knight.style.left = dragStart.origLeft + 'px';
+      knight.style.top = dragStart.origTop + 'px';
+      setTimeout(() => { knight.style.transition = ''; }, 450);
+    }
+  }, [isDragging, dragStart, participated]);
+
+  const dropSuccess = () => {
+    setParticipated(true);
+    const p = pickPrize(prizeTier);
+    setPrize(p);
+    onLog({kind:'brazeBridge', msg:`getUser().setCustomUserAttribute('is_participated_promotion_test', true)`});
+    onLog({kind:'brazeBridge', msg:`getUser().setCustomUserAttribute('promotion_prize_test', '${p.detail}')`});
+    onLog({kind:'event', msg:'logCustomEvent(\'view_participated_promotion_modal\')', props:{prize_name:p.name, prize_detail:p.detail, prize_tier:prizeTier}});
+    onLog({kind:'flush', msg:'requestImmediateDataFlush()'});
+    onLog({kind:'mock', msg:`🎁 경품 추첨 결과: ${p.detail}`});
+    setTimeout(() => {
+      setWonBg(WON_BG[p.gasKey]);
+      setTimeout(() => {
+        setPrizeVisible(true);
+        setTimeout(() => setCtaVisible(true), 300);
+      }, 200);
+    }, 1800);
+  };
+
+  const onConfirm = () => {
+    if (!prize) return;
+    const top3 = ['macbook','ps5','dinner'];
+    const confirm = ['gas','dept','conv','coupon_50000','coupon_30000','coupon_10000','coupon_5000','coupon_1000'];
+    if (top3.includes(prize.gasKey)) { setPhase('top3'); onPage('top3 당첨 화면'); }
+    else if (confirm.includes(prize.gasKey)) { setPhase('confirm'); onPage('당첨 확인 화면'); }
+  };
+
+  if (phase === 'top3') return (
+    <div style={{width:295,height:295,borderRadius:12,overflow:'hidden',position:'relative',background:'#F1EEFF'}}>
+      <div style={{position:'absolute',inset:0,backgroundImage:`url(${WON_BG[prize.gasKey]})`,backgroundSize:'cover',backgroundPosition:'center'}}/>
+      <img src={prize.img} style={{position:'absolute',width:271,height:174,left:12,top:50,objectFit:'contain',animation:'prizeAppear 0.6s cubic-bezier(.34,1.56,.64,1) forwards'}} alt=""/>
+      <div style={{position:'absolute',left:0,right:0,bottom:0,padding:'0 16px 14px',zIndex:10}}>
+        <button onClick={()=>{onLog({kind:'close',msg:'closeMessage()'});onPage('닫힘 (top3 링크 이동)')}} style={{width:'100%',height:44,background:'#693BF2',border:'none',borderRadius:10,color:'#fff',fontWeight:700,fontSize:15,cursor:'pointer',fontFamily:'inherit'}}>상세 내용 확인하기</button>
+      </div>
+    </div>
+  );
+
+  if (phase === 'confirm') return (
+    <div style={{width:295,height:295,borderRadius:12,overflow:'hidden',position:'relative'}}>
+      <div style={{position:'absolute',inset:0,backgroundImage:`url(${IMG.bg_confirm})`,backgroundSize:'cover',backgroundPosition:'center'}}/>
+      <div style={{position:'absolute',left:'50%',transform:'translateX(-50%)',top:30,width:80,height:80,display:'flex',alignItems:'center',justifyContent:'center',zIndex:5}}>
+        <div style={{position:'absolute',inset:0,borderRadius:'50%',background:'#F5F1FF',boxShadow:'0 0 0 8px #EDE6FF'}}/>
+        <img src={prize.img} style={{width:60,height:60,objectFit:'contain',position:'relative',zIndex:1}} alt=""/>
+      </div>
+      <div style={{position:'absolute',left:0,right:0,top:120,display:'flex',flexDirection:'column',alignItems:'center',gap:6,zIndex:5,padding:'0 20px'}}>
+        <div style={{fontWeight:800,fontSize:20,letterSpacing:-1,color:'#1C242F',textAlign:'center'}}>당첨을 축하드려요!</div>
+        <div style={{fontSize:15,color:'#6A7685',textAlign:'center',lineHeight:1.5}}>당첨되신 <em style={{color:'#693BF2',fontStyle:'normal',fontWeight:600}}>{prize.detail}</em>은<br/>이벤트 종료 후 일괄 지급됩니다</div>
+      </div>
+      <div style={{position:'absolute',left:0,right:0,bottom:0,padding:'0 16px 14px',zIndex:10}}>
+        <button onClick={()=>{onLog({kind:'close',msg:'closeMessage()'});onPage('닫힘')}} style={{width:'100%',height:44,background:'#693BF2',border:'none',borderRadius:10,color:'#fff',fontWeight:700,fontSize:15,cursor:'pointer',fontFamily:'inherit'}}>확인</button>
+      </div>
+    </div>
+  );
+
+  // drag phase
+  return (
+    <div ref={modalRef} style={{width:295,height:295,borderRadius:12,overflow:'hidden',position:'relative',background:'#1C242F',cursor:isDragging?'grabbing':'default'}}
+      onMouseMove={onMove} onMouseUp={onEnd} onTouchMove={onMove} onTouchEnd={onEnd}>
+      <div style={{position:'absolute',inset:0,backgroundImage:`url(${wonBg || IMG.bg_drag})`,backgroundSize:'cover',backgroundPosition:'center',transition:'background-image 0.3s'}}/>
+      {/* chessboard */}
+      {!wonBg && <div style={{position:'absolute',width:452,height:187,left:-79,top:168,zIndex:11,pointerEvents:'none',backgroundImage:`url(${IMG.chessboard})`,backgroundSize:'cover'}}/>}
+      {/* drop zone */}
+      <div ref={dropRef} style={{position:'absolute',left:'8%',right:'8%',top:'50%',bottom:'2%',zIndex:12}}/>
+      {/* bottom grad */}
+      {!wonBg && <div style={{position:'absolute',left:0,right:0,bottom:0,height:143,zIndex:13,pointerEvents:'none',background:'linear-gradient(0deg,#131313 27%,rgba(19,19,19,0.5) 45%,rgba(19,19,19,0) 59%)'}}/>}
+      {/* noise */}
+      {!wonBg && <div style={{position:'absolute',inset:0,mixBlendMode:'overlay',opacity:0.5,zIndex:18,pointerEvents:'none',backgroundImage:"url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",backgroundSize:'128px 128px'}}/>}
+      {/* close */}
+      <button onClick={()=>{onLog({kind:'close',msg:'closeMessage()'});onPage('닫힘')}} style={{position:'absolute',top:8,right:8,zIndex:30,padding:4,border:'none',background:'none',cursor:'pointer'}}>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeLinecap="round"/></svg>
+      </button>
+      {/* knight */}
+      {!wonBg && (
+        <div ref={knightRef} onMouseDown={onStart} onTouchStart={onStart}
+          style={{position:'absolute',width:59,height:89,left:'calc(50% - 30px + 6px)',top:'45%',zIndex:22,cursor:isDragging?'grabbing':'grab',touchAction:'none',animation:participated?'none':'knightFloat 2.5s ease-in-out infinite',transformOrigin:'center center',userSelect:'none'}}>
+          <img src={IMG.knight} alt="" style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'contain',pointerEvents:'none',userSelect:'none'}}/>
+        </div>
+      )}
+      {/* prize img after won */}
+      {wonBg && (
+        <img src={prize?.img} style={{position:'absolute',width:138,height:83,left:'calc(50% - 69px)',top:110,zIndex:22,pointerEvents:'none',opacity:prizeVisible?1:0,objectFit:'contain',transition:'opacity 0.4s',animation:prizeVisible?'prizeFloat 3s ease-in-out infinite':'none'}} alt=""/>
+      )}
+      {/* hint */}
+      {!participated && !wonBg && (
+        <div style={{position:'absolute',left:0,right:0,top:'76%',textAlign:'center',zIndex:20,pointerEvents:'none'}}>
+          <span style={{fontSize:12,fontWeight:600,color:'#fff',letterSpacing:-0.02,animation:'hintPulse 2s ease-in-out infinite'}}>↑ 나이트 클릭 ↑</span>
+        </div>
+      )}
+      {/* CTA after won */}
+      {ctaVisible && (
+        <div style={{position:'absolute',left:0,right:0,bottom:0,padding:'0 16px 16px',zIndex:25}}>
+          <button onClick={onConfirm} style={{width:'100%',height:44,background:'#693BF2',border:'none',borderRadius:10,color:'#fff',fontWeight:700,fontSize:15,cursor:'pointer',fontFamily:'inherit',transition:'all 0.15s'}}>확인</button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ── Push primer modal ──
+const PushPrimerModal = ({onLog, onPage}) => (
+  <div style={{width:295,height:295,borderRadius:12,overflow:'hidden',position:'relative',background:'#1C242F'}}>
+    <div style={{position:'absolute',inset:0,backgroundImage:`url(${IMG.bg_push})`,backgroundSize:'cover',backgroundPosition:'center'}}/>
+    <button onClick={()=>{onLog({kind:'close',msg:'closeMessage()'});onPage('닫힘 (푸시 거부)')}} style={{position:'absolute',top:8,right:8,zIndex:30,padding:4,border:'none',background:'none',cursor:'pointer'}}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeLinecap="round"/></svg>
+    </button>
+    <div style={{position:'absolute',width:59,height:89,left:'calc(50% - 30px)',top:'45%',zIndex:22}}>
+      <img src={IMG.knight_chain} alt="" style={{width:'100%',height:'100%',objectFit:'contain',animation:'knightShake 0.4s ease-in-out infinite'}}/>
+    </div>
+    <div style={{position:'absolute',inset:0,mixBlendMode:'overlay',opacity:0.5,zIndex:18,pointerEvents:'none',backgroundImage:"url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",backgroundSize:'128px 128px'}}/>
+    <div style={{position:'absolute',left:0,right:0,bottom:0,padding:'0 16px 16px',zIndex:25}}>
+      <button onClick={()=>{onLog({kind:'mock',msg:'[알림 키고 나이트 소환하기] → 설정 앱 딥링크'});onPage('설정 앱 이동')}} style={{width:'100%',height:44,background:'#FF3541',border:'none',borderRadius:10,color:'#fff',fontWeight:700,fontSize:15,cursor:'pointer',fontFamily:'inherit'}}>알림 키고 나이트 소환하기</button>
+    </div>
+  </div>
+);
+
+// ── Uninstall modal ──
+const UninstallModal = ({onLog, onPage}) => (
+  <div style={{width:295,height:295,borderRadius:12,overflow:'hidden',position:'relative',background:'#1C242F'}}>
+    <div style={{position:'absolute',inset:0,backgroundImage:`url(${IMG.bg_uninstall})`,backgroundSize:'cover',backgroundPosition:'center'}}/>
+    <div style={{position:'absolute',width:'100%',height:220,left:0,bottom:-30,zIndex:1,pointerEvents:'none',background:'radial-gradient(ellipse 80% 60% at 50% 100%,rgba(105,59,242,0.45) 0%,rgba(105,59,242,0.15) 40%,transparent 70%)',filter:'blur(20px)'}}/>
+    <button onClick={()=>{onLog({kind:'close',msg:'closeMessage()'});onPage('닫힘')}} style={{position:'absolute',top:8,right:8,zIndex:30,padding:4,border:'none',background:'none',cursor:'pointer'}}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeLinecap="round"/></svg>
+    </button>
+    <div style={{position:'absolute',width:60,height:109,left:'calc(50% - 30px)',top:118,zIndex:10}}>
+      <img src={IMG.knight_outline} alt="" style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'contain',animation:'shimmerOutline 1.4s ease-in-out infinite'}}/>
+      <img src={IMG.knight} alt="" style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'contain',animation:'shimmerReal 1.4s ease-in-out infinite'}}/>
+    </div>
+    <div style={{position:'absolute',left:0,right:0,bottom:0,padding:'0 16px 16px',zIndex:25}}>
+      <button onClick={()=>{onLog({kind:'mock',msg:'[나이트 소환하기] → Airbridge 딥링크 (앱스토어)'});onPage('App Store 이동')}} style={{width:'100%',height:44,background:'#693BF2',border:'none',borderRadius:10,color:'#fff',fontWeight:700,fontSize:15,cursor:'pointer',fontFamily:'inherit',textDecoration:'none',display:'flex',alignItems:'center',justifyContent:'center'}}>나이트 소환하기</button>
+    </div>
+  </div>
+);
+
+// ── No push modal ──
+const NoPushModal = ({onLog, onPage}) => (
+  <div style={{width:295,height:295,borderRadius:12,overflow:'hidden',position:'relative',background:'#353535'}}>
+    <div style={{position:'absolute',inset:0,backgroundImage:`url(${IMG.bg_nopush})`,backgroundSize:'cover',backgroundPosition:'center'}}/>
+    <button onClick={()=>{onLog({kind:'close',msg:'closeMessage()'});onPage('닫힘')}} style={{position:'absolute',top:8,right:8,zIndex:30,padding:4,border:'none',background:'none',cursor:'pointer'}}>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeLinecap="round"/></svg>
+    </button>
+    <div style={{position:'absolute',left:'50%',transform:'translateX(-50%)',bottom:62,zIndex:26,background:'#F1EEFF',borderRadius:6,padding:'5px 14px',pointerEvents:'none',whiteSpace:'nowrap'}}>
+      <span style={{fontSize:10,fontWeight:500,color:'#865FFF',letterSpacing:-0.02}}>알림을 켠 후 다시 시도해 주세요</span>
+    </div>
+    <div style={{position:'absolute',left:0,right:0,bottom:0,padding:'0 15px 15px',zIndex:25}}>
+      <button onClick={()=>{onLog({kind:'close',msg:'closeMessage()'});onPage('닫힘')}} style={{width:'100%',height:44,background:'#693BF2',border:'none',borderRadius:8,color:'#fff',fontWeight:700,fontSize:15,cursor:'pointer',fontFamily:'inherit'}}>확인</button>
+    </div>
+  </div>
+);
+
+// ── Terms modal ──
+const TermsModal = ({mktInfo, mktMsg, pushOn, onLog, onNext}) => {
+  const [checked, setChecked] = useState({marketing_info: mktInfo, marketing_message: mktMsg});
+  const visibleItems = [];
+  if (!mktInfo) visibleItems.push({key:'marketing_info', label:'개인정보 마케팅 활용 동의'});
+  if (!mktMsg)  visibleItems.push({key:'marketing_message', label:'마케팅 알림 수신 동의'});
+  const allChecked = visibleItems.every(i => checked[i.key]);
+
+  const submit = () => {
+    const consented = visibleItems.filter(i => checked[i.key]).map(i => i.key);
+    if (!mktInfo && checked.marketing_info) onLog({kind:'brazeBridge', msg:"getUser().setCustomUserAttribute('is_marketing_info_opted_in', true)"});
+    if (!mktMsg && checked.marketing_message) onLog({kind:'brazeBridge', msg:"getUser().setCustomUserAttribute('is_marketing_message_opted_in', true)"});
+    onLog({kind:'event', msg:"logCustomEvent('click_terms_submit_button')", props:{is_all_checked:true, checked_items:consented.join(',')}});
+    onLog({kind:'flush', msg:'requestImmediateDataFlush()'});
+    onNext(pushOn);
+  };
+
+  return (
+    <div style={{width:295,height:295,background:'#fff',borderRadius:12,padding:'10px 14px 14px',display:'flex',flexDirection:'column',overflow:'hidden'}}>
+      <button onClick={()=>{onLog({kind:'close',msg:'closeMessage()'})}} style={{display:'block',marginLeft:'auto',padding:0,border:'none',background:'none',cursor:'pointer'}}>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6L18 18" stroke="#6B7684" strokeWidth="2" strokeLinecap="round"/></svg>
+      </button>
+      <div style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:8,margin:'8px 0',justifyContent:'center'}}>
+        <p style={{fontSize:18,fontWeight:700,textAlign:'center',color:'#1C242F',lineHeight:1.35}}>이벤트 참여를 위해<br/>동의해 주세요</p>
+        <div style={{display:'flex',flexDirection:'column',gap:10,width:'100%',marginTop:4}}>
+          {visibleItems.length > 1 && (
+            <div onClick={()=>setChecked(visibleItems.reduce((a,i)=>({...a,[i.key]:!visibleItems.every(x=>checked[x.key])}),...[{}]))} style={{display:'flex',alignItems:'flex-start',gap:8,cursor:'pointer',paddingBottom:10,borderBottom:'1px solid #EFF1F5'}}>
+              <div style={{width:18,height:18,minWidth:18,border:`2px solid ${visibleItems.every(i=>checked[i.key])?'#693BF2':'#E0E5EB'}`,borderRadius:4,background:visibleItems.every(i=>checked[i.key])?'#693BF2':'#fff',display:'flex',alignItems:'center',justifyContent:'center',marginTop:1}}>
+                {visibleItems.every(i=>checked[i.key]) && <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6L5 9L10 3" stroke="white" strokeWidth="2" fill="none"/></svg>}
+              </div>
+              <span style={{fontSize:16,fontWeight:600,color:'#1C242F'}}>전체 동의</span>
+            </div>
+          )}
+          {visibleItems.map(item => (
+            <div key={item.key} onClick={()=>setChecked(p=>({...p,[item.key]:!p[item.key]}))} style={{display:'flex',alignItems:'flex-start',gap:8,cursor:'pointer'}}>
+              <div style={{width:18,height:18,minWidth:18,border:`2px solid ${checked[item.key]?'#693BF2':'#E0E5EB'}`,borderRadius:4,background:checked[item.key]?'#693BF2':'#fff',display:'flex',alignItems:'center',justifyContent:'center',marginTop:1}}>
+                {checked[item.key] && <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6L5 9L10 3" stroke="white" strokeWidth="2" fill="none"/></svg>}
+              </div>
+              <span style={{fontSize:14,color:'#1C242F'}}>{item.label}</span>
+            </div>
+          ))}
+          {visibleItems.length === 0 && <p style={{fontSize:13,color:'#6B7684',textAlign:'center'}}>모든 동의 항목이 충족되었습니다</p>}
+        </div>
+      </div>
+      <button onClick={submit} disabled={!allChecked && visibleItems.length > 0} style={{display:'block',borderRadius:8,fontFamily:'inherit',fontWeight:600,fontSize:14,width:'100%',height:40,cursor:allChecked||visibleItems.length===0?'pointer':'not-allowed',background:allChecked||visibleItems.length===0?'#693BF2':'#E0E5EB',border:'none',color:allChecked||visibleItems.length===0?'#fff':'#AAB4BF',transition:'all 0.2s'}}>동의하기</button>
+    </div>
+  );
+};
+
+// ── Terms notice modal ──
+const TermsNotice = ({onNext}) => {
+  const now = new Date();
+  const dt = now.getFullYear()+'.'+String(now.getMonth()+1).padStart(2,'0')+'.'+String(now.getDate()).padStart(2,'0')+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+  return (
+    <div style={{width:295,height:295,background:'#fff',borderRadius:12,padding:'10px 14px 14px',display:'flex',flexDirection:'column',overflow:'hidden'}}>
+      <div style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:8,margin:'8px 0',justifyContent:'center'}}>
+        <div style={{width:48,height:48,borderRadius:'50%',background:'#ECFDF5',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 4px'}}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="#10B981"/></svg>
+        </div>
+        <p style={{fontSize:18,fontWeight:700,textAlign:'center',color:'#1C242F',lineHeight:1.35}}>동의가 완료되었습니다</p>
+        <table style={{width:'100%',borderCollapse:'collapse',marginTop:6,fontSize:12}}>
+          <tbody>
+            <tr><th style={{padding:6,border:'1px solid #EFF1F5',background:'#F8F9FB',fontWeight:600,color:'#6B7684',width:70,textAlign:'left'}}>동의 일시</th><td style={{padding:6,border:'1px solid #EFF1F5'}}>{dt}</td></tr>
+            <tr><th style={{padding:6,border:'1px solid #EFF1F5',background:'#F8F9FB',fontWeight:600,color:'#6B7684',textAlign:'left'}}>동의 항목</th><td style={{padding:6,border:'1px solid #EFF1F5'}}>개인정보 마케팅 활용 동의<br/>마케팅 알림 수신 동의</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <button onClick={onNext} style={{display:'block',borderRadius:8,fontFamily:'inherit',fontWeight:600,fontSize:14,width:'100%',height:40,cursor:'pointer',background:'#693BF2',border:'none',color:'#fff'}}>확인</button>
+    </div>
+  );
+};
+
+// ── Main App ──
+const App = () => {
+  const [tab, setTab] = useState('flow');
+  const [logs, setLogs] = useState([]);
+  const [flowStep, setFlowStep] = useState('terms'); // terms | notice | chess | push
+  const logRef = useRef(null);
+
+  // Mock settings
+  const [prizeTier, setPrizeTier] = useState('base');
+  const [pushOn, setPushOn] = useState(true);
+  const [mktInfo, setMktInfo] = useState(false);
+  const [mktMsg, setMktMsg] = useState(false);
+
+  useEffect(() => {
+    if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight;
+  }, [logs]);
+
+  const addLog = useCallback((entry) => {
+    const time = new Date().toLocaleTimeString('ko',{hour12:false});
+    setLogs(prev => [...prev, {...entry, time}]);
+  }, []);
+
+  const addPage = useCallback((label) => {
+    addLog({kind:'page', msg:`페이지 전환 → ${label}`});
+  }, [addLog]);
+
+  const resetFlow = () => {
+    setFlowStep('terms');
+    setLogs([]);
+  };
+
+  const TAB_INFO = {
+    flow:      {label:'① 메인 플로우', sub:'약관→동의→체스'},
+    nodrag:    {label:'② 기존 유저', sub:'드래그 only'},
+    uninstall: {label:'③ 앱 미설치', sub:'나이트 shimmer'},
+    nopush:    {label:'④ 푸시 거부', sub:'참여 불가'},
+  };
+
+  const renderModal = () => {
+    if (tab === 'uninstall') return <UninstallModal onLog={addLog} onPage={addPage}/>;
+    if (tab === 'nopush')    return <NoPushModal onLog={addLog} onPage={addPage}/>;
+    if (tab === 'nodrag')    return <ChessModal prizeTier={prizeTier} pushOn={pushOn} onLog={addLog} onPage={addPage}/>;
+    // flow
+    if (flowStep === 'terms') {
+      const allDone = mktInfo && mktMsg;
+      if (allDone) {
+        // skip terms
+        return pushOn
+          ? <ChessModal prizeTier={prizeTier} pushOn={pushOn} onLog={addLog} onPage={addPage}/>
+          : <PushPrimerModal onLog={addLog} onPage={addPage}/>;
+      }
+      return <TermsModal mktInfo={mktInfo} mktMsg={mktMsg} pushOn={pushOn} onLog={addLog}
+        onNext={(push) => {
+          addPage('동의 고지 화면');
+          setFlowStep('notice');
+        }}/>;
+    }
+    if (flowStep === 'notice') {
+      return <TermsNotice onNext={() => {
+        addLog({kind:'event', msg:"logCustomEvent('click_consent_confirm')"});
+        if (pushOn) { addPage('체스 드래그앤드롭'); setFlowStep('chess'); }
+        else { addPage('푸시 프라이머'); setFlowStep('push'); }
+      }}/>;
+    }
+    if (flowStep === 'chess') return <ChessModal prizeTier={prizeTier} pushOn={pushOn} onLog={addLog} onPage={addPage}/>;
+    if (flowStep === 'push')  return <PushPrimerModal onLog={addLog} onPage={addPage}/>;
+    return null;
+  };
+
+  const MOCK_CONFIGS = {
+    flow: [
+      {id:'prize_tier', label:'경품 tier', opts:['base','mid','top'], val:prizeTier, set:setPrizeTier},
+      {id:'push', label:'푸시 권한', opts:['ON','OFF'], val:pushOn?'ON':'OFF', set:v=>setPushOn(v==='ON')},
+      {id:'mkt_info', label:'마케팅정보', opts:['미동의','동의됨'], val:mktInfo?'동의됨':'미동의', set:v=>setMktInfo(v==='동의됨')},
+      {id:'mkt_msg', label:'마케팅알림', opts:['미동의','동의됨'], val:mktMsg?'동의됨':'미동의', set:v=>setMktMsg(v==='동의됨')},
+    ],
+    nodrag: [
+      {id:'prize_tier', label:'경품 tier', opts:['base','mid','top'], val:prizeTier, set:setPrizeTier},
+    ],
+    uninstall: [],
+    nopush: [],
+  };
+
+  const mocks = MOCK_CONFIGS[tab] || [];
+
+  return (
+    <div style={{display:'flex',flexDirection:'column',height:'100vh',background:'#0a0a0f',fontFamily:'Pretendard Variable, Pretendard, -apple-system, sans-serif'}}>
+
+      {/* Header */}
+      <div style={{padding:'14px 20px',borderBottom:'1px solid rgba(105,59,242,0.2)',display:'flex',alignItems:'center',gap:12,flexShrink:0}}>
+        <div style={{display:'flex',alignItems:'center',gap:8}}>
+          <div style={{width:28,height:28,background:'#693BF2',borderRadius:8,display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontWeight:800,color:'#fff'}}>숨</div>
+          <div>
+            <div style={{fontSize:13,fontWeight:700,color:'#C5B6FF',letterSpacing:-0.3}}>체크메이트 2026</div>
+            <div style={{fontSize:10,color:'#6B5C8A',fontFamily:'DM Mono,monospace',letterSpacing:'0.05em'}}>BRAZE IAM — INTERACTIVE DEMO</div>
+          </div>
+        </div>
+        {/* tabs */}
+        <div style={{display:'flex',gap:4,marginLeft:16}}>
+          {Object.entries(TAB_INFO).map(([id,info]) => (
+            <button key={id} onClick={()=>{setTab(id);resetFlow();setLogs([]);}}
+              style={{padding:'5px 10px',borderRadius:6,border:`1px solid ${tab===id?'#693BF2':'rgba(105,59,242,0.2)'}`,background:tab===id?'rgba(105,59,242,0.2)':'transparent',color:tab===id?'#C5B6FF':'#6B5C8A',fontSize:11,cursor:'pointer',transition:'all 0.15s',fontFamily:'inherit',lineHeight:1.4,textAlign:'left'}}>
+              <div style={{fontWeight:600}}>{info.label}</div>
+              <div style={{fontSize:9,opacity:0.7}}>{info.sub}</div>
+            </button>
+          ))}
+        </div>
+        <div style={{marginLeft:'auto',display:'flex',gap:8}}>
+          {(tab==='flow') && <button onClick={resetFlow} style={{padding:'5px 12px',borderRadius:6,border:'1px solid rgba(105,59,242,0.3)',background:'transparent',color:'#9B8CC4',fontSize:11,cursor:'pointer',fontFamily:'inherit'}}>↺ 초기화</button>}
+          <button onClick={()=>setLogs([])} style={{padding:'5px 12px',borderRadius:6,border:'1px solid rgba(255,255,255,0.1)',background:'transparent',color:'#64748B',fontSize:11,cursor:'pointer',fontFamily:'inherit'}}>로그 지우기</button>
+        </div>
+      </div>
+
+      {/* Body */}
+      <div style={{flex:1,display:'flex',overflow:'hidden'}}>
+
+        {/* Left: phone + controls */}
+        <div style={{width:380,flexShrink:0,display:'flex',flexDirection:'column',alignItems:'center',padding:'24px 16px',background:'#0a0a0f',borderRight:'1px solid rgba(105,59,242,0.12)',overflowY:'auto',gap:20}}>
+          <div style={{fontSize:10,fontFamily:'DM Mono,monospace',color:'#6B5C8A',letterSpacing:'0.08em',textTransform:'uppercase'}}>Phone Preview · 295×295</div>
+
+          {/* Modal preview */}
+          <div style={{borderRadius:16,overflow:'hidden',boxShadow:'0 0 0 1px rgba(105,59,242,0.3), 0 32px 80px rgba(105,59,242,0.2)',background:'rgba(0,0,0,0.65)',width:295,height:295,flexShrink:0}}>
+            {renderModal()}
+          </div>
+
+          {/* Mock controls */}
+          {mocks.length > 0 && (
+            <div style={{width:'100%',background:'rgba(105,59,242,0.08)',border:'1px solid rgba(105,59,242,0.2)',borderRadius:10,padding:14}}>
+              <div style={{fontSize:10,fontFamily:'DM Mono,monospace',color:'#8B6FD4',letterSpacing:'0.08em',textTransform:'uppercase',marginBottom:12,fontWeight:600}}>Mock 설정</div>
+              <div style={{display:'flex',flexDirection:'column',gap:8}}>
+                {mocks.map(m => (
+                  <div key={m.id} style={{display:'flex',alignItems:'center',gap:8}}>
+                    <span style={{fontSize:11,fontFamily:'DM Mono,monospace',color:'#9B8CC4',width:72,flexShrink:0}}>{m.label}</span>
+                    <div style={{display:'flex',gap:4}}>
+                      {m.opts.map(opt => (
+                        <button key={opt} onClick={()=>m.set(opt)}
+                          style={{padding:'4px 9px',borderRadius:5,border:`1px solid ${m.val===opt?'#693BF2':'rgba(105,59,242,0.2)'}`,background:m.val===opt?'rgba(105,59,242,0.3)':'transparent',color:m.val===opt?'#C5B6FF':'#6B5C8A',fontSize:11,cursor:'pointer',transition:'all 0.15s',fontFamily:'DM Mono,monospace'}}>
+                          {opt}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {tab === 'flow' && (
+                <div style={{marginTop:10,padding:'8px 10px',background:'rgba(105,59,242,0.1)',borderRadius:6,fontSize:10,fontFamily:'DM Mono,monospace',color:'#8B6FD4',lineHeight:1.5}}>
+                  현재: {mktInfo&&mktMsg ? (pushOn?'체스 바로 진입':'푸시 프라이머') : '약관 동의 화면 진입'}
+                </div>
+              )}
+            </div>
+          )}
+          {mocks.length === 0 && (
+            <div style={{fontSize:11,fontFamily:'DM Mono,monospace',color:'#4A3D6A',textAlign:'center'}}>이 IAM은 Mock 설정이 없습니다</div>
+          )}
+        </div>
+
+        {/* Right: log */}
+        <div style={{flex:1,display:'flex',flexDirection:'column',overflow:'hidden'}}>
+          <div style={{padding:'10px 16px',borderBottom:'1px solid rgba(255,255,255,0.05)',display:'flex',alignItems:'center',gap:8,flexShrink:0}}>
+            <div style={{width:6,height:6,borderRadius:'50%',background:'#693BF2',animation:'hintPulse 1.5s ease-in-out infinite'}}/>
+            <span style={{fontSize:11,fontFamily:'DM Mono,monospace',color:'#6B5C8A',letterSpacing:'0.06em',textTransform:'uppercase'}}>brazeBridge Mock — 실시간 이벤트 로그</span>
+          </div>
+          <div ref={logRef} style={{flex:1,overflowY:'auto',padding:12,display:'flex',flexDirection:'column',gap:5}}>
+            {logs.length === 0 ? (
+              <div style={{textAlign:'center',color:'#2D2460',fontSize:12,fontFamily:'DM Mono,monospace',marginTop:40}}>모달과 상호작용하면 로그가 여기 표시됩니다</div>
+            ) : logs.map((item,i) => <LogEntry key={i} item={item}/>)}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+ReactDOM.render(<App/>, document.getElementById('root'));
+  </script>
+</body>
+</html>
