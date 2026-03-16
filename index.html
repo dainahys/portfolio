@@ -1450,14 +1450,123 @@ function togglePromo(id) {
 <p class="text-[14px] font-medium text-text-primary text-center">Lead Generation</p>
 </div>
 </div>
-<a href="javascript:void(0)" onclick="alert('준비중입니다')" class="group rounded-[20px] border bordered bg-white/5 overflow-hidden hover:bg-white/10 transition-colors">
+<div class="group rounded-[20px] border bordered bg-white/5 overflow-hidden hover:bg-white/10 transition-colors cursor-pointer" onclick="openGrowthModal()">
 <div class="aspect-square bg-[#111111] overflow-hidden">
 <img src="assets/growth-infra/growth-infra.png" alt="Growth Infra project thumbnail" class="block w-full h-full object-cover"/>
 </div>
 <div class="border-t bordered px-4 py-4">
 <p class="text-[14px] font-medium text-text-primary text-center">Growth Infra</p>
 </div>
-</a>
+</div>
+
+<!-- Growth Infra Modal -->
+<div class="hidden fixed inset-0 z-[100]" id="growthModal">
+  <div class="absolute inset-0 backdrop" onclick="closeGrowthModal()"></div>
+  <div class="relative mx-auto mt-10 w-[96%] max-w-[720px] rounded-[16px] bg-white border border-border shadow-lift flex flex-col" style="max-height:88vh">
+
+    <div class="flex items-start justify-between gap-4 px-6 pt-6 pb-4 border-b border-border flex-shrink-0">
+      <div>
+        <p class="font-mono text-xs text-text-secondary uppercase tracking-wider">Growth Infra</p>
+        <h3 class="font-display font-bold text-[20px] leading-[1.35] mt-1">마케팅 자동화 & 데이터 인프라 구축</h3>
+      </div>
+      <button aria-label="Close" class="text-text-secondary hover:text-black transition-colors flex-shrink-0 mt-1" onclick="closeGrowthModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <div class="overflow-y-auto flex-1 px-6 py-5 space-y-5">
+
+      <!-- ① CRM 대시보드 자동화 -->
+      <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">① CRM 성과 대시보드 자동화</p>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">BigQuery + Google Apps Script + Looker Studio를 연동해 앱 푸시 캠페인 성과를 자동 집계하는 대시보드를 구축했습니다. 고수/고객 채널별로 Unique · CTR · CVR · Uplift를 일별·월별로 추적하며, 수동 집계 없이 실시간 모니터링이 가능한 구조를 만들었습니다.</p>
+        </div>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:240px;overflow-y:auto">
+          <img src="assets/growth-infra/growth-infra.png" alt="CRM 성과 대시보드" class="w-full block"/>
+        </div>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:240px;overflow-y:auto">
+          <img src="assets/growth-infra/growth-infra_chart.png" alt="마케팅 대시보드 자동화" class="w-full block"/>
+        </div>
+      </div>
+
+      <!-- ② 프로그램 운영 자동화 -->
+      <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">② 프로그램 운영 자동화</p>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">프로그램 신청 시 DB 자동 적재 → 마케팅 수신 동의 자동 변경 → 자동 메일 발송까지 이어지는 파이프라인을 구축했습니다. BigQuery SQL로 신청자 현황을 실시간 추출하고, Google Apps Script로 후속 액션을 자동화해 운영 공수를 대폭 줄였습니다.</p>
+        </div>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:260px;overflow-y:auto">
+          <img src="assets/growth-infra/growth-infra_operation.png" alt="프로그램 운영 자동화" class="w-full block"/>
+        </div>
+      </div>
+
+      <!-- ③ 프로모션 모니터링 자동화 + 시뮬레이터 -->
+      <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">③ 프로모션 모니터링 자동화 & 시뮬레이터</p>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">프로모션별 누적 성과를 자동 집계하는 대시보드와 간트차트 기반 타임라인을 구축했습니다. 또한 구간별 이동률·iROAS를 실시간으로 계산하는 HTML 인터랙티브 시뮬레이터를 직접 구현해 예산 보고에 활용했습니다.</p>
+        </div>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:260px;overflow-y:auto">
+          <img src="assets/growth-infra/growth-infra_promotion.png" alt="프로모션 모니터링 대시보드" class="w-full block"/>
+        </div>
+      </div>
+
+      <!-- ④ Braze 인앱 설문 구현 -->
+      <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">④ Braze Liquid 인앱 설문 구현</p>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">Braze Custom HTML IAM + Liquid 문법을 활용해 유저 참여 이력에 따라 질문 분기가 달라지는 인앱 설문을 직접 구현했습니다. 응답 결과는 brazeBridge로 Custom Attribute에 즉시 적재해 CRM 세그먼트에 반영했습니다.</p>
+        </div>
+        <div class="rounded-[8px] overflow-hidden border border-border">
+          <img src="assets/growth-infra/growth-infra_survey.png" alt="Braze 인앱 설문" class="w-full block"/>
+        </div>
+      </div>
+
+      <!-- ⑤ 데이터 파이프라인 → Braze 연동 -->
+      <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">⑤ 데이터 파이프라인 → Braze 연동 기획</p>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">BigQuery · Kafka · 클라이언트 이벤트 데이터를 Braze User Attribute로 전송하는 파이프라인을 기획했습니다. 고수의 스마트견적 캠페인 활성화/비활성화 상태를 실시간으로 Braze에 반영해 맞춤형 CRM 세그먼트 운영이 가능한 구조를 설계하고, 개발팀과 협업을 위한 Jira 스펙 문서를 직접 작성했습니다.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:260px;overflow-y:auto">
+            <img src="assets/growth-infra/growth-infra_data-1.png" alt="데이터 파이프라인 Braze 연동 스펙" class="w-full block"/>
+          </div>
+          <div class="rounded-[8px] overflow-hidden border border-border">
+            <img src="assets/growth-infra/growth-infra_data-2.png" alt="Airflow Braze Catalog 업로드 슬랙 알림" class="w-full block"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- 사용 기술 -->
+      <div class="rounded-[12px] border border-border px-4 py-4">
+        <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-3">Stack</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">BigQuery</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Google Apps Script</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Looker Studio</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Braze</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Python</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Snowflake</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Google Sheets</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function openGrowthModal() {
+  document.getElementById('growthModal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+function closeGrowthModal() {
+  document.getElementById('growthModal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+</script>
 
 <!-- Lead Generation Modal -->
 <div class="hidden fixed inset-0 z-[100]" id="leadModal">
