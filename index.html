@@ -1228,51 +1228,51 @@ class="block w-full h-full object-cover"
 
           <!-- Creative, IAM, Flowchart tabs -->
           <div class="px-5 pb-5">
-            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-soomgo mb-3">Creative & IAM</p>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-3">Creative & IAM</p>
 
             <!-- Tab bar -->
             <div class="flex gap-2 mb-4" id="app-tabs">
-              <button onclick="switchPromoTab('app','event')" id="app-tab-event" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-[#6A3AF2] bg-[#6A3AF2] text-white transition-all">이벤트 페이지</button>
-              <button onclick="switchPromoTab('app','iam')" id="app-tab-iam" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-[#E0D8FF] text-[#9B8CC4] hover:border-[#6A3AF2] hover:text-[#6A3AF2] transition-all">IAM 데모</button>
-              <button onclick="switchPromoTab('app','flow')" id="app-tab-flow" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-[#E0D8FF] text-[#9B8CC4] hover:border-[#6A3AF2] hover:text-[#6A3AF2] transition-all">플로우차트</button>
+              <button onclick="switchPromoTab('app','event')" id="app-tab-event" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-black bg-black text-white transition-all">이벤트 페이지</button>
+              <button onclick="switchPromoTab('app','iam')" id="app-tab-iam" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-border text-text-secondary hover:border-black hover:text-black transition-all">IAM 데모</button>
+              <button onclick="switchPromoTab('app','flow')" id="app-tab-flow" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-border text-text-secondary hover:border-black hover:text-black transition-all">플로우차트</button>
             </div>
 
             <!-- Event page -->
             <div id="app-panel-event">
-              <div class="rounded-[12px] border border-border overflow-hidden bg-[#0a0a14]">
-                <img src="assets/promotion/checkmate/soomgo-eventpage_checkmate.png" alt="체크메이트 이벤트 페이지" class="w-full block"/>
+              <div class="rounded-[12px] border border-border overflow-hidden" style="max-height:260px;overflow-y:auto">
+                <img src="assets/promotion/soomgo-eventpage_checkmate.png" alt="체크메이트 이벤트 페이지" class="w-full block"/>
               </div>
             </div>
 
             <!-- IAM demo -->
             <div id="app-panel-iam" style="display:none">
-              <div class="rounded-[12px] border border-[#C4B8FF] bg-[#0a0a14] flex flex-col items-center justify-center gap-4 p-6 text-center">
+              <div class="rounded-[12px] border border-border bg-[#F8F8F8] flex flex-col items-center justify-center gap-4 p-6 text-center">
                 <div>
-                  <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-[#C5B6FF] mb-2">Braze IAM — 인터랙티브 데모</p>
-                  <p class="text-[12px] text-[#9B8CC4] leading-[1.6]">brazeBridge Mock이 주입된 실제 IAM 코드입니다.<br>약관 동의 → 체스 드래그앤드롭 → 경품 당첨 플로우를 직접 체험할 수 있습니다.</p>
+                  <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-2">Braze IAM — 인터랙티브 데모</p>
+                  <p class="text-[12px] text-text-secondary leading-[1.6]">brazeBridge Mock이 주입된 실제 IAM 코드입니다.<br>약관 동의 → 체스 드래그앤드롭 → 경품 당첨 플로우를 직접 체험할 수 있습니다.</p>
                 </div>
                 <div class="flex flex-col gap-2 w-full">
-                  <a href="assets/promotion/checkmate/iam_demo_checkmate.html" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full h-10 rounded-[8px] bg-[#693BF2] text-white text-[13px] font-semibold font-mono hover:bg-[#7c4ff5] transition-colors">
+                  <a href="assets/promotion/iam_demo_checkmate.html" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full h-10 rounded-[8px] bg-black text-white text-[13px] font-semibold font-mono hover:bg-black/80 transition-colors">
                     <span class="material-symbols-outlined !text-[16px]">play_arrow</span>
                     데모 실행하기
                   </a>
-                  <p class="text-[10px] text-[#6B5C8A] font-mono">새 탭에서 열립니다 · 4개 분기 탭 전환 가능</p>
+                  <p class="text-[10px] text-text-secondary font-mono">새 탭에서 열립니다 · 4개 분기 탭 전환 가능</p>
                 </div>
               </div>
             </div>
 
             <!-- Flowchart -->
             <div id="app-panel-flow" style="display:none">
-              <div class="rounded-[12px] border border-[#E0D8FF] bg-[#F8F5FF] flex flex-col items-center justify-center gap-4 p-6 text-center">
+              <div class="rounded-[12px] border border-border bg-[#F8F8F8] flex flex-col items-center justify-center gap-4 p-6 text-center">
                 <div>
-                  <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-soomgo mb-2">Canvas 유저 플로우차트</p>
+                  <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-2">Canvas 유저 플로우차트</p>
                   <p class="text-[12px] text-text-secondary leading-[1.6]">5개 분기 · Braze Canvas 트리거 조건 · brazeBridge 이벤트 스펙까지 담은 플로우차트입니다.</p>
                 </div>
-                <a href="assets/promotion/checkmate/flowchart_checkmate.html" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full h-10 rounded-[8px] border border-[#6A3AF2] text-[#6A3AF2] text-[13px] font-semibold font-mono hover:bg-[#F3F0FF] transition-colors">
+                <a href="assets/promotion/flowchart_checkmate.html" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full h-10 rounded-[8px] border border-black text-black text-[13px] font-semibold font-mono hover:bg-black/5 transition-colors">
                   <span class="material-symbols-outlined !text-[16px]">account_tree</span>
                   플로우차트 열기
                 </a>
-                <p class="text-[10px] text-[#9B8CC4] font-mono">새 탭에서 열립니다</p>
+                <p class="text-[10px] text-text-secondary font-mono">새 탭에서 열립니다</p>
               </div>
             </div>
 
@@ -1286,12 +1286,12 @@ class="block w-full h-full object-cover"
               if (!panel || !btn) return;
               if (t === tab) {
                 panel.style.display = '';
-                btn.classList.add('bg-[#6A3AF2]','text-white','border-[#6A3AF2]');
-                btn.classList.remove('text-[#9B8CC4]','border-[#E0D8FF]');
+                btn.classList.add('bg-black','text-white','border-black');
+                btn.classList.remove('text-text-secondary','border-border');
               } else {
                 panel.style.display = 'none';
-                btn.classList.remove('bg-[#6A3AF2]','text-white','border-[#6A3AF2]');
-                btn.classList.add('text-[#9B8CC4]','border-[#E0D8FF]');
+                btn.classList.remove('bg-black','text-white','border-black');
+                btn.classList.add('text-text-secondary','border-border');
               }
             });
           }
@@ -1345,34 +1345,34 @@ class="block w-full h-full object-cover"
 
           <!-- Creative & IAM tabs -->
           <div class="px-5 pb-5">
-            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-soomgo mb-3">Creative & IAM</p>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-3">Creative & IAM</p>
 
             <!-- Tab bar -->
             <div class="flex gap-2 mb-4">
-              <button onclick="switchPromoTab('cashback','event')" id="cashback-tab-event" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-[#6A3AF2] bg-[#6A3AF2] text-white transition-all">이벤트 페이지</button>
-              <button onclick="switchPromoTab('cashback','iam')" id="cashback-tab-iam" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-[#E0D8FF] text-[#9B8CC4] hover:border-[#6A3AF2] hover:text-[#6A3AF2] transition-all">IAM 데모</button>
+              <button onclick="switchPromoTab('cashback','event')" id="cashback-tab-event" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-black bg-black text-white transition-all">이벤트 페이지</button>
+              <button onclick="switchPromoTab('cashback','iam')" id="cashback-tab-iam" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-border text-text-secondary hover:border-black hover:text-black transition-all">IAM 데모</button>
             </div>
 
             <!-- Event page -->
             <div id="cashback-panel-event">
-              <div class="rounded-[12px] border border-border overflow-hidden bg-[#fdf5ff]">
+              <div class="rounded-[12px] border border-border overflow-hidden" style="max-height:260px;overflow-y:auto">
                 <img src="assets/promotion/cashback/soomgo-eventpage_cashback.png" alt="캐시백 프로모션 이벤트 페이지" class="w-full block"/>
               </div>
             </div>
 
             <!-- IAM demo -->
             <div id="cashback-panel-iam" style="display:none">
-              <div class="rounded-[12px] border border-[#C4B8FF] bg-[#0a0a14] flex flex-col items-center justify-center gap-4 p-6 text-center">
+              <div class="rounded-[12px] border border-border bg-[#F8F8F8] flex flex-col items-center justify-center gap-4 p-6 text-center">
                 <div>
-                  <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-[#C5B6FF] mb-2">Braze IAM — 인터랙티브 데모</p>
-                  <p class="text-[12px] text-[#9B8CC4] leading-[1.6]">보너스캐시 계산기 + 견적 발송 트리거 IAM 2종입니다.<br>구간 점프 시 노출 로직과 Liquid 연동을 직접 체험할 수 있습니다.</p>
+                  <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-2">Braze IAM — 인터랙티브 데모</p>
+                  <p class="text-[12px] text-text-secondary leading-[1.6]">보너스캐시 계산기 + 견적 발송 트리거 IAM 2종입니다.<br>구간 점프 시 노출 로직과 Liquid 연동을 직접 체험할 수 있습니다.</p>
                 </div>
                 <div class="flex flex-col gap-2 w-full">
-                  <a href="assets/promotion/cashback/iam_demo_cashback.html" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full h-10 rounded-[8px] bg-[#693BF2] text-white text-[13px] font-semibold font-mono hover:bg-[#7c4ff5] transition-colors">
+                  <a href="assets/promotion/cashback/iam_demo_cashback.html" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full h-10 rounded-[8px] bg-black text-white text-[13px] font-semibold font-mono hover:bg-black/80 transition-colors">
                     <span class="material-symbols-outlined !text-[16px]">play_arrow</span>
                     데모 실행하기
                   </a>
-                  <p class="text-[10px] text-[#6B5C8A] font-mono">새 탭에서 열립니다 · 2개 IAM 탭 전환 가능</p>
+                  <p class="text-[10px] text-text-secondary font-mono">새 탭에서 열립니다 · 2개 IAM 탭 전환 가능</p>
                 </div>
               </div>
             </div>
@@ -1404,23 +1404,8 @@ function togglePromo(id) {
     detail.style.maxHeight = '0';
     icon.style.transform = 'rotate(0deg)';
   } else {
-    // Set to auto first to get real height, then animate
-    detail.style.maxHeight = 'none';
-    const h = detail.scrollHeight;
-    detail.style.maxHeight = '0';
-    requestAnimationFrame(() => {
-      detail.style.maxHeight = h + 'px';
-    });
+    detail.style.maxHeight = '9999px';
     icon.style.transform = 'rotate(180deg)';
-    // Re-expand after images load
-    const imgs = detail.querySelectorAll('img');
-    imgs.forEach(img => {
-      if (!img.complete) {
-        img.addEventListener('load', () => {
-          detail.style.maxHeight = detail.scrollHeight + 'px';
-        }, {once: true});
-      }
-    });
   }
 }
 </script>
