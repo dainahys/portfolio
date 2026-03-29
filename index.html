@@ -1040,6 +1040,573 @@
       margin-top: 48px !important;
     }
 
+  
+    /* ── #view-nu-en styles (mirroring #view-nu) ── */
+
+
+    #view-nu-en {
+      background: #ffffff;
+      color: var(--nu-text);
+      overflow-x: hidden;
+    }
+
+    #view-nu-en .text-nextunicorn { color: var(--nu); }
+
+    #view-nu-en .nu-title { color: var(--nu-text); }
+
+    #view-nu-en .nu-body  { color: var(--nu-muted); }
+
+    #view-nu-en .nu-border { border-color: var(--nu-border); }
+
+    #view-nu-en .nu-panel,
+    #view-nu-en .nu-panel-soft {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+    }
+
+    #view-nu-en .nu-intro-card {
+      background: #F8FBFF;
+      border: 1px solid #D9E7FF;
+      border-radius: 16px;
+      padding: 16px 20px;
+      box-shadow: 0 2px 8px rgba(17,24,39,0.04);
+    }
+
+    #view-nu-en .nu-card {
+      background: #fff;
+      border: 1px solid var(--nu-border);
+      border-radius: 16px;
+      padding: 16px 20px;
+    }
+
+    #view-nu-en .shadow-soft { box-shadow: 0 2px 8px rgba(17,24,39,0.06); }
+
+    #view-nu-en .section-label,
+    #view-nu-en p.font-mono.text-\[12px\],
+    #view-nu-en span.font-mono.text-\[12px\] {
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    #view-nu-en .text-text-secondary { color: var(--nu-muted); }
+
+    #view-nu-en h2.nu-title,
+    #view-nu-en h3.nu-title.type-h2,
+    #view-nu-en .type-h2 {
+      font-family: "Poppins", sans-serif;
+      font-size: clamp(28px, 3.2vw, 32px);
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      color: var(--nu-text);
+    }
+
+    #view-nu-en .type-h3 {
+      font-family: "Poppins", sans-serif;
+      font-size: clamp(22px, 2.4vw, 24px);
+      font-weight: 700;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+      color: var(--nu-text);
+    }
+
+    #view-nu-en .type-body,
+    #view-nu-en .nu-body {
+      font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--nu-muted);
+    }
+
+    #view-nu-en .figure-frame,
+    #view-nu-en figure.rounded-\[18px\],
+    #view-nu-en figure.rounded-\[24px\] {
+      border: 1px solid var(--nu-border);
+      border-radius: 18px;
+      background: #ffffff;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(17,24,39,0.06);
+    }
+
+    #view-nu-en figure.rounded-\[24px\].bg-white\/5 {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(217,231,255,0.22);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: none;
+    }
+
+    #view-nu-en figure figcaption {
+      font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--nu-muted);
+    }
+
+    #view-nu-en section:not(.section-dark) figure.rounded-\[18px\] > div[class*="max-w-\["],
+    #view-nu-en section:not(.section-dark) figure.rounded-\[24px\] > div[class*="max-w-\["] {
+      max-width: 620px !important;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #view-nu-en section:not(.section-dark) figure.rounded-\[18px\] > div.max-w-\[360px\],
+    #view-nu-en section:not(.section-dark) figure.rounded-\[24px\] > div.max-w-\[360px\] {
+      max-width: 260px !important;
+    }
+
+    #view-nu-en section:not(.section-dark) figure.rounded-\[18px\] img,
+    #view-nu-en section:not(.section-dark) figure.rounded-\[24px\] img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      max-height: 320px;
+      margin-left: auto;
+      margin-right: auto;
+      object-fit: contain;
+    }
+
+    #view-nu-en section:not(.section-dark) figure.rounded-\[12px\] img,
+    #view-nu-en section:not(.section-dark) figure.rounded-\[14px\] img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      max-height: 180px;
+      margin-left: auto;
+      margin-right: auto;
+      object-fit: contain;
+    }
+
+    #view-nu-en section:not(.section-dark) figure.rounded-\[18px\].p-3,
+    #view-nu-en section:not(.section-dark) figure.rounded-\[24px\].p-5,
+    #view-nu-en section:not(.section-dark) figure.rounded-\[24px\].md\:p-6 {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    #view-nu-en .rounded-\[18px\].bg-white.border.border-\[\#D9E7FF\],
+    #view-nu-en .rounded-\[20px\].border.border-\[\#D9E7FF\].bg-white,
+    #view-nu-en .rounded-\[18px\].border.border-\[\#D9E7FF\].bg-white {
+      border-radius: 18px;
+      border-color: var(--nu-border);
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(17,24,39,0.06);
+    }
+
+    #view-nu-en .rounded-\[16px\].border.border-\[\#CFE0FF\].bg-\[\#EEF5FF\],
+    #view-nu-en .rounded-\[18px\].border.border-\[\#D9E7FF\].bg-\[\#F8FBFF\],
+    #view-nu-en .rounded-\[12px\].border.border-\[\#D9E7FF\].bg-\[\#F8FBFF\],
+    #view-nu-en .rounded-\[14px\].border.border-\[\#D9E7FF\].bg-\[\#F8FBFF\] {
+      border-color: var(--nu-border);
+      background: var(--nu-tint);
+    }
+
+    #view-nu-en .section-dark {
+      background: #0a1220;
+      color: #f0f6ff;
+    }
+
+    #view-nu-en .section-dark .muted { color: #7a9cc4; }
+
+    #view-nu-en .section-dark .bordered { border-color: rgba(217,231,255,0.18); }
+
+    #view-nu-en .section-dark .text-nextunicorn { color: var(--nu-2); }
+
+    #view-nu-en .py-section-m { padding-top: 40px; padding-bottom: 40px; }
+
+    #view-nu-en .py-section   { padding-top: 56px; padding-bottom: 56px; }
+
+    #view-nu-en section.py-16 { padding-top: 56px; padding-bottom: 56px; }
+
+    #view-nu-en section.md\:py-20 { padding-top: 72px; padding-bottom: 72px; }
+
+    #view-nu-en .space-y-6 > * + * { margin-top: 14px; }
+
+    #view-nu-en .space-y-5 > * + * { margin-top: 12px; }
+
+    #view-nu-en .space-y-4 > * + * { margin-top: 10px; }
+
+    #view-nu-en .p-5.md\:p-6  { padding: 16px 20px; }
+
+    #view-nu-en .mt-5  { margin-top: 14px; }
+
+    #view-nu-en .mt-6  { margin-top: 18px; }
+
+    #view-nu-en .mt-8  { margin-top: 20px; }
+
+    #view-nu-en .mt-10 { margin-top: 24px; }
+
+    #view-nu-en .mt-4  { margin-top: 10px; }
+
+    #view-nu-en .mt-3  { margin-top: 8px; }
+
+    #view-nu-en .mb-8  { margin-bottom: 16px; }
+
+    #view-nu-en .mb-3  { margin-bottom: 8px; }
+
+    #view-nu-en .flex.flex-col.gap-3 { gap: 5px; }
+
+    #view-nu-en .flex.flex-col.gap-4 { gap: 8px; }
+
+    #view-nu-en .max-w-container {
+      max-width: 960px;
+    }
+
+    #view-nu-en img,
+    #view-nu-en svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    #view-nu-en article,
+    #view-nu-en figure,
+    #view-nu-en .rounded-card,
+    #view-nu-en .rounded-\[16px\],
+    #view-nu-en .rounded-\[18px\],
+    #view-nu-en .rounded-\[20px\],
+    #view-nu-en .rounded-\[24px\] {
+      min-width: 0;
+    }
+
+    #view-nu-en .nu-project-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 48px;
+      margin-bottom: 28px;
+      padding-top: 32px;
+      border-top: 2px solid var(--nu-border);
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+      box-sizing: border-box;
+    }
+
+    #view-nu-en .nu-project-divider--boundary {
+      display: block;
+      margin-top: 40px;
+      margin-bottom: 8px;
+      padding-top: 24px;
+      min-height: 0;
+    }
+
+    #view-nu-en .nu-project-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--nu);
+      color: #fff;
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0.02em;
+    }
+
+    #view-nu-en .nu-project-title {
+      display: block;
+      max-width: 100%;
+      font-family: "Pretendard", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--nu-muted);
+      letter-spacing: 0.01em;
+      overflow-wrap: anywhere;
+    }
+
+    #view-nu-en .project-step-flow {
+      position: relative;
+      margin-top: 8px;
+    }
+
+    #view-nu-en .project-step-flow::before {
+      content: "";
+      position: absolute;
+      left: 24px;
+      transform: translateX(-50%);
+      top: 24px;
+      bottom: 24px;
+      width: 2px;
+      border-radius: 9999px;
+      background: linear-gradient(to bottom, #0064FF 0%, rgba(0,100,255,0.45) 55%, rgba(0,100,255,0) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #view-nu-en .project-step-flow > .relative.mt-20:first-child {
+      margin-top: 0;
+    }
+
+    #view-nu-en .nu-project-shell {
+      max-width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+      box-sizing: border-box;
+    }
+
+    #view-nu-en .nu-project-shell .panel,
+    #view-nu-en .nu-project-shell article.panel {
+      box-shadow: none;
+    }
+
+    #view-nu-en .nu-unified-section {
+      margin-top: 16px;
+      border: 0;
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
+    }
+
+    #view-nu-en .nu-unified-section > * + * {
+      margin-top: 16px;
+    }
+
+    #view-nu-en .nu-unified-section > .nu-project-divider {
+      max-width: none;
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 0;
+      padding-right: 0;
+      box-sizing: border-box;
+    }
+
+    #view-nu-en .nu-unified-section > .nu-project-divider {
+      margin-top: 8px;
+      margin-bottom: 0;
+      padding-top: 20px;
+    }
+
+    #view-nu-en .nu-unified-section > .nu-acquisition-pie {
+      margin-top: 12px;
+      margin-bottom: 0;
+    }
+
+    #view-nu-en .nu-unified-section > .nu-acquisition-pie + .nu-step-divider {
+      margin-top: 4px;
+    }
+
+      #view-nu-en section:not(.section-dark) figure.rounded-\[18px\] img,
+      #view-nu-en section:not(.section-dark) figure.rounded-\[24px\] img {
+        max-height: 240px;
+      }
+
+      #view-nu-en section:not(.section-dark) figure.rounded-\[12px\] img,
+      #view-nu-en section:not(.section-dark) figure.rounded-\[14px\] img {
+        max-height: 140px;
+      }
+
+    /* ── #view-sg-en styles (mirroring #view-sg) ── */
+
+
+    /* ─── Heading weight 보정 — font-bold 없는 font-display 요소 ─── */
+    #view-sg-en h2.font-display:not(.font-bold),
+    #view-sg-en h3.font-display:not(.font-bold),
+    #view-sg-en h4.font-display:not(.font-bold),
+    #view-sg-en p.font-display:not(.font-bold) {
+      font-weight: 600;
+    }
+
+
+    /* ─── SOOMGO view ─── */
+    #view-sg-en {
+      background: #ffffff;
+      color: var(--sg-text);
+    }
+
+    #view-sg-en .text-soomgo { color: var(--sg); }
+
+    #view-sg-en .text-text-secondary { color: var(--sg-muted); }
+
+
+    /* card/panel → lighter, less padding feel */
+    #view-sg-en .sg-panel,
+    #view-sg-en .sg-panel-soft,
+    #view-sg-en .sg-card,
+    #view-sg-en .sg-card-soft {
+      background: var(--sg-tint);
+      border: 1px solid var(--sg-border);
+      border-radius: 12px;
+    }
+
+    #view-sg-en .rounded-card.sg-card {
+      background: #ffffff;
+      border: 1px solid var(--sg-border);
+      border-radius: 12px;
+      box-shadow: none;
+    }
+
+    #view-sg-en .rounded-card.border.border-border.bg-white,
+    #view-sg-en .bg-white { background: #fff; }
+
+    #view-sg-en .bg-gray-50 { background: var(--sg-tint); }
+
+    #view-sg-en .border-border { border-color: var(--sg-border); }
+
+    #view-sg-en .sg-title { color: var(--sg-text); }
+
+    #view-sg-en .sg-body  { color: var(--sg-muted); }
+
+    #view-sg-en .sg-caption { color: var(--sg-muted); }
+
+    #view-sg-en .sg-border { border-color: var(--sg-border); }
+
+    #view-sg-en .sg-pill {
+      background: var(--sg-tint);
+      border: 1px solid var(--sg-border);
+      color: var(--sg);
+    }
+
+    #view-sg-en figure figcaption { color: var(--sg-muted); }
+
+    #view-sg-en .shadow-soft { box-shadow: 0 2px 8px rgba(31,31,43,0.06); }
+
+
+    #view-sg-en .section-dark {
+      background: #111111;
+      color: #f0eeff;
+    }
+
+    #view-sg-en .section-dark .muted { color: #9d93c4; }
+
+    #view-sg-en .section-dark .bordered { border-color: rgba(224,216,255,0.2); }
+
+    #view-sg-en .section-dark .text-soomgo { color: var(--sg-2); }
+
+
+    /* ─── Compact spacing overrides — Soomgo body wrapper ─── */
+    #view-sg-en .gap-section-m { gap: 48px; }
+
+    #view-sg-en .gap-section    { gap: 48px; }
+
+    #view-sg-en .py-section-m   { padding-top: 40px; padding-bottom: 40px; }
+
+    #view-sg-en .py-section     { padding-top: 56px; padding-bottom: 56px; }
+
+    #view-sg-en .pt-8           { padding-top: 24px; }
+
+    #view-sg-en .pb-section-m   { padding-bottom: 40px; }
+
+    #view-sg-en .md\:pt-10      { padding-top: 28px; }
+
+    #view-sg-en .md\:pb-section { padding-bottom: 56px; }
+
+
+    /* Section article spacing overrides */
+    #view-sg-en article.mt-10  { margin-top: 40px; }
+
+    #view-sg-en article.mt-16  { margin-top: 40px; }
+
+    #view-sg-en article.mt-20  { margin-top: 40px; }
+
+    #view-sg-en article.mt-24  { margin-top: 48px; }
+
+    #view-sg-en section.mt-12  { margin-top: 32px; }
+
+    #view-sg-en .mt-20.border-t { margin-top: 40px; }
+
+    #view-sg-en .mt-16.border-t { margin-top: 40px; }
+
+
+    /* Inner content spacing */
+    #view-sg-en .mb-8  { margin-bottom: 16px; }
+
+    #view-sg-en .mt-6  { margin-top: 16px; }
+
+    #view-sg-en .mt-8  { margin-top: 20px; }
+
+    #view-sg-en .mt-10 { margin-top: 24px; }
+
+    #view-sg-en .mt-4  { margin-top: 10px; }
+
+    #view-sg-en .mt-3  { margin-top: 8px; }
+
+
+    #view-sg-en .space-y-3 > * + * { margin-top: 6px; }
+
+    #view-sg-en .space-y-4 > * + * { margin-top: 10px; }
+
+    #view-sg-en .space-y-5 > * + * { margin-top: 12px; }
+
+
+    #view-sg-en .flex.flex-col.gap-3 { gap: 5px; }
+
+    #view-sg-en .flex.flex-col.gap-4 { gap: 8px; }
+
+
+    /* Soomgo article inner dividers */
+    #view-sg-en .mt-10.border-t { margin-top: 28px; padding-top: 24px; }
+
+
+    /* Cards inside — reduce padding */
+    #view-sg-en .p-10.md\:p-10,
+    #view-sg-en .p-10.md\:p-12 { padding: 24px; }
+
+    #view-sg-en .p-7.md\:p-8   { padding: 18px 22px; }
+
+    #view-sg-en .p-5.md\:p-6   { padding: 16px 20px; }
+
+
+    /* ─── Soomgo layout stability guards ─── */
+    #view-sg-en {
+      overflow-x: hidden;
+    }
+
+    #view-sg-en img,
+    #view-sg-en svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    #view-sg-en .md\:ml-\[68px\] {
+      min-width: 0;
+    }
+
+    #view-sg-en .md\:ml-\[68px\] > * {
+      min-width: 0;
+    }
+
+    #view-sg-en figure,
+    #view-sg-en .rounded-card,
+    #view-sg-en .rounded-xl,
+    #view-sg-en .rounded-\[14px\],
+    #view-sg-en .rounded-\[16px\] {
+      min-width: 0;
+    }
+
+    #view-sg-en .project-step-flow {
+      position: relative;
+      margin-top: 8px;
+    }
+
+    #view-sg-en .project-step-flow::before {
+      content: "";
+      position: absolute;
+      left: 24px;
+      transform: translateX(-50%);
+      top: 24px;
+      bottom: 24px;
+      width: 2px;
+      border-radius: 9999px;
+      background: linear-gradient(to bottom, #6A3AF2 0%, rgba(106,58,242,0.45) 55%, rgba(106,58,242,0) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #view-sg-en .project-step-flow > .relative.mt-20:first-child {
+      margin-top: 0;
+    }
   </style>
 </link></link>
 </head>
@@ -3795,6 +4362,151 @@ function closeLeadModal() {
 </div>
 </section>
 </article>
+
+<div class="mt-12 border-t border-[#E5DDFF]"></div>
+<!-- HOW I WORK — Cross-functional Collaboration & Process -->
+<article class="mt-8 md:ml-[68px]">
+<div class="flex flex-col gap-2 mb-6">
+<span class="font-mono text-[12px] uppercase tracking-[0.12em] text-soomgo font-semibold">How I Work</span>
+<h2 class="font-display font-bold text-[26px] md:text-[30px] leading-[1.25] tracking-tight text-text-primary">
+  Cross-Functional Collaboration & Working Process
+</h2>
+<p class="text-[14px] leading-[1.8] text-text-secondary mt-1">
+  I don't work in isolation — every project involves aligning with POs, data scientists, analysts, UX researchers, and engineers. Below is how I typically structure collaboration and communication across teams.
+</p>
+</div>
+
+<div class="space-y-8">
+
+  <!-- 1. Stakeholder Map -->
+  <div class="rounded-[16px] border border-[#E0D8FF] bg-[#FAFAFF] p-5 md:p-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="material-symbols-outlined !text-[20px] text-soomgo">hub</span>
+      <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-soomgo font-semibold">Stakeholder Map</span>
+    </div>
+    <h3 class="font-display font-bold text-[17px] leading-[1.35] tracking-tight text-text-primary mb-2">
+      Who I collaborate with and how decisions flow
+    </h3>
+    <p class="text-[13px] leading-[1.8] text-text-secondary mb-4">
+      For each CRM initiative, I map the stakeholders involved — identifying Decision Makers, Contributors, and those whose buy-in is required. This helps me align priorities early, reduce friction mid-project, and ensure the right people review the right outputs.
+    </p>
+
+    <!-- Placeholder for actual stakeholder map image -->
+    <div class="rounded-[12px] border-2 border-dashed border-[#D9CEFF] bg-[#F8F5FF] p-6 md:p-8 flex flex-col items-center justify-center min-h-[200px]">
+      <span class="material-symbols-outlined !text-[36px] text-[#B49BFA] mb-3">account_tree</span>
+      <p class="font-mono text-[11px] uppercase tracking-[0.10em] text-[#8B68F8] mb-1">Stakeholder Map</p>
+      <p class="text-[12px] text-text-secondary text-center max-w-[380px]">
+        Visual stakeholder map showing collaboration structure across PO, Data Science, Data Analytics, UX Research, and Engineering teams — with decision authority and information flow.
+      </p>
+    </div>
+
+    <div class="mt-4 flex flex-wrap gap-2">
+      <span class="text-[11px] font-mono px-2 py-0.5 rounded-full border border-[#E0D8FF] text-[#6A3AF2] bg-[#F3F0FF]">PO / PM</span>
+      <span class="text-[11px] font-mono px-2 py-0.5 rounded-full border border-[#E0D8FF] text-[#6A3AF2] bg-[#F3F0FF]">Data Scientist</span>
+      <span class="text-[11px] font-mono px-2 py-0.5 rounded-full border border-[#E0D8FF] text-[#6A3AF2] bg-[#F3F0FF]">Data Analyst</span>
+      <span class="text-[11px] font-mono px-2 py-0.5 rounded-full border border-[#E0D8FF] text-[#6A3AF2] bg-[#F3F0FF]">UX Researcher</span>
+      <span class="text-[11px] font-mono px-2 py-0.5 rounded-full border border-[#E0D8FF] text-[#6A3AF2] bg-[#F3F0FF]">Engineering</span>
+      <span class="text-[11px] font-mono px-2 py-0.5 rounded-full border border-[#E0D8FF] text-[#6A3AF2] bg-[#F3F0FF]">CX / Ops</span>
+    </div>
+  </div>
+
+  <!-- 2. User Flow & System Diagram -->
+  <div class="rounded-[16px] border border-[#E0D8FF] bg-[#FAFAFF] p-5 md:p-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="material-symbols-outlined !text-[20px] text-soomgo">schema</span>
+      <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-soomgo font-semibold">User Flow & System Diagram</span>
+    </div>
+    <h3 class="font-display font-bold text-[17px] leading-[1.35] tracking-tight text-text-primary mb-2">
+      How users move through the system and how components connect
+    </h3>
+    <p class="text-[13px] leading-[1.8] text-text-secondary mb-4">
+      Before designing any CRM flow, I map the full user journey — from trigger event to conversion — and document how system components (Braze Canvas, BigQuery segments, Custom Attributes, push/in-app/email channels) connect. This structured thinking ensures experiments target the right funnel stage and technical dependencies are clear before execution.
+    </p>
+
+    <!-- Placeholder for actual user flow diagram -->
+    <div class="rounded-[12px] border-2 border-dashed border-[#D9CEFF] bg-[#F8F5FF] p-6 md:p-8 flex flex-col items-center justify-center min-h-[200px]">
+      <span class="material-symbols-outlined !text-[36px] text-[#B49BFA] mb-3">conversion_path</span>
+      <p class="font-mono text-[11px] uppercase tracking-[0.10em] text-[#8B68F8] mb-1">User Flow Diagram</p>
+      <p class="text-[12px] text-text-secondary text-center max-w-[380px]">
+        End-to-end user flow from sign-up → first quote → first payment, with Braze Canvas trigger points, segmentation logic, and channel mapping (App Push / In-App / Email / KakaoTalk).
+      </p>
+    </div>
+
+    <div class="mt-4 grid grid-cols-2 gap-3 text-[12px] leading-[1.7] text-text-secondary">
+      <div class="flex items-start gap-2">
+        <span class="material-symbols-outlined !text-[16px] text-soomgo mt-0.5">check_circle</span>
+        <span>User journey mapping before every experiment</span>
+      </div>
+      <div class="flex items-start gap-2">
+        <span class="material-symbols-outlined !text-[16px] text-soomgo mt-0.5">check_circle</span>
+        <span>System architecture for CRM automation flows</span>
+      </div>
+      <div class="flex items-start gap-2">
+        <span class="material-symbols-outlined !text-[16px] text-soomgo mt-0.5">check_circle</span>
+        <span>Braze Canvas flow documentation</span>
+      </div>
+      <div class="flex items-start gap-2">
+        <span class="material-symbols-outlined !text-[16px] text-soomgo mt-0.5">check_circle</span>
+        <span>Segment logic defined in BigQuery SQL</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Communication Log -->
+  <div class="rounded-[16px] border border-[#E0D8FF] bg-[#FAFAFF] p-5 md:p-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="material-symbols-outlined !text-[20px] text-soomgo">forum</span>
+      <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-soomgo font-semibold">Communication & Async Collaboration</span>
+    </div>
+    <h3 class="font-display font-bold text-[17px] leading-[1.35] tracking-tight text-text-primary mb-2">
+      How I communicate decisions and align teams
+    </h3>
+    <p class="text-[13px] leading-[1.8] text-text-secondary mb-4">
+      I prioritize written, structured communication — documenting experiment hypotheses, sharing results with clear takeaways, and keeping async records of decisions. This ensures alignment even without synchronous meetings, and builds a knowledge base the team can reference.
+    </p>
+
+    <!-- Communication examples -->
+    <div class="space-y-3">
+      <div class="rounded-[10px] border border-[#E8E3F5] bg-white p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="material-symbols-outlined !text-[16px] text-[#8B68F8]">description</span>
+          <span class="text-[12px] font-semibold text-text-primary">Experiment Brief</span>
+          <span class="text-[10px] font-mono text-text-secondary ml-auto">Before each experiment</span>
+        </div>
+        <p class="text-[12px] leading-[1.7] text-text-secondary">
+          Structured docs shared with PO & data team: hypothesis, target segment, expected impact, success criteria, and rollback plan — written before any execution begins.
+        </p>
+      </div>
+
+      <div class="rounded-[10px] border border-[#E8E3F5] bg-white p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="material-symbols-outlined !text-[16px] text-[#8B68F8]">insights</span>
+          <span class="text-[12px] font-semibold text-text-primary">Results & Retrospective</span>
+          <span class="text-[10px] font-mono text-text-secondary ml-auto">After each experiment</span>
+        </div>
+        <p class="text-[12px] leading-[1.7] text-text-secondary">
+          Post-experiment reports with segment-level analysis, not just top-line metrics. Includes "what we learned" and "what to test next" — ensuring every experiment feeds the next one.
+        </p>
+      </div>
+
+      <div class="rounded-[10px] border border-[#E8E3F5] bg-white p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="material-symbols-outlined !text-[16px] text-[#8B68F8]">group_work</span>
+          <span class="text-[12px] font-semibold text-text-primary">Cross-Team Sync</span>
+          <span class="text-[10px] font-mono text-text-secondary ml-auto">Weekly cadence</span>
+        </div>
+        <p class="text-[12px] leading-[1.7] text-text-secondary">
+          Weekly alignment with PO and data teams on experiment pipeline, priority changes, and shared metrics. Async updates for non-blocking decisions; sync meetings reserved for trade-off discussions.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</article>
+
+<div class="mt-12 border-t border-[#E5DDFF]"></div>
+
 <div class="sg-project-divider">
   <span class="sg-project-title">New Provider Onboarding &amp; Request Response Conversion Improvement</span>
 </div>
@@ -5847,13 +6559,8 @@ Back to Top
 </div>
 </footer>
 </div>
-</main>
 
-<!-- =========================
-           VIEW: RESUME
-      ========================== -->
-
-<div id="view-nu-en" style="display:none">
+<div id="view-nu-en" style="display:none;padding-top:80px">
 <div style="background:#ffffff;">
 <div class="mx-auto max-w-container px-6 py-6">
 <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home-en')">
@@ -5971,6 +6678,146 @@ Back to Top
 </div>
 <div aria-hidden="true" class="nu-project-divider nu-project-divider--boundary"></div>
 <div class="nu-unified-section">
+
+<div class="mt-12 border-t border-[#D9E7FF]"></div>
+<!-- HOW I WORK — Cross-functional Collaboration & Process (NextUnicorn) -->
+<article class="mt-8 md:ml-[68px]">
+<div class="flex flex-col gap-2 mb-6">
+<span class="font-mono text-[12px] uppercase tracking-[0.12em] text-nextunicorn font-semibold">How I Work</span>
+<h2 class="font-display font-bold text-[26px] md:text-[30px] leading-[1.25] tracking-tight text-text-primary">
+  Cross-Functional Collaboration & Working Process
+</h2>
+<p class="text-[14px] leading-[1.8] text-text-secondary mt-1">
+  As the sole marketer, I worked across product, data, and design to build measurement infrastructure and growth systems from scratch. Here's how I structured that collaboration.
+</p>
+</div>
+
+<div class="space-y-8">
+
+  <!-- 1. Stakeholder Map -->
+  <div class="rounded-[16px] border border-[#D9E7FF] bg-[#FAFCFF] p-5 md:p-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="material-symbols-outlined !text-[20px] text-nextunicorn">hub</span>
+      <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-nextunicorn font-semibold">Stakeholder Map</span>
+    </div>
+    <h3 class="font-display font-bold text-[17px] leading-[1.35] tracking-tight text-text-primary mb-2">
+      Sole marketer managing all channels — with cross-functional alignment
+    </h3>
+    <p class="text-[13px] leading-[1.8] text-text-secondary mb-4">
+      At NextUnicorn, I was the only marketer owning the entire growth stack — from paid acquisition and SEO to CRM lifecycle and measurement infrastructure. This required constant alignment with the PM, data analyst, and engineering team to define priorities, share attribution data, and coordinate product-side changes that affected user flows.
+    </p>
+
+    <!-- Placeholder -->
+    <div class="rounded-[12px] border-2 border-dashed border-[#CFE0FF] bg-[#F0F6FF] p-6 md:p-8 flex flex-col items-center justify-center min-h-[200px]">
+      <span class="material-symbols-outlined !text-[36px] text-[#4C8DFF] mb-3">account_tree</span>
+      <p class="font-mono text-[11px] uppercase tracking-[0.10em] text-nextunicorn mb-1">Stakeholder Map</p>
+      <p class="text-[12px] text-text-secondary text-center max-w-[380px]">
+        Collaboration structure across PM, Data Analyst, Engineering, and CEO — showing how marketing decisions were aligned with product roadmap and business priorities.
+      </p>
+    </div>
+
+    <div class="mt-4 flex flex-wrap gap-2">
+      <span class="text-[11px] font-mono px-2 py-0.5 rounded-full border border-[#D9E7FF] text-nextunicorn bg-[#F0F6FF]">PM</span>
+      <span class="text-[11px] font-mono px-2 py-0.5 rounded-full border border-[#D9E7FF] text-nextunicorn bg-[#F0F6FF]">Data Analyst</span>
+      <span class="text-[11px] font-mono px-2 py-0.5 rounded-full border border-[#D9E7FF] text-nextunicorn bg-[#F0F6FF]">Engineering</span>
+      <span class="text-[11px] font-mono px-2 py-0.5 rounded-full border border-[#D9E7FF] text-nextunicorn bg-[#F0F6FF]">CEO</span>
+      <span class="text-[11px] font-mono px-2 py-0.5 rounded-full border border-[#D9E7FF] text-nextunicorn bg-[#F0F6FF]">Design</span>
+    </div>
+  </div>
+
+  <!-- 2. User Flow & System Diagram -->
+  <div class="rounded-[16px] border border-[#D9E7FF] bg-[#FAFCFF] p-5 md:p-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="material-symbols-outlined !text-[20px] text-nextunicorn">schema</span>
+      <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-nextunicorn font-semibold">User Flow & Measurement Architecture</span>
+    </div>
+    <h3 class="font-display font-bold text-[17px] leading-[1.35] tracking-tight text-text-primary mb-2">
+      Building measurement infrastructure and user journey maps from zero
+    </h3>
+    <p class="text-[13px] leading-[1.8] text-text-secondary mb-4">
+      When I joined, there was no attribution framework, no UTM taxonomy, and no structured funnel tracking. I built the measurement foundation (UTM → GTM → conversion tags → attribution) and mapped dual user journeys (startup vs. investor) to design CRM flows that matched each side's behavioral patterns.
+    </p>
+
+    <!-- Placeholder -->
+    <div class="rounded-[12px] border-2 border-dashed border-[#CFE0FF] bg-[#F0F6FF] p-6 md:p-8 flex flex-col items-center justify-center min-h-[200px]">
+      <span class="material-symbols-outlined !text-[36px] text-[#4C8DFF] mb-3">conversion_path</span>
+      <p class="font-mono text-[11px] uppercase tracking-[0.10em] text-nextunicorn mb-1">Measurement & User Flow</p>
+      <p class="text-[12px] text-text-secondary text-center max-w-[380px]">
+        Dual user journey: Startup (register → upload IR → get discovered → subscription) and Investor (browse → networking → consultation → repeat usage) — with UTM/GTM attribution layer.
+      </p>
+    </div>
+
+    <div class="mt-4 grid grid-cols-2 gap-3 text-[12px] leading-[1.7] text-text-secondary">
+      <div class="flex items-start gap-2">
+        <span class="material-symbols-outlined !text-[16px] text-nextunicorn mt-0.5">check_circle</span>
+        <span>UTM taxonomy & GTM conversion tracking built from scratch</span>
+      </div>
+      <div class="flex items-start gap-2">
+        <span class="material-symbols-outlined !text-[16px] text-nextunicorn mt-0.5">check_circle</span>
+        <span>Dual user journey mapping (startup vs. investor)</span>
+      </div>
+      <div class="flex items-start gap-2">
+        <span class="material-symbols-outlined !text-[16px] text-nextunicorn mt-0.5">check_circle</span>
+        <span>Channel-level attribution framework</span>
+      </div>
+      <div class="flex items-start gap-2">
+        <span class="material-symbols-outlined !text-[16px] text-nextunicorn mt-0.5">check_circle</span>
+        <span>SQL-based funnel analysis and cohort tracking</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Communication Log -->
+  <div class="rounded-[16px] border border-[#D9E7FF] bg-[#FAFCFF] p-5 md:p-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="material-symbols-outlined !text-[20px] text-nextunicorn">forum</span>
+      <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-nextunicorn font-semibold">Communication & Async Collaboration</span>
+    </div>
+    <h3 class="font-display font-bold text-[17px] leading-[1.35] tracking-tight text-text-primary mb-2">
+      Structured reporting and cross-team alignment as sole marketer
+    </h3>
+    <p class="text-[13px] leading-[1.8] text-text-secondary mb-4">
+      As the only marketer, clear communication was critical. I maintained structured documentation for every campaign, built shared dashboards for subscription/networking metrics, and ran weekly syncs with PM and data teams.
+    </p>
+
+    <div class="space-y-3">
+      <div class="rounded-[10px] border border-[#E3ECF7] bg-white p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="material-symbols-outlined !text-[16px] text-nextunicorn">dashboard</span>
+          <span class="text-[12px] font-semibold text-text-primary">Shared Dashboards</span>
+        </div>
+        <p class="text-[12px] leading-[1.7] text-text-secondary">
+          Built subscription/networking performance dashboards with the data team — shared across PM, CEO, and engineering for weekly review and priority alignment.
+        </p>
+      </div>
+
+      <div class="rounded-[10px] border border-[#E3ECF7] bg-white p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="material-symbols-outlined !text-[16px] text-nextunicorn">campaign</span>
+          <span class="text-[12px] font-semibold text-text-primary">Campaign Documentation</span>
+        </div>
+        <p class="text-[12px] leading-[1.7] text-text-secondary">
+          Every campaign (paid, CRM, SEO) documented with goals, target segments, creative rationale, and post-campaign analysis — creating a reusable knowledge base.
+        </p>
+      </div>
+
+      <div class="rounded-[10px] border border-[#E3ECF7] bg-white p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="material-symbols-outlined !text-[16px] text-nextunicorn">handshake</span>
+          <span class="text-[12px] font-semibold text-text-primary">Stakeholder Updates</span>
+        </div>
+        <p class="text-[12px] leading-[1.7] text-text-secondary">
+          Monthly marketing performance reports to CEO with channel-level ROI breakdown, experiment learnings, and next-period priorities — keeping leadership aligned on growth strategy.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</article>
+
+<div class="mt-12 border-t border-[#D9E7FF]"></div>
+
 <div class="project-step-flow relative mt-8">
 <div class="relative mt-20">
 <div class="flex items-start gap-5 mb-6">
@@ -6797,6 +7644,13 @@ Back to Top
            VIEW: RESUME
       ========================== -->
 
+
+
+
+<!-- =========================
+           VIEW: RESUME
+      ========================== -->
+
 <div id="view-resume" style="display:none">
 <div class="resume-topbar pt-2 pb-2">
   <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home')">
@@ -7375,10 +8229,12 @@ Back to Top
         if (views[k]) views[k].style.display = (k === which) ? 'block' : 'none';
       });
 
-      const isResume = which === 'resume' || which === 'resume-en';
-      main.style.display = isResume ? 'none' : '';
+      // Hide main when showing views that live outside it (resume, nu-en, resume-en, etc.)
+      const viewsOutsideMain = ['resume', 'resume-en', 'nu-en'];
+      const isOutsideMain = viewsOutsideMain.includes(which);
+      main.style.display = isOutsideMain ? 'none' : '';
       if (pageShell) {
-        pageShell.style.minHeight = isResume ? 'auto' : '';
+        pageShell.style.minHeight = isOutsideMain ? 'auto' : '';
       }
 
       window.scrollTo(0,0);
