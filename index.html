@@ -1038,6 +1038,10 @@
 <button class="hidden sm:flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-black transition-colors" onclick="showView('home'); document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
             Contact
 </button>
+<div class="hidden sm:flex items-center gap-0 text-sm font-mono border border-border rounded-pill overflow-hidden">
+  <button id="btn-ko" onclick="setLang('ko')" class="px-3 py-1.5 text-xs font-semibold transition-colors bg-black text-white">KO</button>
+  <button id="btn-en" onclick="setLang('en')" class="px-3 py-1.5 text-xs font-semibold transition-colors bg-transparent text-text-secondary hover:text-black">EN</button>
+</div>
 <button aria-label="menu" class="md:hidden">
 <span class="material-symbols-outlined">menu</span>
 </button>
@@ -1057,8 +1061,7 @@
                 Hi, I'm Hayeon
               </h1>
 <p class="text-[15px] md:text-[17px] leading-[1.8] text-text-secondary max-w-md">
-                데이터에서 문제를 찾고, 실험과 반복으로 해결합니다.<br class="hidden md:block"/>
-                유저 라이프사이클을 기반으로 성장 기회를 발굴하고 비즈니스 임팩트로 연결합니다.
+                <span data-ko data-ko-html="데이터에서 문제를 찾고, 실험과 반복으로 해결합니다.<br class='hidden md:block'/>유저 라이프사이클을 기반으로 성장 기회를 발굴하고 비즈니스 임팩트로 연결합니다." data-en-html="I find problems in data, solve them through experimentation,<br class='hidden md:block'/>and connect growth opportunities across the user lifecycle to business impact.">I find problems in data, solve them through experimentation,<br class="hidden md:block"/>and connect growth opportunities across the user lifecycle to business impact.</span>
               </p>
 <div class="flex flex-wrap gap-4 pt-2">
 <button class="h-12 px-8 bg-black text-white text-sm font-semibold hover:bg-black/85 transition-all rounded-pill flex items-center gap-2" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});">
@@ -1122,10 +1125,10 @@
 <span class="inline-flex items-center rounded-full border border-[#D9CEFF] bg-[#F7F4FF] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-soomgo">MONETIZATION</span>
 </div>
 <h3 class="font-display font-bold text-[24px] leading-[1.25] tracking-[-0.015em] mb-2 group-hover:text-soomgo transition-colors">
-                    고수 활성화부터 매출 확장까지
+                    <span data-ko data-ko-text="고수 활성화부터 매출 확장까지" data-en-text="From provider activation to revenue expansion">From provider activation to revenue expansion</span>
                   </h3>
-<p class="text-[15px] leading-[1.5] text-text-secondary mb-2">고수 여정에서는 첫 견적 이전 이탈과 첫 견적 이후 확장 정체가 동시에 발생하고 있었습니다. 저는 이 두 구간의 전환 문제를 분리해 정의하고, 각 단계에 맞는 실험과 CRM을 설계해 활성화가 반복 행동과 매출 확장으로 이어지는 구조를 만들었습니다.</p>
-<p class="text-[14px] leading-[1.6] font-semibold text-text-primary">결제 전환율 43.3% 증대 · 견적 전환율 32% 증대 · Promotion ROAS 1,249% 달성</p>
+<p class="text-[15px] leading-[1.5] text-text-secondary mb-2"><span data-ko data-ko-text="고수 여정에서는 첫 견적 이전 이탈과 첫 견적 이후 확장 정체가 동시에 발생하고 있었습니다. 저는 이 두 구간의 전환 문제를 분리해 정의하고, 각 단계에 맞는 실험과 CRM을 설계해 활성화가 반복 행동과 매출 확장으로 이어지는 구조를 만들었습니다." data-en-text="The provider journey was losing users before the first quote and plateauing after it. I defined each conversion gap separately and designed experiments and CRM for each stage — building a structure where activation leads to repeat behavior and revenue expansion.">The provider journey was losing users before the first quote and plateauing after it. I defined each conversion gap separately and designed experiments and CRM for each stage — building a structure where activation leads to repeat behavior and revenue expansion.</span></p>
+<p class="text-[14px] leading-[1.6] font-semibold text-text-primary"><span data-ko data-ko-text="결제 전환율 43.3% 증대 · 견적 전환율 32% 증대 · Promotion ROAS 1,249% 달성" data-en-text="Purchase CVR +43.3% · Quote CVR +32% · Promotion ROAS 1,249%">Purchase CVR +43.3% · Quote CVR +32% · Promotion ROAS 1,249%</span></p>
 </div>
 </button>
 <!-- Nextunicorn -->
@@ -1159,9 +1162,9 @@
 <span class="inline-flex items-center rounded-full border border-[#D6E6FF] bg-[#F4F8FF] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-nextunicorn">CRM</span>
 <span class="inline-flex items-center rounded-full border border-[#D6E6FF] bg-[#F4F8FF] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-nextunicorn">SEO</span>
 </div>
-<h3 class="font-display font-bold text-[24px] leading-[1.25] tracking-[-0.015em] mb-2 group-hover:text-nextunicorn transition-colors">유저 획득, 리텐션, 수익화 전략</h3>
-<p class="text-[13px] leading-[1.6] text-text-secondary mb-2">Nextunicorn에서는 단순한 트래픽 확대보다, 들어온 유저가 다시 방문하고 유료 행동으로 이어지는 구조가 중요했습니다. 유입만 늘리면 비용만 쌓이는 구조였기 때문입니다. Paid UA, CRM, SEO를 하나의 성장 퍼널로 묶어 획득–리텐션–수익화의 연결 구조를 만들었습니다.</p>
-<p class="text-[14px] leading-[1.6] font-semibold text-text-primary">CAC 53% 감소 · 목표 재구매율 101% 달성 · Blended ROAS 133% 달성</p>
+<h3 class="font-display font-bold text-[24px] leading-[1.25] tracking-[-0.015em] mb-2 group-hover:text-nextunicorn transition-colors"><span data-ko data-ko-text="유저 획득, 리텐션, 수익화 전략" data-en-text="User acquisition, retention & monetization strategy">User acquisition, retention & monetization strategy</span></h3>
+<p class="text-[13px] leading-[1.6] text-text-secondary mb-2"><span data-ko data-ko-text="Nextunicorn에서는 단순한 트래픽 확대보다, 들어온 유저가 다시 방문하고 유료 행동으로 이어지는 구조가 중요했습니다. 유입만 늘리면 비용만 쌓이는 구조였기 때문입니다. Paid UA, CRM, SEO를 하나의 성장 퍼널로 묶어 획득–리텐션–수익화의 연결 구조를 만들었습니다." data-en-text="At NextUnicorn, the priority was building a structure where acquired users returned and converted to paid actions — not just growing traffic volume. I connected Paid UA, CRM, and SEO into a single growth funnel, linking acquisition, retention, and monetization.">At NextUnicorn, the priority was building a structure where acquired users returned and converted to paid actions — not just growing traffic volume. I connected Paid UA, CRM, and SEO into a single growth funnel, linking acquisition, retention, and monetization.</span></p>
+<p class="text-[14px] leading-[1.6] font-semibold text-text-primary"><span data-ko data-ko-text="CAC 53% 감소 · 목표 재구매율 101% 달성 · Blended ROAS 133% 달성" data-en-text="CAC −53% · Repurchase target 101% · Blended ROAS 133%">CAC −53% · Repurchase target 101% · Blended ROAS 133%</span></p>
 </div>
 </button>
 </div>
@@ -1415,7 +1418,7 @@ class="block w-full h-full object-cover"
           <div class="px-5 pt-4 pb-5 space-y-3">
             <div>
               <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">Overview</p>
-              <p class="text-[13px] leading-[1.8] text-text-secondary">넥스트유니콘에서 IR자료 구독 서비스 전환을 목표로 월별 프로모션을 기획·운영했습니다. 할인 구조·이벤트 테마·랜딩 페이지 구성을 매월 직접 설계하며 월 매출의 평균 60%를 견인했습니다.</p>
+              <p class="text-[13px] leading-[1.8] text-text-secondary"><span data-ko data-ko-text="넥스트유니콘" data-en-text="NextUnicorn">NextUnicorn</span>에서 IR자료 구독 서비스 전환을 목표로 월별 프로모션을 기획·운영했습니다. 할인 구조·이벤트 테마·랜딩 페이지 구성을 매월 직접 설계하며 월 매출의 평균 60%를 견인했습니다.</p>
             </div>
             <div>
               <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-2">Creative</p>
@@ -1692,10 +1695,10 @@ function closeLeadModal() {
 <div>
 <h2 class="font-display font-bold text-[30px] leading-[1.25] tracking-tight">Growth is a structure, not a moment.<br>Let’s build better ones.</h2>
 <p class="text-[15px] leading-[1.8] text-text-secondary mt-3 max-w-xl">
-                    포트폴리오와 프로젝트에 대해 더 이야기 나누고 싶거나, 함께 풀어갈 성장 문제가 있다면 편하게 연락 주세요.
+<span data-ko data-ko-text="포트폴리오와 프로젝트에 대해 더 이야기 나누고 싶거나, 함께 풀어갈 성장 문제가 있다면 편하게 연락 주세요." data-en-text="If you'd like to talk more about my portfolio or projects — or have a growth problem worth solving together — feel free to reach out.">If you'd like to talk more about my portfolio or projects — or have a growth problem worth solving together — feel free to reach out.</span>
                   </p>
 </div>
-<a class="inline-flex items-center justify-center h-12 px-8 rounded-pill bg-black text-white text-sm font-semibold hover:bg-black/85 transition-all" href="/cdn-cgi/l/email-protection#572323233f362e32383917303a363e3b7934383a">
+<a class="inline-flex items-center justify-center h-12 px-8 rounded-pill bg-black text-white text-sm font-semibold hover:bg-black/85 transition-all" href="mailto:ttthayeon@gmail.com">
                   Email me
 </a>
 </div>
@@ -1795,7 +1798,7 @@ function closeLeadModal() {
 </div>
 </div>
 <p class="mt-10 text-[15px] md:text-[17px] leading-[1.8] muted max-w-2xl">
-              캠페인을 나열하는 대신, 고수의 여정을 <b class="text-white">하나의 성장 시스템</b>으로 재구성했습니다. 고수가 플랫폼에서 처음 가치를 경험하고, 반복하고, 더 깊이 참여하는 구조를 단계별로 설계했습니다.
+              <span data-ko data-ko-html="캠페인을 나열하는 대신, 고수의 여정을 <b class='text-white'>하나의 성장 시스템</b>으로 재구성했습니다. 고수가 플랫폼에서 처음 가치를 경험하고, 반복하고, 더 깊이 참여하는 구조를 단계별로 설계했습니다." data-en-html="Rather than running campaigns in isolation, I redesigned the provider journey as <b class="text-white">a single growth system</b> — structuring each stage so providers experience value early, repeat it, and engage more deeply over time.">Rather than running campaigns in isolation, I redesigned the provider journey as <b class="text-white">a single growth system</b> — structuring each stage so providers experience value early, repeat it, and engage more deeply over time.</span>
             </p>
 <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
   <div class="rounded-card border bordered bg-white/5 p-6 flex flex-col gap-2">
@@ -1844,11 +1847,11 @@ function closeLeadModal() {
                   고수의 활성화 비율 및 수익 전환율을 증대한다
                 </h3>
 <div class="type-body sg-body mt-2 text-[14px] md:text-[15px] leading-[1.75] text-text-secondary space-y-1.5">
-<p>숨고 고수 대상 CRM 전략 전반을 담당합니다.</p>
+<p><span data-ko data-ko-text="숨고 고수 대상 CRM 전략 전반을 담당합니다." data-en-text="I own the end-to-end CRM strategy for Soomgo's service providers.">I own the end-to-end CRM strategy for Soomgo's service providers.</span></p>
 
-<p>온보딩부터 리텐션까지 고수 라이프사이클 전 구간의 문제를 정의하고 개선 실행까지 책임집니다. 퍼널 전환율과 이탈 구간을 데이터로 추적하고, 행동 기반 세그먼트와 코호트를 SQL로 직접 추출합니다. App Push, 알림톡, 이메일, 인앱 메시지 각 채널의 역할을 정의하고 조합해, 고수의 CRM 피로도를 최소화하되 전환과 매출을 극대화합니다.</p>
+<p><span data-ko data-ko-text="온보딩부터 리텐션까지 고수 라이프사이클 전 구간의 문제를 정의하고 개선 실행까지 책임집니다. 퍼널 전환율과 이탈 구간을 데이터로 추적하고, 행동 기반 세그먼트와 코호트를 SQL로 직접 추출합니다. App Push, 알림톡, 이메일, 인앱 메시지 각 채널의 역할을 정의하고 조합해, 고수의 CRM 피로도를 최소화하되 전환과 매출을 극대화합니다." data-en-text="From onboarding to retention, I define and improve problems across every lifecycle stage, track funnel conversion and drop-off through data, and extract behavior-based segments and cohorts directly in SQL. I define and combine the roles of each channel — App Push, KakaoTalk notification, email, and in-app messaging — to maximize conversion and revenue while minimizing provider CRM fatigue.">From onboarding to retention, I define and improve problems across every lifecycle stage, track funnel conversion and drop-off through data, and extract behavior-based segments and cohorts directly in SQL. I define and combine the roles of each channel — App Push, KakaoTalk notification, email, and in-app messaging — to maximize conversion and revenue while minimizing provider CRM fatigue.</span></p>
 
-<p>PO, 데이터 사이언티스트, 데이터 분석가, UX 리서처 등 다양한 직군과 협업합니다.</p>
+<p><span data-ko data-ko-text="PO, 데이터 사이언티스트, 데이터 분석가, UX 리서처 등 다양한 직군과 협업합니다." data-en-text="I collaborate cross-functionally with POs, data scientists, data analysts, and UX researchers.">I collaborate cross-functionally with POs, data scientists, data analysts, and UX researchers.</span></p>
 </div>
 </section>
 </article>
@@ -1982,7 +1985,7 @@ function closeLeadModal() {
   </div>
   <div class="md:ml-[68px]">
 <p class="mt-5 text-[15px] leading-[1.8] text-text-secondary">
-  퍼널 데이터를 코호트별로 쪼개보니, 하락분의 상당 부분이 신규 고수 이탈에서 시작되고 있었습니다. 가입 후 7일 이내 첫 결제 전환율은 15%에 불과했고, 1개월 이내 결제율은 전년 대비 6.3%p 하락했습니다. 이 시기에 첫 결제로 이어지지 못한 고수는 대부분 그대로 이탈했습니다.
+  <span data-ko data-ko-text="퍼널 데이터를 코호트별로 쪼개보니, 하락분의 상당 부분이 신규 고수 이탈에서 시작되고 있었습니다. 가입 후 7일 이내 첫 결제 전환율은 15%에 불과했고, 1개월 이내 결제율은 전년 대비 6.3%p 하락했습니다. 이 시기에 첫 결제로 이어지지 못한 고수는 대부분 그대로 이탈했습니다." data-en-text="Breaking down funnel data by cohort, a significant portion of the decline originated from new provider churn. Only 15% of new providers completed their first payment within 7 days of sign-up, and the 1-month payment rate dropped 6.3pp year-over-year. Providers who failed to convert to a first payment during this period almost always churned.">Breaking down funnel data by cohort, a significant portion of the decline originated from new provider churn. Only 15% of new providers completed their first payment within 7 days of sign-up, and the 1-month payment rate dropped 6.3pp year-over-year. Providers who failed to convert to a first payment during this period almost always churned.</span>
 </p>
 <p class="mt-5 text-[15px] leading-[1.8] text-text-secondary">
   즉, 전체 효율 하락은 발송 직전 문제만이 아니라, 신규 고수의 초기 안착 실패가 엔진의 시작점부터 누적된 결과이기도 했습니다.
@@ -2344,17 +2347,17 @@ function closeLeadModal() {
 <div class="rounded-[16px] border border-[#D9CEFF] bg-[#FCFAFF] p-4">
 <p class="font-display font-bold text-[16px] text-[#1F1F2B] mb-2">견적 발송 경험 없음</p>
 <ul class="space-y-1.5 text-[13px] leading-[1.7] text-[#5B5670]">
-<li>• 견적서 작성 방법 자체가 복잡하게 느껴짐</li>
-<li>• 어떤 정보를 먼저 입력해야 할지 불명확함</li>
-<li>• 작성 부담으로 첫 발송 시도를 미루는 경향</li>
+<li><span data-ko data-ko-text="• 견적서 작성 방법 자체가 복잡하게 느껴짐" data-en-text="• The quote-writing process itself feels complex">• The quote-writing process itself feels complex</span></li>
+<li><span data-ko data-ko-text="• 어떤 정보를 먼저 입력해야 할지 불명확함" data-en-text="• Unclear which information to enter first">• Unclear which information to enter first</span></li>
+<li><span data-ko data-ko-text="• 작성 부담으로 첫 발송 시도를 미루는 경향" data-en-text="• Writing burden leads to deferring the first attempt">• Writing burden leads to deferring the first attempt</span></li>
 </ul>
 </div>
 <div class="rounded-[16px] border border-[#D9CEFF] bg-[#FCFAFF] p-4">
 <p class="font-display font-bold text-[16px] text-[#1F1F2B] mb-2">견적 발송 경험 있음</p>
 <ul class="space-y-1.5 text-[13px] leading-[1.7] text-[#5B5670]">
-<li>• 견적가를 어떻게 책정할지에 대한 불확실성</li>
-<li>• 요청 건별로 발송 가치(수익성) 판단 강화</li>
-<li>• 동일한 요청이라도 선택적으로 발송하는 경향</li>
+<li><span data-ko data-ko-text="• 견적가를 어떻게 책정할지에 대한 불확실성" data-en-text="• Uncertainty about how to price a quote">• Uncertainty about how to price a quote</span></li>
+<li><span data-ko data-ko-text="• 요청 건별로 발송 가치(수익성) 판단 강화" data-en-text="• Stronger per-request ROI evaluation">• Stronger per-request ROI evaluation</span></li>
+<li><span data-ko data-ko-text="• 동일한 요청이라도 선택적으로 발송하는 경향" data-en-text="• Tendency to respond selectively, even to similar requests">• Tendency to respond selectively, even to similar requests</span></li>
 </ul>
 </div>
 </div>
@@ -2690,7 +2693,7 @@ function closeLeadModal() {
 </div>
 </div>
 <div class="sg-project-divider">
-  <span class="sg-project-title">신규 수익화 기능 런칭과 초기 전환 확대</span>
+  <span class="sg-project-title"><span data-ko data-ko-text="신규 수익화 기능 런칭과 초기 전환 확대" data-en-text="Soomgo Plus ad product — New feature GTM & monetization">Soomgo Plus ad product — New feature GTM & monetization</span></span>
 </div>
 <!-- 10 Product Levers for Revenue Expansion -->
 <div class="project-step-flow relative mt-8">
@@ -2836,7 +2839,7 @@ function closeLeadModal() {
             <p class="text-[11px] leading-[1.6] text-text-secondary">오픈 시점에 맞춰 인앱/알림톡으로 실제 입찰 행동을 유도</p>
           </div>
         </div>
-        <figcaption class="mt-3 text-[12px] leading-[1.6] text-text-secondary">Figure — 숨고플러스 오픈 알림 신청 이벤트 및 운영 커뮤니케이션</figcaption>
+        <figcaption class="mt-3 text-[12px] leading-[1.6] text-text-secondary"><span data-ko data-ko-text="Figure — 숨고플러스 오픈 알림 신청 이벤트 및 운영 커뮤니케이션" data-en-text="Figure — Soomgo Plus open-alert signup event and operational communications">Figure — Soomgo Plus open-alert signup event and operational communications</span></figcaption>
       </figure>
       <p class="mt-4 text-[15px] leading-[1.8] text-text-secondary">세그먼트 × 소구점 실험을 반복하며, 이후에는 서비스·지역 정보를 결합한 메시지 파이프라인을 구축해 시장 유형별 USP를 자동으로 반영하는 구조로 고도화했습니다. 이를 위해 SQL로 서비스·지역·고수 특성 데이터를 결합한 마케팅용 테이블을 직접 생성하고, Braze Connected Content로 메시지 발송 시점에 해당 데이터를 호출하는 구조를 설계했습니다.</p>
       <div class="mt-5 rounded-xl border border-[#D9CEFF] bg-[#F7F4FF] p-5 md:p-6">
@@ -2875,8 +2878,8 @@ function closeLeadModal() {
     </div>
   </div>
   <div class="md:ml-[68px]">
-    <p class="mt-5 font-display text-[24px] md:text-[28px] leading-[1.35] tracking-[-0.01em] text-[#1F1F2B] font-bold">개발 없이 초기 커뮤니케이션 구조를 구축하고, 세그먼트를 정교화해 메시지의 영향력을 높였습니다</p>
-    <p class="mt-5 text-[15px] leading-[1.8] text-text-secondary">개발 없이 Braze만으로 오픈 알림 신청과 자동 발송 구조를 구축해, 초기 커뮤니케이션을 빠르게 설계하고 안정적으로 운영할 수 있었습니다. 이후 결제 구조가 즉시 결제로 바뀐 뒤에는 CRM 메시지의 영향력이 크게 확대됐습니다. 환불후 기준 메시지 기여도는 1~5회차 평균 16.9%에서 6~9회차 평균 58.5%까지 상승했고, 최고치는 73.2%를 기록했습니다. 이는 메시지가 단순 리마인드를 넘어, 당일 결제 전환을 직접 만들어내는 핵심 트리거로 작동했음을 보여줍니다. 구독 전환율과 입찰 이후 재구매율 변화는 SQL로 직접 분석해, 이후 커뮤니케이션과 세그먼트 설계 개선에 반영했습니다.</p>
+    <p class="mt-5 font-display text-[24px] md:text-[28px] leading-[1.35] tracking-[-0.01em] text-[#1F1F2B] font-bold"><span data-ko data-ko-text="개발 없이 초기 커뮤니케이션 구조를 구축하고, 세그먼트를 정교화해 메시지의 영향력을 높였습니다" data-en-text="Built the initial communication structure without engineering and strengthened message impact through segment refinement">Built the initial communication structure without engineering and strengthened message impact through segment refinement</span></p>
+    <p class="mt-5 text-[15px] leading-[1.8] text-text-secondary"><span data-ko data-ko-text="개발 없이 Braze만으로 오픈 알림 신청과 자동 발송 구조를 구축해, 초기 커뮤니케이션을 빠르게 설계하고 안정적으로 운영할 수 있었습니다. 이후 결제 구조가 즉시 결제로 바뀐 뒤에는 CRM 메시지의 영향력이 크게 확대됐습니다. 환불후 기준 메시지 기여도는 1~5회차 평균 16.9%에서 6~9회차 평균 58.5%까지 상승했고, 최고치는 73.2%를 기록했습니다. 이는 메시지가 단순 리마인드를 넘어, 당일 결제 전환을 직접 만들어내는 핵심 트리거로 작동했음을 보여줍니다. 구독 전환율과 입찰 이후 재구매율 변화는 SQL로 직접 분석해, 이후 커뮤니케이션과 세그먼트 설계 개선에 반영했습니다." data-en-text="Using only Braze — without additional engineering — I built the open-alert opt-in and automated send structure, enabling fast and stable initial communication operations. After the payment model shifted to immediate payment, CRM message attribution expanded significantly. Post-refund attribution rose from an average of 16.9% in rounds 1–5 to an average of 58.5% in rounds 6–9, peaking at 73.2%. This demonstrated that messages were functioning as a direct conversion trigger — not just a reminder. Subscription conversion rates and post-bid repurchase changes were analyzed directly in SQL and fed back into subsequent communication and segment design improvements.">Using only Braze — without additional engineering — I built the open-alert opt-in and automated send structure, enabling fast and stable initial communication operations. After the payment model shifted to immediate payment, CRM message attribution expanded significantly. Post-refund attribution rose from an average of 16.9% in rounds 1–5 to an average of 58.5% in rounds 6–9, peaking at 73.2%. This demonstrated that messages were functioning as a direct conversion trigger — not just a reminder. Subscription conversion rates and post-bid repurchase changes were analyzed directly in SQL and fed back into subsequent communication and segment design improvements.</span></p>
     <p class="mt-4 text-[13px] leading-[1.7] text-[#5B5670]">※ 광고 구좌 및 입찰자·낙찰자 관련 상세 수치와 세부 분석 데이터는 대외비에 해당해, 본 문서에서는 구조와 핵심 인사이트 중심으로만 정리했습니다.</p>
   </div>
 </div>
@@ -3218,15 +3221,15 @@ function closeLeadModal() {
   </div>
   <div class="rounded-[12px] bg-white border border-[#D9E7FF] p-3 md:p-4">
     <p class="text-[20px] md:text-[22px] font-bold text-nextunicorn leading-tight">43%</p>
-    <p class="mt-1 text-[12px] leading-[1.5] text-text-secondary">전년 대비 Paid 채널 CAC 수준<br/>(57% 감소)</p>
+    <p class="mt-1 text-[12px] leading-[1.5] text-text-secondary"><span data-ko data-ko-html="전년 대비 Paid 채널 CAC 수준<br/>(57% 감소)" data-en-html="Paid CAC vs prior year<br/>(53% reduction)">Paid CAC vs prior year<br/>(53% reduction)</span></p>
   </div>
   <div class="rounded-[12px] bg-white border border-[#D9E7FF] p-3 md:p-4">
     <p class="text-[20px] md:text-[22px] font-bold text-nextunicorn leading-tight">20%↓</p>
-    <p class="mt-1 text-[12px] leading-[1.5] text-text-secondary">신규 매체 도입 후<br/>전체 채널 CAC 감소</p>
+    <p class="mt-1 text-[12px] leading-[1.5] text-text-secondary"><span data-ko data-ko-html="신규 매체 도입 후<br/>전체 채널 CAC 감소" data-en-html="Overall CAC decrease<br/>after new channel introduction">Overall CAC decrease<br/>after new channel introduction</span></p>
   </div>
   <div class="rounded-[12px] bg-white border border-[#D9E7FF] p-3 md:p-4">
     <p class="text-[20px] md:text-[22px] font-bold text-nextunicorn leading-tight">150%</p>
-    <p class="mt-1 text-[12px] leading-[1.5] text-text-secondary">오가닉 콘텐츠<br/>유입 증가</p>
+    <p class="mt-1 text-[12px] leading-[1.5] text-text-secondary"><span data-ko data-ko-html="오가닉 콘텐츠<br/>유입 증가" data-en-html="Organic content<br/>acquisition growth">Organic content<br/>acquisition growth</span></p>
   </div>
 </div>
 </div>
@@ -3540,7 +3543,7 @@ function closeLeadModal() {
 <article class="h-full rounded-[18px] border border-[#D9E7FF] bg-[#F8FBFF] p-5">
 <h4 class="type-h3 font-display font-bold text-[20px] leading-[1.3] tracking-tight nu-title">투자자 활성화 CRM</h4>
 <p class="mt-3 text-[14px] leading-[1.8] nu-body">
-              이미 국내 투자기관의 84%가 가입된 상태였기 때문에, 신규 투자자 확보보다 기존 투자자를 다시 활성화하는 것이 더 큰 임팩트를 만들 수 있었습니다. 넥스트유니콘을 통해 컨택 가능한 스타트업 풀이 계속 확대되고 있다는 점, 이미 다른 투자자들이 딜 소싱에 활용하고 있다는 사회적 증거를 중심으로 CRM 플로우를 설계했습니다.
+              <span data-ko data-ko-text="이미 국내 투자기관의 84%가 가입된 상태였기 때문에, 신규 투자자 확보보다 기존 투자자를 다시 활성화하는 것이 더 큰 임팩트를 만들 수 있었습니다. 넥스트유니콘을 통해 컨택 가능한 스타트업 풀이 계속 확대되고 있다는 점, 이미 다른 투자자들이 딜 소싱에 활용하고 있다는 사회적 증거를 중심으로 CRM 플로우를 설계했습니다." data-en-text="With 84% of domestic investment institutions already signed up, reactivating existing investors offered higher impact than acquiring new ones. I designed the CRM flow around social proof — the continuously expanding pool of startups contactable through NextUnicorn, with evidence that many other investors were already using it for deal sourcing.">With 84% of domestic investment institutions already signed up, reactivating existing investors offered higher impact than acquiring new ones. I designed the CRM flow around social proof — the continuously expanding pool of startups contactable through NextUnicorn, with evidence that many other investors were already using it for deal sourcing.</span>
             </p>
 <figure class="mt-5 rounded-[16px] border border-[#D9E7FF] bg-white p-3 shadow-soft">
   <div class="max-w-[520px] mx-auto">
@@ -3558,7 +3561,7 @@ function closeLeadModal() {
 <article class="h-full rounded-[18px] border border-[#D9E7FF] bg-[#F8FBFF] p-5">
 <h4 class="type-h3 font-display font-bold text-[20px] leading-[1.3] tracking-tight nu-title">스타트업 리텐션 CRM</h4>
 <p class="mt-3 text-[14px] leading-[1.8] nu-body">
-              스타트업 유저에게 핵심 소구는 "언제든 다시 시도할 수 있다"는 지속성이었습니다. 무응답 이후 이탈을 막기 위해 CRM 플로우를 재설계하고, 다음 네트워킹 시도로 이어지는 연결 고리를 만들었습니다.
+              <span data-ko data-ko-text="스타트업 유저에게 핵심 소구는 &quot;언제든 다시 시도할 수 있다&quot;는 지속성이었습니다. 무응답 이후 이탈을 막기 위해 CRM 플로우를 재설계하고, 다음 네트워킹 시도로 이어지는 연결 고리를 만들었습니다." data-en-text="The core message for startups was continuity — 'you can try again at any time.' I redesigned the CRM flow to prevent churn after no-response and built a bridge to the next networking attempt.">The core message for startups was continuity — 'you can try again at any time.' I redesigned the CRM flow to prevent churn after no-response and built a bridge to the next networking attempt.</span>
             </p>
 <figure class="mt-5 rounded-[16px] border border-[#D9E7FF] bg-white p-3 shadow-soft">
   <div class="max-w-[520px] mx-auto">
@@ -3920,8 +3923,8 @@ function closeLeadModal() {
   <!-- Header -->
   <div class="pt-4 pb-8 border-b border-border">
     <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-text-secondary mb-3">Resume</p>
-    <h1 class="font-display font-bold text-[42px] leading-[1.1] tracking-tight text-text-primary">송하연</h1>
-    <p class="font-display font-bold text-[22px] tracking-tight text-text-secondary mt-1">Hayeon Song</p>
+    <h1 class="font-display font-bold text-[42px] leading-[1.1] tracking-tight text-text-primary"><span data-ko data-ko-text="송하연" data-en-text="Hayeon Song">Hayeon Song</span></h1>
+    <p class="font-display font-bold text-[22px] tracking-tight text-text-secondary mt-1"><span data-ko data-ko-text="Hayeon Song" data-en-text="Growth Marketer">Growth Marketer</span></p>
     <div class="flex flex-wrap gap-x-6 gap-y-1 mt-4 text-[13px] text-text-secondary font-mono">
       <span>+82 10 4977 5087</span>
       <a class="hover:text-black transition-colors" href="mailto:ttthayeon@gmail.com">ttthayeon@gmail.com</a>
@@ -3932,7 +3935,7 @@ function closeLeadModal() {
   <!-- About -->
   <div class="mt-10">
     <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-text-secondary mb-4">About</p>
-    <p class="text-[15px] leading-[1.8] text-text-primary">데이터 기반으로 획득–활성화–리텐션–수익화를 설계합니다. 문제를 구조적으로 정의하고, 실험으로 검증하며, 전환율과 핵심 비즈니스 지표를 지속적으로 개선해왔습니다. SQL 기반 데이터 분석과 Paid 채널, CRM 최적화를 통해 매출 성장 등 실제 성과를 만들어냅니다.</p>
+    <p class="text-[15px] leading-[1.8] text-text-primary"><span data-ko data-ko-text="데이터 기반으로 획득–활성화–리텐션–수익화를 설계합니다. 문제를 구조적으로 정의하고, 실험으로 검증하며, 전환율과 핵심 비즈니스 지표를 지속적으로 개선해왔습니다. SQL 기반 데이터 분석과 Paid 채널, CRM 최적화를 통해 매출 성장 등 실제 성과를 만들어냅니다." data-en-text="Growth marketer with 6+ years designing data-driven acquisition, activation, retention, and monetization strategies across marketplace and B2B platforms. Builds measurable growth systems — from SQL-based segmentation and A/B-tested CRM flows to paid channel optimization and SEO — and consistently translates experimental findings into revenue impact.">Growth marketer with 6+ years designing data-driven acquisition, activation, retention, and monetization strategies across marketplace and B2B platforms. Builds measurable growth systems — from SQL-based segmentation and A/B-tested CRM flows to paid channel optimization and SEO — and consistently translates experimental findings into revenue impact.</span></p>
   </div>
 
   <!-- Experience -->
@@ -3943,55 +3946,55 @@ function closeLeadModal() {
     <div class="mb-10">
       <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-5">
         <div>
-          <span class="font-display font-bold text-[17px] text-text-primary">그로스 마케터 (Growth Marketer)</span>
-          <span class="text-text-secondary text-[15px]"> · 브레이브모바일 (숨고)</span>
+          <span class="font-display font-bold text-[17px] text-text-primary"><span data-ko data-ko-text="그로스 마케터 (Growth Marketer)" data-en-text="Growth Marketer">Growth Marketer</span></span>
+          <span class="text-text-secondary text-[15px]"> · <span data-ko data-ko-text="브레이브모바일 (숨고)" data-en-text="Brave Mobile (Soomgo)">Brave Mobile (Soomgo)</span></span>
         </div>
         <span class="font-mono text-[12px] text-text-secondary whitespace-nowrap">06/2024 – 현재</span>
       </div>
       <div class="space-y-5 pl-0">
 
         <div class="border-l-2 border-border pl-4">
-          <p class="text-[13px] font-semibold text-text-primary mb-1">[신규 고수 초기 안착 및 첫 구매 전환 개선 CRM 마케팅 <span class="font-normal text-text-secondary">기여도 100%</span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">06/2024 – 08/2024</span></p>
-          <p class="text-[13px] text-soomgo font-semibold mb-1">성과: 가입 당일 구매 전환율 +43% 개선, 신규 고수 월간 매출 +12% 개선</p>
+          <p class="text-[13px] font-semibold text-text-primary mb-1">[<span data-ko data-ko-text="신규 고수 초기 안착 및 첫 구매 전환 개선 CRM 마케팅" data-en-text="New Provider Onboarding & First-Purchase CRM">New Provider Onboarding & First-Purchase CRM</span> <span class="font-normal text-text-secondary"><span data-ko data-ko-text="기여도 100%" data-en-text="100% contribution">100% contribution</span></span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">06/2024 – 08/2024</span></p>
+          <p class="text-[13px] text-soomgo font-semibold mb-1"><span data-ko data-ko-text="성과: 가입 당일 구매 전환율 +43% 개선, 신규 고수 월간 매출 +12% 개선" data-en-text="Result: Same-day purchase CVR +43%, new provider monthly revenue +12%">Result: Same-day purchase CVR +43%, new provider monthly revenue +12%</span></p>
           <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
-            <li>첫 결제를 활성화의 기준점으로 정의하고, 신규 고수의 초기 안착 구간 전환 구조를 개선</li>
-            <li>가입 초기 골든타임을 기준으로 첫 구매–첫 견적–재구매로 이어지는 흐름 설계</li>
+            <li><span data-ko data-ko-text="첫 결제를 활성화의 기준점으로 정의하고, 신규 고수의 초기 안착 구간 전환 구조를 개선" data-en-text="Redefined first payment as the activation milestone and improved the early-stage conversion structure for new providers">Redefined first payment as the activation milestone and improved the early-stage conversion structure for new providers</span></li>
+            <li><span data-ko data-ko-text="가입 초기 골든타임을 기준으로 첫 구매–첫 견적–재구매로 이어지는 흐름 설계" data-en-text="Designed the first-purchase → first-quote → repurchase flow around the 24-hour golden window post-signup">Designed the first-purchase → first-quote → repurchase flow around the 24-hour golden window post-signup</span></li>
           </ul>
         </div>
 
         <div class="border-l-2 border-border pl-4">
-          <p class="text-[13px] font-semibold text-text-primary mb-1">[요청 반응 및 견적 전환 개선 CRM 마케팅 <span class="font-normal text-text-secondary">기여도 100%</span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">08/2024 – 10/2024</span></p>
-          <p class="text-[13px] text-soomgo font-semibold mb-1">성과: 견적 발송 전환율 +32%, 견적서 오픈 비율 +25%, 요청서 확인 후 견적 발송 비율 +6% 개선</p>
+          <p class="text-[13px] font-semibold text-text-primary mb-1">[<span data-ko data-ko-text="요청 반응 및 견적 전환 개선 CRM 마케팅" data-en-text="Quote Conversion CRM">Quote Conversion CRM</span> <span class="font-normal text-text-secondary"><span data-ko data-ko-text="기여도 100%" data-en-text="100% contribution">100% contribution</span></span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">08/2024 – 10/2024</span></p>
+          <p class="text-[13px] text-soomgo font-semibold mb-1"><span data-ko data-ko-text="성과: 견적 발송 전환율 +32%, 견적서 오픈 비율 +25%, 요청서 확인 후 견적 발송 비율 +6% 개선" data-en-text="Result: Quote CVR +32%, quote open rate +25%, post-view quote send rate +6%">Result: Quote CVR +32%, quote open rate +25%, post-view quote send rate +6%</span></p>
           <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
-            <li>요청 확인 이후 실제 견적 발송까지 이어지는 반응 구간을 분석하고, 발송 직전 마찰 제거 및 상태별 리마인더 타이밍 실험 설계</li>
-            <li>요청 확인 상태에 따라 발송 시점을 분기해 고수의 응답 행동을 최적화</li>
+            <li><span data-ko data-ko-text="요청 확인 이후 실제 견적 발송까지 이어지는 반응 구간을 분석하고, 발송 직전 마찰 제거 및 상태별 리마인더 타이밍 실험 설계" data-en-text="Analyzed the post-request-view → quote-send funnel; removed pre-submission friction and designed reminder timing experiments branched by review status">Analyzed the post-request-view → quote-send funnel; removed pre-submission friction and designed reminder timing experiments branched by review status</span></li>
+            <li><span data-ko data-ko-text="요청 확인 상태에 따라 발송 시점을 분기해 고수의 응답 행동을 최적화" data-en-text="Branched send timing by request review status to optimize provider response behavior">Branched send timing by request review status to optimize provider response behavior</span></li>
           </ul>
         </div>
 
         <div class="border-l-2 border-border pl-4">
-          <p class="text-[13px] font-semibold text-text-primary mb-1">[인터뷰·서베이 기반 고수 행동 장벽 정의 및 전환 개선 <span class="font-normal text-text-secondary">기여도 80%</span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">10/2024 – 12/2024</span></p>
-          <p class="text-[13px] text-soomgo font-semibold mb-1">성과: 견적 발송 전환율 +9%, 고객 응답률 18% 증가, 가이드 적용률 14% 향상</p>
+          <p class="text-[13px] font-semibold text-text-primary mb-1">[<span data-ko data-ko-text="인터뷰·서베이 기반 고수 행동 장벽 정의 및 전환 개선" data-en-text="Behavioral Barrier Analysis & Conversion Improvement">Behavioral Barrier Analysis & Conversion Improvement</span> <span class="font-normal text-text-secondary"><span data-ko data-ko-text="기여도 80%" data-en-text="80% contribution">80% contribution</span></span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">10/2024 – 12/2024</span></p>
+          <p class="text-[13px] text-soomgo font-semibold mb-1"><span data-ko data-ko-text="성과: 견적 발송 전환율 +9%, 고객 응답률 18% 증가, 가이드 적용률 14% 향상" data-en-text="Result: Quote CVR +9%, customer response rate +18%, guide adoption +14%">Result: Quote CVR +9%, customer response rate +18%, guide adoption +14%</span></p>
           <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
-            <li>Braze Custom HTML 모달로 0-party 데이터를 수집하고, 정량 퍼널 데이터와 인터뷰·서베이를 결합해 고수 행동 장벽을 유형화</li>
-            <li>행동 장벽 유형과 세그먼트별 메시지 반응 차이를 실험으로 검증하고, 필요한 정보·유도 액션·가이드를 재설계해 전환율 개선</li>
+            <li><span data-ko data-ko-text="Braze Custom HTML 모달로 0-party 데이터를 수집하고, 정량 퍼널 데이터와 인터뷰·서베이를 결합해 고수 행동 장벽을 유형화" data-en-text="Collected zero-party data via Braze Custom HTML modal; combined quantitative funnel data with interviews and surveys to categorize provider behavioral barriers">Collected zero-party data via Braze Custom HTML modal; combined quantitative funnel data with interviews and surveys to categorize provider behavioral barriers</span></li>
+            <li><span data-ko data-ko-text="행동 장벽 유형과 세그먼트별 메시지 반응 차이를 실험으로 검증하고, 필요한 정보·유도 액션·가이드를 재설계해 전환율 개선" data-en-text="Validated barrier types and segment-level message response differences through experiments; redesigned information, CTAs, and guides to improve conversion">Validated barrier types and segment-level message response differences through experiments; redesigned information, CTAs, and guides to improve conversion</span></li>
           </ul>
         </div>
 
         <div class="border-l-2 border-border pl-4">
-          <p class="text-[13px] font-semibold text-text-primary mb-1">[기존 고수 인게이지먼트 강화를 위한 리브랜딩 프로모션 <span class="font-normal text-text-secondary">기여도 70%</span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">01/2025 – 06/2025</span></p>
-          <p class="text-[13px] text-soomgo font-semibold mb-1">성과: 목표 프로모션 참여자 수 대비 121% 달성</p>
+          <p class="text-[13px] font-semibold text-text-primary mb-1">[<span data-ko data-ko-text="기존 고수 인게이지먼트 강화를 위한 리브랜딩 프로모션" data-en-text="Rebranding Promotion for Existing Provider Engagement">Rebranding Promotion for Existing Provider Engagement</span> <span class="font-normal text-text-secondary"><span data-ko data-ko-text="기여도 70%" data-en-text="70% contribution">70% contribution</span></span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">01/2025 – 06/2025</span></p>
+          <p class="text-[13px] text-soomgo font-semibold mb-1"><span data-ko data-ko-text="성과: 목표 프로모션 참여자 수 대비 121% 달성" data-en-text="Result: 121% of participation target achieved">Result: 121% of participation target achieved</span></p>
           <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
-            <li>고수 대상 리브랜딩 메시지 홍보 및 참여 유도 CRM 마케팅 리딩</li>
+            <li><span data-ko data-ko-text="고수 대상 리브랜딩 메시지 홍보 및 참여 유도 CRM 마케팅 리딩" data-en-text="Led CRM marketing to promote rebranding messaging and drive participation among existing providers">Led CRM marketing to promote rebranding messaging and drive participation among existing providers</span></li>
           </ul>
         </div>
 
         <div class="border-l-2 border-border pl-4">
-          <p class="text-[13px] font-semibold text-text-primary mb-1">[숨고플러스 광고 상품 CRM 마케팅 <span class="font-normal text-text-secondary">기여도 90%</span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">07/2025 – 02/2026</span></p>
-          <p class="text-[13px] text-soomgo font-semibold mb-1">성과: Promotion ROAS 1,249%, CRM 메시지 기여도 평균 17%, 최고 73%</p>
-          <p class="text-[13px] text-soomgo font-semibold mb-1">성과: 1회차 목표 입찰 금액 109% 달성, 실제 입찰 구좌 중 알림 신청 유저 비중 53%</p>
+          <p class="text-[13px] font-semibold text-text-primary mb-1">[<span data-ko data-ko-text="숨고플러스 광고 상품 CRM 마케팅" data-en-text="Soomgo Plus Ad Product CRM">Soomgo Plus Ad Product CRM</span> <span class="font-normal text-text-secondary"><span data-ko data-ko-text="기여도 90%" data-en-text="90% contribution">90% contribution</span></span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">07/2025 – 02/2026</span></p>
+          <p class="text-[13px] text-soomgo font-semibold mb-1"><span data-ko data-ko-text="성과: Promotion ROAS 1,249%, CRM 메시지 기여도 평균 17%, 최고 73%" data-en-text="Result: Promotion ROAS 1,249%, avg. CRM attribution 17%, peak 73%">Result: Promotion ROAS 1,249%, avg. CRM attribution 17%, peak 73%</span></p>
+          <p class="text-[13px] text-soomgo font-semibold mb-1"><span data-ko data-ko-text="성과: 1회차 목표 입찰 금액 109% 달성, 실제 입찰 구좌 중 알림 신청 유저 비중 53%" data-en-text="Result: 1st-round bid target 109%, opt-in users = 53% of actual bids">Result: 1st-round bid target 109%, opt-in users = 53% of actual bids</span></p>
           <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
-            <li>BigQuery SQL 기반 타겟 세그먼트 정의 및 출시 전 수요 검증 구조 설계</li>
-            <li>Braze Custom Attribute 활용, 개발 없이 오픈 알림 신청–출시 알림–자동 입찰 알림–결제 전환 플로우 구축</li>
+            <li><span data-ko data-ko-text="BigQuery SQL 기반 타겟 세그먼트 정의 및 출시 전 수요 검증 구조 설계" data-en-text="Defined target segments via BigQuery SQL and designed a pre-launch demand validation structure">Defined target segments via BigQuery SQL and designed a pre-launch demand validation structure</span></li>
+            <li><span data-ko data-ko-text="Braze Custom Attribute 활용, 개발 없이 오픈 알림 신청–출시 알림–자동 입찰 알림–결제 전환 플로우 구축" data-en-text="Built open-alert opt-in → launch notification → auto-bid → payment conversion flow via Braze Custom Attributes, without engineering">Built open-alert opt-in → launch notification → auto-bid → payment conversion flow via Braze Custom Attributes, without engineering</span></li>
           </ul>
         </div>
 
@@ -4004,47 +4007,47 @@ function closeLeadModal() {
     <div class="mb-10">
       <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-5">
         <div>
-          <span class="font-display font-bold text-[17px] text-text-primary">마케팅 매니저 (Marketing Manager)</span>
-          <span class="text-text-secondary text-[15px]"> · 넥스트유니콘</span>
+          <span class="font-display font-bold text-[17px] text-text-primary"><span data-ko data-ko-text="마케팅 매니저 (Marketing Manager)" data-en-text="Marketing Manager">Marketing Manager</span></span>
+          <span class="text-text-secondary text-[15px]"> · <span data-ko data-ko-text="넥스트유니콘" data-en-text="NextUnicorn">NextUnicorn</span></span>
         </div>
         <span class="font-mono text-[12px] text-text-secondary whitespace-nowrap">08/2021 – 06/2024</span>
       </div>
       <div class="space-y-5 pl-0">
 
         <div class="border-l-2 border-border pl-4">
-          <p class="text-[13px] font-semibold text-text-primary mb-1">[구독 서비스 첫 구독 전환 마케팅 <span class="font-normal text-text-secondary">기여도 80%</span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">11/2023 – 03/2024</span></p>
-          <p class="text-[13px] text-nextunicorn font-semibold mb-1">성과: 월 목표 구독수 평균 110% 달성, 목표 Initial Revenue 월평균 130% 달성, 목표 Blended ROAS 월평균 133% 달성</p>
+          <p class="text-[13px] font-semibold text-text-primary mb-1">[<span data-ko data-ko-text="구독 서비스 첫 구독 전환 마케팅" data-en-text="Subscription First-Conversion Marketing">Subscription First-Conversion Marketing</span> <span class="font-normal text-text-secondary"><span data-ko data-ko-text="기여도 80%" data-en-text="80% contribution">80% contribution</span></span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">11/2023 – 03/2024</span></p>
+          <p class="text-[13px] text-nextunicorn font-semibold mb-1"><span data-ko data-ko-text="성과: 월 목표 구독수 평균 110% 달성, 목표 Initial Revenue 월평균 130% 달성, 목표 Blended ROAS 월평균 133% 달성" data-en-text="Result: Monthly subscriber target avg. 110%, Initial Revenue avg. 130%, Blended ROAS avg. 133%">Result: Monthly subscriber target avg. 110%, Initial Revenue avg. 130%, Blended ROAS avg. 133%</span></p>
           <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
-            <li>세그먼트·채널·USP 조합 검증을 기반으로 CRM 캠페인 플로우 설계 및 CRM 캠페인 리딩</li>
-            <li>Paid 매체 최적화 (SA ROAS 500%, Meta DA ROAS 229%)</li>
-            <li>구독 전환 목표 프로모션 기획 주도 및 운영, 유입 증대 목표 콘텐츠 기획·배포</li>
+            <li><span data-ko data-ko-text="세그먼트·채널·USP 조합 검증을 기반으로 CRM 캠페인 플로우 설계 및 CRM 캠페인 리딩" data-en-text="Designed and led CRM campaign flows based on segment × channel × USP combination testing">Designed and led CRM campaign flows based on segment × channel × USP combination testing</span></li>
+            <li><span data-ko data-ko-text="Paid 매체 최적화 (SA ROAS 500%, Meta DA ROAS 229%)" data-en-text="Paid channel optimization (SA avg. ROAS 500%, Meta DA avg. ROAS 229%)">Paid channel optimization (SA avg. ROAS 500%, Meta DA avg. ROAS 229%)</span></li>
+            <li><span data-ko data-ko-text="구독 전환 목표 프로모션 기획 주도 및 운영, 유입 증대 목표 콘텐츠 기획·배포" data-en-text="Led subscription conversion promotions and planned & distributed acquisition-focused content">Led subscription conversion promotions and planned & distributed acquisition-focused content</span></li>
           </ul>
         </div>
 
         <div class="border-l-2 border-border pl-4">
-          <p class="text-[13px] font-semibold text-text-primary mb-1">[전체 플랫폼 GMV 증대를 위한 마케팅 캠페인 <span class="font-normal text-text-secondary">기여도 80%</span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">01/2024 – 03/2024</span></p>
-          <p class="text-[13px] text-nextunicorn font-semibold mb-1">성과: 목표 Blended Revenue 월평균 126% 달성, GMV MoM 26% 성장, Recurring Revenue MoM 17% 성장</p>
+          <p class="text-[13px] font-semibold text-text-primary mb-1">[<span data-ko data-ko-text="전체 플랫폼 GMV 증대를 위한 마케팅 캠페인" data-en-text="Full-Platform GMV Growth Campaign">Full-Platform GMV Growth Campaign</span> <span class="font-normal text-text-secondary"><span data-ko data-ko-text="기여도 80%" data-en-text="80% contribution">80% contribution</span></span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">01/2024 – 03/2024</span></p>
+          <p class="text-[13px] text-nextunicorn font-semibold mb-1"><span data-ko data-ko-text="성과: 목표 Blended Revenue 월평균 126% 달성, GMV MoM 26% 성장, Recurring Revenue MoM 17% 성장" data-en-text="Result: Blended Revenue avg. 126%, GMV MoM +26%, Recurring Revenue MoM +17%">Result: Blended Revenue avg. 126%, GMV MoM +26%, Recurring Revenue MoM +17%</span></p>
           <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
-            <li>구독 유지–재구매–유료 프로그램 전환이 이어지는 CRM 퍼널 재설계</li>
-            <li>크로스셀링 및 해지 방지 CRM 캠페인 기획·운영</li>
+            <li><span data-ko data-ko-text="구독 유지–재구매–유료 프로그램 전환이 이어지는 CRM 퍼널 재설계" data-en-text="Redesigned the CRM funnel connecting subscription retention, repurchase, and paid program cross-sell">Redesigned the CRM funnel connecting subscription retention, repurchase, and paid program cross-sell</span></li>
+            <li><span data-ko data-ko-text="크로스셀링 및 해지 방지 CRM 캠페인 기획·운영" data-en-text="Planned and operated cross-sell and churn-prevention CRM campaigns">Planned and operated cross-sell and churn-prevention CRM campaigns</span></li>
           </ul>
         </div>
 
         <div class="border-l-2 border-border pl-4">
-          <p class="text-[13px] font-semibold text-text-primary mb-1">[투자자&스타트업 네트워킹 활성화/리텐션 개선 캠페인 <span class="font-normal text-text-secondary">기여도 90%</span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">01/2022 – 01/2023</span></p>
-          <p class="text-[13px] text-nextunicorn font-semibold mb-1">성과: 투자자 유저의 네트워킹 프로덕트 사용 주기 71% 단축, 스타트업 유저 목표 재구매율 101% 달성</p>
+          <p class="text-[13px] font-semibold text-text-primary mb-1">[<span data-ko data-ko-text="투자자&스타트업 네트워킹 활성화/리텐션 개선 캠페인" data-en-text="Investor & Startup Networking Activation / Retention Campaign">Investor & Startup Networking Activation / Retention Campaign</span> <span class="font-normal text-text-secondary"><span data-ko data-ko-text="기여도 90%" data-en-text="90% contribution">90% contribution</span></span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">01/2022 – 01/2023</span></p>
+          <p class="text-[13px] text-nextunicorn font-semibold mb-1"><span data-ko data-ko-text="성과: 투자자 유저의 네트워킹 프로덕트 사용 주기 71% 단축, 스타트업 유저 목표 재구매율 101% 달성" data-en-text="Result: Investor networking usage cycle shortened 71%, startup repurchase rate target 101%">Result: Investor networking usage cycle shortened 71%, startup repurchase rate target 101%</span></p>
           <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
-            <li>양면시장 User Journey를 정의하고, 투자자·스타트업의 핵심 인앱 액션을 분리해 각각에 맞는 활성화·리텐션 CRM 설계·운영</li>
-            <li>유입 이후 네트워킹 참여→재참여→유료 프로그램 전환까지 이어지는 CRM 캠페인을 리딩해 재사용성과 수익화를 동시에 강화</li>
+            <li><span data-ko data-ko-text="양면시장 User Journey를 정의하고, 투자자·스타트업의 핵심 인앱 액션을 분리해 각각에 맞는 활성화·리텐션 CRM 설계·운영" data-en-text="Mapped two-sided market user journeys; separated core in-app actions for investors and startups and designed separate activation and retention CRM flows for each">Mapped two-sided market user journeys; separated core in-app actions for investors and startups and designed separate activation and retention CRM flows for each</span></li>
+            <li><span data-ko data-ko-text="유입 이후 네트워킹 참여→재참여→유료 프로그램 전환까지 이어지는 CRM 캠페인을 리딩해 재사용성과 수익화를 동시에 강화" data-en-text="Led CRM campaigns connecting post-acquisition networking participation → re-engagement → paid program conversion, strengthening both repeat usage and monetization">Led CRM campaigns connecting post-acquisition networking participation → re-engagement → paid program conversion, strengthening both repeat usage and monetization</span></li>
           </ul>
         </div>
 
         <div class="border-l-2 border-border pl-4">
-          <p class="text-[13px] font-semibold text-text-primary mb-1">[서비스 User Acquisition 최적화 <span class="font-normal text-text-secondary">기여도 90%</span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">08/2021 – 02/2022</span></p>
-          <p class="text-[13px] text-nextunicorn font-semibold mb-1">성과: 전년 대비 248% 이상 신규 유저 획득, 전년 대비 유저 획득 비용(CAC) 47% 수준으로 개선</p>
-          <p class="text-[13px] text-nextunicorn font-semibold mb-1">성과: Paid CAC 30% 감소, 신규 채널 도입으로 전체 CAC 20% 추가 절감</p>
+          <p class="text-[13px] font-semibold text-text-primary mb-1">[<span data-ko data-ko-text="서비스 User Acquisition 최적화" data-en-text="Service User Acquisition Optimization">Service User Acquisition Optimization</span> <span class="font-normal text-text-secondary"><span data-ko data-ko-text="기여도 90%" data-en-text="90% contribution">90% contribution</span></span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">08/2021 – 02/2022</span></p>
+          <p class="text-[13px] text-nextunicorn font-semibold mb-1"><span data-ko data-ko-text="성과: 전년 대비 248% 이상 신규 유저 획득, 전년 대비 유저 획득 비용(CAC) 47% 수준으로 개선" data-en-text="Result: New user acquisition 248%+ YoY, CAC reduced to 47% of prior year level">Result: New user acquisition 248%+ YoY, CAC reduced to 47% of prior year level</span></p>
+          <p class="text-[13px] text-nextunicorn font-semibold mb-1"><span data-ko data-ko-text="성과: Paid CAC 30% 감소, 신규 채널 도입으로 전체 CAC 20% 추가 절감" data-en-text="Result: Paid CAC −30%, additional 20% overall CAC reduction after new channel introduction">Result: Paid CAC −30%, additional 20% overall CAC reduction after new channel introduction</span></p>
           <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
-            <li>채널별 유입·가입·핵심 행동 데이터를 구조화해 성과 측정 대시보드 구축, Paid/Non-Paid 채널 믹스로 CAC를 관리하며 퍼널 전환율을 최적화</li>
+            <li><span data-ko data-ko-text="채널별 유입·가입·핵심 행동 데이터를 구조화해 성과 측정 대시보드 구축, Paid/Non-Paid 채널 믹스로 CAC를 관리하며 퍼널 전환율을 최적화" data-en-text="Structured per-channel acquisition, sign-up, and core action data into a performance dashboard; managed CAC via Paid/Non-Paid channel mix while optimizing funnel conversion">Structured per-channel acquisition, sign-up, and core action data into a performance dashboard; managed CAC via Paid/Non-Paid channel mix while optimizing funnel conversion</span></li>
           </ul>
         </div>
 
@@ -4058,34 +4061,34 @@ function closeLeadModal() {
       <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-5">
         <div>
           <span class="font-display font-bold text-[17px] text-text-primary">마케팅 매니저 (Marketing Manager)</span>
-          <span class="text-text-secondary text-[15px]"> · 패신저스 (비보트)</span>
+          <span class="text-text-secondary text-[15px]"> · <span data-ko data-ko-text="패신저스 (비보트)" data-en-text="Passengers (Bevot)">Passengers (Bevot)</span></span>
         </div>
         <span class="font-mono text-[12px] text-text-secondary whitespace-nowrap">09/2020 – 08/2021</span>
       </div>
       <div class="space-y-5 pl-0">
 
         <div class="border-l-2 border-border pl-4">
-          <p class="text-[13px] font-semibold text-text-primary mb-1">[첫구매 전환 캠페인 <span class="font-normal text-text-secondary">기여도 90%</span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">01/2021 – 09/2021</span></p>
-          <p class="text-[13px] text-text-secondary font-semibold mb-1">성과: 목표 DAU 233% 달성, 목표 첫구매 유저 150% 달성, 평균 ROAS 500% 달성</p>
+          <p class="text-[13px] font-semibold text-text-primary mb-1">[<span data-ko data-ko-text="첫구매 전환 캠페인" data-en-text="First-Purchase Conversion Campaign">First-Purchase Conversion Campaign</span> <span class="font-normal text-text-secondary"><span data-ko data-ko-text="기여도 90%" data-en-text="90% contribution">90% contribution</span></span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">01/2021 – 09/2021</span></p>
+          <p class="text-[13px] text-text-secondary font-semibold mb-1"><span data-ko data-ko-text="성과: 목표 DAU 233% 달성, 목표 첫구매 유저 150% 달성, 평균 ROAS 500% 달성" data-en-text="Result: DAU target 233%, first-purchase user target 150%, avg. ROAS 500%">Result: DAU target 233%, first-purchase user target 150%, avg. ROAS 500%</span></p>
           <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
-            <li>Meta DA 최적화 (평균 ROAS 400% 이상), 네이버 SA 최적화 (평균 ROAS 600% 이상)</li>
+            <li><span data-ko data-ko-text="Meta DA 최적화 (평균 ROAS 400% 이상), 네이버 SA 최적화 (평균 ROAS 600% 이상)" data-en-text="Meta DA optimization (avg. ROAS 400%+), Naver SA optimization (avg. ROAS 600%+)">Meta DA optimization (avg. ROAS 400%+), Naver SA optimization (avg. ROAS 600%+)</span></li>
           </ul>
         </div>
 
         <div class="border-l-2 border-border pl-4">
-          <p class="text-[13px] font-semibold text-text-primary mb-1">[유저 획득을 위한 SEO 개선 & Owned Media 운영 <span class="font-normal text-text-secondary">기여도 80%</span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">10/2020 – 07/2021</span></p>
-          <p class="text-[13px] text-text-secondary font-semibold mb-1">성과: 자연 유입 유저 비중 약 4%p 증가, 콘텐츠/온드미디어 운영을 통한 유저 2,000명 이상 확보</p>
+          <p class="text-[13px] font-semibold text-text-primary mb-1">[<span data-ko data-ko-text="유저 획득을 위한 SEO 개선 & Owned Media 운영" data-en-text="SEO Improvement & Owned Media for User Acquisition">SEO Improvement & Owned Media for User Acquisition</span> <span class="font-normal text-text-secondary"><span data-ko data-ko-text="기여도 80%" data-en-text="80% contribution">80% contribution</span></span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">10/2020 – 07/2021</span></p>
+          <p class="text-[13px] text-text-secondary font-semibold mb-1"><span data-ko data-ko-text="성과: 자연 유입 유저 비중 약 4%p 증가, 콘텐츠/온드미디어 운영을 통한 유저 2,000명 이상 확보" data-en-text="Result: Organic traffic share +4pp, 2,000+ users acquired through content/owned media">Result: Organic traffic share +4pp, 2,000+ users acquired through content/owned media</span></p>
           <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
-            <li>신규 서비스 콘텐츠 제작 및 발행 (발행 콘텐츠 30건 이상, 콘텐츠를 통한 누적 신규 가입 회원 6,000명 이상)</li>
+            <li><span data-ko data-ko-text="신규 서비스 콘텐츠 제작 및 발행 (발행 콘텐츠 30건 이상, 콘텐츠를 통한 누적 신규 가입 회원 6,000명 이상)" data-en-text="Created and published new service content (30+ articles, 6,000+ cumulative new sign-ups via content)">Created and published new service content (30+ articles, 6,000+ cumulative new sign-ups via content)</span></li>
           </ul>
         </div>
 
         <div class="border-l-2 border-border pl-4">
-          <p class="text-[13px] font-semibold text-text-primary mb-1">[신규 서비스 활성화 및 UX/UI 개선 참여 <span class="font-normal text-text-secondary">기여도 60%</span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">10/2020 – 07/2021</span></p>
-          <p class="text-[13px] text-text-secondary font-semibold mb-1">성과: 신규 서비스 참여 유저 3,000명 이상 확보, UX/UI 개선을 통한 이탈률 10%p 감소</p>
+          <p class="text-[13px] font-semibold text-text-primary mb-1">[<span data-ko data-ko-text="신규 서비스 활성화 및 UX/UI 개선 참여" data-en-text="New Service Activation & UX/UI Improvement">New Service Activation & UX/UI Improvement</span> <span class="font-normal text-text-secondary"><span data-ko data-ko-text="기여도 60%" data-en-text="60% contribution">60% contribution</span></span>] <span class="font-mono font-normal text-[11px] text-text-secondary ml-1">10/2020 – 07/2021</span></p>
+          <p class="text-[13px] text-text-secondary font-semibold mb-1"><span data-ko data-ko-text="성과: 신규 서비스 참여 유저 3,000명 이상 확보, UX/UI 개선을 통한 이탈률 10%p 감소" data-en-text="Result: 3,000+ users acquired for new service, churn rate −10pp through UX/UI improvements">Result: 3,000+ users acquired for new service, churn rate −10pp through UX/UI improvements</span></p>
           <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
-            <li>잠재고객 데이터 기반 신규 서비스 기획 및 운영 참여</li>
-            <li>서비스 활성화를 위한 가설 검증/유저 데이터 분석 대시보드 구성</li>
+            <li><span data-ko data-ko-text="잠재고객 데이터 기반 신규 서비스 기획 및 운영 참여" data-en-text="Participated in new service planning and operations based on potential customer data">Participated in new service planning and operations based on potential customer data</span></li>
+            <li><span data-ko data-ko-text="서비스 활성화를 위한 가설 검증/유저 데이터 분석 대시보드 구성" data-en-text="Built hypothesis validation and user data analysis dashboards for service activation">Built hypothesis validation and user data analysis dashboards for service activation</span></li>
           </ul>
         </div>
 
@@ -4200,7 +4203,7 @@ function closeLeadModal() {
 </div>
 </div>
 </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
     function showView(which){
       const views = {
         home: document.getElementById('view-home'),
@@ -4244,14 +4247,42 @@ function closeLeadModal() {
       document.body.style.overflow = '';
     }
 
+
+    // ── Language Toggle ─────────────────────────────────────────────
+    function setLang(lang) {
+      localStorage.setItem('lang', lang);
+      document.documentElement.lang = lang === 'en' ? 'en' : 'ko';
+
+      // text nodes
+      document.querySelectorAll('[data-ko][data-ko-text]').forEach(el => {
+        el.textContent = lang === 'en' ? el.dataset.enText : el.dataset.koText;
+      });
+
+      // html nodes
+      document.querySelectorAll('[data-ko][data-ko-html]').forEach(el => {
+        el.innerHTML = lang === 'en' ? el.dataset.enHtml : el.dataset.koHtml;
+      });
+
+      // toggle button states
+      const btnKo = document.getElementById('btn-ko');
+      const btnEn = document.getElementById('btn-en');
+      if (btnKo && btnEn) {
+        if (lang === 'en') {
+          btnKo.className = 'px-3 py-1.5 text-xs font-semibold transition-colors bg-transparent text-text-secondary hover:text-black';
+          btnEn.className = 'px-3 py-1.5 text-xs font-semibold transition-colors bg-black text-white';
+        } else {
+          btnKo.className = 'px-3 py-1.5 text-xs font-semibold transition-colors bg-black text-white';
+          btnEn.className = 'px-3 py-1.5 text-xs font-semibold transition-colors bg-transparent text-text-secondary hover:text-black';
+        }
+      }
+    }
+
+    // init on load
+    (function() {
+      const saved = localStorage.getItem('lang') || 'ko';
+      setLang(saved);
+    })();
+    // ────────────────────────────────────────────────────────────────
     function syncViewW(){
       const hash = window.location.hash;
-      if (hash === '#sg') showView('sg');
-      else if (hash === '#nu') showView('nu');
-      else if (hash === '#resume') showView('resume');
-      else showView('home');
-    }
-    window.addEventListener('DOMContentLoaded', syncViewW);
-    </script>
-</body>
-</html>
+      if (hash === '#sg')
