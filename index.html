@@ -1158,6 +1158,21 @@
       margin: 0 auto;
       padding: 0 24px;
     }
+
+    #view-articles,
+    #view-articles-en {
+      width: 100%;
+      padding-top: 104px !important;
+      min-height: auto !important;
+      height: auto !important;
+      background: #fff;
+    }
+    #view-articles .resume-topbar,
+    #view-articles-en .resume-topbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
     #view-resume-en .resume-shell {
       max-width: 720px;
       margin: 0 auto;
@@ -9189,6 +9204,12 @@ Back to Top
 <!-- Articles View (KR) -->
 <!-- ════════════════════════════════════════════════════════ -->
 <div id="view-articles" style="display:none">
+<div class="resume-topbar pt-2 pb-2">
+  <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home')">
+    <span class="material-symbols-outlined !text-[18px]">arrow_back</span>
+    Back to Home
+  </button>
+</div>
 <div class="mx-auto max-w-container px-6">
 
 <!-- Header -->
@@ -9489,6 +9510,12 @@ Back to Top
 <!-- Articles View (EN) -->
 <!-- ════════════════════════════════════════════════════════ -->
 <div id="view-articles-en" style="display:none">
+<div class="resume-topbar pt-2 pb-2">
+  <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home-en')">
+    <span class="material-symbols-outlined !text-[18px]">arrow_back</span>
+    Back to Home
+  </button>
+</div>
 <div class="mx-auto max-w-container px-6">
 
 <!-- Header -->
