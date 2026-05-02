@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -1798,9 +1797,9 @@ class="block w-full h-full object-cover"
           </div>
           <p class="font-display font-bold text-[16px] text-[#1F1F2B]">체크메이트 2026</p>
           <div class="flex gap-5 mt-2.5">
-            <div><p class="font-bold text-[14px] text-text-secondary">TBU</p><p class="text-[11px] text-text-secondary">전환</p></div>
-            <div><p class="font-bold text-[14px] text-text-secondary">TBU</p><p class="text-[11px] text-text-secondary">CPI</p></div>
-            <div><p class="font-bold text-[14px] text-text-secondary">TBU</p><p class="text-[11px] text-text-secondary">ROI</p></div>
+            <div><p class="font-bold text-[14px] text-text-secondary">₩443</p><p class="text-[11px] text-text-secondary">CPI</p></div>
+            <div><p class="font-bold text-[14px] text-text-secondary">409%</p><p class="text-[11px] text-text-secondary">BEP 대비</p></div>
+            <div><p class="font-bold text-[14px] text-text-secondary">3,449%</p><p class="text-[11px] text-text-secondary">iROAS</p></div>
           </div>
         </div>
         <span class="material-symbols-outlined !text-[20px] text-text-secondary transition-transform duration-300 flex-shrink-0 mt-1" id="icon-app">expand_more</span>
@@ -1825,7 +1824,11 @@ class="block w-full h-full object-cover"
             </div>
             <div>
               <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">Result</p>
-              <p class="text-[13px] leading-[1.8] text-text-secondary italic">TBU — 진행 중</p>
+              <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
+                <li>CPI <strong class="text-text-primary">₩443</strong> (경품비 포함, 1월 대비 66% 절감)</li>
+                <li>BEP 대비 <strong class="text-text-primary">409%</strong> · AMBITIOUS 시나리오 상회</li>
+                <li>iROAS <strong class="text-text-primary">3,449%</strong></li>
+              </ul>
             </div>
           </div>
 
@@ -1899,6 +1902,96 @@ class="block w-full h-full object-cover"
             });
           }
           </script>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Card 1-B: 1월 앱 다운로드 (Pilot) ── -->
+    <div class="rounded-[14px] border border-border bg-white overflow-hidden">
+      <button class="w-full text-left px-5 py-4 flex items-start justify-between gap-4" onclick="togglePromo('app2')">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary bg-[#F8F8F8] px-2 py-0.5 rounded-full">앱 다운로드</span>
+            <span class="font-mono text-[11px] text-text-secondary">2026.01 · 기여도 100%</span>
+          </div>
+          <p class="font-display font-bold text-[16px] text-[#1F1F2B]">숨고 앱 다운로드 이벤트</p>
+          <div class="flex gap-5 mt-2.5">
+            <div><p class="font-bold text-[14px] text-text-secondary">₩1,300</p><p class="text-[11px] text-text-secondary">CPI</p></div>
+            <div><p class="font-bold text-[14px] text-text-secondary">163%</p><p class="text-[11px] text-text-secondary">BEP 대비</p></div>
+            <div><p class="font-bold text-[14px] text-text-secondary">1,176%</p><p class="text-[11px] text-text-secondary">iROAS</p></div>
+          </div>
+        </div>
+        <span class="material-symbols-outlined !text-[20px] text-text-secondary transition-transform duration-300 flex-shrink-0 mt-1" id="icon-app2">expand_more</span>
+      </button>
+
+      <div class="overflow-hidden transition-all duration-500 ease-in-out" id="detail-app2" style="max-height:0">
+        <div class="border-t border-border">
+
+          <div class="px-5 pt-4 pb-3 space-y-3">
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">Background</p>
+              <p class="text-[13px] leading-[1.8] text-text-secondary">앱 다운로드 이벤트의 첫 시도로, <strong class="text-text-primary">유저 접속 시 인앱 모달만 노출하는 최소 스펙</strong>으로 진행했습니다. 별도 이벤트 페이지·랜딩 없이 측정 로직과 경품 구조의 유효성을 빠르게 검증하는 것이 목표였습니다.</p>
+            </div>
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">Execution</p>
+              <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
+                <li>대상: 앱 미설치/삭제 고객 (2025년 이후 가입자)</li>
+                <li>친구톡 6차 + 인앱 모달 4종 자동 운영</li>
+                <li>경품: PS5 / 다이슨 에어랩 / 로보락 청소기 — 다운로드 자동 응모</li>
+                <li>주차별 세그먼트 고도화로 Direct CVR 0.04% → 0.57%까지 학습</li>
+                <li>플로우: 상품 모달 → 앱스토어 → 다운로드 → Airbridge 트래킹 매칭 → 응모 완료 모달 자동 노출</li>
+              </ul>
+            </div>
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">Result</p>
+              <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
+                <li>CPI <strong class="text-text-primary">₩1,300</strong> (경품비 포함)</li>
+                <li>BEP 대비 <strong class="text-text-primary">163%</strong></li>
+                <li>iROAS <strong class="text-text-primary">1,176%</strong></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="px-5 pb-5">
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-3">Creative — 인앱 모달</p>
+
+            <div class="flex gap-2 mb-4 flex-wrap" id="app2-tabs">
+              <button onclick="switchPromoTab('app2','m1')" id="app2-tab-m1" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-black bg-black text-white transition-all">PS5</button>
+              <button onclick="switchPromoTab('app2','m2')" id="app2-tab-m2" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-border text-text-secondary hover:border-black hover:text-black transition-all">에어랩</button>
+              <button onclick="switchPromoTab('app2','m3')" id="app2-tab-m3" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-border text-text-secondary hover:border-black hover:text-black transition-all">로보락</button>
+              <button onclick="switchPromoTab('app2','m4')" id="app2-tab-m4" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-border text-text-secondary hover:border-black hover:text-black transition-all">응모 완료</button>
+            </div>
+
+            <div id="app2-panel-m1">
+              <div class="rounded-[12px] border border-border overflow-hidden bg-[#F8F8F8] flex justify-center">
+                <img src="assets/promotion/appinstall2601/iam_ps5.png" alt="PS5 경품 IAM 모달" class="block max-h-[420px] w-auto"/>
+              </div>
+              <p class="text-[11px] text-text-secondary mt-2 font-mono">PS5 — 다운로드 유도 IAM</p>
+            </div>
+
+            <div id="app2-panel-m2" style="display:none">
+              <div class="rounded-[12px] border border-border overflow-hidden bg-[#F8F8F8] flex justify-center">
+                <img src="assets/promotion/appinstall2601/iam_airwrap.png" alt="에어랩 경품 IAM 모달" class="block max-h-[420px] w-auto"/>
+              </div>
+              <p class="text-[11px] text-text-secondary mt-2 font-mono">다이슨 에어랩 — 다운로드 유도 IAM</p>
+            </div>
+
+            <div id="app2-panel-m3" style="display:none">
+              <div class="rounded-[12px] border border-border overflow-hidden bg-[#F8F8F8] flex justify-center">
+                <img src="assets/promotion/appinstall2601/iam_roborock.png" alt="로보락 경품 IAM 모달" class="block max-h-[420px] w-auto"/>
+              </div>
+              <p class="text-[11px] text-text-secondary mt-2 font-mono">로보락 청소기 — 다운로드 유도 IAM</p>
+            </div>
+
+            <div id="app2-panel-m4" style="display:none">
+              <div class="rounded-[12px] border border-border overflow-hidden bg-[#F8F8F8] flex justify-center">
+                <img src="assets/promotion/appinstall2601/iam_complete.png" alt="응모 완료 IAM 모달" class="block max-h-[420px] w-auto"/>
+              </div>
+              <p class="text-[11px] text-text-secondary mt-2 font-mono">응모 완료 — 다운로드 직후 자동 응모 안내</p>
+            </div>
+
+          </div>
 
         </div>
       </div>
@@ -2488,9 +2581,9 @@ class="block w-full h-full object-cover"
           </div>
           <p class="font-display font-bold text-[16px] text-[#1F1F2B]">Checkmate 2026</p>
           <div class="flex gap-5 mt-2.5">
-            <div><p class="font-bold text-[14px] text-text-secondary">TBU</p><p class="text-[11px] text-text-secondary">CVR</p></div>
-            <div><p class="font-bold text-[14px] text-text-secondary">TBU</p><p class="text-[11px] text-text-secondary">CPI</p></div>
-            <div><p class="font-bold text-[14px] text-text-secondary">TBU</p><p class="text-[11px] text-text-secondary">ROI</p></div>
+            <div><p class="font-bold text-[14px] text-text-secondary">₩443</p><p class="text-[11px] text-text-secondary">CPI</p></div>
+            <div><p class="font-bold text-[14px] text-text-secondary">409%</p><p class="text-[11px] text-text-secondary">vs BEP</p></div>
+            <div><p class="font-bold text-[14px] text-text-secondary">3,449%</p><p class="text-[11px] text-text-secondary">iROAS</p></div>
           </div>
         </div>
         <span class="material-symbols-outlined !text-[20px] text-text-secondary transition-transform duration-300 flex-shrink-0 mt-1" id="icon-app">expand_more</span>
@@ -2515,7 +2608,11 @@ class="block w-full h-full object-cover"
             </div>
             <div>
               <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">Result</p>
-              <p class="text-[13px] leading-[1.8] text-text-secondary italic">TBU — In progress</p>
+              <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
+                <li>CPI <strong class="text-text-primary">₩443</strong> (incl. prize cost, 66% reduction vs January)</li>
+                <li><strong class="text-text-primary">409%</strong> vs BEP · exceeds AMBITIOUS scenario</li>
+                <li>iROAS <strong class="text-text-primary">3,449%</strong></li>
+              </ul>
             </div>
           </div>
 
@@ -2589,6 +2686,96 @@ class="block w-full h-full object-cover"
             });
           }
           </script>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Card 1-B: January App Download (Pilot) ── -->
+    <div class="rounded-[14px] border border-border bg-white overflow-hidden">
+      <button class="w-full text-left px-5 py-4 flex items-start justify-between gap-4" onclick="togglePromo('app2')">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary bg-[#F8F8F8] px-2 py-0.5 rounded-full">App Download</span>
+            <span class="font-mono text-[11px] text-text-secondary">2026.01 · 100% contribution</span>
+          </div>
+          <p class="font-display font-bold text-[16px] text-[#1F1F2B]">Soomgo App Download Event</p>
+          <div class="flex gap-5 mt-2.5">
+            <div><p class="font-bold text-[14px] text-text-secondary">₩1,300</p><p class="text-[11px] text-text-secondary">CPI</p></div>
+            <div><p class="font-bold text-[14px] text-text-secondary">163%</p><p class="text-[11px] text-text-secondary">vs BEP</p></div>
+            <div><p class="font-bold text-[14px] text-text-secondary">1,176%</p><p class="text-[11px] text-text-secondary">iROAS</p></div>
+          </div>
+        </div>
+        <span class="material-symbols-outlined !text-[20px] text-text-secondary transition-transform duration-300 flex-shrink-0 mt-1" id="icon-app2">expand_more</span>
+      </button>
+
+      <div class="overflow-hidden transition-all duration-500 ease-in-out" id="detail-app2" style="max-height:0">
+        <div class="border-t border-border">
+
+          <div class="px-5 pt-4 pb-3 space-y-3">
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">Background</p>
+              <p class="text-[13px] leading-[1.8] text-text-secondary">The first attempt at an app-download event, built as a <strong class="text-text-primary">minimum-spec run with only an in-app modal shown on user visit</strong>. No separate event page or landing — the goal was to validate the measurement logic and prize structure as quickly as possible.</p>
+            </div>
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">Execution</p>
+              <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
+                <li>Target: customers without the app or who deleted it (post-2025 signups)</li>
+                <li>6 FriendTalk waves + 4 in-app modals on auto-pilot</li>
+                <li>Prizes: PS5 / Dyson Airwrap / Roborock vacuum — auto-entry on app install</li>
+                <li>Weekly segmentation refinement lifted Direct CVR from 0.04% to 0.57%</li>
+                <li>Flow: prize modal → App Store → install → Airbridge tracking match → entry-complete modal auto-shown</li>
+              </ul>
+            </div>
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">Result</p>
+              <ul class="text-[13px] leading-[1.8] text-text-secondary list-disc list-outside ml-4 space-y-0.5">
+                <li>CPI <strong class="text-text-primary">₩1,300</strong> (incl. prize cost)</li>
+                <li><strong class="text-text-primary">163%</strong> vs BEP</li>
+                <li>iROAS <strong class="text-text-primary">1,176%</strong></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="px-5 pb-5">
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-3">Creative — In-App Modals</p>
+
+            <div class="flex gap-2 mb-4 flex-wrap" id="app2-tabs">
+              <button onclick="switchPromoTab('app2','m1')" id="app2-tab-m1" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-black bg-black text-white transition-all">PS5</button>
+              <button onclick="switchPromoTab('app2','m2')" id="app2-tab-m2" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-border text-text-secondary hover:border-black hover:text-black transition-all">Airwrap</button>
+              <button onclick="switchPromoTab('app2','m3')" id="app2-tab-m3" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-border text-text-secondary hover:border-black hover:text-black transition-all">Roborock</button>
+              <button onclick="switchPromoTab('app2','m4')" id="app2-tab-m4" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-border text-text-secondary hover:border-black hover:text-black transition-all">Entry Done</button>
+            </div>
+
+            <div id="app2-panel-m1">
+              <div class="rounded-[12px] border border-border overflow-hidden bg-[#F8F8F8] flex justify-center">
+                <img src="assets/promotion/appinstall2601/iam_ps5.png" alt="PS5 prize IAM modal" class="block max-h-[420px] w-auto"/>
+              </div>
+              <p class="text-[11px] text-text-secondary mt-2 font-mono">PS5 — download-prompt IAM</p>
+            </div>
+
+            <div id="app2-panel-m2" style="display:none">
+              <div class="rounded-[12px] border border-border overflow-hidden bg-[#F8F8F8] flex justify-center">
+                <img src="assets/promotion/appinstall2601/iam_airwrap.png" alt="Airwrap prize IAM modal" class="block max-h-[420px] w-auto"/>
+              </div>
+              <p class="text-[11px] text-text-secondary mt-2 font-mono">Dyson Airwrap — download-prompt IAM</p>
+            </div>
+
+            <div id="app2-panel-m3" style="display:none">
+              <div class="rounded-[12px] border border-border overflow-hidden bg-[#F8F8F8] flex justify-center">
+                <img src="assets/promotion/appinstall2601/iam_roborock.png" alt="Roborock prize IAM modal" class="block max-h-[420px] w-auto"/>
+              </div>
+              <p class="text-[11px] text-text-secondary mt-2 font-mono">Roborock vacuum — download-prompt IAM</p>
+            </div>
+
+            <div id="app2-panel-m4" style="display:none">
+              <div class="rounded-[12px] border border-border overflow-hidden bg-[#F8F8F8] flex justify-center">
+                <img src="assets/promotion/appinstall2601/iam_complete.png" alt="Entry-complete IAM modal" class="block max-h-[420px] w-auto"/>
+              </div>
+              <p class="text-[11px] text-text-secondary mt-2 font-mono">Entry complete — auto-entry confirmation post-install</p>
+            </div>
+
+          </div>
 
         </div>
       </div>
