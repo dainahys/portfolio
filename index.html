@@ -1750,6 +1750,7 @@
 <a class="text-sm font-medium text-text-secondary hover:text-black transition-colors" href="#about" onclick="showView('home');">About</a>
 <a class="text-sm font-medium text-text-secondary hover:text-black transition-colors" href="#work" onclick="showView('home');">Portfolio</a>
 <a class="text-sm font-medium text-text-secondary hover:text-black transition-colors" href="#resume" onclick="showView('resume');return false;">Resume</a>
+<a class="text-sm font-medium text-text-secondary hover:text-black transition-colors" href="#articles" onclick="showView('articles');return false;">Articles</a>
 </nav>
 <button class="hidden sm:flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-black transition-colors" onclick="showView('home'); document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
             Contact
@@ -9184,6 +9185,56 @@ Back to Top
 </div>
 
 
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- Articles View (KR) -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div id="view-articles" style="display:none">
+<div class="mx-auto max-w-container px-6">
+
+<!-- Header -->
+<section class="pt-section-m md:pt-section pb-12 md:pb-16">
+  <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-text-secondary mb-4">Articles</p>
+  <h1 class="font-display font-bold text-[40px] md:text-[52px] leading-[1.1] tracking-[-0.02em] text-text-primary mb-5">
+    Articles
+  </h1>
+  <p class="text-[15px] md:text-[17px] leading-[1.8] text-text-secondary max-w-md">
+    실무에서 만든 시스템과 거기서 배운 것들을 정리합니다.<br class="hidden md:block"/>마케팅 자동화, CRM 실험, 데이터 인프라 — 직접 만들고 운영한 사례를 코드와 함께 기록합니다.
+  </p>
+</section>
+
+<!-- Divider -->
+<div class="border-t border-border"></div>
+
+<!-- Article List -->
+<section class="pb-section-m md:pb-section">
+
+  <!-- ── Article 1 ── -->
+  <a href="articles/braze/iam-modal/" class="group block py-8 md:py-10 border-b border-border hover:border-black/20 transition-colors duration-300">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="font-mono text-[10px] text-text-secondary tracking-[0.05em]">2026.05.02</span>
+      <span class="inline-block bg-[#F4F2EC] text-text-secondary text-[10px] font-mono font-medium px-2 py-0.5 rounded-[3px] tracking-[0.04em]">Guide</span>
+      <span class="font-mono text-[10px] text-text-secondary">· 8 min read</span>
+    </div>
+    <h2 class="font-display font-bold text-[22px] md:text-[24px] leading-[1.35] tracking-[-0.01em] text-text-primary mb-2 group-hover:text-black/70 transition-colors">
+      Braze Custom HTML IAM 구현 가이드 — brazeBridge로 인터랙티브 모달 만들기
+    </h2>
+    <p class="text-[14px] leading-[1.7] text-text-secondary mb-4 max-w-[680px]">
+      약관 동의 → 드래그앤드롭 게임 → 경품 추첨까지 단일 모달에서 처리하는 다단계 IAM을 brazeBridge API로 구현한 실전 기록과 코드.
+    </p>
+    <div class="flex flex-wrap gap-1.5">
+      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Braze</span>
+      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">brazeBridge</span>
+      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Liquid</span>
+      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">HTML/JS</span>
+    </div>
+  </a>
+
+</section>
+
+</div>
+</div>
+
+
 <div id="view-resume-en" style="display:none">
 <div class="resume-topbar pt-2 pb-2">
   <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home-en')">
@@ -9432,6 +9483,56 @@ Back to Top
 
 </div>
 
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- Articles View (EN) -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div id="view-articles-en" style="display:none">
+<div class="mx-auto max-w-container px-6">
+
+<!-- Header -->
+<section class="pt-section-m md:pt-section pb-12 md:pb-16">
+  <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-text-secondary mb-4">Articles</p>
+  <h1 class="font-display font-bold text-[40px] md:text-[52px] leading-[1.1] tracking-[-0.02em] text-text-primary mb-5">
+    Articles
+  </h1>
+  <p class="text-[15px] md:text-[17px] leading-[1.8] text-text-secondary max-w-md">
+    Notes on systems I've built and what I've learned from them.<br class="hidden md:block"/>Marketing automation, CRM experiments, data infrastructure — real cases with code, written from hands-on experience.
+  </p>
+</section>
+
+<!-- Divider -->
+<div class="border-t border-border"></div>
+
+<!-- Article List -->
+<section class="pb-section-m md:pb-section">
+
+  <!-- ── Article 1 ── -->
+  <a href="articles/braze/iam-modal/" class="group block py-8 md:py-10 border-b border-border hover:border-black/20 transition-colors duration-300">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="font-mono text-[10px] text-text-secondary tracking-[0.05em]">2026.05.02</span>
+      <span class="inline-block bg-[#F4F2EC] text-text-secondary text-[10px] font-mono font-medium px-2 py-0.5 rounded-[3px] tracking-[0.04em]">Guide</span>
+      <span class="font-mono text-[10px] text-text-secondary">· 8 min read</span>
+    </div>
+    <h2 class="font-display font-bold text-[22px] md:text-[24px] leading-[1.35] tracking-[-0.01em] text-text-primary mb-2 group-hover:text-black/70 transition-colors">
+      Braze Custom HTML IAM — Building Interactive Modals with brazeBridge
+    </h2>
+    <p class="text-[14px] leading-[1.7] text-text-secondary mb-4 max-w-[680px]">
+      A real-world record (and the code) of building a multi-step IAM that handles consent → drag-and-drop game → prize draw in a single modal using the brazeBridge API.
+    </p>
+    <div class="flex flex-wrap gap-1.5">
+      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Braze</span>
+      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">brazeBridge</span>
+      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Liquid</span>
+      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">HTML/JS</span>
+    </div>
+  </a>
+
+</section>
+
+</div>
+</div>
+
 <footer class="mt-auto border-t border-border bg-white py-12">
 <div class="max-w-container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
 <div class="text-text-secondary text-sm font-mono">© 2026 Hayeon Song. All rights reserved.</div>
@@ -9483,10 +9584,12 @@ Back to Top
         sg:   document.getElementById('view-sg'),
         nu:   document.getElementById('view-nu'),
         resume: document.getElementById('view-resume'),
+        articles: document.getElementById('view-articles'),
         'home-en': document.getElementById('view-home-en'),
         'sg-en':   document.getElementById('view-sg-en'),
         'nu-en':   document.getElementById('view-nu-en'),
         'resume-en': document.getElementById('view-resume-en'),
+        'articles-en': document.getElementById('view-articles-en'),
       };
       const main = document.querySelector('main');
       const pageShell = document.querySelector('body > div.relative');
@@ -9495,8 +9598,8 @@ Back to Top
         if (views[k]) views[k].style.display = (k === which) ? 'block' : 'none';
       });
 
-      // Hide main when showing views that live outside it (resume, nu-en, resume-en, etc.)
-      const viewsOutsideMain = ['resume', 'resume-en', 'nu-en'];
+      // Hide main when showing views that live outside it (resume, nu-en, resume-en, articles, etc.)
+      const viewsOutsideMain = ['resume', 'resume-en', 'nu-en', 'articles', 'articles-en'];
       const isOutsideMain = viewsOutsideMain.includes(which);
       main.style.display = isOutsideMain ? 'none' : '';
       if (pageShell) {
@@ -9506,8 +9609,8 @@ Back to Top
       window.scrollTo(0,0);
 
       const hashMap = {
-        home: '#home', sg: '#sg', nu: '#nu', resume: '#resume',
-        'home-en': '#home-en', 'sg-en': '#sg-en', 'nu-en': '#nu-en', 'resume-en': '#resume-en'
+        home: '#home', sg: '#sg', nu: '#nu', resume: '#resume', articles: '#articles',
+        'home-en': '#home-en', 'sg-en': '#sg-en', 'nu-en': '#nu-en', 'resume-en': '#resume-en', 'articles-en': '#articles-en'
       };
       const nextHash = hashMap[which] || '#home';
       // skipHistory가 true면 popstate에서 호출된 것이므로 history 갱신하지 않음
@@ -9516,7 +9619,7 @@ Back to Top
       }
 
       // Track current language
-      const enViews = ['home-en','sg-en','nu-en','resume-en'];
+      const enViews = ['home-en','sg-en','nu-en','resume-en','articles-en'];
       if (enViews.includes(which)) {
         currentLang = 'en';
       } else {
@@ -9539,12 +9642,12 @@ Back to Top
     let currentLang = 'ko';
 
     const langPairs = {
-      'home': 'home-en', 'sg': 'sg-en', 'nu': 'nu-en', 'resume': 'resume-en',
-      'home-en': 'home', 'sg-en': 'sg', 'nu-en': 'nu', 'resume-en': 'resume'
+      'home': 'home-en', 'sg': 'sg-en', 'nu': 'nu-en', 'resume': 'resume-en', 'articles': 'articles-en',
+      'home-en': 'home', 'sg-en': 'sg', 'nu-en': 'nu', 'resume-en': 'resume', 'articles-en': 'articles'
     };
 
     function getCurrentView() {
-      const allViews = ['home','sg','nu','resume','home-en','sg-en','nu-en','resume-en'];
+      const allViews = ['home','sg','nu','resume','articles','home-en','sg-en','nu-en','resume-en','articles-en'];
       for (const v of allViews) {
         const el = document.getElementById('view-' + v);
         if (el && el.style.display !== 'none') return v;
@@ -9624,10 +9727,12 @@ Back to Top
       if (hash === '#sg') showView('sg');
       else if (hash === '#nu') showView('nu');
       else if (hash === '#resume') showView('resume');
+      else if (hash === '#articles') showView('articles');
       else if (hash === '#home-en') { currentLang = 'en'; showView('home-en'); }
       else if (hash === '#sg-en') { currentLang = 'en'; showView('sg-en'); }
       else if (hash === '#nu-en') { currentLang = 'en'; showView('nu-en'); }
       else if (hash === '#resume-en') { currentLang = 'en'; showView('resume-en'); }
+      else if (hash === '#articles-en') { currentLang = 'en'; showView('articles-en'); }
       else showView('home');
       
       // Apply inline translations based on current lang
@@ -9639,7 +9744,7 @@ Back to Top
     // 브라우저 뒤로/앞으로 버튼 대응 (DOMContentLoaded 이후 동작)
     window.addEventListener('popstate', function(e){
       const hash = window.location.hash.replace('#','') || 'home';
-      const validViews = ['home','sg','nu','resume','home-en','sg-en','nu-en','resume-en'];
+      const validViews = ['home','sg','nu','resume','articles','home-en','sg-en','nu-en','resume-en','articles-en'];
       const target = validViews.includes(hash) ? hash : 'home';
       showView(target, true);
     });
