@@ -9449,28 +9449,6 @@ Back to Top
       updateNavLinks();
     }
 
-    // 브라우저 뒤로/앞으로 버튼 대응
-    window.addEventListener('popstate', function(e){
-      // hash로부터 view 이름 추출 (예: '#sg' → 'sg')
-      const hash = window.location.hash.replace('#','') || 'home';
-      const validViews = ['home','sg','nu','resume','home-en','sg-en','nu-en','resume-en'];
-      const target = validViews.includes(hash) ? hash : 'home';
-      // skipHistory=true: history 갱신 없이 view만 전환
-      showView(target, true);
-    });
-
-    // 페이지 첫 로드 시 hash로부터 초기 view 결정
-    (function initFromHash(){
-      const hash = window.location.hash.replace('#','');
-      const validViews = ['home','sg','nu','resume','home-en','sg-en','nu-en','resume-en'];
-      if (hash && validViews.includes(hash)) {
-        showView(hash, true);
-      } else {
-        // 초기 진입 시 history state 설정 (뒤로가기가 첫 entry로 잘 작동하도록)
-        history.replaceState({ view: 'home' }, '', '#home');
-      }
-    })();
-
     function openSoonModal(){
       document.getElementById('soonModal').classList.remove('hidden');
       document.body.style.overflow = 'hidden';
@@ -9580,6 +9558,20 @@ Back to Top
     }
 
     window.addEventListener('DOMContentLoaded', syncViewW);
+
+    // 브라우저 뒤로/앞으로 버튼 대응 (DOMContentLoaded 이후 동작)
+    window.addEventListener('popstate', function(e){
+      const hash = window.location.hash.replace('#','') || 'home';
+      const validViews = ['home','sg','nu','resume','home-en','sg-en','nu-en','resume-en'];
+      const target = validViews.includes(hash) ? hash : 'home';
+      showView(target, true);
+    });
+
+    // 초기 진입 시 history state 시드 (뒤로가기 entry 안정화)
+    if (!history.state) {
+      const initHash = window.location.hash || '#home';
+      history.replaceState({ view: initHash.replace('#','') || 'home' }, '', initHash);
+    }
     </script>
 </body>
 </html>
