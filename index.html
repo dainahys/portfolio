@@ -2302,16 +2302,13 @@ function closePromoModal() {
   document.body.style.overflow = '';
 }
 function togglePromo(id) {
-  const detail = document.getElementById('detail-' + id);
-  const icon = document.getElementById('icon-' + id);
-  const isOpen = detail.style.maxHeight !== '0px' && detail.style.maxHeight !== '';
-  if (isOpen) {
-    detail.style.maxHeight = '0';
-    icon.style.transform = 'rotate(0deg)';
-  } else {
-    detail.style.maxHeight = '9999px';
-    icon.style.transform = 'rotate(180deg)';
-  }
+  const details = document.querySelectorAll('#detail-' + id);
+  const icons = document.querySelectorAll('#icon-' + id);
+  if (!details.length) return;
+  // Determine current state from the first match (KO/EN duplicates share state)
+  const isOpen = details[0].style.maxHeight !== '0px' && details[0].style.maxHeight !== '';
+  details.forEach(d => { d.style.maxHeight = isOpen ? '0' : '9999px'; });
+  icons.forEach(i => { i.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)'; });
 }
 </script>
 <div class="group rounded-[20px] border bordered bg-white/5 overflow-hidden hover:bg-white/10 transition-colors cursor-pointer" onclick="openLeadModal()">
@@ -3197,16 +3194,13 @@ function closePromoModal() {
   document.body.style.overflow = '';
 }
 function togglePromo(id) {
-  const detail = document.getElementById('detail-' + id);
-  const icon = document.getElementById('icon-' + id);
-  const isOpen = detail.style.maxHeight !== '0px' && detail.style.maxHeight !== '';
-  if (isOpen) {
-    detail.style.maxHeight = '0';
-    icon.style.transform = 'rotate(0deg)';
-  } else {
-    detail.style.maxHeight = '9999px';
-    icon.style.transform = 'rotate(180deg)';
-  }
+  const details = document.querySelectorAll('#detail-' + id);
+  const icons = document.querySelectorAll('#icon-' + id);
+  if (!details.length) return;
+  // Determine current state from the first match (KO/EN duplicates share state)
+  const isOpen = details[0].style.maxHeight !== '0px' && details[0].style.maxHeight !== '';
+  details.forEach(d => { d.style.maxHeight = isOpen ? '0' : '9999px'; });
+  icons.forEach(i => { i.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)'; });
 }
 </script>
 <div class="group rounded-[20px] border bordered bg-white/5 overflow-hidden hover:bg-white/10 transition-colors cursor-pointer" onclick="openLeadModal()">
