@@ -463,11 +463,11 @@ const App = () => {
 
   const MOCK_CONFIGS = {
     calc: [
-      {id:'count', label:'현재 건수', opts:['0','2','3','5','6','10','11','15'], val:String(mockCount), set:v=>{setMockCount(Number(v));setMockSum(Number(v)*900);}},
+      {id:'count', label:'현재 건수', opts:['0','2','3','5','6','10','11','15'], val:String(mockCount), set:v=>{setMockCount(Number(v));setMockSum(Number(v)*900);addLog({kind:'mock',msg:`MOCK 변경 — 현재 건수: ${v}건`});}},
     ],
     quote: [
-      {id:'count', label:'발송 후 건수', opts:['3','6','11','16','21','26','31','5','8'], val:String(mockCount), set:v=>{setMockCount(Number(v));setMockSum(Number(v)*900);}},
-      {id:'price', label:'견적 금액', opts:['1000','3000','5000','10000'], val:String(mockPrice), set:v=>setMockPrice(Number(v))},
+      {id:'count', label:'발송 후 건수', opts:['3','6','11','16','21','26','31','5','8'], val:String(mockCount), set:v=>{setMockCount(Number(v));setMockSum(Number(v)*900);addLog({kind:'mock',msg:`MOCK 변경 — 발송 후 건수: ${v}건${TIER_JUMPS.includes(Number(v))?' (구간 점프 ✅)':' (점프 없음)'}`});}},
+      {id:'price', label:'견적 금액', opts:['1000','3000','5000','10000'], val:String(mockPrice), set:v=>{setMockPrice(Number(v));addLog({kind:'mock',msg:`MOCK 변경 — 견적 금액: ${Number(v).toLocaleString()}원`});}},
     ],
   };
   const mocks = MOCK_CONFIGS[tab] || [];
