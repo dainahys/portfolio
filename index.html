@@ -9482,6 +9482,7 @@ Back to Top
   </div>
 
 </div>
+</div>
 
 
 <!-- ════════════════════════════════════════════════════════ -->
@@ -9690,6 +9691,9 @@ Back to Top
         } else if (text === 'Resume') {
           a.setAttribute('onclick', "showView('resume" + suffix + "');return false;");
           a.setAttribute('href', '#resume' + suffix);
+        } else if (text === 'Articles') {
+          a.setAttribute('onclick', "showView('articles" + suffix + "');return false;");
+          a.setAttribute('href', '#articles' + suffix);
         }
       });
       // Update logo
