@@ -2229,12 +2229,12 @@ function togglePromo(id) {
 <!-- Growth Infra Modal -->
 <div class="hidden fixed inset-0 z-[100]" id="growthModal">
   <div class="absolute inset-0 backdrop" onclick="closeGrowthModal()"></div>
-  <div class="relative mx-auto mt-10 w-[96%] max-w-[720px] rounded-[16px] bg-white border border-border shadow-lift flex flex-col" style="max-height:88vh">
+  <div class="relative mx-auto mt-10 w-[96%] max-w-[760px] rounded-[16px] bg-white border border-border shadow-lift flex flex-col" style="max-height:88vh">
 
     <div class="flex items-start justify-between gap-4 px-6 pt-6 pb-4 border-b border-border flex-shrink-0">
       <div>
         <p class="font-mono text-xs text-text-secondary uppercase tracking-wider">Growth Infra</p>
-        <h3 class="font-display font-bold text-[20px] leading-[1.35] mt-1">마케팅 자동화·데이터 파이프라인 구축</h3>
+        <h3 class="font-display font-bold text-[20px] leading-[1.35] mt-1">"실험 → 액션 → 검증"의 운영 루프를 자동화 시스템으로</h3>
       </div>
       <button aria-label="Close" class="text-text-secondary hover:text-black transition-colors flex-shrink-0 mt-1" onclick="closeGrowthModal()">
         <span class="material-symbols-outlined">close</span>
@@ -2243,77 +2243,167 @@ function togglePromo(id) {
 
     <div class="overflow-y-auto flex-1 px-6 py-5 space-y-5">
 
-      <!-- ① CRM 대시보드 자동화 -->
+      <!-- Hero / Intro -->
+      <div class="rounded-[12px] border border-border bg-[#FAFAFA] px-4 py-4 space-y-3">
+        <p class="text-[13px] leading-[1.8] text-text-secondary">
+          마케팅 실행에는 동일한 작업의 반복이 많습니다. 매일 지표를 들여다보고, 이상 신호를 발견하고, 액션을 실행하고, 효과를 검증하는 사이클이 매번 사람의 손을 거치면 누락·지연·기준 차이가 누적되고, 결국 분석과 실험에 쓸 수 있는 시간이 줄어 실험의 속도가 느려집니다.
+        </p>
+        <p class="text-[13px] leading-[1.8] text-text-secondary">
+          <strong class="text-text-primary">BigQuery · n8n · Braze · Google Workspace</strong>를 조합해 모니터링부터 액션 검증까지의 운영 사이클을 자동화 가능한 구조로 정비했고, 매일 같은 기준으로 데이터를 보며 의사결정할 수 있는 환경을 만들었습니다.
+        </p>
+      </div>
+
+      <!-- 4-step framework label -->
+      <div class="flex items-center justify-center gap-2 flex-wrap text-[11px] font-mono text-text-secondary">
+        <span class="inline-flex items-center rounded-full border border-border bg-white px-2.5 py-1">① MONITOR</span>
+        <span>→</span>
+        <span class="inline-flex items-center rounded-full border border-border bg-white px-2.5 py-1">② DETECT</span>
+        <span>→</span>
+        <span class="inline-flex items-center rounded-full border border-border bg-white px-2.5 py-1">③ SCHEDULE</span>
+        <span>→</span>
+        <span class="inline-flex items-center rounded-full border border-border bg-white px-2.5 py-1">④ VERIFY</span>
+      </div>
+
+      <!-- ① MONITOR -->
       <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
         <div>
-          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">① CRM 성과 대시보드 자동화</p>
-          <p class="text-[13px] leading-[1.8] text-text-secondary">BigQuery + Google Apps Script + Looker Studio를 연동해 앱 푸시 캠페인 성과를 자동 집계하는 대시보드를 구축했습니다. 고수/고객 채널별로 Unique · CTR · CVR · Uplift를 일별·월별로 추적하며, 수동 집계 없이 실시간 모니터링이 가능한 구조를 만들었습니다.</p>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">① MONITOR</p>
+          <h4 class="font-display font-bold text-[15px] text-[#1F1F2B] mb-2">핵심 지표를 매일 자동으로 추출하고 알림</h4>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">매일 아침, n8n이 BigQuery에서 지표를 자동 추출해 Slack으로 발송합니다. 같은 시간에 동일한 기준의 리포트가 도착하기 때문에, 마케터는 더 이상 "오늘 어디까지 봐야 하지?"를 고민하지 않고 바로 분석에 들어갑니다.</p>
         </div>
-        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:240px;overflow-y:auto">
-          <img src="assets/growth-infra/growth-infra_chart.png" alt="마케팅 대시보드 자동화" class="w-full block"/>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:280px;overflow-y:auto">
+          <img src="assets/growth-infra/growth_infra_autonoti2.png" alt="n8n 워크플로 — BigQuery → Slack" class="w-full block"/>
+        </div>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:320px;overflow-y:auto">
+          <img src="assets/growth-infra/growth_infra_autonoti1.png" alt="Slack 자동 리포트 예시" class="w-full block"/>
         </div>
       </div>
 
-      <!-- ② 프로그램 운영 자동화 -->
+      <!-- ② DETECT -->
       <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
         <div>
-          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">② 프로그램 운영 자동화</p>
-          <p class="text-[13px] leading-[1.8] text-text-secondary">프로그램 신청 시 DB 자동 적재 → 마케팅 수신 동의 자동 변경 → 자동 메일 발송까지 이어지는 파이프라인을 구축했습니다. BigQuery SQL로 신청자 현황을 실시간 추출하고, Google Apps Script로 후속 액션을 자동화해 운영 공수를 최소화했습니다.</p>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">② DETECT</p>
+          <h4 class="font-display font-bold text-[15px] text-[#1F1F2B] mb-2">액션이 필요한 세그먼트를 바로 식별하도록 알림</h4>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">단순 수치 알림이 아니라, 핵심 지표를 세그먼트별 uplift%와 함께 정리해 보여줍니다. 어디서 효과가 나오고 어디서 막혔는지 빠르게 파악해 다음 액션을 결정할 수 있게 합니다. CG/TG 비교, 전체/Direct/Influenced 분리까지 자동으로 정리합니다.</p>
         </div>
-        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:260px;overflow-y:auto">
-          <img src="assets/growth-infra/growth-infra_operation.png" alt="프로그램 운영 자동화" class="w-full block"/>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:380px;overflow-y:auto">
+          <img src="assets/growth-infra/growth_infra_autonoti3.png" alt="n8n JS 코드 — 세그먼트별 uplift 자동 계산" class="w-full block"/>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:240px;overflow-y:auto">
+            <img src="assets/growth-infra/growth_infra_autochart1.png" alt="실제 분석 사례 — CG/TG uplift% 추이" class="w-full block"/>
+          </div>
+          <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:240px;overflow-y:auto">
+            <img src="assets/growth-infra/growth_infra_autochart2.png" alt="실제 분석 사례 — request 수 비교" class="w-full block"/>
+          </div>
         </div>
       </div>
 
-      <!-- ③ 프로모션 모니터링 자동화 + 시뮬레이터 -->
+      <!-- ③ SCHEDULE -->
       <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
         <div>
-          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">③ 프로모션 모니터링 자동화 & 시뮬레이터</p>
-          <p class="text-[13px] leading-[1.8] text-text-secondary">프로모션별 누적 성과를 자동 집계하는 대시보드와 간트차트 기반 타임라인을 구축했습니다. 또한 구간별 이동률·iROAS를 실시간으로 계산하는 HTML 인터랙티브 시뮬레이터를 직접 구현해 마케팅팀에서 동일한 기준으로 프로모션 관련 의사결정이 이루어지도록 개선했습니다.</p>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">③ SCHEDULE</p>
+          <h4 class="font-display font-bold text-[15px] text-[#1F1F2B] mb-2">예정·과거 액션을 캘린더로 한눈에</h4>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">결정된 액션은 Braze 캠페인·캔버스로 등록되고, 동일 워크플로우가 매일 오전 이를 Google Calendar 이벤트로 자동 동기화합니다. 예정·진행 중·완료된 액션이 같은 뷰에서 한눈에 보이기 때문에 팀 간 일정 공유가 쉬워지고 캠페인 충돌도 자연스럽게 방지됩니다.</p>
         </div>
-        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:260px;overflow-y:auto">
-          <img src="assets/growth-infra/growth-infra_promotion.png" alt="프로모션 모니터링 대시보드" class="w-full block"/>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:380px;overflow-y:auto">
+          <img src="assets/growth-infra/growth_infra_autocalendar.png" alt="n8n 워크플로 — Braze 캠페인을 Google Calendar로 자동 동기화" class="w-full block"/>
         </div>
       </div>
 
-      <!-- ④ Braze 인앱 설문 구현 -->
+      <!-- ④ VERIFY -->
       <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
         <div>
-          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">④ Braze Liquid 인앱 설문 구현</p>
-          <p class="text-[13px] leading-[1.8] text-text-secondary">Braze Custom HTML IAM + Liquid 문법을 활용해 유저 참여 이력에 따라 질문 분기가 달라지는 인앱 설문을 직접 구현했습니다. 응답 결과는 brazeBridge로 Custom Attribute에 즉시 적재해 CRM 세그먼트에 반영했습니다.</p>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">④ VERIFY</p>
+          <h4 class="font-display font-bold text-[15px] text-[#1F1F2B] mb-2">액션 후 결과 자동 검증</h4>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">액션이 적용된 시점을 기준으로 지표 변화와 uplift% 추이가 차트로 자동 노티되어, 액션 전후 효과를 시각적으로 즉시 검증할 수 있습니다. Looker Studio 기반 대시보드로 채널별·캠페인별 성과를 일별·월별로 추적하며, 그 결과는 다시 다음 실험의 가설로 이어집니다.</p>
         </div>
-        <div class="rounded-[8px] overflow-hidden border border-border">
-          <img src="assets/growth-infra/growth-infra_survey.png" alt="Braze 인앱 설문" class="w-full block"/>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:300px;overflow-y:auto">
+          <img src="assets/growth-infra/growth-infra_chart.png" alt="앱 푸시 캠페인 성과 대시보드 (Pro / Customer)" class="w-full block"/>
         </div>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:300px;overflow-y:auto">
+          <img src="assets/growth-infra/growth-infra_chart2.png" alt="대시보드 상세 — Monthly / Daily / Service 분석" class="w-full block"/>
+        </div>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:300px;overflow-y:auto">
+          <img src="assets/growth-infra/growth-infra_promotion.png" alt="프로모션 모니터링 대시보드 + 시뮬레이터" class="w-full block"/>
+        </div>
+        <p class="text-[12px] leading-[1.7] text-text-secondary mt-1">
+          프로모션 단위로는 누적 성과 대시보드와 간트차트 기반 타임라인을 별도로 구축했으며, 구간별 이동률·iROAS를 실시간으로 계산하는 HTML 인터랙티브 시뮬레이터를 직접 구현해 마케팅팀이 동일한 기준으로 의사결정할 수 있게 했습니다.
+        </p>
       </div>
 
-      <!-- ⑤ 데이터 파이프라인 → Braze 연동 -->
-      <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
+      <!-- ⑤ EXTEND -->
+      <div class="rounded-[12px] border border-border bg-[#FAFAFA] px-4 py-4 space-y-4">
         <div>
-          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">⑤ 데이터 파이프라인 → Braze 연동 기획</p>
-          <p class="text-[13px] leading-[1.8] text-text-secondary">BigQuery · Kafka · 클라이언트 이벤트 데이터를 Braze User Attribute로 전송하는 파이프라인을 기획했습니다. 고수의 스마트견적 캠페인 활성화/비활성화 상태를 실시간으로 Braze에 반영해 맞춤형 CRM 세그먼트 운영이 가능한 구조를 설계하고, 개발팀, 프로덕트팀과 협업을 진행했습니다.</p>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">⑤ EXTEND</p>
+          <h4 class="font-display font-bold text-[15px] text-[#1F1F2B] mb-2">자동화 위에서 추가로 한 일들</h4>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">기본 운영 루프가 안정화된 다음, 같은 시스템 위에서 데이터를 더 깊이 활용하기 위한 작업들을 추가로 진행했습니다.</p>
         </div>
-        <div class="flex flex-col gap-3">
+
+        <!-- ⑤-1 프로그램 운영 자동화 -->
+        <div class="rounded-[12px] border border-border bg-white px-4 py-4 space-y-3">
+          <div>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">⑤-1 프로그램 운영 자동화</p>
+            <p class="text-[13px] leading-[1.8] text-text-secondary">프로그램 신청 → DB 자동 적재 → 마케팅 수신 동의 자동 변경 → 자동 메일 발송으로 이어지는 파이프라인을 구축했습니다. BigQuery SQL로 신청자 현황을 실시간 추출하고, Google Apps Script로 후속 액션을 자동화해 운영 공수를 최소화했습니다.</p>
+          </div>
           <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:260px;overflow-y:auto">
-            <img src="assets/growth-infra/growth-infra_data-1.png" alt="데이터 파이프라인 Braze 연동 스펙" class="w-full block"/>
+            <img src="assets/growth-infra/growth-infra_operation.png" alt="프로그램 운영 자동화" class="w-full block"/>
+          </div>
+        </div>
+
+        <!-- ⑤-2 Braze Liquid 인앱 설문 -->
+        <div class="rounded-[12px] border border-border bg-white px-4 py-4 space-y-3">
+          <div>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">⑤-2 Braze Liquid 인앱 설문 구현</p>
+            <p class="text-[13px] leading-[1.8] text-text-secondary">Braze Custom HTML IAM + Liquid 문법을 활용해 유저 참여 이력에 따라 질문 분기가 달라지는 인앱 설문을 직접 구현했습니다. 응답 결과는 brazeBridge로 Custom Attribute에 즉시 적재해 CRM 세그먼트에 반영했습니다.</p>
           </div>
           <div class="rounded-[8px] overflow-hidden border border-border">
-            <img src="assets/growth-infra/growth-infra_data-2.png" alt="Airflow Braze Catalog 업로드 슬랙 알림" class="w-full block"/>
+            <img src="assets/growth-infra/growth-infra_survey.png" alt="Braze 인앱 설문" class="w-full block"/>
+          </div>
+        </div>
+
+        <!-- ⑤-3 데이터 파이프라인 → Braze 연동 -->
+        <div class="rounded-[12px] border border-border bg-white px-4 py-4 space-y-3">
+          <div>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">⑤-3 데이터 파이프라인 → Braze 연동 기획</p>
+            <p class="text-[13px] leading-[1.8] text-text-secondary">BigQuery · Kafka · 클라이언트 이벤트 데이터를 Braze User Attribute로 전송하는 파이프라인을 기획했습니다. 고수의 스마트견적 캠페인 활성화/비활성화 상태를 실시간으로 Braze에 반영해 맞춤형 CRM 세그먼트 운영이 가능한 구조를 설계하고, 개발팀·프로덕트팀과 협업했습니다.</p>
+          </div>
+          <div class="flex flex-col gap-3">
+            <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:260px;overflow-y:auto">
+              <img src="assets/growth-infra/growth-infra_data-1.png" alt="데이터 파이프라인 Braze 연동 스펙" class="w-full block"/>
+            </div>
+            <div class="rounded-[8px] overflow-hidden border border-border">
+              <img src="assets/growth-infra/growth-infra_data-2.png" alt="Airflow Braze Catalog 업로드 슬랙 알림" class="w-full block"/>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- 사용 기술 -->
+      <!-- Result -->
+      <div class="rounded-[12px] border border-border bg-[#F1ECFF] px-4 py-4 space-y-2">
+        <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-[#6A3AF2] mb-1">Result</p>
+        <p class="text-[14px] leading-[1.8] text-[#1F1F2B] font-semibold">실험 1사이클의 리드타임이 짧아졌고, 마케터는 수치 확인·일정 관리·결과 시각화에 들이던 시간을 분석과 다음 실험 설계에 다시 쓸 수 있게 됐습니다.</p>
+      </div>
+
+      <!-- Stack -->
       <div class="rounded-[12px] border border-border px-4 py-4">
         <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-3">Stack</p>
         <div class="flex flex-wrap gap-2">
           <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">BigQuery</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">n8n</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Braze</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Liquid</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">brazeBridge</span>
           <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Google Apps Script</span>
           <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Looker Studio</span>
-          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Braze</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Airflow</span>
           <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Python</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Kafka</span>
           <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Snowflake</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Slack API</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Google Calendar API</span>
           <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Google Sheets</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">HTML/JS</span>
         </div>
       </div>
 
@@ -3041,12 +3131,12 @@ function togglePromo(id) {
 <!-- Growth Infra Modal -->
 <div class="hidden fixed inset-0 z-[100]" id="growthModal">
   <div class="absolute inset-0 backdrop" onclick="closeGrowthModal()"></div>
-  <div class="relative mx-auto mt-10 w-[96%] max-w-[720px] rounded-[16px] bg-white border border-border shadow-lift flex flex-col" style="max-height:88vh">
+  <div class="relative mx-auto mt-10 w-[96%] max-w-[760px] rounded-[16px] bg-white border border-border shadow-lift flex flex-col" style="max-height:88vh">
 
     <div class="flex items-start justify-between gap-4 px-6 pt-6 pb-4 border-b border-border flex-shrink-0">
       <div>
         <p class="font-mono text-xs text-text-secondary uppercase tracking-wider">Growth Infra</p>
-        <h3 class="font-display font-bold text-[20px] leading-[1.35] mt-1">Marketing Automation · Data Pipeline</h3>
+        <h3 class="font-display font-bold text-[20px] leading-[1.35] mt-1">Turning the "Experiment → Action → Verify" loop into an automated system</h3>
       </div>
       <button aria-label="Close" class="text-text-secondary hover:text-black transition-colors flex-shrink-0 mt-1" onclick="closeGrowthModal()">
         <span class="material-symbols-outlined">close</span>
@@ -3055,77 +3145,167 @@ function togglePromo(id) {
 
     <div class="overflow-y-auto flex-1 px-6 py-5 space-y-5">
 
-      <!-- ① CRM 대시보드 자동화 -->
+      <!-- Hero / Intro -->
+      <div class="rounded-[12px] border border-border bg-[#FAFAFA] px-4 py-4 space-y-3">
+        <p class="text-[13px] leading-[1.8] text-text-secondary">
+          Marketing execution involves a lot of repeated work. When the daily cycle of monitoring metrics, detecting anomalies, taking action, and verifying impact passes through human hands every time, omissions, delays, and inconsistent standards accumulate — eventually shrinking the time available for analysis and experimentation, and slowing experiment velocity.
+        </p>
+        <p class="text-[13px] leading-[1.8] text-text-secondary">
+          By combining <strong class="text-text-primary">BigQuery · n8n · Braze · Google Workspace</strong>, I rebuilt the operational cycle from monitoring to action verification as an automatable structure — creating an environment where decisions are made on the same data, by the same standard, every day.
+        </p>
+      </div>
+
+      <!-- 4-step framework label -->
+      <div class="flex items-center justify-center gap-2 flex-wrap text-[11px] font-mono text-text-secondary">
+        <span class="inline-flex items-center rounded-full border border-border bg-white px-2.5 py-1">① MONITOR</span>
+        <span>→</span>
+        <span class="inline-flex items-center rounded-full border border-border bg-white px-2.5 py-1">② DETECT</span>
+        <span>→</span>
+        <span class="inline-flex items-center rounded-full border border-border bg-white px-2.5 py-1">③ SCHEDULE</span>
+        <span>→</span>
+        <span class="inline-flex items-center rounded-full border border-border bg-white px-2.5 py-1">④ VERIFY</span>
+      </div>
+
+      <!-- ① MONITOR -->
       <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
         <div>
-          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">① CRM Performance Dashboard Automation</p>
-          <p class="text-[13px] leading-[1.8] text-text-secondary">Built a dashboard that automatically aggregates app push campaign performance by integrating BigQuery + Google Apps Script + Looker Studio. Tracks Unique, CTR, CVR, and Uplift by provider/customer channel on a daily and monthly basis — enabling real-time monitoring without manual aggregation.</p>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">① MONITOR</p>
+          <h4 class="font-display font-bold text-[15px] text-[#1F1F2B] mb-2">Auto-extract and report key metrics every day</h4>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">Every morning, n8n auto-extracts metrics from BigQuery and posts them to Slack. Because the same report arrives at the same time on a consistent basis, marketers no longer wonder "where do I even start today?" and can move straight into analysis.</p>
         </div>
-        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:240px;overflow-y:auto">
-          <img src="assets/growth-infra/growth-infra_chart.png" alt="Marketing Dashboard Automation" class="w-full block"/>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:280px;overflow-y:auto">
+          <img src="assets/growth-infra/growth_infra_autonoti2.png" alt="n8n workflow — BigQuery → Slack" class="w-full block"/>
+        </div>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:320px;overflow-y:auto">
+          <img src="assets/growth-infra/growth_infra_autonoti1.png" alt="Slack auto-report example" class="w-full block"/>
         </div>
       </div>
 
-      <!-- ② 프로그램 운영 자동화 -->
+      <!-- ② DETECT -->
       <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
         <div>
-          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">② Program Operations Automation</p>
-          <p class="text-[13px] leading-[1.8] text-text-secondary">Built a pipeline connecting program sign-up → auto DB entry → marketing consent update → automatic email dispatch. Used BigQuery SQL to extract applicant status in real time and Google Apps Script to automate follow-up actions, minimizing manual operational effort.</p>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">② DETECT</p>
+          <h4 class="font-display font-bold text-[15px] text-[#1F1F2B] mb-2">Surface segments that need action immediately</h4>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">Rather than just raw numbers, the report organizes key metrics with segment-level uplift% so the team can quickly see where impact is happening and where things are stuck — and decide the next action accordingly. CG/TG comparisons and All / Direct / Influenced splits are computed and arranged automatically.</p>
         </div>
-        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:260px;overflow-y:auto">
-          <img src="assets/growth-infra/growth-infra_operation.png" alt="Program Operations Automation" class="w-full block"/>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:380px;overflow-y:auto">
+          <img src="assets/growth-infra/growth_infra_autonoti3.png" alt="n8n JS — automatic uplift computation per segment" class="w-full block"/>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:240px;overflow-y:auto">
+            <img src="assets/growth-infra/growth_infra_autochart1.png" alt="Real analysis example — CG/TG uplift% trend" class="w-full block"/>
+          </div>
+          <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:240px;overflow-y:auto">
+            <img src="assets/growth-infra/growth_infra_autochart2.png" alt="Real analysis example — request volume comparison" class="w-full block"/>
+          </div>
         </div>
       </div>
 
-      <!-- ③ 프로모션 모니터링 자동화 + 시뮬레이터 -->
+      <!-- ③ SCHEDULE -->
       <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
         <div>
-          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">③ Promotion Monitoring Automation & Simulator</p>
-          <p class="text-[13px] leading-[1.8] text-text-secondary">Built a dashboard that auto-aggregates cumulative promotion performance and a Gantt chart-based timeline. Also directly implemented an interactive HTML simulator that calculates tier migration rates and iROAS in real time — enabling the marketing team to make promotion decisions on a consistent basis.</p>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">③ SCHEDULE</p>
+          <h4 class="font-display font-bold text-[15px] text-[#1F1F2B] mb-2">See planned and past actions on a single calendar</h4>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">Once an action is decided, it's registered as a Braze campaign or canvas, and the same workflow auto-syncs it to a Google Calendar event every morning. Planned, in-progress, and completed actions all appear in one view, making cross-team scheduling easy and naturally preventing campaign collisions.</p>
         </div>
-        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:260px;overflow-y:auto">
-          <img src="assets/growth-infra/growth-infra_promotion.png" alt="Promotion Monitoring Dashboard" class="w-full block"/>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:380px;overflow-y:auto">
+          <img src="assets/growth-infra/growth_infra_autocalendar.png" alt="n8n workflow — auto-syncing Braze campaigns to Google Calendar" class="w-full block"/>
         </div>
       </div>
 
-      <!-- ④ Braze 인앱 설문 구현 -->
+      <!-- ④ VERIFY -->
       <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
         <div>
-          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">④ Braze Liquid In-App Survey Implementation</p>
-          <p class="text-[13px] leading-[1.8] text-text-secondary">Implemented an in-app survey with branching questions based on user participation history using Braze Custom HTML IAM + Liquid syntax. Response data is immediately stored to Custom Attributes via brazeBridge and reflected in CRM segments.</p>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">④ VERIFY</p>
+          <h4 class="font-display font-bold text-[15px] text-[#1F1F2B] mb-2">Auto-verify results after each action</h4>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">Anchored on the moment an action is applied, metric changes and uplift% trends are auto-charted and notified — making before/after impact visually verifiable on the spot. Looker Studio dashboards track channel- and campaign-level performance daily and monthly, and the results feed back into the next experiment's hypothesis.</p>
         </div>
-        <div class="rounded-[8px] overflow-hidden border border-border">
-          <img src="assets/growth-infra/growth-infra_survey.png" alt="Braze In-App Survey" class="w-full block"/>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:300px;overflow-y:auto">
+          <img src="assets/growth-infra/growth-infra_chart.png" alt="App push campaign performance dashboard (Pro / Customer)" class="w-full block"/>
         </div>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:300px;overflow-y:auto">
+          <img src="assets/growth-infra/growth-infra_chart2.png" alt="Dashboard detail — Monthly / Daily / Service breakdown" class="w-full block"/>
+        </div>
+        <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:300px;overflow-y:auto">
+          <img src="assets/growth-infra/growth-infra_promotion.png" alt="Promotion monitoring dashboard + simulator" class="w-full block"/>
+        </div>
+        <p class="text-[12px] leading-[1.7] text-text-secondary mt-1">
+          For promotions specifically, I built a dedicated cumulative-performance dashboard with a Gantt-chart timeline, plus an interactive HTML simulator that calculates tier migration rates and iROAS in real time — so the marketing team can decide on a single, consistent basis.
+        </p>
       </div>
 
-      <!-- ⑤ 데이터 파이프라인 → Braze 연동 -->
-      <div class="rounded-[12px] border border-border px-4 py-4 space-y-3">
+      <!-- ⑤ EXTEND -->
+      <div class="rounded-[12px] border border-border bg-[#FAFAFA] px-4 py-4 space-y-4">
         <div>
-          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">⑤ Data Pipeline → Braze Integration Planning</p>
-          <p class="text-[13px] leading-[1.8] text-text-secondary">Planned a pipeline to send BigQuery · Kafka · client event data to Braze User Attributes. Designed a structure that reflects providers' Smart Quote campaign activation/deactivation status in real time to Braze, enabling customized CRM segment operations — executed in collaboration with engineering and product teams.</p>
+          <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">⑤ EXTEND</p>
+          <h4 class="font-display font-bold text-[15px] text-[#1F1F2B] mb-2">Built on top of the automation layer</h4>
+          <p class="text-[13px] leading-[1.8] text-text-secondary">Once the core operational loop was stable, I added work that uses the same foundation to leverage data more deeply.</p>
         </div>
-        <div class="flex flex-col gap-3">
+
+        <!-- ⑤-1 Program Operations Automation -->
+        <div class="rounded-[12px] border border-border bg-white px-4 py-4 space-y-3">
+          <div>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">⑤-1 Program Operations Automation</p>
+            <p class="text-[13px] leading-[1.8] text-text-secondary">Built a pipeline connecting program sign-up → auto DB entry → marketing-consent update → automatic email dispatch. BigQuery SQL extracts applicant status in real time, and Google Apps Script automates follow-up actions, minimizing manual operational effort.</p>
+          </div>
           <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:260px;overflow-y:auto">
-            <img src="assets/growth-infra/growth-infra_data-1.png" alt="Data Pipeline Braze Integration Spec" class="w-full block"/>
+            <img src="assets/growth-infra/growth-infra_operation.png" alt="Program Operations Automation" class="w-full block"/>
+          </div>
+        </div>
+
+        <!-- ⑤-2 Braze Liquid In-App Survey -->
+        <div class="rounded-[12px] border border-border bg-white px-4 py-4 space-y-3">
+          <div>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">⑤-2 Braze Liquid In-App Survey</p>
+            <p class="text-[13px] leading-[1.8] text-text-secondary">Implemented an in-app survey with branching questions based on user participation history using Braze Custom HTML IAM + Liquid. Responses are immediately written to Custom Attributes via brazeBridge and reflected in CRM segments.</p>
           </div>
           <div class="rounded-[8px] overflow-hidden border border-border">
-            <img src="assets/growth-infra/growth-infra_data-2.png" alt="Airflow Braze Catalog Upload Slack Notification" class="w-full block"/>
+            <img src="assets/growth-infra/growth-infra_survey.png" alt="Braze in-app survey" class="w-full block"/>
+          </div>
+        </div>
+
+        <!-- ⑤-3 Data Pipeline → Braze Integration Planning -->
+        <div class="rounded-[12px] border border-border bg-white px-4 py-4 space-y-3">
+          <div>
+            <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-1">⑤-3 Data Pipeline → Braze Integration Planning</p>
+            <p class="text-[13px] leading-[1.8] text-text-secondary">Planned a pipeline to send BigQuery · Kafka · client event data to Braze User Attributes. Designed a structure reflecting providers' Smart Quote campaign activation/deactivation status to Braze in real time — enabling personalized CRM segment operations — in collaboration with the engineering and product teams.</p>
+          </div>
+          <div class="flex flex-col gap-3">
+            <div class="rounded-[8px] overflow-hidden border border-border" style="max-height:260px;overflow-y:auto">
+              <img src="assets/growth-infra/growth-infra_data-1.png" alt="Data pipeline → Braze integration spec" class="w-full block"/>
+            </div>
+            <div class="rounded-[8px] overflow-hidden border border-border">
+              <img src="assets/growth-infra/growth-infra_data-2.png" alt="Airflow Braze Catalog upload — Slack notification" class="w-full block"/>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- 사용 기술 -->
+      <!-- Result -->
+      <div class="rounded-[12px] border border-border bg-[#F1ECFF] px-4 py-4 space-y-2">
+        <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-[#6A3AF2] mb-1">Result</p>
+        <p class="text-[14px] leading-[1.8] text-[#1F1F2B] font-semibold">The lead time for one experiment cycle shortened, and the time previously spent on number-checking, scheduling, and result visualization could be redirected back into analysis and the design of the next experiment.</p>
+      </div>
+
+      <!-- Stack -->
       <div class="rounded-[12px] border border-border px-4 py-4">
         <p class="font-mono text-[10px] uppercase tracking-[0.1em] text-text-secondary mb-3">Stack</p>
         <div class="flex flex-wrap gap-2">
           <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">BigQuery</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">n8n</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Braze</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Liquid</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">brazeBridge</span>
           <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Google Apps Script</span>
           <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Looker Studio</span>
-          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Braze</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Airflow</span>
           <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Python</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Kafka</span>
           <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Snowflake</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Slack API</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Google Calendar API</span>
           <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">Google Sheets</span>
+          <span class="inline-flex items-center rounded-full border border-border bg-[#F8F8F8] px-2.5 py-1 text-[11px] font-mono text-text-secondary">HTML/JS</span>
         </div>
       </div>
 
