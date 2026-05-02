@@ -791,6 +791,20 @@
       }
     }
 
+    /* ─── 📱 모바일 타임라인 세로선 텍스트 관통 수정 ─── */
+    @media (max-width: 767px) {
+      /* 본문 컨테이너에 left padding을 줘서 세로선 우측으로 밀어냄 */
+      /* (md:ml-[68px]는 데스크톱에서만 적용되므로 모바일 전용 처리 필요) */
+      .project-step-flow .md\:ml-\[68px\] {
+        padding-left: 60px;
+      }
+
+      /* 헤더 영역 gap 축소 (좁은 화면에서 제목이 너무 우측으로 밀리는 것 방지) */
+      .project-step-flow .flex.items-start.gap-5 {
+        gap: 12px;
+      }
+    }
+
     /* ─── DEFINED PROBLEM — 인용문 스타일 ─── */
     .defined-problem-text {
       font-family: 'Nanum Square', 'Noto Sans KR', system-ui, sans-serif;
