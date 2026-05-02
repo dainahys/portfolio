@@ -1933,16 +1933,21 @@ class="block w-full h-full object-cover"
 
           <script>
           function switchPromoTab(promo, tab) {
-            ['event','iam','flow'].forEach(function(t) {
-              var panel = document.getElementById(promo+'-panel-'+t);
-              var btn = document.getElementById(promo+'-tab-'+t);
-              if (!panel || !btn) return;
+            // 해당 promo 카드의 모든 패널/버튼을 동적으로 찾음 (탭 종류 하드코딩 X)
+            var panels = document.querySelectorAll('[id^="' + promo + '-panel-"]');
+            var btns = document.querySelectorAll('[id^="' + promo + '-tab-"]');
+
+            panels.forEach(function(panel) {
+              var t = panel.id.replace(promo + '-panel-', '');
+              panel.style.display = (t === tab) ? '' : 'none';
+            });
+
+            btns.forEach(function(btn) {
+              var t = btn.id.replace(promo + '-tab-', '');
               if (t === tab) {
-                panel.style.display = '';
                 btn.classList.add('bg-black','text-white','border-black');
                 btn.classList.remove('text-text-secondary','border-border');
               } else {
-                panel.style.display = 'none';
                 btn.classList.remove('bg-black','text-white','border-black');
                 btn.classList.add('text-text-secondary','border-border');
               }
@@ -2729,16 +2734,21 @@ class="block w-full h-full object-cover"
 
           <script>
           function switchPromoTab(promo, tab) {
-            ['event','iam','flow'].forEach(function(t) {
-              var panel = document.getElementById(promo+'-panel-'+t);
-              var btn = document.getElementById(promo+'-tab-'+t);
-              if (!panel || !btn) return;
+            // 해당 promo 카드의 모든 패널/버튼을 동적으로 찾음 (탭 종류 하드코딩 X)
+            var panels = document.querySelectorAll('[id^="' + promo + '-panel-"]');
+            var btns = document.querySelectorAll('[id^="' + promo + '-tab-"]');
+
+            panels.forEach(function(panel) {
+              var t = panel.id.replace(promo + '-panel-', '');
+              panel.style.display = (t === tab) ? '' : 'none';
+            });
+
+            btns.forEach(function(btn) {
+              var t = btn.id.replace(promo + '-tab-', '');
               if (t === tab) {
-                panel.style.display = '';
                 btn.classList.add('bg-black','text-white','border-black');
                 btn.classList.remove('text-text-secondary','border-border');
               } else {
-                panel.style.display = 'none';
                 btn.classList.remove('bg-black','text-white','border-black');
                 btn.classList.add('text-text-secondary','border-border');
               }
