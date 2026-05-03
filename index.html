@@ -2232,10 +2232,20 @@ class="block w-full h-full object-cover"
               <button onclick="switchPromoTab('cashback','iam')" id="cashback-tab-iam" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-border text-text-secondary hover:border-black hover:text-black transition-all">IAM 데모</button>
             </div>
 
-            <!-- Event page -->
+            <!-- Event page (스크롤 임베드) -->
             <div id="cashback-panel-event">
-              <div class="rounded-[12px] border border-border overflow-hidden" style="max-height:260px;overflow-y:auto">
-                <img src="assets/promotion/cashback/soomgo-eventpage_cashback.png" alt="캐시백 프로모션 이벤트 페이지" class="w-full block"/>
+              <div class="rounded-[12px] border border-border bg-[#F8F8F8] p-4">
+                <div class="rounded-[12px] overflow-auto border border-border bg-white" style="height:720px">
+                  <div class="flex justify-center">
+                    <img
+                      src="assets/promotion/cashback/soomgo-eventpage_cashback.png"
+                      alt="캐시백 프로모션 이벤트 페이지"
+                      class="block"
+                      style="width:400px;max-width:100%;height:auto"
+                      decoding="async"/>
+                  </div>
+                </div>
+                <p class="text-center text-[11px] text-text-secondary mt-3 font-mono">↕ 스크롤로 전체 페이지 확인</p>
               </div>
             </div>
 
@@ -3131,10 +3141,20 @@ class="block w-full h-full object-cover"
               <button onclick="switchPromoTab('cashback','iam')" id="cashback-tab-iam" class="px-3 py-1.5 rounded-full text-[11px] font-mono border border-border text-text-secondary hover:border-black hover:text-black transition-all">IAM Demo</button>
             </div>
 
-            <!-- Event page -->
+            <!-- Event page (scroll embed) -->
             <div id="cashback-panel-event">
-              <div class="rounded-[12px] border border-border overflow-hidden" style="max-height:260px;overflow-y:auto">
-                <img src="assets/promotion/cashback/soomgo-eventpage_cashback.png" alt="Cashback Promotion Event Page" class="w-full block"/>
+              <div class="rounded-[12px] border border-border bg-[#F8F8F8] p-4">
+                <div class="rounded-[12px] overflow-auto border border-border bg-white" style="height:720px">
+                  <div class="flex justify-center">
+                    <img
+                      src="assets/promotion/cashback/soomgo-eventpage_cashback.png"
+                      alt="Cashback Promotion Event Page"
+                      class="block"
+                      style="width:400px;max-width:100%;height:auto"
+                      decoding="async"/>
+                  </div>
+                </div>
+                <p class="text-center text-[11px] text-text-secondary mt-3 font-mono">↕ Scroll to view full page</p>
               </div>
             </div>
 
