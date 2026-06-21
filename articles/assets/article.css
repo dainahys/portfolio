@@ -84,6 +84,18 @@ ol.reasons .lead{font-weight:700;color:var(--ink)}
 pre{background:var(--code-bg);color:var(--code-ink);font-family:var(--mono);font-size:13px;line-height:1.7;padding:16px 18px;overflow-x:auto}
 pre .cm{color:var(--code-dim)}
 pre .kw{color:var(--code-accent)}
+/* syntax highlighting (highlight.js) — Xcode-dark-ish palette on dark code blocks */
+.code pre code{background:none;border:0;padding:0;font-size:inherit;color:inherit;border-radius:0;display:block}
+.hljs{background:transparent;color:var(--code-ink)}
+.hljs-comment,.hljs-quote{color:#7e8694;font-style:italic}
+.hljs-keyword,.hljs-built_in,.hljs-literal,.hljs-selector-tag{color:#ff7ab2}
+.hljs-string,.hljs-regexp,.hljs-meta .hljs-string{color:#ff8170}
+.hljs-number,.hljs-symbol{color:#d9c97c}
+.hljs-title,.hljs-title.function_,.hljs-section{color:#67d4b4}
+.hljs-attr,.hljs-attribute,.hljs-property{color:#bf9eee}
+.hljs-tag,.hljs-name{color:#5dd8ff}
+.hljs-variable,.hljs-template-variable,.hljs-params{color:var(--code-ink)}
+.hljs-meta{color:#9aa0a6}
 
 /* ── Pull quote / punchline ──────────────────────────────── */
 .pull{margin:8px 0 22px;padding:20px 24px;border-left:3px solid var(--accent);background:var(--accent-tint);border-radius:0 10px 10px 0}

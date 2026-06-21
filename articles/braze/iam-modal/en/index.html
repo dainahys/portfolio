@@ -40,6 +40,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" rel="stylesheet"/>
 <link rel="stylesheet" href="/articles/assets/article.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.hljs){document.querySelectorAll(".code pre code").forEach(function(b){try{hljs.highlightElement(b);}catch(e){}});}});</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -360,11 +362,11 @@
 </svg>
 <figcaption>The thinking on entry — app ownership via Airbridge (self-served), the event-open signal via dev-team collaboration, participation status by the marketer directly.</figcaption></figure>
 
-  <details class="code-fold"><summary><span class="dot">▌</span> goToPage()</summary><div class="code"><pre>function goToPage(id){
+  <details class="code-fold"><summary><span class="dot">▌</span> goToPage()</summary><div class="code"><pre><code>function goToPage(id){
   document.querySelectorAll('.bz-page').forEach(function(p){
     p.classList.toggle('active', p.getAttribute('page-id') === id);
   });
-}</pre></div></details>
+}</code></pre></div></details>
   <p>→ What this code does: among the several screens hidden inside one HTML, it turns on only the one to show right now. This single function is the backbone of the multi-step flow.</p>
 
   <h3>Step 1. Prompting app download / app entry</h3>
@@ -410,26 +412,26 @@
   <h3>Step 2. Terms / marketing opt-in</h3>
   <p>On the first screen of event participation, we collect consent for marketing use of personal data and consent to receive marketing notifications. Four operational details went in here.</p>
   <p><strong>First, items already consented to aren't shown.</strong> The user's existing consent state is injected via Liquid, and the checkboxes for items already consented to are hidden. For a user who has already consented to everything, the consent screen itself becomes a light, formal confirmation.</p>
-  <details class="code-fold"><summary><span class="dot">▌</span> Hide consented items (Liquid injection)</summary><div class="code"><pre>&lt;span data-attr-marketing_info=&quot;{{custom_attribute.${is_marketing_info_opted_in}}}&quot;&gt;&lt;/span&gt;
-&lt;span data-attr-marketing_message=&quot;{{custom_attribute.${is_marketing_message_opted_in}}}&quot;&gt;&lt;/span&gt;</pre></div></details>
+  <details class="code-fold"><summary><span class="dot">▌</span> Hide consented items (Liquid injection)</summary><div class="code"><pre><code>&lt;span data-attr-marketing_info=&quot;{{custom_attribute.${is_marketing_info_opted_in}}}&quot;&gt;&lt;/span&gt;
+&lt;span data-attr-marketing_message=&quot;{{custom_attribute.${is_marketing_message_opted_in}}}&quot;&gt;&lt;/span&gt;</code></pre></div></details>
   <p>→ What this code does: before the message is displayed, Braze plants “which consents this user has already given” into the screen, and the JS reads those values to hide the already-consented checkboxes.</p>
   <p><strong>Second, record on consent immediately, and reflect it immediately.</strong> The moment the consent button is pressed, a Custom Attribute is recorded per consent item and sent straight to the server with <code>requestImmediateDataFlush()</code>.</p>
-  <details class="code-fold"><summary><span class="dot">▌</span> Record consent · immediate flush</summary><div class="code"><pre>if(consentedItems.indexOf('marketing_info') !== -1)
+  <details class="code-fold"><summary><span class="dot">▌</span> Record consent · immediate flush</summary><div class="code"><pre><code>if(consentedItems.indexOf('marketing_info') !== -1)
   u.setCustomUserAttribute('is_marketing_info_opted_in', true);
 if(consentedItems.indexOf('marketing_message') !== -1)
   u.setCustomUserAttribute('is_marketing_message_opted_in', true);
 b.logCustomEvent('click_terms_submit_button', {checked_items: consentedItems.join(',')});
-b.requestImmediateDataFlush();</pre></div></details>
+b.requestImmediateDataFlush();</code></pre></div></details>
   <p>→ What this code does: it tags which items were consented to, stamps the consent action, and then — without waiting — sends it to the Braze server immediately.</p>
   <p><strong>Third, notify the user of the consent.</strong> Right after consent completes, the flow passes through a notice screen that shows the consent date/time and the consented items in a table. For marketing opt-in, notice is as important as collection.</p>
   <p><strong>Fourth, record consent in two places at once.</strong> Marketing opt-in isn't just for sending Braze messages — it's a legal state value shared across the entire service, so recording it only in Braze would leave it out of sync with the service DB. So the moment the modal closes, the consented items are packed into a deep link and handed to the app, and the app uses those values to call the service-server API and reflect the consent in the DB too (the app↔server connection was designed together with the dev team). The reasoning behind why this handling was needed is covered in Chapter 11, Challenge 5.</p>
-  <details class="code-fold"><summary><span class="dot">▌</span> handleFinalClose() — consent sync</summary><div class="code"><pre>function handleFinalClose(){
-  var params = buildConsentParams();  <span class="cm">// list of consented items</span>
+  <details class="code-fold"><summary><span class="dot">▌</span> handleFinalClose() — consent sync</summary><div class="code"><pre><code>function handleFinalClose(){
+  var params = buildConsentParams();  // list of consented items
   if(params.length &gt; 0){
-    window.location = '{APP_SCHEME}/consent?' + params.join('&amp;');  <span class="cm">// → app receives it and calls server API</span>
+    window.location = '{APP_SCHEME}/consent?' + params.join('&amp;');  // → app receives it and calls server API
   }
-  setTimeout(closeModal, 300);  <span class="cm">// close the modal a moment later</span>
-}</pre></div></details>
+  setTimeout(closeModal, 300);  // close the modal a moment later
+}</code></pre></div></details>
   <p>→ What this code does: right before the modal closes, it loads the consented items onto a deep link and hands them to the app. The app receives this signal and reports the consent state to the service server. The modal then closes.</p>
 
   <figure class="diagram"><svg width="100%" viewBox="0 0 680 340" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
@@ -490,14 +492,14 @@ b.requestImmediateDataFlush();</pre></div></details>
   <h3>Step 2.5. Push-state branch — the primer</h3>
   <p>After consent confirmation, the screen splits based on the user's app-push permission state. If permission is on, they go straight to the game; if it's off, they go to the <strong>push primer</strong> — a knight chained up, with a “Turn on alerts and summon the knight” button. This screen reframes the permission request not as a system pop-up but as game lore (“to free the knight, you need notifications”). (This branch wasn't in the original design and was added during implementation. Handling by permission state and how it was discovered are covered in Chapter 11, Challenge 4.)</p>
   <p>The determination uses a priority order. The real-time permission check provided by brazeBridge is used first, and only in environments where that's not possible do we fall back to the send-time snapshot value injected via Liquid.</p>
-  <details class="code-fold"><summary><span class="dot">▌</span> Two-tier push-permission check</summary><div class="code"><pre>if(b &amp;&amp; typeof b.isPushPermissionGranted === 'function'){
+  <details class="code-fold"><summary><span class="dot">▌</span> Two-tier push-permission check</summary><div class="code"><pre><code>if(b &amp;&amp; typeof b.isPushPermissionGranted === 'function'){
   if(b.isPushPermissionGranted()){ goToPage('chess-drop'); initDragDrop(); }
   else{ goToPage('push-primer'); }
-} else if(isPushOn()){            <span class="cm">// Liquid snapshot fallback</span>
+} else if(isPushOn()){            // Liquid snapshot fallback
   goToPage('chess-drop'); initDragDrop();
 } else {
   goToPage('push-primer');
-}</pre></div></details>
+}</code></pre></div></details>
   <p>→ What this code does: it asks the bridge directly whether push is on “at this very moment,” and if it can't ask, it judges by the value noted down when the message was sent. Since a user can change the setting while looking at the modal, the real-time value takes priority.</p>
 
   <h3>Step 3. The drag-and-drop game</h3>
@@ -572,7 +574,7 @@ b.requestImmediateDataFlush();</pre></div></details>
   </table></div></figure>
   <p>The key point is that the “set by” splits into two. Values the app SDK fills (permission state) and values brazeBridge fills inside the modal (consent, participation, win) coexist, and Canvas reads both together to branch.</p>
   <p>Event and attribute recording was written considering both the real Braze environment and the local demo environment at once.</p>
-  <details class="code-fold"><summary><span class="dot">▌</span> logParticipation()</summary><div class="code"><pre>function getBridge(){ return window.brazeBridge || window.appboyBridge || null; }
+  <details class="code-fold"><summary><span class="dot">▌</span> logParticipation()</summary><div class="code"><pre><code>function getBridge(){ return window.brazeBridge || window.appboyBridge || null; }
 
 function logParticipation(prize){
   var b = getBridge(); if(!b) return;
@@ -582,7 +584,7 @@ function logParticipation(prize){
     prize_name: prize.name
   });
   b.requestImmediateDataFlush();
-}</pre></div></details>
+}</code></pre></div></details>
   <p>→ What this code does: the moment participation ends, it attaches a “participated” name tag and a “won this” name tag, stamps the action, and sends it to the server immediately. This single record becomes the raw material for blocking re-participation and for branching follow-up messages.</p>
   <p>Why <code>requestImmediateDataFlush()</code> matters — the SDK batches data and sends it on a fixed interval, but since a Canvas branch within the same session has to evaluate this attribute right away, it's sent immediately instead of waiting.</p>
   <p>The “order” of recording was also a design target. When the app receives the deep link, I guaranteed that the <code>push_authorization_status</code> Attribute is set <strong>first</strong>, and only then is the <code>deeplink_open_promotion</code> event sent. Because Canvas wakes on this event and reads the Attribute value to branch, if the order were reversed it would send the wrong message based on the stale, pre-update permission value. As much as what to record, the order in which it's recorded determines the accuracy of automation.</p>
@@ -678,15 +680,15 @@ function logParticipation(prize){
   <p><strong>Liquid — injecting per-user snapshot values.</strong> Values that differ per user but are fixed at send time, like existing consent state, are injected via Liquid. Since Liquid is evaluated on the server before the HTML renders, it's more stable to use it only for value injection rather than complex conditional processing.</p>
   <p><strong>Connected Content — querying operational state.</strong> Connected Content is known as a personalization feature for fetching custom thumbnails or product-recommendation images, but its essence is broader — <strong>a feature that sends a request to an external URL at the moment the message renders and uses that response within the message.</strong> If the response is an image, it becomes thumbnail personalization; if it's JSON, it becomes real-time inventory lookup like this time. Values that keep changing during the campaign, like prize inventory, were fetched this way, and in this campaign that “external” was the GAS web app itself.</p>
   <p><strong>GAS + Spreadsheet — the inventory ledger and a lightweight API.</strong> The inventory per prize is written in a Google Spreadsheet, and the GAS web app receives two kinds of request. <code>get</code> returns the current inventory as JSON (called by Connected Content), and <code>claim</code> records the win into the sheet (called by the modal's JS). Lookup, recording, and the ledger are all solved without backend development.</p>
-  <details class="code-fold"><summary><span class="dot">▌</span> Connected Content — inventory lookup</summary><div class="code"><pre>{% connected_content https://script.google.com/macros/s/{GAS_WEBAPP_ID}/exec?action=get :save inv %}</pre></div></details>
-  <details class="code-fold"><summary><span class="dot">▌</span> Inject inventory value into the screen</summary><div class="code"><pre>&lt;div id=&quot;ld&quot; data-inv='{% if inv and inv.success %}{{ inv.inventory | json }}{% else %}{}{% endif %}'&gt;&lt;/div&gt;</pre></div></details>
+  <details class="code-fold"><summary><span class="dot">▌</span> Connected Content — inventory lookup</summary><div class="code"><pre><code>{% connected_content https://script.google.com/macros/s/{GAS_WEBAPP_ID}/exec?action=get :save inv %}</code></pre></div></details>
+  <details class="code-fold"><summary><span class="dot">▌</span> Inject inventory value into the screen</summary><div class="code"><pre><code>&lt;div id=&quot;ld&quot; data-inv='{% if inv and inv.success %}{{ inv.inventory | json }}{% else %}{}{% endif %}'&gt;&lt;/div&gt;</code></pre></div></details>
   <p>→ What this code does: the moment the modal is displayed, Braze asks GAS “what's the inventory right now?” and plants the answer (JSON) into the screen. The JS reads that value to judge whether stock is depleted.</p>
-  <details class="code-fold"><summary><span class="dot">▌</span> claimPrize() — decrement inventory</summary><div class="code"><pre>function claimPrize(prizeName){
+  <details class="code-fold"><summary><span class="dot">▌</span> claimPrize() — decrement inventory</summary><div class="code"><pre><code>function claimPrize(prizeName){
   fetch(GAS_WEBAPP_URL, {
     method: 'POST', mode: 'no-cors',
     body: JSON.stringify({ action: 'claim', prize: prizeName, braze_id: brazeId })
   });
-}</pre></div></details>
+}</code></pre></div></details>
   <p>→ What this code does: the moment a win is confirmed, the modal directly tells GAS “one of this prize went out” and writes a line into the sheet. That single line is both the inventory decrement and the winner record.</p>
   <p><strong>JavaScript — computation and screen rendering.</strong> The draw, page transitions, animations, and inventory judgment are all handled by JS.</p>
   <p>The core effect of this separation is in operations. To adjust prize inventory or close it out, <strong>the marketer just changes the number in the spreadsheet.</strong> There's no need to edit the HTML or re-publish the campaign.</p>
@@ -743,14 +745,14 @@ function logParticipation(prize){
   <p>After collecting consent and even turning on the flag in Braze, I paused for a moment — <em>wait, this way only Braze knows this user consented, while the service server (DB) doesn't, right?</em> Marketing opt-in isn't used only when sending messages from Braze — it's a legal state value shared across the whole service, so if it changes only inside Braze, it goes out of sync with the service DB.</p>
   <p>So the moment the modal closes, I made it pack which items were consented to onto a deep link and hand them to the app. The app receives those values and calls the API that reflects the consent state to the service server — this app↔server connection was designed together with the dev team. As a result, <strong>consent is left in two places at once.</strong> In Braze, by the modal directly (for targeting/segments); in the service DB, by the app that received the deep link, via the API (for the legal consent state). If only one side had been recorded, the consent state in one of the two places would have been false.</p>
   <p><strong>A later improvement — Braze straight to the server, bypassing the app.</strong> Initially, consent was synced as above via <em>modal → deep link → app → server API</em>. Since the structure had the modal hand a value to the app and the app call the server, the sync was only complete if the app received and processed that deep link. Later, as an API to send the consent state directly from Braze to the server was developed, it was simplified to reflect <strong>Braze → server</strong> in one go, without going through the app. The payload Braze sends looks roughly like this (values are illustrative).</p>
-  <details class="code-fold"><summary><span class="dot">▌</span> Braze → server consent-sync payload</summary><div class="code"><pre>{
-  "userId": "{{${user_id}}}",   <span class="cm">// user identifier injected via Braze Liquid</span>
+  <details class="code-fold"><summary><span class="dot">▌</span> Braze → server consent-sync payload</summary><div class="code"><pre><code>{
+  "userId": "{{${user_id}}}",   // user identifier injected via Braze Liquid
   "userRole": "customer",
-  "eventSourceType": "braze",   <span class="cm">// which path the consent came in through</span>
-  "term": "r-99999",            <span class="cm">// promotion identifier (example)</span>
-  "allowNewsLetters": true,     <span class="cm">// consent to receive marketing notifications</span>
-  "useMarketing": true          <span class="cm">// consent for marketing use of personal data</span>
-}</pre></div></details>
+  "eventSourceType": "braze",   // which path the consent came in through
+  "term": "r-99999",            // promotion identifier (example)
+  "allowNewsLetters": true,     // consent to receive marketing notifications
+  "useMarketing": true          // consent for marketing use of personal data
+}</code></pre></div></details>
   <p>→ What this code does: when consent happens, Braze sends this JSON directly to the service server, so the consent state in the service DB is updated even without the app's relay. The modal focuses only on collecting and recording consent, and the DB reflection is finished between Braze and the server.</p>
 
   <h3>Challenge 6. Drag doesn't work in Braze Preview</h3>
@@ -761,15 +763,15 @@ function logParticipation(prize){
     <li>Apply <code>touch-action: none</code> only to the drag-target element</li>
     <li>Register mouse and touch events separately, but register the touch listener with <code>{passive:false}</code> to block conflicts with screen scrolling during the drag</li>
   </ul>
-  <details class="code-fold"><summary><span class="dot">▌</span> Register drag events</summary><div class="code"><pre>knight.addEventListener('mousedown', onStart);
+  <details class="code-fold"><summary><span class="dot">▌</span> Register drag events</summary><div class="code"><pre><code>knight.addEventListener('mousedown', onStart);
 knight.addEventListener('touchstart', onStart, {passive:false});
-document.addEventListener('touchmove', onMove, {passive:false});</pre></div></details>
+document.addEventListener('touchmove', onMove, {passive:false});</code></pre></div></details>
   <p>→ What this code does: it connects the PC mouse and the mobile finger with the same drag logic, while preventing the screen from scrolling along during a drag on mobile.</p>
   <p>For the record, the brazeBridge call itself was also environment-dependent. I added both a fallback that accepts the new and old bridge, and handling that initializes only after the bridge is ready.</p>
-  <details class="code-fold"><summary><span class="dot">▌</span> Wait for the bridge to be ready</summary><div class="code"><pre>function getBridge(){ return window.brazeBridge || window.appboyBridge || null; }
+  <details class="code-fold"><summary><span class="dot">▌</span> Wait for the bridge to be ready</summary><div class="code"><pre><code>function getBridge(){ return window.brazeBridge || window.appboyBridge || null; }
 
 if(window.brazeBridge || window.appboyBridge) initTermsVisibility();
-else window.addEventListener('ab.BridgeReady', initTermsVisibility);</pre></div></details>
+else window.addEventListener('ab.BridgeReady', initTermsVisibility);</code></pre></div></details>
   <p>→ What this code does: it uses whichever bridge exists, new (brazeBridge) or old (appboyBridge), and if the bridge isn't in place yet, it waits for the “ready” signal before starting.</p>
 
   <h3>Challenge 7. The send-time value and the real-time value differ</h3>
