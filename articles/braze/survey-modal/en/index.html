@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Building a Braze IAM Survey Modal — Hayeon Song</title>
+<meta name="description" content="Validating a promotion plan with real user-response data — building a multi-step branching survey engine inside a single IAM message and cross-checking the responses against behavioral data."/>
+<meta name="author" content="Hayeon Song (Daina)"/>
+<meta name="keywords" content="Braze, In-App Message, IAM, CRM, lifecycle marketing, SQL, BigQuery, survey design, segmentation, Growth Marketing, Hayeon Song, Daina Song"/>
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+<meta name="theme-color" content="#1f1f2b"/>
+<link rel="canonical" href="https://dainahys.com/articles/braze/survey-modal/en/"/>
+<link rel="alternate" hreflang="ko" href="https://dainahys.com/articles/braze/survey-modal/"/>
+<link rel="alternate" hreflang="en" href="https://dainahys.com/articles/braze/survey-modal/en/"/>
+<link rel="alternate" hreflang="x-default" href="https://dainahys.com/articles/braze/survey-modal/"/>
+<link rel="next" href="https://dainahys.com/articles/braze/iam-modal/en/"/>
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="Hayeon Song — Growth Marketing Portfolio"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:title" content="Building a Braze IAM Survey Modal — Validating a Promotion Plan with Real User-Response Data"/>
+<meta property="og:description" content="Building a multi-step branching survey engine inside a single IAM message and cross-checking the responses against behavioral data."/>
+<meta property="og:url" content="https://dainahys.com/articles/braze/survey-modal/en/"/>
+<meta property="og:image" content="https://dainahys.com/articles/assets/braze-survey-modal-og.png"/>
+<meta property="article:published_time" content="2026-02-28"/>
+<meta property="article:modified_time" content="2026-06-14"/>
+<meta property="article:author" content="Hayeon Song"/>
+<meta property="article:section" content="Growth / CRM"/>
+<meta property="article:tag" content="Braze"/>
+<meta property="article:tag" content="In-App Message"/>
+<meta property="article:tag" content="CRM"/>
+<meta property="article:tag" content="survey design"/>
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Building a Braze IAM Survey Modal — Validating a Promotion Plan with Real User-Response Data"/>
+<meta name="twitter:description" content="Building a multi-step branching survey engine inside a single IAM message and cross-checking the responses against behavioral data."/>
+<meta name="twitter:image" content="https://dainahys.com/articles/assets/braze-survey-modal-og.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/articles/assets/article.css"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://dainahys.com/#person",
+      "name": "Hayeon Song",
+      "alternateName": ["송하연", "Daina"],
+      "url": "https://dainahys.com",
+      "jobTitle": "Growth Marketer",
+      "knowsAbout": ["Braze", "CRM lifecycle marketing", "In-App Messaging", "SQL", "BigQuery", "A/B testing", "Segmentation"],
+      "sameAs": ["https://dainahys.com", "https://github.com/dainahys"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://dainahys.com/#website",
+      "url": "https://dainahys.com",
+      "name": "Hayeon Song — Growth Marketing Portfolio",
+      "inLanguage": "ko",
+      "publisher": { "@id": "https://dainahys.com/#person" }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://dainahys.com/articles/braze/survey-modal/en/#article",
+      "headline": "Building a Braze IAM Survey Modal: Validating a Promotion Plan with Real User-Response Data",
+      "description": "Building a multi-step branching survey engine inside a single IAM message and cross-checking the responses against behavioral data.",
+      "inLanguage": "en",
+      "datePublished": "2026-02-28",
+      "dateModified": "2026-06-14",
+      "author": { "@id": "https://dainahys.com/#person" },
+      "publisher": { "@id": "https://dainahys.com/#person" },
+      "isPartOf": { "@id": "https://dainahys.com/#website" },
+      "mainEntityOfPage": "https://dainahys.com/articles/braze/survey-modal/en/",
+      "image": "https://dainahys.com/articles/assets/braze-survey-modal-og.png",
+      "articleSection": "Growth / CRM",
+      "proficiencyLevel": "Expert",
+      "keywords": "Braze, In-App Message, IAM, CRM, SQL, BigQuery, survey design, segmentation, Growth Marketing",
+      "about": [
+        { "@type": "Thing", "name": "Braze" },
+        { "@type": "Thing", "name": "In-App Messaging" },
+        { "@type": "Thing", "name": "CRM lifecycle marketing" },
+        { "@type": "Thing", "name": "survey design" }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://dainahys.com/articles/braze/survey-modal/en/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://dainahys.com" },
+        { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://dainahys.com/#articles" },
+        { "@type": "ListItem", "position": 3, "name": "Building a Braze IAM Survey Modal" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://dainahys.com/articles/braze/survey-modal/en/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why build the survey as a Braze In-App Message (IAM) instead of using an external survey tool?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because the responses are written directly to the user profile, where they can be cross-checked against behavioral data, and because reach, segmentation, and follow-up campaigns all flow as one stream without a separate tool. Unlike an external form, partial responses are also preserved on the profile."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How did you implement a multi-step, branching survey inside a single IAM message?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "I built a custom page-id-based router (a goToPage function with a back stack) that turns one static message into something that switches pages like an SPA, branches into segment-specific paths based on the responses, and generates the monthly questions dynamically from a template."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you extract the survey response data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In-progress responses are accumulated in a Custom Attribute, and when the 255-character limit is exceeded they are split into chunks. Completed responses are logged as a Custom Event and then extracted with Braze Query Builder SQL, calling the external_user_id column to get the real, unhashed identifier."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What did this survey reveal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By cross-checking survey responses against behavioral data, it confirmed that the sharp drop in promotion participation was not seasonality but a problem of structure — reach, recall, and reward design."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Hayeon Song</a>
+    <div class="topbar-right">
+      <a class="back" href="/index.html#articles-en">← Articles</a>
+      <span class="langtoggle"><a href="../">KO</a><a class="on" aria-current="page">EN</a></span>
+    </div>
+  </div>
+</div>
+
+<article>
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Growth · CRM · Article</p>
+    <h1>Building a Braze IAM Survey Modal:<br/>Validating a Promotion Plan with Real User-Response Data</h1>
+    <p class="deck">A record of building — not a throwaway in-app, but a reusable multi-step branching survey engine — inside a single IAM message, and cross-checking the responses against the same users' actual behavioral data to finally close the question: “seasonality, or structure?”</p>
+    <div class="meta">
+      <span class="chip">Braze IAM</span>
+      <span class="chip">Custom HTML / JS</span>
+      <span class="chip">Custom Event · Attribute</span>
+      <span class="chip">BigQuery</span>
+      <span class="chip">Behavioral cross-check</span>
+    </div>
+    <p class="byline">Hayeon (Daina) Song · 2026</p>
+  </div>
+</header>
+
+<!-- 1 -->
+<section><div class="wrap">
+  <p class="sec-label">Background</p>
+  <h2>Why we decided to ask</h2>
+  <p>For a marketer, promotions are homework that never ends. Which benefit will get a reaction, how to deliver it so participation grows, which mix will work this time — even after you wrap one up, the same questions come back next quarter. You vaguely know that the users who participated and the ones who never did want different things, but what that actually is, you patch over every time with internal hypotheses and past performance.</p>
+  <p>Then came a moment when that guesswork stopped working. The November promotion did well, but as we moved into December and January the efficiency visibly dropped off. The trouble was that the cause split two ways — was it the seasonality of the year-end holidays (an external factor), or a problem of structure like reach, benefit, or fatigue? The two call for opposite responses. If it's seasonality, you wait it out; if it's structural, you have to change the promotion design itself.</p>
+  <p>Existing performance data couldn't tell the two apart. Click-through and conversion rates show <em>what</em> dropped, but not <em>why</em>. So this time we stopped guessing and decided to ask users directly. Not “how was it?” — instead, we set up four hypotheses and designed the survey to validate them.</p>
+  <ul class="hyp">
+    <li><b>H1 Exposure</b>They didn't notice the promotion because notifications were OFF or channel reach was low</li>
+    <li><b>H2 Value</b>The December–January benefit was less attractive than expected</li>
+    <li><b>H3 Fatigue</b>Repeated messages built up fatigue and they tuned it out</li>
+    <li><b>H4 Seasonality</b>External factors like year-end busyness or spending pressure</li>
+  </ul>
+  <p>These four hypotheses became the skeleton of the survey itself.</p>
+</div></section>
+
+<!-- 2 -->
+<section><div class="wrap">
+  <p class="sec-label">Design principles</p>
+  <h2>Sample design came before the screens</h2>
+  <p>A survey doesn't get better just because you build the screens well. You have to decide first who to ask, and how many responses you need before you can trust them. Before building anything, we locked down three things.</p>
+  <ol class="reasons">
+    <li><span class="lead">We split the audience by behavior.</span> We graded activity level (Light · Mid · Heavy) by the frequency of core actions from January to October, then crossed that with November–January participation patterns in BigQuery to build segments. For each segment, we calculated in advance how many responses are needed to mean something, at a 90% confidence level and 8% margin of error. Rather than aiming for a high total response count, we set the goal as filling the minimum sample for each segment.</li>
+    <li><span class="lead">We suppressed bias by design.</span> Users with strong complaints raise their voices, benefit-sensitive users pile in, and the users who are actually too worn out and about to leave ignore the survey entirely. We put a mitigation in place for each type, and deliberately ran the first wave <strong>without any reward</strong>. Lead with a reward and you draw in only the benefit-sensitive users. We collected the pure responses first, then attached a reward in a second wave only to the segments that were short on sample.</li>
+    <li><span class="lead">We made the responses joinable with behavioral data.</span> This is ultimately what made us choose IAM over an external survey tool.</li>
+  </ol>
+  <p style="font-size:14px;color:var(--faint)">(The sample sizing and the question/branching design were refined together with an in-house UX researcher.)</p>
+</div></section>
+
+<!-- 3 -->
+<section><div class="wrap">
+  <p class="sec-label">Implementation · Why IAM</p>
+  <h2>Why inside an IAM instead of an external survey tool</h2>
+  <p>There are plenty of ways to collect a survey. You can build a separate survey page, or send a link by push or email. We still chose a Braze IAM modal, for three reasons.</p>
+  <ol class="reasons">
+    <li>You ask in the very moment the user is already inside the app. There's no bouncing them out to an external page, so the barrier to responding is low.</li>
+    <li>You can target the exposure by segment. Based on promotion participation, recent visits, or specific behavioral events, you can give participants and non-participants different paths.</li>
+    <li>The biggest reason is the data. <strong>The responses attach directly to that user's Braze profile.</strong> External survey responses are a dataset that lives off on its own, but IAM responses stay as Custom Events and Attributes — they become segments, and they can even be <em>cross-checked against the same user's actual behavioral data</em>. That's exactly what made the analysis covered later possible.</li>
+  </ol>
+</div></section>
+
+<!-- 4 -->
+<section><div class="wrap">
+  <p class="sec-label">Implementation · Page router</p>
+  <h2>Turning one static message into a multi-step flow</h2>
+  <p>A Braze IAM is, by default, a single static message — not a multi-step survey tool. So I put an SPA-style page router directly inside one Custom HTML message. Every question lives as a <code>.bz-page[page-id]</code> unit, and only one is shown <code>active</code> at a time.</p>
+
+  <p>The actual modal is made up of screens like these — intro, single-/multi-select, monthly event cards, all the way to a 5-point scale, all switching within one message.</p>
+  <figure class="diagram">
+    <div class="ui-gallery">
+      <div class="ui-screen">
+        <div class="ui-cap">Intro</div>
+        <div class="ui-modal">
+          <div class="um-img" style="height:74px">Icon</div>
+          <p class="um-title" style="margin-top:10px">Event Experience Survey</p>
+          <p class="um-desc">Takes about 1–2 minutes<br>Your input makes for better benefits.</p>
+          <div class="ui-btn">Start survey</div>
+        </div>
+      </div>
+
+      <div class="ui-screen">
+        <div class="ui-cap">Single select · auto-advance on select</div>
+        <div class="ui-modal">
+          <p class="um-title">When did you first<br>use the service?</p>
+          <div class="ui-opts">
+            <div class="ui-opt"><span class="ui-dot"></span>More than a year ago</div>
+            <div class="ui-opt sel"><span class="ui-dot"></span>6 months–1 year ago</div>
+            <div class="ui-opt"><span class="ui-dot"></span>Within 6 months</div>
+            <div class="ui-opt"><span class="ui-dot"></span>Don't remember</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-screen">
+        <div class="ui-cap">Monthly dynamic card</div>
+        <div class="ui-modal">
+          <p class="um-title">Have you seen the<br>November event?</p>
+          <div class="ui-card"><div class="um-img">Event image</div><div class="um-label">November promotion</div></div>
+          <div class="ui-opts">
+            <div class="ui-opt"><span class="ui-dot"></span>Yes, I've seen it</div>
+            <div class="ui-opt"><span class="ui-dot"></span>No / don't remember</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-screen">
+        <div class="ui-cap">5-point scale</div>
+        <div class="ui-modal">
+          <p class="um-title">Was the benefit<br>attractive?</p>
+          <div class="ui-scale">
+            <div class="ui-opt"><span class="ui-dot"></span>1</div>
+            <div class="ui-opt"><span class="ui-dot"></span>2</div>
+            <div class="ui-opt sel"><span class="ui-dot"></span>3</div>
+            <div class="ui-opt"><span class="ui-dot"></span>4</div>
+            <div class="ui-opt"><span class="ui-dot"></span>5</div>
+          </div>
+          <div class="ui-scale-lab"><span>Not at all</span><span>Very</span></div>
+        </div>
+      </div>
+
+      <div class="ui-screen">
+        <div class="ui-cap">Multi select · enabled at 1 or more</div>
+        <div class="ui-modal">
+          <p class="um-title">Pick the channels where you<br>get event news</p>
+          <p class="um-desc">Select all that apply</p>
+          <div class="ui-opts">
+            <div class="ui-opt sel"><span class="ui-dot ui-sq"></span>App push</div>
+            <div class="ui-opt"><span class="ui-dot ui-sq"></span>KakaoTalk</div>
+            <div class="ui-opt"><span class="ui-dot ui-sq"></span>Email</div>
+          </div>
+          <div class="ui-btn">Next</div>
+        </div>
+      </div>
+    </div>
+    <figcaption>An example reproducing the actual IAM modal screens. A radio advances to the next page the instant it's selected; a checkbox requires at least one selection before “Next” becomes active.</figcaption>
+  </figure>
+  <figure class="diagram">
+    <svg viewBox="0 0 700 206" xmlns="http://www.w3.org/2000/svg" font-family="DM Mono, monospace" font-size="11.5">
+      <defs><marker id="m4" markerWidth="8" markerHeight="8" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#8a8694"/></marker></defs>
+      <rect x="20" y="24" width="320" height="166" rx="12" fill="#fff" stroke="#d9d7d2"/>
+      <text x="36" y="45" fill="#111111">Static message · 1 HTML page</text>
+      <rect x="36" y="56" width="288" height="30" rx="6" fill="#f3f2ef" stroke="#1f1f2b"/>
+      <text x="50" y="75" fill="#111111">.bz-page[q0-1]  ·  display:block</text>
+      <rect x="36" y="94" width="288" height="26" rx="6" fill="#fff" stroke="#ebeae7"/>
+      <text x="50" y="111" fill="#9a95a5">.bz-page[q0-0]  ·  none</text>
+      <rect x="36" y="126" width="288" height="26" rx="6" fill="#fff" stroke="#ebeae7"/>
+      <text x="50" y="143" fill="#9a95a5">.bz-page[q0-1a]  ·  none</text>
+      <rect x="36" y="158" width="288" height="26" rx="6" fill="#fff" stroke="#ebeae7"/>
+      <text x="50" y="175" fill="#9a95a5">.bz-page[q0-1b]  ·  none</text>
+      <line x1="340" y1="71" x2="404" y2="71" stroke="#8a8694" stroke-width="1.5" marker-end="url(#m4)"/>
+      <text x="372" y="63" text-anchor="middle" fill="#8a8694" font-size="10">goToPage()</text>
+      <rect x="408" y="24" width="272" height="166" rx="12" fill="#fff" stroke="#d9d7d2"/>
+      <text x="424" y="45" fill="#111111">pageHistory · back stack</text>
+      <rect x="424" y="56" width="240" height="26" rx="6" fill="#f3f2ef" stroke="#d9d7d2"/><text x="436" y="73" fill="#5b5670">q0-1   ← current</text>
+      <rect x="424" y="88" width="240" height="26" rx="6" fill="#fff" stroke="#ebeae7"/><text x="436" y="105" fill="#8a8694">q0-0</text>
+      <line x1="544" y1="124" x2="544" y2="150" stroke="#8a8694" stroke-width="1.5" marker-end="url(#m4)"/>
+      <text x="544" y="170" text-anchor="middle" fill="#8a8694" font-size="10">goBack() → pop → previous page</text>
+    </svg>
+    <figcaption>From a single static message, toggling only .bz-page[page-id] switches pages like an SPA, and pageHistory implements “back”.</figcaption>
+  </figure>
+  <div class="code">
+    <div class="code-label"><span class="dot">▌</span> goToPage()</div>
+<pre>var pageHistory = [];
+
+function goToPage(pageId) {
+  var currentPage = document.querySelector('.bz-page.active');
+
+  <span class="cm">// On entering the first question from the intro, fire the 'survey started' event</span>
+  if (currentPage &amp;&amp; currentPage.getAttribute('page-id') === 'intro' &amp;&amp; pageId !== 'intro') {
+    surveyStarted = true;
+    logSurveyStarted();
+  }
+
+  logProgressEvent(pageId);   <span class="cm">// Save progress to the user profile</span>
+
+  if (currentPage) pageHistory.push(currentPage.getAttribute('page-id'));
+  document.querySelectorAll('.bz-page').forEach(function (page) {
+    page.classList.toggle('active', page.getAttribute('page-id') === pageId);
+  });
+}</pre>
+  </div>
+  <p>A <code>pageHistory</code> stack also supports a “Back” button. For radio (single-select) questions, I hid the “Next” button and made them auto-advance the instant a choice is made; checkboxes (multi-select) only activate the button once at least one is chosen. Reducing the time spent on any one question page directly affects completion rate.</p>
+</div></section>
+
+<!-- 5 -->
+<section><div class="wrap">
+  <p class="sec-label">Implementation · Branching design</p>
+  <h2>Same modal, a different survey for each respondent</h2>
+  <p>The core of this survey was that <em>we don't throw the same questions at everyone</em>. The path branches based on the response, and at the end the user is classified into one of four segments.</p>
+  <div class="code">
+    <div class="code-label"><span class="dot">▌</span> segmentLabels</div>
+<pre>var segmentLabels = {
+  'A': 'Unaware (never saw the event)',
+  'B': 'Participant (joined the event)',
+  'C': 'Non-participant (saw it but didn't join)',
+  'E': 'Low-frequency user'
+};</pre>
+  </div>
+  <p>Each question's “Next” isn't a plain page move — it's wired to a handler that reads the response value and decides the next path. For example, if the annual request count is “none,” it branches to the low-frequency path; otherwise, to the general path. And after all the monthly event responses are in, the very next batch of questions changes depending on what type the person is.</p>
+  <div class="code">
+    <div class="code-label"><span class="dot">▌</span> handleQ0_1a() · finishEventQuestions()</div>
+<pre>function handleQ0_1a() {
+  var value = getPageValue('q0-1a');
+  if (value === 'none') {           <span class="cm">// Low-frequency (E) path</span>
+    surveyAnswers.isLowFrequency = true;
+    goToPage('q0-1-1');
+  } else {
+    surveyAnswers.isLowFrequency = false;
+    goToPage('q0-1b');
+  }
+}
+
+function finishEventQuestions() {
+  if (seenEvents.length === 0)        return goToPage('a1'); <span class="cm">// Unaware (A)</span>
+  if (participatedEvents.length &gt; 0)  return goToPage('b1'); <span class="cm">// Participant (B)</span>
+  goToPage('c1');                                            <span class="cm">// Non-participant (C)</span>
+}</pre>
+  </div>
+  <p>This branching isn't a UX device to smooth out the screen flow — it's <strong>a design for validating the hypotheses</strong>. The Unaware (A) path splits the exposure hypothesis — was there no touchpoint at all, or did they see it and ignore it? Participants (B) are asked about friction, value, and trust in the participation process; non-participants (C) are asked why they didn't join, split across value, fatigue, and circumstance. At the end, the common question where all paths converge asks “how has your intent changed versus November,” separating seasonality from a structural problem. This is exactly why different questions go out depending on who the respondent is.</p>
+
+  <figure class="diagram">
+    <div class="mtable">
+      <table>
+        <thead><tr><th>Segment</th><th>Definition</th><th>What the branch digs into (hypothesis)</th></tr></thead>
+        <tbody>
+          <tr><td>A Unaware</td><td>Never saw the event</td><td>Exposure — was there no touchpoint, or did they see it and ignore it (H1)</td></tr>
+          <tr><td>B Participant</td><td>Joined the event</td><td>Friction · value · trust in the participation process (H2)</td></tr>
+          <tr><td>C Non-participant</td><td>Saw it but didn't join</td><td>Reason for not joining — value · fatigue · circumstance (H2 · H3)</td></tr>
+          <tr><td>E Low-frequency</td><td>Low activity / request frequency</td><td>Low-frequency user path</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <figcaption>The four paths get different questions but converge at the end on a common question (change in intent vs. November) to separate <strong>seasonality (H4) vs. structure</strong>.</figcaption>
+  </figure>
+  <p>The full survey flow, branching by user type, looks like this.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 720 524" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Survey branching flow diagram by user type">
+      <defs>
+        <marker id="ah" markerWidth="8" markerHeight="8" refX="5.5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#1f1f2b"/>
+        </marker>
+      </defs>
+
+      <!-- Screening -->
+      <rect x="170" y="16" width="380" height="84" rx="10" fill="#fff" stroke="#1f1f2b" stroke-width="1.5"/>
+      <text x="360" y="40" text-anchor="middle" font-family="DM Mono,monospace" font-size="10.5" fill="#1f1f2b" letter-spacing="1">Screening · common</text>
+      <text x="360" y="61" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="12.5" font-weight="600" fill="#1a1a1a">First-use timing · frequency · notification opt-in</text>
+      <text x="360" y="82" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="10.5" fill="#5b5670">Nov/Dec/Jan event awareness → path → participation · monthly repeat</text>
+
+      <!-- Branch distribution -->
+      <line x1="360" y1="100" x2="360" y2="130" stroke="#8a8694" stroke-width="1.5"/>
+      <text x="368" y="120" font-family="DM Mono,monospace" font-size="10" fill="#8a8694">branch by response</text>
+      <line x1="96" y1="130" x2="624" y2="130" stroke="#8a8694" stroke-width="1.5"/>
+      <line x1="96" y1="130" x2="96" y2="158" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ah)"/>
+      <line x1="272" y1="130" x2="272" y2="158" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ah)"/>
+      <line x1="448" y1="130" x2="448" y2="158" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ah)"/>
+      <line x1="624" y1="130" x2="624" y2="158" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ah)"/>
+
+      <!-- A -->
+      <rect x="24" y="160" width="144" height="150" rx="10" fill="#f3f2ef" stroke="#d9d7d2"/>
+      <text x="96" y="186" text-anchor="middle" font-family="DM Mono,monospace" font-size="11.5" font-weight="600" fill="#1f1f2b">A · Unaware</text>
+      <text text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11.5" fill="#1a1a1a"><tspan x="96" y="216">Didn't see the event</tspan><tspan x="96" y="234">No touchpoint, or</tspan><tspan x="96" y="252">deliberate ignore?</tspan></text>
+      <text x="96" y="294" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#5b5670">hypothesis · H1</text>
+
+      <!-- B -->
+      <rect x="200" y="160" width="144" height="150" rx="10" fill="#f3f2ef" stroke="#d9d7d2"/>
+      <text x="272" y="186" text-anchor="middle" font-family="DM Mono,monospace" font-size="11.5" font-weight="600" fill="#1f1f2b">B · Participant</text>
+      <text text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11.5" fill="#1a1a1a"><tspan x="272" y="225">Participation experience:</tspan><tspan x="272" y="243">friction · value · trust</tspan></text>
+      <text x="272" y="294" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#5b5670">hypothesis · H2</text>
+
+      <!-- C -->
+      <rect x="376" y="160" width="144" height="150" rx="10" fill="#f3f2ef" stroke="#d9d7d2"/>
+      <text x="448" y="186" text-anchor="middle" font-family="DM Mono,monospace" font-size="11.5" font-weight="600" fill="#1f1f2b">C · Non-participant</text>
+      <text text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11.5" fill="#1a1a1a"><tspan x="448" y="225">Aware but didn't join</tspan><tspan x="448" y="243">value · fatigue · circumstance</tspan></text>
+      <text x="448" y="294" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#5b5670">hypothesis · H2·H3·H4</text>
+
+      <!-- E -->
+      <rect x="552" y="160" width="144" height="150" rx="10" fill="#f3f2ef" stroke="#d9d7d2"/>
+      <text x="624" y="186" text-anchor="middle" font-family="DM Mono,monospace" font-size="11.5" font-weight="600" fill="#1f1f2b">E · Low-frequency</text>
+      <text text-anchor="middle" font-family="Pretendard,sans-serif" font-size="11.5" fill="#1a1a1a"><tspan x="624" y="225">Promotion touchpoint ·</tspan><tspan x="624" y="243">barrier to joining</tspan></text>
+      <text x="624" y="294" text-anchor="middle" font-family="DM Mono,monospace" font-size="10" fill="#5b5670">hypothesis · H1·H2</text>
+
+      <!-- Converge -->
+      <line x1="96" y1="310" x2="96" y2="344" stroke="#8a8694" stroke-width="1.5"/>
+      <line x1="272" y1="310" x2="272" y2="344" stroke="#8a8694" stroke-width="1.5"/>
+      <line x1="448" y1="310" x2="448" y2="344" stroke="#8a8694" stroke-width="1.5"/>
+      <line x1="624" y1="310" x2="624" y2="344" stroke="#8a8694" stroke-width="1.5"/>
+      <line x1="96" y1="344" x2="624" y2="344" stroke="#8a8694" stroke-width="1.5"/>
+      <line x1="360" y1="344" x2="360" y2="372" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ah)"/>
+
+      <!-- Common -->
+      <rect x="170" y="372" width="380" height="74" rx="10" fill="#fff" stroke="#1f1f2b" stroke-width="1.5"/>
+      <text x="360" y="396" text-anchor="middle" font-family="DM Mono,monospace" font-size="10.5" fill="#1f1f2b" letter-spacing="1">Common convergence</text>
+      <text x="360" y="417" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="12.5" font-weight="600" fill="#1a1a1a">Change in intent vs. November → cause of fatigue</text>
+      <text x="360" y="435" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="10.5" fill="#5b5670">Separating seasonality vs. structure</text>
+
+      <!-- Demo → done -->
+      <line x1="360" y1="446" x2="360" y2="470" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="300" y="470" width="120" height="42" rx="8" fill="#fff" stroke="#d9d7d2"/>
+      <text x="360" y="496" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="12" fill="#1a1a1a">Demographics</text>
+      <line x1="420" y1="491" x2="450" y2="491" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="452" y="470" width="96" height="42" rx="8" fill="#1f1f2b"/>
+      <text x="500" y="496" text-anchor="middle" font-family="Pretendard,sans-serif" font-size="12" font-weight="600" fill="#fff">Done</text>
+    </svg>
+    <figcaption>Each type takes a different path but converges at the common question. Every step's response is logged as a Custom Event/Attribute, so it's preserved even on drop-off.</figcaption>
+  </figure>
+</div></section>
+
+<!-- 6 -->
+<section><div class="wrap">
+  <p class="sec-label">Implementation · Dynamic generation</p>
+  <h2>Don't hardcode — generate the monthly questions dynamically</h2>
+  <p>This survey had to ask about three separate promotions — November, December, and January. Repeating “did you see the [month] event → how did you find out → did you participate → (satisfaction / reason for not joining)” for each month means dozens of static pages. So I kept a single question page (<code>event-question</code>) and re-rendered its contents each time with a template function.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 700 196" xmlns="http://www.w3.org/2000/svg" font-family="DM Mono, monospace" font-size="11.5">
+      <defs><marker id="m1" markerWidth="8" markerHeight="8" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#8a8694"/></marker></defs>
+      <rect x="20" y="66" width="150" height="64" rx="10" fill="#f3f2ef" stroke="#1f1f2b"/>
+      <text x="95" y="92" text-anchor="middle" fill="#111111" font-weight="500">event-question</text>
+      <text x="95" y="110" text-anchor="middle" fill="#1f1f2b">1 template page</text>
+      <line x1="172" y1="98" x2="246" y2="98" stroke="#8a8694" stroke-width="1.5" marker-end="url(#m1)"/>
+      <text x="209" y="90" text-anchor="middle" fill="#8a8694" font-size="9.5">showEventQuestion()</text>
+      <rect x="250" y="40" width="150" height="116" rx="10" fill="#fff" stroke="#d9d7d2"/>
+      <text x="325" y="58" text-anchor="middle" fill="#8a8694" font-size="10">eventList</text>
+      <rect x="266" y="68" width="118" height="22" rx="5" fill="#fff" stroke="#ebeae7"/><text x="325" y="83" text-anchor="middle" fill="#1a1a1a">November</text>
+      <rect x="266" y="96" width="118" height="22" rx="5" fill="#fff" stroke="#ebeae7"/><text x="325" y="111" text-anchor="middle" fill="#1a1a1a">December</text>
+      <rect x="266" y="124" width="118" height="22" rx="5" fill="#fff" stroke="#ebeae7"/><text x="325" y="139" text-anchor="middle" fill="#1a1a1a">January</text>
+      <line x1="402" y1="98" x2="468" y2="98" stroke="#8a8694" stroke-width="1.5" marker-end="url(#m1)"/>
+      <text x="435" y="90" text-anchor="middle" fill="#8a8694" font-size="10">× 3</text>
+      <rect x="472" y="34" width="208" height="128" rx="10" fill="#f3f2ef" stroke="#d9d7d2"/>
+      <text x="576" y="52" text-anchor="middle" fill="#111111" font-size="10">Monthly question set</text>
+      <text x="490" y="76" fill="#5b5670" font-size="10.5">· Saw it?</text>
+      <text x="490" y="98" fill="#5b5670" font-size="10.5">· How did you find out?</text>
+      <text x="490" y="120" fill="#5b5670" font-size="10.5">· Did you participate?</text>
+      <text x="490" y="142" fill="#5b5670" font-size="10.5">· Satisfaction / reason for not joining</text>
+    </svg>
+    <figcaption>Instead of dozens of static pages, a function re-renders one page (event-question) for each month.</figcaption>
+  </figure>
+  <div class="code">
+    <div class="code-label"><span class="dot">▌</span> showEventQuestion()</div>
+<pre>var eventList = ['nov_event', 'dec_event', 'jan_event'];
+
+function showEventQuestion() {
+  var event = eventData[eventList[currentEventIndex]];
+  var modal = document.getElementById('event-question-modal');
+
+  if      (currentQuestionType === 'seen')         modal.innerHTML = buildSeenQuestion(event);
+  else if (currentQuestionType === 'channel')      modal.innerHTML = buildChannelQuestion(event);
+  else if (currentQuestionType === 'participated') modal.innerHTML = buildParticipatedQuestion(event);
+  <span class="cm">// …attract / non_participate_reason</span>
+
+  goToPage('event-question');
+}</pre>
+  </div>
+  <p>Even if events grow, you just add one key to the <code>eventList</code> array. Question text and images are injected from <code>eventData</code>, so the screen is a single page while in practice as many screens as month × question-type are generated dynamically.</p>
+  <p>By this point, the router, branching, dynamic generation, and data logging combine into a single <strong>reusable survey engine</strong>. The next survey isn't built from scratch — you just swap in the question definitions (<code>eventData</code>) and the branching rules. It's not a one-off where you reconstruct the in-app each time, but an asset designed to be implemented over and over.</p>
+</div></section>
+
+<!-- 7 -->
+<section><div class="wrap">
+  <p class="sec-label">Implementation · Data logging</p>
+  <h2>From responses to data — and the 255-character wall</h2>
+  <p>The most important thing in a survey modal isn't displaying the question — it's <strong>leaving the responses in a form usable in later campaigns</strong>. I logged them two ways. At completion, all responses are fired as a single Custom Event (<code>promo_survey_completed</code>), carrying the segment (path) and each answer together as properties.</p>
+  <p style="font-size:14px;color:var(--faint)">※ The Custom Event/Attribute names in this article (<code>promo_survey_completed</code>, <code>promo_survey_responses</code>, etc.) are examples to illustrate the structure.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 700 138" xmlns="http://www.w3.org/2000/svg" font-family="DM Mono, monospace">
+      <defs><marker id="m2" markerWidth="8" markerHeight="8" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#8a8694"/></marker></defs>
+      <rect x="20" y="40" width="116" height="56" rx="9" fill="#f3f2ef" stroke="#1f1f2b"/><text x="78" y="65" text-anchor="middle" fill="#1a1a1a" font-size="11">Log on each step</text><text x="78" y="118" text-anchor="middle" fill="#8a8694" font-size="9.5">logProgressEvent()</text><line x1="136" y1="68" x2="158" y2="68" stroke="#8a8694" stroke-width="1.5" marker-end="url(#m2)"/><rect x="158" y="40" width="116" height="56" rx="9" fill="#fff" stroke="#d9d7d2"/><text x="216" y="65" text-anchor="middle" fill="#1a1a1a" font-size="11">Accumulate Attribute</text><text x="216" y="118" text-anchor="middle" fill="#8a8694" font-size="9.5">survives drop-off</text><line x1="274" y1="68" x2="296" y2="68" stroke="#8a8694" stroke-width="1.5" marker-end="url(#m2)"/><rect x="296" y="40" width="116" height="56" rx="9" fill="#fff" stroke="#d9d7d2"/><text x="354" y="65" text-anchor="middle" fill="#1a1a1a" font-size="11">Chunk split</text><text x="354" y="118" text-anchor="middle" fill="#8a8694" font-size="9.5">255 chars↑ · _2 · _3</text><line x1="412" y1="68" x2="434" y2="68" stroke="#8a8694" stroke-width="1.5" marker-end="url(#m2)"/><rect x="434" y="40" width="116" height="56" rx="9" fill="#fff" stroke="#d9d7d2"/><text x="492" y="65" text-anchor="middle" fill="#1a1a1a" font-size="11">Completion event</text><text x="492" y="118" text-anchor="middle" fill="#8a8694" font-size="9.5">[Q] readable keys</text><line x1="550" y1="68" x2="572" y2="68" stroke="#8a8694" stroke-width="1.5" marker-end="url(#m2)"/><rect x="572" y="40" width="116" height="56" rx="9" fill="#f3f2ef" stroke="#1f1f2b"/><text x="630" y="65" text-anchor="middle" fill="#1a1a1a" font-size="11">Query Builder extract</text><text x="630" y="118" text-anchor="middle" fill="#8a8694" font-size="9.5">external_user_id</text>
+    </svg>
+    <figcaption>In-progress responses accumulate in an Attribute (preserved even on drop-off); completion goes to an Event. Extraction is via Query Builder.</figcaption>
+  </figure>
+  <div class="code">
+    <div class="code-label"><span class="dot">▌</span> saveSurveyData()</div>
+<pre>function saveSurveyData(status) {
+  var segment = surveyAnswers.path || 'screenout';
+  var eventProperties = {
+    survey_status: status,
+    segment: segment,
+    segment_label: segmentLabels[segment] || segment,
+    completed_at: new Date().toISOString()
+  };
+  Object.keys(surveyAnswers).forEach(function (key) {
+    if (key === 'path' || key === 'isLowFrequency') return;
+    var v = surveyAnswers[key];
+    eventProperties[key] = Array.isArray(v) ? v.join(',') : String(v);
+  });
+
+  var bridge = window.brazeBridge || window.appboyBridge;
+  bridge.logCustomEvent('promo_survey_completed', eventProperties);
+  bridge.requestImmediateDataFlush();
+}</pre>
+  </div>
+  <p>I added one more detail here. I separated the on-screen text from the logged value, but <em>at the same time</em> also kept a human-readable form alongside it. If only code values pile up (<code>q0_1a_request_count = none</code>), you'd need a lookup table every time you read a report later. So I stored <code>[Q] question text = answer text</code> together with it.</p>
+  <div class="code">
+    <div class="code-label"><span class="dot">▌</span> Inside getPageValue()</div>
+<pre>surveyAnswers[key] = value;                        <span class="cm">// Code value for analysis</span>
+surveyAnswers['[Q] ' + questionText] = answerText; <span class="cm">// Human-readable value</span></pre>
+  </div>
+  <p>The problem was mid-survey drop-off. If the event is only logged on completion, the responses of users who don't finish are all lost. So every time a page advanced, I saved the progress to a Custom Attribute — <strong>even on drop-off, the responses up to that point stay on the profile.</strong> This is a clear advantage over collecting responses with an external survey tool like Google Forms. With an external tool, any response not submitted to the end vanishes wholesale; here, the responses as of any page you've advanced past are preserved on the user profile. But Braze Attribute string values have a 255-character limit, so once responses pile up, a single JSON blob exceeds it. I split it into 250-character chunks across multiple Attributes, and cleaned up by emptying chunks no longer in use.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 700 188" xmlns="http://www.w3.org/2000/svg" font-family="DM Mono, monospace" font-size="11">
+      <defs><marker id="m3" markerWidth="8" markerHeight="8" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#8a8694"/></marker></defs>
+      <rect x="20" y="26" width="660" height="36" rx="8" fill="#f3f2ef" stroke="#1f1f2b"/>
+      <text x="36" y="49" fill="#111111">promo_survey_responses = { …accumulating response JSON… }</text>
+      <text x="664" y="49" text-anchor="end" fill="#1f1f2b">over 255 chars</text>
+      <line x1="120" y1="62" x2="120" y2="96" stroke="#8a8694" stroke-width="1.5" marker-end="url(#m3)"/>
+      <line x1="330" y1="62" x2="330" y2="96" stroke="#8a8694" stroke-width="1.5" marker-end="url(#m3)"/>
+      <line x1="510" y1="62" x2="510" y2="96" stroke="#8a8694" stroke-width="1.5" marker-end="url(#m3)"/>
+      <text x="350" y="84" text-anchor="middle" fill="#8a8694" font-size="10">split into 250-char chunks</text>
+      <rect x="20" y="100" width="200" height="48" rx="8" fill="#fff" stroke="#d9d7d2"/>
+      <text x="120" y="121" text-anchor="middle" fill="#1a1a1a">Chunk 1 · 250 chars</text>
+      <text x="120" y="138" text-anchor="middle" fill="#8a8694" font-size="10">→ _responses</text>
+      <rect x="232" y="100" width="168" height="48" rx="8" fill="#fff" stroke="#d9d7d2"/>
+      <text x="316" y="121" text-anchor="middle" fill="#1a1a1a">Chunk 2</text>
+      <text x="316" y="138" text-anchor="middle" fill="#8a8694" font-size="10">→ _2</text>
+      <rect x="412" y="100" width="120" height="48" rx="8" fill="#fff" stroke="#d9d7d2"/>
+      <text x="472" y="121" text-anchor="middle" fill="#1a1a1a">Chunk 3</text>
+      <text x="472" y="138" text-anchor="middle" fill="#8a8694" font-size="10">→ _3</text>
+      <rect x="544" y="100" width="136" height="48" rx="8" fill="#fff" stroke="#ebeae7" stroke-dasharray="4 3"/>
+      <text x="612" y="121" text-anchor="middle" fill="#9a95a5">_4 · _5 …</text>
+      <text x="612" y="138" text-anchor="middle" fill="#9a95a5" font-size="10">unused → null</text>
+    </svg>
+    <figcaption>Work around the Braze Attribute 255-character string limit by splitting into 250-char chunks, and empty the chunks no longer in use.</figcaption>
+  </figure>
+  <div class="code">
+    <div class="code-label"><span class="dot">▌</span> logProgressEvent() — chunk split</div>
+<pre>var fullJson = JSON.stringify(responseData);
+var CHUNK_SIZE = 250;
+var totalChunks = Math.ceil(fullJson.length / CHUNK_SIZE);
+var user = bridge.getUser();
+
+for (var i = 0; i &lt; totalChunks; i++) {
+  var chunk = fullJson.substring(i * CHUNK_SIZE, (i + 1) * CHUNK_SIZE);
+  var attrName = i === 0 ? 'promo_survey_responses' : 'promo_survey_responses_' + (i + 1);
+  user.setCustomUserAttribute(attrName, chunk);
+}
+<span class="cm">// Clean up chunks that were larger in a previous round</span>
+for (var j = totalChunks; j &lt; 5; j++) {
+  var name = j === 0 ? 'promo_survey_responses' : 'promo_survey_responses_' + (j + 1);
+  user.setCustomUserAttribute(name, null);
+}</pre>
+  </div>
+  <p>In practice, the responses accumulate like this. While in progress, partial responses pile up in a Custom Attribute; completed responses stack up as an event. This event is recorded to Braze right away, but in our in-house analytics environment (Amplitude) it wasn't visible, because the Custom Event forwarding option in Currents was turned off. Turning forwarding on spikes the event volume and strains the analytics tool's ingestion limit, so for the purpose of extracting only the survey responses, the Braze Query Builder was the better fit. Pulled with Query Builder, it comes out as rows holding both the code values and the human-readable questions and answers.</p>
+  <div class="code">
+    <div class="code-label"><span class="dot">▌</span> Custom Attribute · promo_survey_responses (accumulating in progress)</div>
+<pre><span class="cm">// Entering q0-0 — start</span>
+{"current_page":"q0-0"}
+
+<span class="cm">// Right after the first response</span>
+{"current_page":"q0-1a","q0_0_first_use":"within_6m"}
+
+<span class="cm">// After a branch response — values keep accumulating</span>
+{"current_page":"q0-1b","q0_0_first_use":"within_6m","q0_1a_request_count":"3_4"}
+
+<span class="cm">// Complete — even on drop-off, this much is preserved on the profile</span>
+{ …, "q0_1b_usage_period":"1week", "isLowFrequency":false }</pre>
+  </div>
+  <p>The main keys stored in the attribute are as follows.</p>
+  <figure class="diagram">
+    <div class="mtable"><table>
+      <thead><tr><th>key</th><th>meaning</th><th>example value</th></tr></thead>
+      <tbody>
+        <tr><td>current_page</td><td>Last page the user stayed on</td><td>q0-1b</td></tr>
+        <tr><td>q0_0_first_use</td><td>First-use timing</td><td>within_6m · 1year_plus</td></tr>
+        <tr><td>q0_1a_request_count</td><td>Core actions in the last year</td><td>3_4 · none</td></tr>
+        <tr><td>q0_1b_usage_period</td><td>Period of concentrated use</td><td>1week · year_round</td></tr>
+        <tr><td>isLowFrequency</td><td>Whether they entered the low-frequency path</td><td>true · false</td></tr>
+      </tbody>
+    </table></div>
+    <figcaption>While in progress, these values accumulate in the attribute. The completion event (promo_survey_completed) adds segment · segment_label · [Q] human-readable question/answer on top of these.</figcaption>
+  </figure>
+  <div class="code">
+    <div class="code-label"><span class="dot">▌</span> Braze Query Builder · SQL</div>
+<pre>SELECT
+  external_user_id AS external_id,
+  TO_TIMESTAMP(time) AS event_time_utc,
+  CONVERT_TIMEZONE('UTC', 'Asia/Seoul', TO_TIMESTAMP(time)) AS event_time_kst,
+  properties
+FROM
+  USERS_BEHAVIORS_CUSTOMEVENT_SHARED
+WHERE
+  name = 'promo_survey_completed'
+  AND time &gt;= DATE_PART('epoch_second', CONVERT_TIMEZONE('Asia/Seoul', 'UTC', TO_TIMESTAMP('2026-02-01 00:00:00')))
+ORDER BY
+  time DESC;</pre>
+  </div>
+  <p>There was one trap here. The initial draft query I was handed called the <code>user_id</code> column, but that value comes out in a hashed form that didn't match the user identifiers we operate on. Switching to call the <code>external_user_id</code> column directly, the real, unhashed external_id was extracted correctly — the query above is that final form.</p>
+  <figure class="diagram">
+    <div class="dtable">
+      <table>
+        <thead><tr><th>EXTERNAL_ID</th><th>EVENT_TIME_UTC</th><th>EVENT_TIME_KST</th><th>PROPERTIES · promo_survey_completed</th></tr></thead>
+        <tbody>
+          <tr><td>u_10··abcd</td><td>2026-02-23T03:19Z</td><td>2026-02-23 12:19</td><td class="j">{"survey_status":"completed","segment":"A","segment_label":"Unaware","q0_0_first_use":"6m_1year","[Q] When did you first use it?":"6 months–1 year ago", …}</td></tr>
+          <tr><td>u_15··efgh</td><td>2026-02-22T18:18Z</td><td>2026-02-23 03:18</td><td class="j">{ …,"segment":"B","segment_label":"Participant","[Q] Was the benefit attractive?":"3 points", …}</td></tr>
+          <tr><td>u_99··wxyz</td><td>2026-02-21T07:24Z</td><td>2026-02-21 16:24</td><td class="j">{ …,"segment":"E","segment_label":"Low-frequency","[Q] Preferred benefit?":"Guaranteed type", …}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <figcaption>Example of the structure of the Braze Query Builder extract result (not actual data/identifiers). The code values and the <code>[Q]</code> human-readable questions and answers are held together in one row.</figcaption>
+  </figure>
+  <figure class="diagram">
+    <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" font-family="DM Mono, monospace">
+      <defs><marker id="mu" markerWidth="8" markerHeight="8" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#8a8694"/></marker></defs>
+      <text x="112" y="18" text-anchor="middle" fill="#8a8694" font-size="9.5">Stored values (attribute · event)</text><text x="331" y="18" text-anchor="middle" fill="#8a8694" font-size="9.5">Segment condition</text><text x="569" y="18" text-anchor="middle" fill="#8a8694" font-size="9.5">Follow-up targeting</text><rect x="14" y="28" width="196" height="48" rx="8" fill="#f3f2ef" stroke="#1f1f2b"/><text x="112" y="60" text-anchor="middle" fill="#111111" font-size="10.5">[Q] Preferred benefit = Guaranteed</text><line x1="210" y1="56" x2="232" y2="56" stroke="#8a8694" stroke-width="1.5" marker-end="url(#mu)"/><rect x="236" y="28" width="190" height="48" rx="8" fill="#fff" stroke="#1f1f2b"/><text x="331" y="60" text-anchor="middle" fill="#1a1a1a" font-size="11">Guaranteed-pref users</text><line x1="426" y1="56" x2="448" y2="56" stroke="#8a8694" stroke-width="1.5" marker-end="url(#mu)"/><rect x="452" y="28" width="234" height="48" rx="8" fill="#fff" stroke="#d9d7d2"/><text x="569" y="60" text-anchor="middle" fill="#5b5670" font-size="11">Guaranteed-emphasis campaign</text><rect x="14" y="86" width="196" height="48" rx="8" fill="#f3f2ef" stroke="#1f1f2b"/><text x="112" y="118" text-anchor="middle" fill="#111111" font-size="10.5">segment = A (Unaware)</text><line x1="210" y1="114" x2="232" y2="114" stroke="#8a8694" stroke-width="1.5" marker-end="url(#mu)"/><rect x="236" y="86" width="190" height="48" rx="8" fill="#fff" stroke="#1f1f2b"/><text x="331" y="118" text-anchor="middle" fill="#1a1a1a" font-size="11">Unaware users</text><line x1="426" y1="114" x2="448" y2="114" stroke="#8a8694" stroke-width="1.5" marker-end="url(#mu)"/><rect x="452" y="86" width="234" height="48" rx="8" fill="#fff" stroke="#d9d7d2"/><text x="569" y="118" text-anchor="middle" fill="#5b5670" font-size="11">Reach-boost campaign</text><rect x="14" y="144" width="196" height="48" rx="8" fill="#f3f2ef" stroke="#1f1f2b"/><text x="112" y="176" text-anchor="middle" fill="#111111" font-size="10.5">current_page = value question</text><line x1="210" y1="172" x2="232" y2="172" stroke="#8a8694" stroke-width="1.5" marker-end="url(#mu)"/><rect x="236" y="144" width="190" height="48" rx="8" fill="#fff" stroke="#1f1f2b"/><text x="331" y="176" text-anchor="middle" fill="#1a1a1a" font-size="11">Dropped at value step</text><line x1="426" y1="172" x2="448" y2="172" stroke="#8a8694" stroke-width="1.5" marker-end="url(#mu)"/><rect x="452" y="144" width="234" height="48" rx="8" fill="#fff" stroke="#d9d7d2"/><text x="569" y="176" text-anchor="middle" fill="#5b5670" font-size="11">Benefit-message retargeting</text>
+    </svg>
+    <figcaption>The stored values become segment conditions, which carry through to the targeting of follow-up campaigns.</figcaption>
+  </figure>
+  <p>By continuously updating responses and promotion-related records into user attributes like this, each user's profile itself becomes a segment condition. Responses such as “users who said they prefer a guaranteed benefit” or “users who said they didn't notice the event” are used directly as targeting conditions, becoming the branching and send audience of follow-up campaigns. The survey isn't a one-and-done collection of results — it becomes an <strong>input for segmentation and follow-up targeting</strong>. Beyond simply collecting responses, it's designed to bank the responses as a CRM asset.</p>
+</div></section>
+
+<!-- 8 -->
+<section><div class="wrap">
+  <p class="sec-label">Results</p>
+  <h2>Cross-checking responses against behavioral data</h2>
+  <p>Here is where “why inside an IAM” pays off. Because the responses are attached to the user profile, we could <strong>cross-check the survey responses against the same users' actual activity, participation, and prize data</strong>. With an external survey tool, that analysis would have been impossible. <span style="color:var(--faint)">(The specific figures are confidential, so below they're replaced with qualitative phrasing.)</span></p>
+
+  <div class="finding">
+    <span class="lead">Reach was already broken from the start.</span>
+    <span class="fig">Over 80%</span> of visitors didn't notice the event at all, and more than half of those for structural reasons like no notification capture or no visit.
+  </div>
+  <div class="finding">
+    <span class="lead">What users wanted wasn't a lottery — it was certainty.</span>
+    A <span class="fig">majority</span> preferred a guaranteed benefit, while the lottery type came down to a tiny minority, and the top reason for not participating was “I didn't think I'd win.” The current lottery structure itself was blocking participation.
+  </div>
+
+  <p>The strongest finding came from the cross-check.</p>
+  <div class="pull"><p>A <span class="fig">large majority</span> of the users who actually <strong>participated</strong> in the November promotion answered that they “didn't see” that event, and <span class="fig">half</span> of the actual <strong>prize winners</strong> answered that they “didn't receive” the benefit.</p></div>
+  <p>They acted, but it never registered as an experience — neither the participation nor the win stayed in the user's memory.</p>
+
+  <div class="finding">
+    <span class="lead">The promotion wasn't creating new demand — it was harvesting existing demand.</span>
+    Visitors with no core actions at all during the event period — a not-insignificant share of the whole — <span class="fig">essentially didn't participate</span> in the promotion, whereas the most positive group was new signups (highest participation positivity and lowest indifference).
+  </div>
+
+  <p>And so the original question — seasonality or structure — was answered and closed. When we asked drop-off users why their intent had cooled, “unchanged” and “don't remember” were most of it, and the share citing fatigue came down to a small minority. The sharp efficiency drop wasn't due to the year-end mood or message fatigue, but a structural problem: it <strong>simply wasn't reaching them in the first place (the unawareness rate topped 80%), and even when it reached them it didn't register (a large majority of participants “didn't see” it)</strong>. The seasonality hypothesis was rejected, and exposure and experience recall remained the core.</p>
+</div></section>
+
+<!-- 9 -->
+<section><div class="wrap">
+  <p class="sec-label">Next experiment</p>
+  <h2>Ask, record, and experiment again</h2>
+  <p>The direction the cross-check pointed to was clear. Users respond to an <strong>immediately felt, guaranteed reward</strong> over an uncertain lottery, and above all, <em>if an action doesn't register as a result</em>, neither participation nor a win means anything. The survey modal, then, wasn't an opinion-collection tool. It was the starting point of a loop — ask users first, leave the responses as data, change the structure of the next campaign with that data, and check performance again. MarTech doesn't end at operating tools. It's the work of designing a structure to ask, record, and experiment again.</p>
+  <p>In the next article, I'll cover the next promotion experiment that reflects these findings and insights.</p>
+
+  <a class="next" href="../../iam-modal/en/">
+    <span class="k">Related · next in the series</span>
+    <span class="t">Action and reward on one screen — a gamified opt-in IAM</span>
+    <span class="d">A record of implementing the “immediate feel · experience recall” this survey pointed to, as a flow of terms consent → game → instant result.</span>
+  </a>
+</div></section>
+
+</article>
+
+<footer><div class="wrap">
+  <p class="slogan">Growth is a structure, not a moment.</p>
+  <div class="foot-row">
+    <a href="/index.html">← dainahys.com</a>
+    <span>Hayeon Song · Growth Marketer</span>
+  </div>
+</div></footer>
+
+</body>
+</html>

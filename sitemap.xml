@@ -49,6 +49,46 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://dainahys.com/work/nextunicorn/"/>
   </url>
 
+  <!-- Resume -->
+  <url>
+    <loc>https://dainahys.com/resume/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://dainahys.com/resume/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dainahys.com/resume/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dainahys.com/resume/"/>
+  </url>
+  <url>
+    <loc>https://dainahys.com/resume/en/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://dainahys.com/resume/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dainahys.com/resume/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dainahys.com/resume/"/>
+  </url>
+
+  <!-- Articles list -->
+  <url>
+    <loc>https://dainahys.com/articles/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://dainahys.com/articles/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dainahys.com/articles/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dainahys.com/articles/"/>
+  </url>
+  <url>
+    <loc>https://dainahys.com/articles/en/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://dainahys.com/articles/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dainahys.com/articles/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dainahys.com/articles/"/>
+  </url>
+
   <!-- Articles -->
   <url>
     <loc>https://dainahys.com/articles/braze/iam-modal/</loc>
@@ -73,5 +113,17 @@
     <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://dainahys.com/articles/braze/survey-modal/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dainahys.com/articles/braze/survey-modal/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dainahys.com/articles/braze/survey-modal/"/>
+  </url>
+  <url>
+    <loc>https://dainahys.com/articles/braze/survey-modal/en/</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://dainahys.com/articles/braze/survey-modal/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dainahys.com/articles/braze/survey-modal/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dainahys.com/articles/braze/survey-modal/"/>
   </url>
 </urlset>

@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8"/>
-<script>(function(){var h=(location.hash||'').toLowerCase();var m={"#sg":"/work/soomgo/","#nu":"/work/nextunicorn/","#sg-en":"/work/soomgo/en/","#nu-en":"/work/nextunicorn/en/"};if(m[h])location.replace(m[h]);})();</script>
+<script>(function(){var h=(location.hash||'').toLowerCase();var m={"#sg":"/work/soomgo/","#nu":"/work/nextunicorn/","#sg-en":"/work/soomgo/en/","#nu-en":"/work/nextunicorn/en/","#resume":"/resume/","#articles":"/articles/","#resume-en":"/resume/en/","#articles-en":"/articles/en/"};if(m[h])location.replace(m[h]);})();</script>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <!-- ── Primary Meta ──────────────────────────────── -->
 <title>Daina Hayeon Song — Growth Marketer · 그로스 마케터 포트폴리오</title>
@@ -1799,8 +1799,8 @@
 <nav class="hidden md:flex items-center gap-8">
 <a class="text-sm font-medium text-text-secondary hover:text-black transition-colors" href="#about" onclick="showView('home');">About</a>
 <a class="text-sm font-medium text-text-secondary hover:text-black transition-colors" href="#work" onclick="showView('home');">Portfolio</a>
-<a class="text-sm font-medium text-text-secondary hover:text-black transition-colors" href="#resume" onclick="showView('resume');return false;">Resume</a>
-<a class="text-sm font-medium text-text-secondary hover:text-black transition-colors" href="#articles" onclick="showView('articles');return false;">Articles</a>
+<a class="text-sm font-medium text-text-secondary hover:text-black transition-colors" href="/resume/">Resume</a>
+<a class="text-sm font-medium text-text-secondary hover:text-black transition-colors" href="/articles/">Articles</a>
 </nav>
 <button class="hidden sm:flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-black transition-colors" onclick="showView('home'); document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
             Contact
@@ -3671,202 +3671,18 @@ function closeLeadModal() {
            VIEW: RESUME
       ========================== -->
 
-<div id="view-resume" style="display:none">
-<div class="resume-topbar pt-2 pb-2">
-  <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home')">
-    <span class="material-symbols-outlined !text-[18px]">arrow_back</span>
-    <span data-ko data-ko-text="홈으로" data-en-text="Back to Home">Back to Home</span>
-  </button>
-</div>
-<div class="mx-auto max-w-container px-6">
-  <div class="max-w-2xl mx-auto text-center py-20 md:py-28">
-    <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-text-secondary mb-4">Resume</p>
-    <h1 class="font-display font-bold text-[34px] md:text-[44px] leading-[1.15] tracking-tight text-text-primary"><span data-ko data-ko-text="이력서가 필요하신가요?" data-en-text="Looking for my résumé?">Looking for my résumé?</span></h1>
-    <p class="text-[15px] md:text-[17px] leading-[1.7] text-text-secondary mt-5 max-w-lg mx-auto"><span data-ko data-ko-text="제 이력서 확인을 원하신다면, 링크드인이나 이메일로 편하게 요청해 주세요. 빠르게 보내드릴게요!" data-en-text="If you’d like to take a look, just reach out on LinkedIn or by email — happy to send it over!">If you’d like to take a look, just reach out on LinkedIn or by email — happy to send it over!</span></p>
-    <div class="flex flex-col sm:flex-row gap-3 justify-center mt-9">
-      <a href="https://www.linkedin.com/in/dainahysong/" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-pill bg-[#0A66C2] text-white text-sm font-semibold hover:opacity-90 transition-opacity"><span data-ko data-ko-text="LinkedIn으로 요청" data-en-text="Request on LinkedIn">Request on LinkedIn</span></a>
-      <a href="mailto:ttthayeon@gmail.com?subject=Resume%20request" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-pill bg-black text-white text-sm font-semibold hover:opacity-90 transition-opacity"><span data-ko data-ko-text="Email로 요청" data-en-text="Request by email">Request by email</span></a>
-    </div>
-    <p class="font-mono text-[12px] text-text-secondary mt-8"><a class="hover:text-black transition-colors" href="https://www.linkedin.com/in/dainahysong/" target="_blank" rel="noreferrer">linkedin.com/in/dainahysong</a>&nbsp;·&nbsp;<a class="hover:text-black transition-colors" href="mailto:ttthayeon@gmail.com">ttthayeon@gmail.com</a></p>
-  </div>
-</div>
-
-</div>
 
 
 <!-- ════════════════════════════════════════════════════════ -->
 <!-- Articles View (KR) -->
 <!-- ════════════════════════════════════════════════════════ -->
-<div id="view-articles" style="display:none">
-<div class="resume-topbar pt-2 pb-2">
-  <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home')">
-    <span class="material-symbols-outlined !text-[18px]">arrow_back</span>
-    Back to Home
-  </button>
-</div>
-<div class="mx-auto max-w-container px-6">
-
-<!-- Header -->
-<section class="pt-section-m md:pt-section pb-12 md:pb-16">
-  <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-text-secondary mb-5">Articles</p>
-  <p class="text-[15px] md:text-[17px] leading-[1.8] text-text-secondary max-w-md">
-    일하면서 만든 것, 배운 것, 그리고 다음에 시도하고 싶은 것.<br class="hidden md:block"/>코드도 짜고 디자인도 하고 카피도 쓰는 마케터의 시행착오와 결과물을 기록합니다.
-  </p>
-</section>
-
-<!-- Divider -->
-<div class="border-t border-border"></div>
-
-<!-- Article List -->
-<section class="pb-section-m md:pb-section">
-
-  <!-- ── Series group: Braze CRM ── (새 카드는 아래 <a>…</a> 블록을 복사) -->
-  <p class="font-mono text-[12px] uppercase tracking-[0.14em] text-[#6A3AF2] pt-2">Braze · CRM 시리즈</p>
-  <p class="text-[13px] leading-[1.6] text-text-secondary mt-1 mb-3">인앱 메시지(IAM)로 만든 실험과 구현 기록</p>
-  <!-- ── Article 1 ── -->
-  <a href="articles/braze/iam-modal/" class="group block py-8 md:py-10 border-b border-border hover:border-black/20 transition-colors duration-300">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="font-mono text-[10px] text-text-secondary tracking-[0.05em]">2026.04.10</span>
-      <span class="inline-block bg-[#F4F2EC] text-text-secondary text-[10px] font-mono font-medium px-2 py-0.5 rounded-[3px] tracking-[0.04em]">Guide</span>
-      <span class="font-mono text-[10px] text-text-secondary">· 16 min read</span>
-    </div>
-    <h2 class="font-display font-bold text-[22px] md:text-[24px] leading-[1.35] tracking-[-0.01em] text-text-primary mb-2 group-hover:text-black/70 transition-colors">
-      앱 다운로드를 이벤트 참여 경험으로 — 비개발자 마케터의 Braze Custom HTML IAM 실전
-    </h2>
-    <p class="text-[14px] leading-[1.7] text-text-secondary mb-4 max-w-[680px]">
-      앱 다운로드를 약관 동의 → 드래그앤드롭 게임 → 랜덤 리워드로 이어지는 Custom HTML IAM으로 설계하고, 백엔드 없이 brazeBridge·Canvas·Connected Content·GAS로 참여·동의·재고를 처리한 기록과 코드.
-    </p>
-    <div class="flex flex-wrap gap-1.5">
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Braze</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Custom HTML IAM</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">brazeBridge</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Canvas</span>
-    </div>
-  </a>
-  <!-- ── Article 2 ── -->
-  <a href="articles/braze/survey-modal/" class="group block py-8 md:py-10 border-b border-border hover:border-black/20 transition-colors duration-300">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="font-mono text-[10px] text-text-secondary tracking-[0.05em]">2026.02.28</span>
-      <span class="inline-block bg-[#F4F2EC] text-text-secondary text-[10px] font-mono font-medium px-2 py-0.5 rounded-[3px] tracking-[0.04em]">Guide</span>
-      <span class="font-mono text-[10px] text-text-secondary">· 12 min read</span>
-    </div>
-    <h2 class="font-display font-bold text-[22px] md:text-[24px] leading-[1.35] tracking-[-0.01em] text-text-primary mb-2 group-hover:text-black/70 transition-colors">
-      Braze IAM으로 다단계 분기 설문 만들기 — 응답을 행동 데이터와 교차검증하기
-    </h2>
-    <p class="text-[14px] leading-[1.7] text-text-secondary mb-4 max-w-[680px]">
-      단일 IAM 메시지 안에 page-id 라우터로 다단계 분기 설문 엔진을 구현하고, 응답을 Custom Attribute·Event로 적립해 행동 데이터와 교차검증한 기록과 코드.
-    </p>
-    <div class="flex flex-wrap gap-1.5">
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Braze</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">IAM</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">SQL</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Segmentation</span>
-    </div>
-  </a>
-
-</section>
-
-</div>
-</div>
 
 
-<div id="view-resume-en" style="display:none">
-<div class="resume-topbar pt-2 pb-2">
-  <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home-en')">
-    <span class="material-symbols-outlined !text-[18px]">arrow_back</span>
-    <span data-ko data-ko-text="홈으로" data-en-text="Back to Home">Back to Home</span>
-  </button>
-</div>
-<div class="mx-auto max-w-container px-6">
-  <div class="max-w-2xl mx-auto text-center py-20 md:py-28">
-    <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-text-secondary mb-4">Resume</p>
-    <h1 class="font-display font-bold text-[34px] md:text-[44px] leading-[1.15] tracking-tight text-text-primary"><span data-ko data-ko-text="이력서가 필요하신가요?" data-en-text="Looking for my résumé?">Looking for my résumé?</span></h1>
-    <p class="text-[15px] md:text-[17px] leading-[1.7] text-text-secondary mt-5 max-w-lg mx-auto"><span data-ko data-ko-text="제 이력서 확인을 원하신다면, 링크드인이나 이메일로 편하게 요청해 주세요. 빠르게 보내드릴게요!" data-en-text="If you’d like to take a look, just reach out on LinkedIn or by email — happy to send it over!">If you’d like to take a look, just reach out on LinkedIn or by email — happy to send it over!</span></p>
-    <div class="flex flex-col sm:flex-row gap-3 justify-center mt-9">
-      <a href="https://www.linkedin.com/in/dainahysong/" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-pill bg-[#0A66C2] text-white text-sm font-semibold hover:opacity-90 transition-opacity"><span data-ko data-ko-text="LinkedIn으로 요청" data-en-text="Request on LinkedIn">Request on LinkedIn</span></a>
-      <a href="mailto:ttthayeon@gmail.com?subject=Resume%20request" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-pill bg-black text-white text-sm font-semibold hover:opacity-90 transition-opacity"><span data-ko data-ko-text="Email로 요청" data-en-text="Request by email">Request by email</span></a>
-    </div>
-    <p class="font-mono text-[12px] text-text-secondary mt-8"><a class="hover:text-black transition-colors" href="https://www.linkedin.com/in/dainahysong/" target="_blank" rel="noreferrer">linkedin.com/in/dainahysong</a>&nbsp;·&nbsp;<a class="hover:text-black transition-colors" href="mailto:ttthayeon@gmail.com">ttthayeon@gmail.com</a></p>
-  </div>
-</div>
-
-</div>
 
 
 <!-- ════════════════════════════════════════════════════════ -->
 <!-- Articles View (EN) -->
 <!-- ════════════════════════════════════════════════════════ -->
-<div id="view-articles-en" style="display:none">
-<div class="resume-topbar pt-2 pb-2">
-  <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home-en')">
-    <span class="material-symbols-outlined !text-[18px]">arrow_back</span>
-    Back to Home
-  </button>
-</div>
-<div class="mx-auto max-w-container px-6">
-
-<!-- Header -->
-<section class="pt-section-m md:pt-section pb-12 md:pb-16">
-  <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-text-secondary mb-5">Articles</p>
-  <p class="text-[15px] md:text-[17px] leading-[1.8] text-text-secondary max-w-md md:max-w-xl">
-    <span class="md:whitespace-nowrap">What I've built, what I've learned, and what I want to try next.</span><br class="hidden md:block"/>A record of what works — and what didn't — by a marketer who codes, designs, and writes.
-  </p>
-</section>
-
-<!-- Divider -->
-<div class="border-t border-border"></div>
-
-<!-- Article List -->
-<section class="pb-section-m md:pb-section">
-
-  <!-- ── Series group: Braze CRM ── (copy the <a>…</a> block below for a new card) -->
-  <p class="font-mono text-[12px] uppercase tracking-[0.14em] text-[#6A3AF2] pt-2">Braze · CRM Series</p>
-  <p class="text-[13px] leading-[1.6] text-text-secondary mt-1 mb-3">In-app message experiments &amp; build logs</p>
-  <!-- ── Article 1 ── -->
-  <a href="articles/braze/iam-modal/en/" class="group block py-8 md:py-10 border-b border-border hover:border-black/20 transition-colors duration-300">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="font-mono text-[10px] text-text-secondary tracking-[0.05em]">2026.04.10</span>
-      <span class="inline-block bg-[#F4F2EC] text-text-secondary text-[10px] font-mono font-medium px-2 py-0.5 rounded-[3px] tracking-[0.04em]">Guide</span>
-      <span class="font-mono text-[10px] text-text-secondary">· 16 min read</span>
-    </div>
-    <h2 class="font-display font-bold text-[22px] md:text-[24px] leading-[1.35] tracking-[-0.01em] text-text-primary mb-2 group-hover:text-black/70 transition-colors">
-      Turning App Downloads into an Event Experience — A Non-Engineer Marketer's Braze Custom HTML IAM Build
-    </h2>
-    <p class="text-[14px] leading-[1.7] text-text-secondary mb-4 max-w-[680px]">
-      How I designed app download as a consent → drag-and-drop game → random-reward Custom HTML IAM, and handled participation, consent, and prize inventory with no backend using brazeBridge, Canvas, Connected Content, and GAS — with the code.
-    </p>
-    <div class="flex flex-wrap gap-1.5">
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Braze</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Custom HTML IAM</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">brazeBridge</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Canvas</span>
-    </div>
-  </a>
-  <!-- ── Article 2 ── -->
-  <a href="articles/braze/survey-modal/" class="group block py-8 md:py-10 border-b border-border hover:border-black/20 transition-colors duration-300">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="font-mono text-[10px] text-text-secondary tracking-[0.05em]">2026.02.28</span>
-      <span class="inline-block bg-[#F4F2EC] text-text-secondary text-[10px] font-mono font-medium px-2 py-0.5 rounded-[3px] tracking-[0.04em]">Guide</span>
-      <span class="font-mono text-[10px] text-text-secondary">· 12 min read</span>
-    </div>
-    <h2 class="font-display font-bold text-[22px] md:text-[24px] leading-[1.35] tracking-[-0.01em] text-text-primary mb-2 group-hover:text-black/70 transition-colors">
-      Building a Multi-Step Branching Survey Inside a Braze IAM — Cross-Validating Responses with Behavioral Data
-    </h2>
-    <p class="text-[14px] leading-[1.7] text-text-secondary mb-4 max-w-[680px]">
-      How I built a multi-step, branching survey engine inside a single IAM with a page-id router, then stored responses as Custom Attributes and Events to cross-validate them against behavioral data — with the code.
-    </p>
-    <div class="flex flex-wrap gap-1.5">
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Braze</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">IAM</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">SQL</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Segmentation</span>
-    </div>
-  </a>
-
-</section>
-
-</div>
-</div>
 
 <footer class="mt-auto border-t border-border bg-white py-12">
 <div class="max-w-container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
@@ -3916,11 +3732,7 @@ function closeLeadModal() {
     function showView(which, skipHistory){
       const views = {
         home: document.getElementById('view-home'),
-        resume: document.getElementById('view-resume'),
-        articles: document.getElementById('view-articles'),
         'home-en': document.getElementById('view-home-en'),
-        'resume-en': document.getElementById('view-resume-en'),
-        'articles-en': document.getElementById('view-articles-en'),
       };
       const main = document.querySelector('main');
       const pageShell = document.querySelector('body > div.relative');
@@ -3930,7 +3742,7 @@ function closeLeadModal() {
       });
 
       // Hide main when showing views that live outside it (resume, nu-en, resume-en, articles, etc.)
-      const viewsOutsideMain = ['resume', 'resume-en', 'articles', 'articles-en'];
+      const viewsOutsideMain = [];
       const isOutsideMain = viewsOutsideMain.includes(which);
       main.style.display = isOutsideMain ? 'none' : '';
       if (pageShell) {
@@ -3940,8 +3752,8 @@ function closeLeadModal() {
       window.scrollTo(0,0);
 
       const hashMap = {
-        home: '#home', resume: '#resume', articles: '#articles',
-        'home-en': '#home-en', 'resume-en': '#resume-en', 'articles-en': '#articles-en'
+        home: '#home',
+        'home-en': '#home-en'
       };
       const nextHash = hashMap[which] || '#home';
       // skipHistory가 true면 popstate에서 호출된 것이므로 history 갱신하지 않음
@@ -3978,7 +3790,7 @@ function closeLeadModal() {
     };
 
     function getCurrentView() {
-      const allViews = ['home','resume','articles','home-en','resume-en','articles-en'];
+      const allViews = ['home','home-en'];
       for (const v of allViews) {
         const el = document.getElementById('view-' + v);
         if (el && el.style.display !== 'none') return v;
@@ -4019,11 +3831,11 @@ function closeLeadModal() {
         if (text === 'About' || text === 'Portfolio') {
           a.setAttribute('onclick', "showView('home" + suffix + "');");
         } else if (text === 'Resume') {
-          a.setAttribute('onclick', "showView('resume" + suffix + "');return false;");
-          a.setAttribute('href', '#resume' + suffix);
+          a.removeAttribute('onclick');
+          a.setAttribute('href', suffix === '-en' ? '/resume/en/' : '/resume/');
         } else if (text === 'Articles') {
-          a.setAttribute('onclick', "showView('articles" + suffix + "');return false;");
-          a.setAttribute('href', '#articles' + suffix);
+          a.removeAttribute('onclick');
+          a.setAttribute('href', suffix === '-en' ? '/articles/en/' : '/articles/');
         }
       });
       // Update logo
@@ -4058,11 +3870,7 @@ function closeLeadModal() {
 
     function syncViewW(){
       const hash = window.location.hash;
-      if (hash === '#resume') showView('resume');
-      else if (hash === '#articles') showView('articles');
-      else if (hash === '#home-en') { currentLang = 'en'; showView('home-en'); }
-      else if (hash === '#resume-en') { currentLang = 'en'; showView('resume-en'); }
-      else if (hash === '#articles-en') { currentLang = 'en'; showView('articles-en'); }
+      if (hash === '#home-en') { currentLang = 'en'; showView('home-en'); }
       else showView('home');
       
       // Apply inline translations based on current lang
@@ -4074,7 +3882,7 @@ function closeLeadModal() {
     // 브라우저 뒤로/앞으로 버튼 대응 (DOMContentLoaded 이후 동작)
     window.addEventListener('popstate', function(e){
       const hash = window.location.hash.replace('#','') || 'home';
-      const validViews = ['home','resume','articles','home-en','resume-en','articles-en'];
+      const validViews = ['home','home-en'];
       const target = validViews.includes(hash) ? hash : 'home';
       showView(target, true);
     });
