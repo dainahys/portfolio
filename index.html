@@ -2750,11 +2750,11 @@ function closeLeadModal() {
                 <span data-ko data-ko-html="데이터에서 문제를 찾고, 실험과 반복으로 해결합니다.<br class='hidden md:block'/>유저 라이프사이클을 기반으로 성장 기회를 발굴하고 비즈니스 임팩트로 연결합니다." data-en-html="I find problems in data, solve them through experimentation,<br class='hidden md:block'/>and connect growth opportunities across the user lifecycle to business impact.">I find problems in data, solve them through experimentation,<br class="hidden md:block"/>and connect growth opportunities across the user lifecycle to business impact.</span>
               </p>
 <div class="flex flex-wrap gap-4 pt-2">
-<button class="h-12 px-8 bg-black text-white text-sm font-semibold hover:bg-black/85 transition-all rounded-pill flex items-center gap-2" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'});">
+<button class="h-12 px-8 bg-black text-white text-sm font-semibold hover:bg-black/85 transition-all rounded-pill flex items-center gap-2" onclick="document.getElementById('work-en').scrollIntoView({behavior:'smooth'});">
 <span>Explore Projects</span>
 <span class="material-symbols-outlined !text-[18px]">arrow_downward</span>
 </button>
-<button class="h-12 px-8 bg-transparent text-text-primary border border-border text-sm font-semibold hover:border-black/30 transition-all rounded-pill" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
+<button class="h-12 px-8 bg-transparent text-text-primary border border-border text-sm font-semibold hover:border-black/30 transition-all rounded-pill" onclick="document.getElementById('contact-en').scrollIntoView({behavior:'smooth'});">
 <span>Get in Touch</span>
 </button>
 </div>
@@ -2785,7 +2785,7 @@ function closeLeadModal() {
 </div>
 </section>
 <!-- Work -->
-<section class="border-t border-border pt-16 md:pt-20" id="work">
+<section class="border-t border-border pt-16 md:pt-20" id="work-en">
 <div class="flex items-end justify-between mb-12">
 <div>
 <span class="block text-xs font-bold tracking-widest uppercase text-text-secondary mb-2">Work</span>
@@ -3594,7 +3594,7 @@ function closeLeadModal() {
 </div>
 </section>
 </section>
-<section class="py-section-m md:py-section" id="contact">
+<section class="py-section-m md:py-section" id="contact-en">
 <div class="rounded-card border border-border bg-white p-10 md:p-12 shadow-soft">
 <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
 <div>
@@ -3850,7 +3850,7 @@ function closeLeadModal() {
       contactBtns.forEach(btn => {
         if (btn.textContent.trim() === 'Contact') {
           const suffix = currentLang === 'en' ? '-en' : '';
-          btn.setAttribute('onclick', "showView('home" + suffix + "'); document.getElementById('contact').scrollIntoView({behavior:'smooth'});");
+          btn.setAttribute('onclick', "showView('home" + suffix + "'); document.getElementById('contact" + suffix + "').scrollIntoView({behavior:'smooth'});");
         }
       });
     }
