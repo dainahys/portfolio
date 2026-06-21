@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Turning App Download into an Event Experience — Braze Custom HTML IAM in Practice — Hayeon Song</title>
+<meta name="description" content="Designing app download as a Braze Custom HTML IAM that flows from consent → drag-and-drop game → random reward, and handling participation, consent, and inventory with no backend — using brazeBridge, Canvas, and GAS."/>
+<meta name="author" content="Hayeon Song (Daina)"/>
+<meta name="keywords" content="Braze, Custom HTML, In-App Message, IAM, brazeBridge, Canvas, Connected Content, Liquid, GAS, Deep Link, app activation, marketing opt-in, CRM, Growth Marketing, Hayeon Song, Daina Song"/>
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+<meta name="theme-color" content="#1f1f2b"/>
+<link rel="canonical" href="https://dainahys.com/articles/braze/iam-modal/en/"/>
+<link rel="alternate" hreflang="ko" href="https://dainahys.com/articles/braze/iam-modal/"/>
+<link rel="alternate" hreflang="en" href="https://dainahys.com/articles/braze/iam-modal/en/"/>
+<link rel="alternate" hreflang="x-default" href="https://dainahys.com/articles/braze/iam-modal/"/>
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="Hayeon Song — Growth Marketing Portfolio"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:title" content="Turning App Download into an Event Experience — Braze Custom HTML IAM in Practice"/>
+<meta property="og:description" content="Designing app download as a Custom HTML IAM that flows from consent → drag-and-drop game → random reward, and handling participation, consent, and inventory with no backend — using brazeBridge, Canvas, and GAS."/>
+<meta property="og:url" content="https://dainahys.com/articles/braze/iam-modal/en/"/>
+<meta property="og:image" content="https://dainahys.com/articles/assets/braze-iam-modal-og.png"/>
+<meta property="article:published_time" content="2026-04-10"/>
+<meta property="article:modified_time" content="2026-04-10"/>
+<meta property="article:author" content="Hayeon Song"/>
+<meta property="article:section" content="Growth / CRM"/>
+<meta property="article:tag" content="Braze"/>
+<meta property="article:tag" content="Custom HTML IAM"/>
+<meta property="article:tag" content="brazeBridge"/>
+<meta property="article:tag" content="Canvas"/>
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Turning App Download into an Event Experience — Braze Custom HTML IAM in Practice"/>
+<meta name="twitter:description" content="Designing app download as a Custom HTML IAM that flows from consent → drag-and-drop game → random reward, and handling participation, consent, and inventory with no backend — using brazeBridge, Canvas, and GAS."/>
+<meta name="twitter:image" content="https://dainahys.com/articles/assets/braze-iam-modal-og.png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/articles/assets/article.css"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://dainahys.com/#person-hayeon",
+      "name": "Hayeon Song",
+      "alternateName": ["송하연", "Daina"],
+      "url": "https://dainahys.com",
+      "jobTitle": "Growth Marketer",
+      "knowsAbout": ["Braze", "CRM lifecycle marketing", "In-App Messaging", "Custom HTML IAM", "brazeBridge", "Canvas", "Connected Content", "Google Apps Script"],
+      "sameAs": ["https://dainahys.com", "https://github.com/dainahys", "https://www.linkedin.com/in/dainahysong/"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://dainahys.com/#website",
+      "url": "https://dainahys.com",
+      "name": "Hayeon Song — Growth Marketing Portfolio",
+      "inLanguage": "ko",
+      "publisher": { "@id": "https://dainahys.com/#person-hayeon" }
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://dainahys.com/articles/braze/iam-modal/en/#article",
+      "headline": "Turning App Download into an Event Experience — Braze Custom HTML IAM in Practice",
+      "description": "Designing app download as a Braze Custom HTML IAM that flows from consent → drag-and-drop game → random reward, and handling participation, consent, and inventory with no backend — using brazeBridge, Canvas, and GAS.",
+      "inLanguage": "en",
+      "datePublished": "2026-04-10",
+      "dateModified": "2026-04-10",
+      "author": { "@id": "https://dainahys.com/#person-hayeon" },
+      "publisher": { "@id": "https://dainahys.com/#person-hayeon" },
+      "isPartOf": { "@id": "https://dainahys.com/#website" },
+      "mainEntityOfPage": "https://dainahys.com/articles/braze/iam-modal/en/",
+      "image": "https://dainahys.com/articles/assets/braze-iam-modal-og.png",
+      "articleSection": "Growth / CRM",
+      "proficiencyLevel": "Expert",
+      "keywords": "Braze, Custom HTML, In-App Message, IAM, brazeBridge, Canvas, Connected Content, Liquid, GAS, app activation, marketing opt-in, CRM, Growth Marketing",
+      "about": [
+        { "@type": "Thing", "name": "Braze" },
+        { "@type": "Thing", "name": "Custom HTML In-App Message" },
+        { "@type": "Thing", "name": "brazeBridge" },
+        { "@type": "Thing", "name": "Canvas" },
+        { "@type": "Thing", "name": "App activation" }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://dainahys.com/articles/braze/iam-modal/en/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://dainahys.com" },
+        { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://dainahys.com/#articles" },
+        { "@type": "ListItem", "position": 3, "name": "Turning App Download into an Event Experience — Braze Custom HTML IAM in Practice" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://dainahys.com/articles/braze/iam-modal/en/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What should I check when brazeBridge isn't working?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Check the environment first. window.brazeBridge is only injected in an actual IAM display environment; it isn't present in a local browser or some Preview environments. On older SDKs it may exist as appboyBridge, so handle both cases with a fallback function, and run initialization only after the ab.BridgeReady event. If it still fails, verify your SDK version and the IAM type (whether it's Custom HTML)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "I recorded a Custom Attribute, but it isn't reflected in my segment / Canvas branch right away.",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The SDK batches data and sends it on a fixed interval. If you need an immediate downstream branch within the same session, call requestImmediateDataFlush() right after writing the attribute. If a timing issue still remains at the branch point, adding a delay step before the branch-condition evaluation is another option."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is managing prize inventory really possible without a backend?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Use a Google Spreadsheet as your inventory ledger and build get (read) and claim (write) endpoints with a GAS web app. Connected Content calls the read endpoint at message render time, and the modal's JS POSTs to the write endpoint the moment a win is confirmed. Just be careful about exposing the web app URL and about request validation, and if it's a high-traffic campaign, check GAS processing limits in advance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I connect events from a promotional IAM to funnel analysis?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If you record each step inside the modal as a separate Custom Event (impression → consent → interaction complete → result viewed), that alone becomes a mini-funnel you can query in your funnel-analysis tool. The key is to design the events for measuring step-by-step drop-off, not for tallying results. Whichever step has the biggest drop-off becomes the hypothesis for your next A/B test."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should I use a Custom HTML IAM instead of a regular IAM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If a single message plus a simple CTA is enough, a regular IAM is better. You need Custom HTML in one of three cases: (1) when you have to collect user responses inside the modal as structured data, (2) when a multi-step flow (consent → interaction → result) has to be handled inside one modal, or (3) when the screen itself needs to change based on per-user data (Liquid) or operational state (Connected Content)."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="/index.html">Hayeon Song</a>
+    <div class="topbar-right">
+      <a class="back" href="/index.html#articles">← Articles</a>
+      <span class="langtoggle"><a href="../">KO</a><a class="on" aria-current="page">EN</a></span>
+    </div>
+  </div>
+</div>
+
+<article>
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Implementation · Braze CRM</p>
+    <h1>Turning App Download into an Event Experience:<br/>Braze Custom HTML IAM in Practice</h1>
+    <p class="deck">A record of a non-developer marketer treating a campaign like a small product — first designing the state values, events, branches, and operational screens it needs, then finding what can be built within Braze's features. The story of turning app download from a “requirement” into a “way to participate.”</p>
+    <div class="meta">
+      <span class="chip">Braze Custom HTML</span>
+      <span class="chip">brazeBridge</span>
+      <span class="chip">Canvas branching</span>
+      <span class="chip">Connected Content · GAS</span>
+      <span class="chip">App activation · opt-in</span>
+    </div>
+    <p class="byline">Hayeon (Daina) Song · 2026</p>
+  </div>
+</header>
+
+<!-- Before we begin -->
+<section><div class="wrap">
+  <p class="sec-label">Before we begin</p>
+  <h2>Not a developer's build log, but a marketer's design record</h2>
+  <p><strong>This isn't a front-end build log written by a developer.</strong> It's a record of how far a non-developer marketer can design a campaign experience inside a marketing tool called Braze, and where it was possible to trim down the development spec.</p>
+  <p>Writing great code was never the goal. The goal was to make app download — a heavy action — feel natural for the user to accept, and to leave the consent, participation, and result data generated along the way in a structure that an operator can reuse.</p>
+  <p>So what mattered in this project wasn't “I built some HTML.” It was <strong>the process of looking at a marketing campaign like a small product — first designing the state values, events, branches, and operational screens it needed — and then finding what could be built within Braze's features.</strong></p>
+  <p>I learned what brazeBridge is and when Liquid is evaluated through the official docs and trial and error. So I wrote this article in an order that a marketer starting from the same line can follow step by step.</p>
+</div></section>
+
+<!-- Start: why this campaign -->
+<section><div class="wrap">
+  <p class="sec-label">The start</p>
+  <h2>“Grow our app users” — and of course, “same budget”</h2>
+  <p>One of the missions that lands on a marketer or marketing team every quarter, every year, is “grow our app users.” Data often shows that users who go as far as downloading the app have high intent, and the service I was responsible for was no exception. The app is also an additional channel for prompting user behavior — though that, of course, requires marketing opt-in and push-notification consent.</p>
+  <p>And along with this mission comes a recurring constraint for the marketer: <strong>“same budget.”</strong> If the marketing budget stays flat but you have to grow app installs, where would you start?</p>
+
+  <div class="callout">
+    <span class="k">TL;DR</span>
+    <p>The goal was to grow app users — a cohort with high retention and LTV. To move new and existing signed-up users that performance advertising alone can't reach, I designed app download itself as an “event participation experience” — a Braze Custom HTML IAM that flows from terms/marketing opt-in → drag-and-drop game → random reward. With no backend development, brazeBridge logged participation history and results; prize inventory was read and recorded via a GAS web app and Connected Content with a Google Spreadsheet as the ledger; and Canvas auto-branched messages by app-install / consent / participation / device-permission state. Download was the primary conversion, and opt-in was a second conversion embedded naturally in the participation flow.</p>
+  </div>
+
+  <p>Since this is a record of a marketer implementing it firsthand, code appears, but <strong>the flow stays readable even if you skip the code</strong> — under every code block I've written a one-line “what this code does.”</p>
+  <p><strong>The tools that appear in this article</strong> — even if a term is new to you, this table is all you need.</p>
+  <figure class="diagram"><div class="mtable"><table>
+    <thead><tr><th>Tool</th><th>One-line description</th></tr></thead>
+    <tbody>
+      <tr><td>Custom HTML IAM</td><td>An in-app message that displays a whole custom-built web screen (HTML/CSS/JS) instead of a fixed template</td></tr>
+      <tr><td>brazeBridge</td><td>The bridge between the screen inside the modal and Braze. It relays clicks and actions that happen in the modal back to Braze</td></tr>
+      <tr><td>Custom Attribute / Event</td><td>A per-user name tag (state) and action stamp (record). They become the raw material for segments and automation</td></tr>
+      <tr><td>Liquid</td><td>Template syntax that fills per-user values into blanks right before a message is sent</td></tr>
+      <tr><td>Connected Content</td><td>A feature that fetches the latest value (e.g. prize inventory) from an external URL at the moment the message is displayed</td></tr>
+      <tr><td>GAS + Spreadsheet</td><td>A combo that uses a Google Spreadsheet like a lightweight database and Google Apps Script like a lightweight server</td></tr>
+      <tr><td>Deep Link</td><td>A link that jumps straight to a specific screen in the app. It works for users who have the app installed</td></tr>
+      <tr><td>Deferred Deep Link</td><td>A link that sends users to the store if they don't have the app, then “defers” the move to the original destination on first launch after install</td></tr>
+    </tbody>
+  </table></div></figure>
+  <p style="font-size:14px;color:var(--faint)">The Custom Event and Custom Attribute names in this article (<code>deeplink_open_promotion</code>, <code>is_participated_promotion_{event_id}</code>, etc.) are all <strong>illustrative</strong> to aid understanding. Actual naming can be decided differently depending on your service environment.</p>
+
+  <p><strong>What this article covers</strong></p>
+  <ol class="num">
+    <li><a href="#ch1">Purpose — we had to grow app users: converting to a channel with high retention and LTV</a></li>
+    <li><a href="#ch2">Problem — performance alone wasn't enough: the need for app activation among new/existing signed-up users</a></li>
+    <li><a href="#ch3">Question — how to connect app download to an “event participation experience”</a></li>
+    <li><a href="#ch4">Campaign concept — Checkmate: drive download and link marketing opt-in into the participation flow</a></li>
+    <li><a href="#ch5">Why a Custom HTML IAM was needed — handling participation, recording, and branching while minimizing the development spec</a></li>
+    <li><a href="#ch6">The modal flow we built</a></li>
+    <li><a href="#ch7">Recording user behavior with brazeBridge</a></li>
+    <li><a href="#ch8">Canvas and automatic branching of follow-up messages</a></li>
+    <li><a href="#ch9">Separating roles: Liquid · Connected Content · GAS · JavaScript</a></li>
+    <li><a href="#ch10">Operational monitoring structure</a></li>
+    <li><a href="#ch11">Seven challenges met while implementing (+ 11.5 the first flow vs. the actual flow · 11.6 the possible cases a user can hit)</a></li>
+    <li><a href="#ch12">What I learned — extending the IAM into an interactive campaign interface for app activation and retention</a></li>
+  </ol>
+</div></section>
+
+<!-- 1 -->
+<section id="ch1"><div class="wrap">
+  <p class="sec-label">Purpose</p>
+  <h2>We had to grow app users — converting to a channel with high retention and LTV</h2>
+  <p>Even the same user behaved differently afterward depending on which surface they used the service on. App users had a shorter revisit cycle than web users and a clearly higher number of core actions per person — the difference was distinct in both retention and LTV. In other words, app conversion wasn't just a channel switch; it was a conversion to a cohort with high retention and LTV.</p>
+  <p>On top of that comes the reach-channel problem. Web users simply have no push channel at all. App install and marketing opt-in may look like separate conversions, but from a CRM perspective they're a single goal — <strong>creating users you can reach, who come back repeatedly.</strong></p>
+</div></section>
+
+<!-- 2 -->
+<section id="ch2"><div class="wrap">
+  <p class="sec-label">Problem</p>
+  <h2>Performance alone wasn't enough</h2>
+  <p>The foundation of any app-install campaign is performance advertising. But performance is a tool for generating new installs from external traffic, and it's inefficient for users who already know the service — users who signed up on the web but never installed the app, or who installed and then deleted it. These users aren't ones to win back by spending ad budget; they're ones you need to give a reason to move into the app within the touchpoints you already own (web, CRM channels).</p>
+  <p>To give the result up front: this judgment was right. This campaign's CPI relative to promotion cost was far lower than a typical performance install campaign.</p>
+</div></section>
+
+<!-- 3 -->
+<section id="ch3"><div class="wrap">
+  <p class="sec-label">Question</p>
+  <h2>How to connect download to an “event participation experience”</h2>
+  <p>A message that says “Install the app” gives the user no reason to act. Installing is a cost from the user's point of view, and the reward that offsets that cost has to be visible in the same spot.</p>
+  <p>So I flipped the question. <strong>Instead of prompting an app install, what if we created an experience you can only join by installing the app?</strong> If the event lives inside the app, installing becomes not a “requirement” but a “way to participate.” And by placing terms/marketing opt-in as a natural step within the participation flow, a second conversion — opt-in — follows the primary conversion of download.</p>
+  <p>The remaining question was the reward. Even when you give the same prize or the same points, how do you give it so the user likes it more? Give the same to everyone, give it by drawing, give it instantly, or give it later — this wasn't a question to answer by guessing. So I decided to ask users directly, and to do that I first built a Braze Custom HTML survey modal to collect reward preferences. (The design and implementation of that survey modal is covered in detail in <a href="../../survey-modal/">a previous article</a>.) Those responses led this campaign toward a “game-style random reward” concept — the immediacy of seeing the result right then and there was the reward experience users responded to most.</p>
+</div></section>
+
+<!-- 4 -->
+<section id="ch4"><div class="wrap">
+  <p class="sec-label">Campaign concept</p>
+  <h2>Checkmate — download prompts and opt-in in one flow</h2>
+  <p>Translating the direction the survey pointed to into a concept resulted in a chess-themed, game-style event. The user drags and drops a chess piece (the knight) onto the chessboard to complete the game, and checks the random reward result right there.</p>
+  <p>The conversion design has two layers.</p>
+  <ul class="bullet">
+    <li><strong>Primary conversion: app download/entry</strong> — the event is played in the app. For users without the app or who deleted it, a Deferred Deep Link (Airbridge) connects them straight from install into the event, reducing drop-off between install and event entry.</li>
+    <li><strong>Embedded conversion: marketing opt-in</strong> — the first step of participation is terms/opt-in. Consent is experienced not as a “sudden request” but as the “beginning of participation.”</li>
+  </ul>
+  <p>The core value to deliver to the user was <strong>immediacy</strong>. We can't deliver the prize on the spot, but we can tell them the result on the spot. The experience that you can know your result right after you participate is the engine of a game-style event.</p>
+</div></section>
+
+<!-- 5 -->
+<section id="ch5"><div class="wrap">
+  <p class="sec-label">Why a Custom HTML IAM</p>
+  <h2>Handling participation, recording, and branching while minimizing the development spec</h2>
+  <p>To put it in one line first — <strong>I needed a way to handle “participation logging · one-time limit · result branching · inventory reflection” without a backend, and the answer was a Custom HTML IAM.</strong></p>
+  <p>Distilling the requirements for building this concept, there were four.</p>
+  <p><strong>Speed</strong> — it had to ship fast, with no development, or with the development spec minimized.</p>
+  <p><strong>Repeatability</strong> — app-activation and opt-in promotions aren't one-offs. The same structure has to be applicable at other times and to other user cohorts, so it had to be in a form that's reusable.</p>
+  <p><strong>Immediacy</strong> — showing the win result on the spot. For that, three things have to be recorded. (1) Whether the user has participated, so they participate only once; (2) the total quantity and depleted quantity per prize — so that when stock runs out, they're routed to a different result; (3) what each user won — to use in follow-up messaging. In other words, the “result on the spot” experience is only possible when a data structure of participation/inventory/win records backs it up. And there were no backend development resources to store all of that.</p>
+  <p><strong>Operational visibility</strong> — the marketer has to be able to grasp the status of app conversion, participation, and consent, as well as prize depletion, in real time.</p>
+  <p>The answer that satisfied all four at once was a Custom HTML IAM. The order of approach was design, not tooling — I looked at the campaign like a small product and first defined the state values (consent, participation, win), events (step-by-step behavior), branches (follow-up messages), and operational screen (status checking), then translated those into what could be built within Braze's features. The three records that immediacy required earlier were solved like this — participation status and win results are stored as Braze Custom Attributes/Events in place of a backend, and prize totals/depletion are read and recorded via a GAS web app with a Google Spreadsheet as the ledger. The screen flow is handled inside the HTML. A regular Braze In-App Message is enough for notices, banners, and simple CTAs, but it has limits for campaigns where the user acts through several steps inside the modal and the result has to be left behind as data again. The goal was to make the in-app message behave not as a simple banner for entering a landing page, but as one small campaign app.</p>
+  <div class="callout">
+    <span class="k">Design artifacts</span>
+    <p>This design existed first as documents, not in my head. I applied the artifacts that product development goes through directly to the campaign.</p>
+    <p>① <strong><a href="../artifacts/flowchart.html" target="_blank" rel="noopener">User flowchart</a></strong> — the entire journey defined, from entry through branches A–E (by participation history, terms, push state) to the can't-participate cases<br/>
+    ② <strong><a href="../artifacts/prototype.html" target="_blank" rel="noopener">Interactive prototype</a></strong> — a working mockup for stakeholder validation before implementation<br/>
+    ③ <strong><a href="../artifacts/tech-doc.html" target="_blank" rel="noopener">Integrated technical spec</a></strong> — an app–Braze communication flow diagram (PHASE 0–4), a per-event property definition sheet, and the Attribute→Event ordering-guarantee rule<br/>
+    ④ <strong><a href="../artifacts/qa.html" target="_blank" rel="noopener">QA test cases</a></strong> — 46 cases by OS, in 7 sections (web→app entry / by terms×push combination / draw·result branching / duplicate participation / edge·regression)</p>
+    <p style="font-size:13px;color:var(--faint);margin-top:6px">↗ The 4 artifacts above are actual documents with sensitive information masked — click a preview to open the full document in a new tab.</p>
+  </div>
+
+  <figure class="artifact full">
+    <div class="art-frame">
+      <img src="../artifacts/previews/flowchart.png" alt="App download promotion user flowchart — the full journey from entry through branches A–E" loading="lazy"/>
+    </div>
+    <figcaption>Design artifact ① <b>User flowchart</b> — entry → app-ownership branch → Braze trigger → the full journey through branches A–E. Scroll inside the box or <a href="../artifacts/flowchart.html" target="_blank" rel="noopener">↗ Open full original document</a></figcaption>
+  </figure>
+</div></section>
+
+<!-- 6 -->
+<section id="ch6"><div class="wrap">
+  <p class="sec-label">Implementation · Modal flow</p>
+  <h2>Switching between several screens inside one HTML</h2>
+  <p>This IAM was designed as a structure that switches between several screens (pages) inside a single Custom HTML. Screens with a <code>page-id</code> are stacked on top of each other, and the <code>goToPage()</code> function changes only the active screen. From the user's standpoint, the experience is simple — install, consent, play, and see the result.</p>
+
+  <figure class="artifact embed">
+    <iframe class="art-embed" src="../artifacts/prototype.html?phone=1&lang=en&v=3" title="App download promotion interactive prototype" loading="lazy"></iframe>
+    <figcaption>Design artifact ② <b>Interactive prototype</b> — a working mockup for stakeholder validation before implementation. You can click through it right here, or <a href="../artifacts/prototype.html" target="_blank" rel="noopener">↗ open it larger in a new tab</a></figcaption>
+  </figure>
+  <p>But before building the screens, there were questions to solve as a marketer first. For a user who tapped the event on the web, I had to send them to the store or open the app depending on whether they had the app, and then know whether the user who came in actually came through this event, and whether they hadn't already participated. To state the conclusion first — the app-ownership branch was answered by the attribution tool (Airbridge), participation status by a Custom Attribute the marketer built directly, and the “opened via this event” signal by a Custom Event built together with the dev team (<code>deeplink_open_promotion</code>). The thinking that led to these answers is covered separately in Chapter 11, Challenges 1 and 2.</p>
+
+  <figure class="diagram"><svg width="100%" viewBox="0 0 680 660" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
+<title>App download promotion user flow — solved vs. open questions, self-served vs. collaboration</title>
+<desc>The app-ownership branch was solved with Airbridge; knowing whether they opened via this event needed a signal the app sends, so it was a collaboration with the dev team; participation status was solved with a value the marketer builds directly.</desc>
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#8a8694" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect x="240" y="24" width="200" height="46" rx="8" fill="#1f1f2b"/>
+<text x="340" y="47" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="14" font-weight="500">Web event page click</text>
+<line x1="340" y1="70" x2="340" y2="100" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="245" y="100" width="190" height="46" rx="8" fill="#f3f2ef" stroke="#1f1f2b" stroke-width="0.5"/>
+<text x="340" y="123" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="14" font-weight="500">① Check app ownership</text>
+<rect x="455" y="103" width="195" height="40" rx="8" fill="#f3f2ef" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="465" y="118" fill="#5b5670" font-size="12" font-weight="500">Solved with Airbridge</text>
+<text x="465" y="135" fill="#5b5670" font-size="11">branch via deep-link routing</text>
+<path d="M340 146 L340 168 L160 168 L160 196" stroke="#8a8694" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+<path d="M340 146 L340 168 L520 168 L520 196" stroke="#8a8694" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+<text x="230" y="162" text-anchor="middle" fill="#5b5670" font-size="12">Not installed</text>
+<text x="450" y="162" text-anchor="middle" fill="#5b5670" font-size="12">Installed</text>
+<rect x="70" y="196" width="180" height="58" rx="8" fill="#FFFFFF" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="160" y="219" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="14" font-weight="500">Store install</text>
+<text x="160" y="238" text-anchor="middle" dominant-baseline="central" fill="#5b5670" font-size="12">Deferred Deep Link</text>
+<rect x="430" y="196" width="180" height="58" rx="8" fill="#FFFFFF" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="520" y="219" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="14" font-weight="500">Open app</text>
+<text x="520" y="238" text-anchor="middle" dominant-baseline="central" fill="#5b5670" font-size="12">Direct Deep Link</text>
+<path d="M160 254 L160 282 L330 282" stroke="#8a8694" stroke-width="1.5" fill="none"/>
+<path d="M520 254 L520 282 L350 282" stroke="#8a8694" stroke-width="1.5" fill="none"/>
+<rect x="270" y="260" width="140" height="18" rx="3" fill="#FFFFFF"/><text x="340" y="270" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="11.5" font-weight="500">Auto-enter after install</text>
+<line x1="340" y1="282" x2="340" y2="312" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="55" y="312" width="570" height="218" rx="12" fill="none" stroke="#8a8694" stroke-width="0.5" stroke-dasharray="5 4"/>
+<text x="75" y="334" fill="#5b5670" font-size="12" font-weight="500">How do I know this?</text>
+<rect x="200" y="350" width="210" height="46" rx="8" fill="#f3f2ef" stroke="#1f1f2b" stroke-width="0.5"/>
+<text x="305" y="373" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="14" font-weight="500">② Opened via this event?</text>
+<line x1="410" y1="373" x2="443" y2="373" stroke="#d9d7d2" stroke-width="0.5" stroke-dasharray="3 3"/>
+<rect x="450" y="352" width="175" height="42" rx="8" fill="#FFFFFF" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="460" y="367" fill="#5b5670" font-size="11" font-weight="500">Dev-team collaboration</text>
+<text x="460" y="384" fill="#5b5670" font-size="11">needs a signal the app sends</text>
+<line x1="305" y1="396" x2="305" y2="426" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="200" y="426" width="210" height="46" rx="8" fill="#f3f2ef" stroke="#1f1f2b" stroke-width="0.5"/>
+<text x="305" y="449" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="14" font-weight="500">③ Check participation status</text>
+<line x1="410" y1="449" x2="443" y2="449" stroke="#d9d7d2" stroke-width="0.5" stroke-dasharray="3 3"/>
+<rect x="450" y="428" width="175" height="42" rx="8" fill="#f3f2ef" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="460" y="443" fill="#5b5670" font-size="11" font-weight="500">By the marketer directly</text>
+<text x="460" y="460" fill="#5b5670" font-size="11">create·record value in Braze</text>
+<line x1="305" y1="530" x2="305" y2="560" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="210" y="560" width="190" height="46" rx="8" fill="#1f1f2b"/>
+<text x="305" y="583" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="14" font-weight="500">In-app event entry · branching</text>
+</svg>
+<figcaption>The thinking on entry — app ownership via Airbridge (self-served), the event-open signal via dev-team collaboration, participation status by the marketer directly.</figcaption></figure>
+
+  <details class="code-fold"><summary><span class="dot">▌</span> goToPage()</summary><div class="code"><pre>function goToPage(id){
+  document.querySelectorAll('.bz-page').forEach(function(p){
+    p.classList.toggle('active', p.getAttribute('page-id') === id);
+  });
+}</pre></div></details>
+  <p>→ What this code does: among the several screens hidden inside one HTML, it turns on only the one to show right now. This single function is the backbone of the multi-step flow.</p>
+
+  <h3>Step 1. Prompting app download / app entry</h3>
+  <p>The entry path for users without the app or who deleted it starts on the web. Tapping the CTA on the web event page (“Download the app and get rewards”) opens an install-prompt modal, and the modal's CTA (“Summon the knight”) sends them to the App Store / Play Store via Airbridge routing. On first launch after install, the Deferred Deep Link callback fires; for already-installed users, a Direct Deep Link fires — both take them straight into the event screen, because any navigation step wedged between install and event entry creates that much drop-off.</p>
+  <p>The moment the app opens, it sends a signal that says “this was opened via this event link” (<code>deeplink_open_promotion</code>). This signal plays two roles. One is <strong>the trigger that fires the event modal</strong>; the other is <strong>the dashboard that counts who came in</strong>. The signal carries a tag (<code>link_type</code>) that tells us whether this user came in by freshly installing the app (new install) or with the app already there (already installed). Thanks to that, a single signal lets us separate new-install inflow from existing-user revisits. (How this shared signal was used to distinguish multiple promotions is covered in Chapter 11, Challenge 2.)</p>
+  <p>That said, the same deep link doesn't always mean entering the event. A user might open it simply to view the event page. So I put a marker called <code>apply_event</code> on the deep link, and made the signal above fire only when that value is <code>true</code>. If it's <code>false</code>, the event page is shown but no Braze signal is sent — a device that splits “just looking” from “coming in to participate” right at the entrance.</p>
+
+  <figure class="diagram"><svg width="100%" viewBox="0 0 680 200" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
+<title>Breaking down the deep-link structure</title>
+<text x="40" y="30" fill="#1f1f2b" font-size="14" font-weight="600">What's packed into one deep link</text>
+<rect x="40" y="46" width="600" height="42" rx="8" fill="#1f1f2b"/>
+<text x="58" y="67" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="13.5" fill="#8E86A8">app://event/</text>
+<text x="158" y="67" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="13.5" fill="#FFFFFF">{event_id}</text>
+<text x="238" y="67" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="13.5" fill="#8E86A8">?</text>
+<text x="248" y="67" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="13.5" fill="#E7E2F4">apply_event=true</text>
+<text x="392" y="67" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="13.5" fill="#8E86A8">&amp;</text>
+<text x="408" y="67" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="13.5" fill="#8E86A8">term=...</text>
+<g stroke="#8a8694" stroke-width="1.2" fill="none">
+<path d="M102 88 L102 102 L97 102 L97 110"/>
+<path d="M195 88 L195 102 L259 102 L259 110"/>
+<path d="M306 88 L306 102 L421 102 L421 110"/>
+<path d="M434 88 L434 102 L583 102 L583 110"/>
+</g>
+<rect x="21" y="110" width="152" height="72" rx="8" fill="#f3f2ef" stroke="#1f1f2b" stroke-width="0.5"/>
+<text x="32" y="130" fill="#1f1f2b" font-size="12" font-weight="600">Scheme · path</text>
+<text x="32" y="149" fill="#5b5670" font-size="10.5">the address that opens</text>
+<text x="32" y="164" fill="#5b5670" font-size="10.5">the event screen (masked)</text>
+<rect x="183" y="110" width="152" height="72" rx="8" fill="#f3f2ef" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="194" y="130" fill="#1f1f2b" font-size="12" font-weight="600">event_id</text>
+<text x="194" y="149" fill="#5b5670" font-size="10.5">identifies which</text>
+<text x="194" y="164" fill="#5b5670" font-size="10.5">event (Challenge 2)</text>
+<rect x="345" y="110" width="152" height="72" rx="8" fill="#FFFFFF" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="356" y="130" fill="#1f1f2b" font-size="12" font-weight="600">apply_event</text>
+<text x="356" y="149" fill="#5b5670" font-size="10.5">sends the participation</text>
+<text x="356" y="164" fill="#5b5670" font-size="10.5">signal only when true</text>
+<rect x="507" y="110" width="152" height="72" rx="8" fill="#f3f2ef" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="518" y="130" fill="#1f1f2b" font-size="12" font-weight="600">term · link_type</text>
+<text x="518" y="149" fill="#5b5670" font-size="10.5">promotion ID ·</text>
+<text x="518" y="164" fill="#5b5670" font-size="10.5">new/already-installed</text>
+</svg>
+<figcaption>Breaking down the deep-link structure — one line carries the path, event identification, the participation marker, and the promotion tag together.</figcaption></figure>
+
+  <h3>Step 2. Terms / marketing opt-in</h3>
+  <p>On the first screen of event participation, we collect consent for marketing use of personal data and consent to receive marketing notifications. Four operational details went in here.</p>
+  <p><strong>First, items already consented to aren't shown.</strong> The user's existing consent state is injected via Liquid, and the checkboxes for items already consented to are hidden. For a user who has already consented to everything, the consent screen itself becomes a light, formal confirmation.</p>
+  <details class="code-fold"><summary><span class="dot">▌</span> Hide consented items (Liquid injection)</summary><div class="code"><pre>&lt;span data-attr-marketing_info=&quot;{{custom_attribute.${is_marketing_info_opted_in}}}&quot;&gt;&lt;/span&gt;
+&lt;span data-attr-marketing_message=&quot;{{custom_attribute.${is_marketing_message_opted_in}}}&quot;&gt;&lt;/span&gt;</pre></div></details>
+  <p>→ What this code does: before the message is displayed, Braze plants “which consents this user has already given” into the screen, and the JS reads those values to hide the already-consented checkboxes.</p>
+  <p><strong>Second, record on consent immediately, and reflect it immediately.</strong> The moment the consent button is pressed, a Custom Attribute is recorded per consent item and sent straight to the server with <code>requestImmediateDataFlush()</code>.</p>
+  <details class="code-fold"><summary><span class="dot">▌</span> Record consent · immediate flush</summary><div class="code"><pre>if(consentedItems.indexOf('marketing_info') !== -1)
+  u.setCustomUserAttribute('is_marketing_info_opted_in', true);
+if(consentedItems.indexOf('marketing_message') !== -1)
+  u.setCustomUserAttribute('is_marketing_message_opted_in', true);
+b.logCustomEvent('click_terms_submit_button', {checked_items: consentedItems.join(',')});
+b.requestImmediateDataFlush();</pre></div></details>
+  <p>→ What this code does: it tags which items were consented to, stamps the consent action, and then — without waiting — sends it to the Braze server immediately.</p>
+  <p><strong>Third, notify the user of the consent.</strong> Right after consent completes, the flow passes through a notice screen that shows the consent date/time and the consented items in a table. For marketing opt-in, notice is as important as collection.</p>
+  <p><strong>Fourth, record consent in two places at once.</strong> Marketing opt-in isn't just for sending Braze messages — it's a legal state value shared across the entire service, so recording it only in Braze would leave it out of sync with the service DB. So the moment the modal closes, the consented items are packed into a deep link and handed to the app, and the app uses those values to call the service-server API and reflect the consent in the DB too (the app↔server connection was designed together with the dev team). The reasoning behind why this handling was needed is covered in Chapter 11, Challenge 5.</p>
+  <details class="code-fold"><summary><span class="dot">▌</span> handleFinalClose() — consent sync</summary><div class="code"><pre>function handleFinalClose(){
+  var params = buildConsentParams();  <span class="cm">// list of consented items</span>
+  if(params.length &gt; 0){
+    window.location = '{APP_SCHEME}/consent?' + params.join('&amp;');  <span class="cm">// → app receives it and calls server API</span>
+  }
+  setTimeout(closeModal, 300);  <span class="cm">// close the modal a moment later</span>
+}</pre></div></details>
+  <p>→ What this code does: right before the modal closes, it loads the consented items onto a deep link and hands them to the app. The app receives this signal and reports the consent state to the service server. The modal then closes.</p>
+
+  <figure class="diagram"><svg width="100%" viewBox="0 0 680 340" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
+<title>Terms-consent modal screen flow</title>
+<defs>
+<marker id="arc5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#8a8694" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect x="40" y="40" width="170" height="220" rx="14" fill="#FFFFFF" stroke="#1f1f2b" stroke-width="1.5"/>
+<text x="125" y="66" text-anchor="middle" fill="#1f1f2b" font-size="12" font-weight="600">To join the event,</text>
+<text x="125" y="82" text-anchor="middle" fill="#1f1f2b" font-size="12" font-weight="600">please consent</text>
+<rect x="58" y="100" width="134" height="26" rx="5" fill="#f3f2ef"/>
+<rect x="64" y="106" width="14" height="14" rx="3" fill="#1f1f2b"/>
+<text x="86" y="113" dominant-baseline="central" fill="#1f1f2b" font-size="10" font-weight="600">Agree to all</text>
+<rect x="58" y="132" width="134" height="22" rx="5" fill="#FAFAFC"/>
+<rect x="64" y="137" width="12" height="12" rx="3" fill="#fff" stroke="#d9d7d2"/>
+<text x="84" y="143" dominant-baseline="central" fill="#5b5670" font-size="9.5">Marketing-use consent</text>
+<rect x="58" y="158" width="134" height="22" rx="5" fill="#FAFAFC"/>
+<rect x="64" y="163" width="12" height="12" rx="3" fill="#fff" stroke="#d9d7d2"/>
+<text x="84" y="169" dominant-baseline="central" fill="#5b5670" font-size="9.5">Notification opt-in</text>
+<rect x="58" y="220" width="134" height="28" rx="6" fill="#1f1f2b"/>
+<text x="125" y="234" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="11" font-weight="600">Agree</text>
+<text x="125" y="284" text-anchor="middle" fill="#5b5670" font-size="11" font-weight="600">① Consent screen</text>
+<text x="125" y="300" text-anchor="middle" fill="#5b5670" font-size="10">already-consented items auto-hidden</text>
+<line x1="214" y1="150" x2="244" y2="150" stroke="#8a8694" stroke-width="1.5" marker-end="url(#arc5)"/>
+<rect x="255" y="40" width="170" height="220" rx="14" fill="#FFFFFF" stroke="#1f1f2b" stroke-width="1.5"/>
+<circle cx="340" cy="78" r="16" fill="#f3f2ef"/>
+<path d="M332 78 L338 84 L349 72" stroke="#1f1f2b" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="340" y="106" text-anchor="middle" fill="#1f1f2b" font-size="12" font-weight="600">Consent complete</text>
+<rect x="273" y="124" width="134" height="24" rx="4" fill="#FAFAFC" stroke="#ebeae7" stroke-width="0.5"/>
+<text x="283" y="136" dominant-baseline="central" fill="#5b5670" font-size="9">Consent date/time</text>
+<text x="397" y="136" text-anchor="end" dominant-baseline="central" fill="#1f1f2b" font-size="9">2026.03.01 14:20</text>
+<rect x="273" y="150" width="134" height="38" rx="4" fill="#FAFAFC" stroke="#ebeae7" stroke-width="0.5"/>
+<text x="283" y="162" dominant-baseline="central" fill="#5b5670" font-size="9">Consented items</text>
+<text x="283" y="176" dominant-baseline="central" fill="#1f1f2b" font-size="9">Marketing use · Notifications</text>
+<rect x="273" y="220" width="134" height="28" rx="6" fill="#1f1f2b"/>
+<text x="340" y="234" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="11" font-weight="600">OK</text>
+<text x="340" y="284" text-anchor="middle" fill="#5b5670" font-size="11" font-weight="600">② Consent notice screen</text>
+<text x="340" y="300" text-anchor="middle" fill="#5b5670" font-size="10">notify user of date·item record</text>
+<line x1="429" y1="150" x2="459" y2="150" stroke="#8a8694" stroke-width="1.5" marker-end="url(#arc5)"/>
+<rect x="470" y="40" width="170" height="220" rx="14" fill="#1f1f2b"/>
+<text x="555" y="70" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">Notifications are off</text>
+<g opacity="0.95">
+<g transform="translate(531,84) scale(3.1)" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M5 20a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z"/>
+<path d="M16.5 18c1-2 2.5-5 2.5-9a7 7 0 0 0-7-7H6.635a1 1 0 0 0-.768 1.64L7 5l-2.32 5.802a2 2 0 0 0 .95 2.526l2.87 1.456"/>
+<path d="m15 5 1.425-1.425"/>
+<path d="m17 8 1.53-1.53"/>
+<path d="M9.713 12.185 7 18"/>
+</g>
+</g>
+<rect x="488" y="216" width="134" height="32" rx="6" fill="#fff"/>
+<text x="555" y="232" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="10.5" font-weight="600">Turn on alerts · summon knight</text>
+<text x="555" y="284" text-anchor="middle" fill="#5b5670" font-size="11" font-weight="600">③ Push primer</text>
+<text x="555" y="300" text-anchor="middle" fill="#5b5670" font-size="10">permission-off users only · as game lore</text>
+</svg>
+<figcaption>Terms-consent modal screen flow — consent → notice → (only for permission-off users) push primer.</figcaption></figure>
+
+  <h3>Step 2.5. Push-state branch — the primer</h3>
+  <p>After consent confirmation, the screen splits based on the user's app-push permission state. If permission is on, they go straight to the game; if it's off, they go to the <strong>push primer</strong> — a knight chained up, with a “Turn on alerts and summon the knight” button. This screen reframes the permission request not as a system pop-up but as game lore (“to free the knight, you need notifications”). (This branch wasn't in the original design and was added during implementation. Handling by permission state and how it was discovered are covered in Chapter 11, Challenge 4.)</p>
+  <p>The determination uses a priority order. The real-time permission check provided by brazeBridge is used first, and only in environments where that's not possible do we fall back to the send-time snapshot value injected via Liquid.</p>
+  <details class="code-fold"><summary><span class="dot">▌</span> Two-tier push-permission check</summary><div class="code"><pre>if(b &amp;&amp; typeof b.isPushPermissionGranted === 'function'){
+  if(b.isPushPermissionGranted()){ goToPage('chess-drop'); initDragDrop(); }
+  else{ goToPage('push-primer'); }
+} else if(isPushOn()){            <span class="cm">// Liquid snapshot fallback</span>
+  goToPage('chess-drop'); initDragDrop();
+} else {
+  goToPage('push-primer');
+}</pre></div></details>
+  <p>→ What this code does: it asks the bridge directly whether push is on “at this very moment,” and if it can't ask, it judges by the value noted down when the message was sent. Since a user can change the setting while looking at the modal, the real-time value takes priority.</p>
+
+  <h3>Step 3. The drag-and-drop game</h3>
+  <p>The user drags and drops the knight into the drop zone on the chessboard. Drop it outside the zone and the knight bounces back to its spot; succeed and a landing animation plays as the draw begins. (Environment-specific issues during implementation are covered in Chapter 11.)</p>
+
+  <h3>Step 4. Random reward result</h3>
+  <p>When the game is completed, the draw result is decided on the spot, instantly, and shown to the user. (The specific draw logic is confidential and omitted.)</p>
+  <p>The win-result screen also splits by prize tier. High-value prizes lead to a dedicated screen connecting to an information-collection form; coupons/gift-voucher items show a “distributed in bulk after the event ends” notice screen. Whether stock is depleted is judged by the value fetched via Connected Content at the moment the modal is displayed — this structure is covered in detail in Chapter 9.</p>
+</div></section>
+
+<!-- 7 -->
+<section id="ch7"><div class="wrap">
+  <p class="sec-label">Implementation · Data recording</p>
+  <h2>Recording user behavior with brazeBridge</h2>
+  <p>To put it in one line first — <strong>Braze became the participation-record store in place of backend tables, and every action in the modal was left behind as data.</strong></p>
+  <p>To sort out the division of recording duties first: app installs and deep-link conversions are measured by the attribution tool (Airbridge), while in-app participation behavior is recorded by brazeBridge. For each action that happens in the modal, I designed the recording method and the purpose of use up front.</p>
+  <figure class="diagram"><div class="mtable"><table>
+    <thead><tr><th>User action</th><th>Recording method</th><th>Purpose of use</th></tr></thead>
+    <tbody>
+      <tr><td>App install / deep-link entry</td><td>Attribution tool (Airbridge)</td><td>Measure primary conversion (download)</td></tr>
+      <tr><td>Terms / opt-in</td><td>Custom Attribute (per item)</td><td>Store consent state, secure reach channel</td></tr>
+      <tr><td>Consent submit / confirm</td><td>Custom Event</td><td>Measure passing the consent step</td></tr>
+      <tr><td>Push-primer response</td><td>Custom Event (open/close)</td><td>Measure permission-request acceptance rate</td></tr>
+      <tr><td>Participation complete</td><td>Custom Attribute</td><td>One-time participation limit, prevent re-display</td></tr>
+      <tr><td>Win result</td><td>Custom Attribute + Event</td><td>Branch follow-up messages by prize</td></tr>
+      <tr><td>Prize decrement</td><td>GAS POST (sheet record)</td><td>Update inventory ledger</td></tr>
+    </tbody>
+  </table></div></figure>
+  <p>Setting the recording units like this makes the whole campaign a funnel that flows <strong>install → entry → consent → interaction complete → result viewed</strong>. Since the drop-off at each step is measured, where users fall off becomes the hypothesis for the next experiment.</p>
+
+  <figure class="diagram"><svg width="100%" viewBox="0 0 680 430" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
+<title>The mini-funnel created from brazeBridge records</title>
+<defs>
+<marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#8a8694" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<text x="40" y="34" fill="#1f1f2b" font-size="14" font-weight="500">Install → entry → consent → interaction complete → result viewed</text>
+<text x="40" y="54" fill="#5b5670" font-size="12">Since each step is left as a separate signal, where users fall off is measured</text>
+<rect x="120" y="76" width="440" height="44" rx="8" fill="#1f1f2b"/>
+<text x="340" y="98" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="14" font-weight="500">Install · deep-link entry</text>
+<text x="575" y="98" dominant-baseline="central" fill="#5b5670" font-size="11">Airbridge</text>
+<line x1="340" y1="120" x2="340" y2="138" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ar2)"/>
+<rect x="160" y="138" width="360" height="44" rx="8" fill="#3d3a4a"/>
+<text x="340" y="160" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="14" font-weight="500">Event entry</text>
+<text x="575" y="160" dominant-baseline="central" fill="#5b5670" font-size="11">deeplink_open</text>
+<line x1="340" y1="182" x2="340" y2="200" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ar2)"/>
+<rect x="200" y="200" width="280" height="44" rx="8" fill="#5b5670"/>
+<text x="340" y="222" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="14" font-weight="500">Terms · opt-in</text>
+<text x="575" y="222" dominant-baseline="central" fill="#5b5670" font-size="11">terms_submit</text>
+<line x1="340" y1="244" x2="340" y2="262" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ar2)"/>
+<rect x="235" y="262" width="210" height="44" rx="8" fill="#8a8694"/>
+<text x="340" y="284" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="14" font-weight="500">Game complete</text>
+<text x="575" y="284" dominant-baseline="central" fill="#5b5670" font-size="11">drag_success</text>
+<line x1="340" y1="306" x2="340" y2="324" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ar2)"/>
+<rect x="265" y="324" width="150" height="44" rx="8" fill="#d9d7d2"/>
+<text x="340" y="346" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="14" font-weight="500">Result viewed</text>
+<text x="575" y="346" dominant-baseline="central" fill="#5b5670" font-size="11">view_result</text>
+<text x="40" y="398" fill="#5b5670" font-size="12">How much the width narrows between steps is the drop-off — that point becomes the next A/B test's hypothesis</text>
+</svg>
+<figcaption>Mini-funnel — install → entry → consent → complete → result viewed, with per-step drop-off measured.</figcaption></figure>
+
+  <p>The “participate only once” limit is solved with the same structure. At the moment of participation completion, an event-specific Custom Attribute (<code>is_participated_promotion_{event_id}</code>) is recorded, and by setting that attribute as a Canvas branch condition and an IAM display-exclusion condition, re-participation is blocked without any separate server validation. The win detail (<code>promotion_prize_{event_id}</code>) is left behind too, used as-is for personalization in follow-up messages like “the ○○ you won.”</p>
+  <p>Summarizing the key Custom Attributes stored this way — what, in which type, recorded by whom, all at a glance. (All names are illustrative.)</p>
+  <figure class="diagram"><div class="mtable"><table>
+    <thead><tr><th>Attribute (example)</th><th>Type</th><th>Set by</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td>push_authorization_status</td><td>String</td><td>App SDK (on deep-link entry)</td><td>Push permission state (not_determined/denied/authorized)</td></tr>
+      <tr><td>is_marketing_info_opted_in</td><td>Boolean</td><td>brazeBridge (consent modal)</td><td>Consent for marketing use of personal data</td></tr>
+      <tr><td>is_marketing_message_opted_in</td><td>Boolean</td><td>brazeBridge (consent modal)</td><td>Consent to receive marketing notifications</td></tr>
+      <tr><td>is_participated_promotion_{event_id}</td><td>Boolean</td><td>brazeBridge (participation complete)</td><td>One-time participation limit, prevent re-display</td></tr>
+      <tr><td>promotion_prize_{event_id}</td><td>String</td><td>brazeBridge (participation complete)</td><td>Won prize — follow-up message personalization</td></tr>
+    </tbody>
+  </table></div></figure>
+  <p>The key point is that the “set by” splits into two. Values the app SDK fills (permission state) and values brazeBridge fills inside the modal (consent, participation, win) coexist, and Canvas reads both together to branch.</p>
+  <p>Event and attribute recording was written considering both the real Braze environment and the local demo environment at once.</p>
+  <details class="code-fold"><summary><span class="dot">▌</span> logParticipation()</summary><div class="code"><pre>function getBridge(){ return window.brazeBridge || window.appboyBridge || null; }
+
+function logParticipation(prize){
+  var b = getBridge(); if(!b) return;
+  b.getUser().setCustomUserAttribute('is_participated_promotion_' + promoTerm, true);
+  b.getUser().setCustomUserAttribute('promotion_prize_' + promoTerm, prize.detail);
+  b.logCustomEvent('view_participated_promotion_modal', {
+    prize_name: prize.name
+  });
+  b.requestImmediateDataFlush();
+}</pre></div></details>
+  <p>→ What this code does: the moment participation ends, it attaches a “participated” name tag and a “won this” name tag, stamps the action, and sends it to the server immediately. This single record becomes the raw material for blocking re-participation and for branching follow-up messages.</p>
+  <p>Why <code>requestImmediateDataFlush()</code> matters — the SDK batches data and sends it on a fixed interval, but since a Canvas branch within the same session has to evaluate this attribute right away, it's sent immediately instead of waiting.</p>
+  <p>The “order” of recording was also a design target. When the app receives the deep link, I guaranteed that the <code>push_authorization_status</code> Attribute is set <strong>first</strong>, and only then is the <code>deeplink_open_promotion</code> event sent. Because Canvas wakes on this event and reads the Attribute value to branch, if the order were reversed it would send the wrong message based on the stale, pre-update permission value. As much as what to record, the order in which it's recorded determines the accuracy of automation.</p>
+
+  <figure class="artifact tall">
+    <a class="art-frame" href="../artifacts/tech-doc.html" target="_blank" rel="noopener">
+      <span class="art-badge">↗ Integrated technical spec</span>
+      <img src="../artifacts/previews/tech-doc.png" alt="Integrated technical document — per-event property definition sheet and Custom Attribute spec" loading="lazy"/>
+    </a>
+    <figcaption>Design artifact ③ <b>Integrated technical spec</b> — per-event property definitions and the Attribute→Event ordering-guarantee rule. Click to open the app↔Braze communication flow diagram (PHASE 0–4) and the full spec.</figcaption>
+  </figure>
+</div></section>
+
+<!-- 8 -->
+<section id="ch8"><div class="wrap">
+  <p class="sec-label">Implementation · Canvas branching</p>
+  <h2>Canvas and automatic branching of follow-up messages</h2>
+  <p>To put it in one line first — <strong>branches decided at send time are handled by Canvas, and branches that change in real time inside the modal are handled by brazeBridge.</strong></p>
+  <p>This IAM isn't a standalone campaign; it's one piece of a Canvas journey. The actual Canvas split users in the following order.</p>
+  <ol class="num">
+    <li><strong>Login / app-ownership branch</strong> — for users who aren't logged in or don't have the app, show a guidance message first instead of the event modal</li>
+    <li><strong>Participation-status branch</strong> — users who already participated are split into a duplicate-participation notice modal</li>
+    <li><strong>Consent state × device-permission state combination branch</strong> — different HTML variants are sent for each combination of whether the user completed all terms consents and whether app push (device notifications) is allowed. For example, the “existing user + terms unmet + device not allowed” combination gets a variant that starts from the consent screen, while the “all consented + device allowed” combination gets a variant that goes straight into the game</li>
+  </ol>
+
+  <figure class="diagram"><svg width="100%" viewBox="0 0 680 620" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
+<title>Canvas follow-up message auto-branching diagram</title>
+<defs>
+<marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#8a8694" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect x="250" y="24" width="180" height="44" rx="8" fill="#1f1f2b"/>
+<text x="340" y="46" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="14" font-weight="500">Deep-link entry signal</text>
+<line x1="340" y1="68" x2="340" y2="92" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ar3)"/>
+<rect x="245" y="92" width="190" height="44" rx="8" fill="#f3f2ef" stroke="#1f1f2b" stroke-width="0.5"/>
+<text x="340" y="114" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="14" font-weight="500">① Participation status</text>
+<path d="M340 136 L340 156 L150 156 L150 178" stroke="#8a8694" stroke-width="1.5" fill="none" marker-end="url(#ar3)"/>
+<path d="M340 136 L340 156 L420 156 L420 178" stroke="#8a8694" stroke-width="1.5" fill="none" marker-end="url(#ar3)"/>
+<text x="150" y="150" text-anchor="middle" fill="#5b5670" font-size="11">Already joined</text>
+<text x="430" y="150" text-anchor="middle" fill="#5b5670" font-size="11">Not joined</text>
+<rect x="60" y="178" width="180" height="44" rx="8" fill="#FFFFFF" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="150" y="200" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="14" font-weight="500">Branch A · Duplicate notice</text>
+<rect x="325" y="178" width="190" height="44" rx="8" fill="#f3f2ef" stroke="#1f1f2b" stroke-width="0.5"/>
+<text x="420" y="200" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="14" font-weight="500">② Terms·device-allow combo</text>
+<line x1="420" y1="222" x2="420" y2="244" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ar3)"/>
+<rect x="120" y="244" width="500" height="118" rx="12" fill="none" stroke="#8a8694" stroke-width="0.5" stroke-dasharray="5 4"/>
+<text x="140" y="266" fill="#5b5670" font-size="12" font-weight="500">Select variant by send-time state — Canvas</text>
+<rect x="140" y="280" width="220" height="32" rx="6" fill="#FFFFFF" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="150" y="296" dominant-baseline="central" fill="#1f1f2b" font-size="12" font-weight="500">Branch B · Installed + terms unmet</text>
+<rect x="380" y="280" width="220" height="32" rx="6" fill="#FFFFFF" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="390" y="296" dominant-baseline="central" fill="#1f1f2b" font-size="12" font-weight="500">Branch C · New + terms unmet</text>
+<rect x="140" y="320" width="220" height="32" rx="6" fill="#f3f2ef" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="150" y="336" dominant-baseline="central" fill="#1f1f2b" font-size="12" font-weight="500">Branch D · All consented + device allowed</text>
+<rect x="380" y="320" width="220" height="32" rx="6" fill="#f3f2ef" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="390" y="336" dominant-baseline="central" fill="#1f1f2b" font-size="12" font-weight="500">Branch E · All consented + device not allowed</text>
+<line x1="370" y1="362" x2="370" y2="392" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ar3)"/>
+<rect x="200" y="392" width="340" height="56" rx="8" fill="#f3f2ef" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="370" y="412" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="13" font-weight="500">Re-check in real time inside the modal — brazeBridge</text>
+<text x="370" y="430" text-anchor="middle" dominant-baseline="central" fill="#5b5670" font-size="12">values that change mid-view, like push permission, are judged here</text>
+<line x1="370" y1="448" x2="370" y2="472" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ar3)"/>
+<rect x="280" y="472" width="180" height="44" rx="8" fill="#1f1f2b"/>
+<text x="370" y="494" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="14" font-weight="500">Game · result screen</text>
+<line x1="370" y1="516" x2="370" y2="540" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ar3)"/>
+<rect x="230" y="540" width="280" height="44" rx="8" fill="#1f1f2b"/>
+<text x="370" y="562" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="13" font-weight="500">Follow-up messages by result (reminder · win notice)</text>
+</svg>
+<figcaption>Canvas branching diagram — login/app-ownership → participation status → variant sent per consent×device-allow combination.</figcaption></figure>
+
+  <p>One design principle emerges here. <strong>Conditions already fixed before the user sees the modal (participation history, the send-time consent/permission state) are split in Canvas and segments, while conditions that can change while viewing the modal (push permission) are re-checked in real time inside the HTML via brazeBridge.</strong> Liquid values are a snapshot from send time, so they can't keep up with cases where the user changes a setting inside the modal and comes back.</p>
+  <p>Users who entered through a single shared trigger (<code>deeplink_open_promotion</code>) are split into five branches by segment conditions to show different IAMs. (The conditions are masked, generalized examples.)</p>
+  <figure class="diagram"><div class="mtable"><table>
+    <thead><tr><th>Branch</th><th>Segment condition (summary)</th><th>IAM shown</th></tr></thead>
+    <tbody>
+      <tr><td>A. Already joined</td><td><code>is_participated_promotion</code> = true</td><td>“Already participated” notice</td></tr>
+      <tr><td>B. Installed + terms unmet</td><td>not joined · consent incomplete · <code>link_type</code> = direct</td><td>Installed notice → consent modal</td></tr>
+      <tr><td>C. New + terms unmet</td><td>not joined · consent incomplete · <code>link_type</code> = deferred</td><td>Start from the consent modal</td></tr>
+      <tr><td>D. All consented + device allowed</td><td>not joined · consent complete · push on</td><td>Go straight into the game</td></tr>
+      <tr><td>E. All consented + device not allowed</td><td>not joined · consent complete · push off</td><td>Push primer → game</td></tr>
+    </tbody>
+  </table></div></figure>
+  <p>This separation has two effects. A single HTML doesn't have to carry every case, so the code stays simple, and the performance of each variant message (which combination consents and participates) can be viewed separately at the Canvas-step level.</p>
+  <p>After participation ends, the attributes stored in Chapter 7 become the follow-up branch conditions as-is — reminders for non-participating users, and different follow-up messages for won/not-won users, all sent automatically.</p>
+</div></section>
+
+<!-- 9 -->
+<section id="ch9"><div class="wrap">
+  <p class="sec-label">Implementation · Separation of roles</p>
+  <h2>Separating roles: Liquid · Connected Content · GAS · JavaScript</h2>
+  <p>To put it in one line first — <strong>user values are handled by Liquid, operational values by Connected Content and GAS, and the screen by JavaScript. Then there's no need to redeploy code during campaign operation.</strong></p>
+  <p><strong>Liquid — injecting per-user snapshot values.</strong> Values that differ per user but are fixed at send time, like existing consent state, are injected via Liquid. Since Liquid is evaluated on the server before the HTML renders, it's more stable to use it only for value injection rather than complex conditional processing.</p>
+  <p><strong>Connected Content — querying operational state.</strong> Connected Content is known as a personalization feature for fetching custom thumbnails or product-recommendation images, but its essence is broader — <strong>a feature that sends a request to an external URL at the moment the message renders and uses that response within the message.</strong> If the response is an image, it becomes thumbnail personalization; if it's JSON, it becomes real-time inventory lookup like this time. Values that keep changing during the campaign, like prize inventory, were fetched this way, and in this campaign that “external” was the GAS web app itself.</p>
+  <p><strong>GAS + Spreadsheet — the inventory ledger and a lightweight API.</strong> The inventory per prize is written in a Google Spreadsheet, and the GAS web app receives two kinds of request. <code>get</code> returns the current inventory as JSON (called by Connected Content), and <code>claim</code> records the win into the sheet (called by the modal's JS). Lookup, recording, and the ledger are all solved without backend development.</p>
+  <details class="code-fold"><summary><span class="dot">▌</span> Connected Content — inventory lookup</summary><div class="code"><pre>{% connected_content https://script.google.com/macros/s/{GAS_WEBAPP_ID}/exec?action=get :save inv %}</pre></div></details>
+  <details class="code-fold"><summary><span class="dot">▌</span> Inject inventory value into the screen</summary><div class="code"><pre>&lt;div id=&quot;ld&quot; data-inv='{% if inv and inv.success %}{{ inv.inventory | json }}{% else %}{}{% endif %}'&gt;&lt;/div&gt;</pre></div></details>
+  <p>→ What this code does: the moment the modal is displayed, Braze asks GAS “what's the inventory right now?” and plants the answer (JSON) into the screen. The JS reads that value to judge whether stock is depleted.</p>
+  <details class="code-fold"><summary><span class="dot">▌</span> claimPrize() — decrement inventory</summary><div class="code"><pre>function claimPrize(prizeName){
+  fetch(GAS_WEBAPP_URL, {
+    method: 'POST', mode: 'no-cors',
+    body: JSON.stringify({ action: 'claim', prize: prizeName, braze_id: brazeId })
+  });
+}</pre></div></details>
+  <p>→ What this code does: the moment a win is confirmed, the modal directly tells GAS “one of this prize went out” and writes a line into the sheet. That single line is both the inventory decrement and the winner record.</p>
+  <p><strong>JavaScript — computation and screen rendering.</strong> The draw, page transitions, animations, and inventory judgment are all handled by JS.</p>
+  <p>The core effect of this separation is in operations. To adjust prize inventory or close it out, <strong>the marketer just changes the number in the spreadsheet.</strong> There's no need to edit the HTML or re-publish the campaign.</p>
+  <div class="callout">
+    <span class="k">Operational note</span>
+    <p>If the GAS web app URL is exposed externally, anyone can call it, so when publishing or sharing docs/code, always mask it and add request validation on the GAS side too, to be safe.</p>
+  </div>
+</div></section>
+
+<!-- 10 -->
+<section id="ch10"><div class="wrap">
+  <p class="sec-label">Operational monitoring</p>
+  <h2>App conversion, participation rate, opt-in, and prize depletion at a glance</h2>
+  <p>Once a campaign starts, there are four numbers a marketer needs. How much app conversion is happening, where the participation funnel leaks, how much consent is accumulating, and how many prizes are left.</p>
+  <p><strong>App conversion</strong> — installs and deep-link entries are tracked at the campaign level on the attribution tool (Airbridge) dashboard.</p>
+  <p><strong>Participation / consent status</strong> — if you build Braze segments based on the Custom Attributes/Events stored in Chapter 7, you can check the count of consented / participation-complete / winning users in real time in the segment builder. The performance of variant messages by consent×device-allow combination is captured separately at the Canvas-step level.</p>
+  <p><strong>Prize-depletion status</strong> — the spreadsheet itself is the monitoring screen. Every time a <code>claim</code> request comes in, a win record piles up line by line in the sheet, so just by keeping the sheet open the marketer sees the depletion speed per prize in real time. Reducing inventory or closing it out is also done by changing a number in the same sheet — the ledger, the monitoring, and the ops console are unified into a single sheet.</p>
+</div></section>
+
+<!-- 11 -->
+<section id="ch11"><div class="wrap">
+  <p class="sec-label">Challenges</p>
+  <h2>Seven challenges met while implementing</h2>
+  <p>This campaign didn't start with a finished design. While building it, I met seven “wait, how do I do this?” moments in turn — from a question at the very start to a bug at the tail end of QA. Here they are in chronological order.</p>
+
+  <h3>Challenge 1. How do I know whether this user installed/participated via this event?</h3>
+  <p>The first thing I ran into was a measurement problem. Whether a user who tapped the event on the web came in by installing the app, whether that was through this event, and whether they hadn't already participated — I needed to know this to decide whether to show the modal, but at first there was no material for that judgment.</p>
+  <p>I solved it by splitting into three. <strong>App ownership</strong> was handled by the attribution tool's (Airbridge) deep-link routing. <strong>Participation status</strong> the marketer could solve directly — the “this user participated” marker (a Custom Attribute) is built directly in Braze, and you just turn it on the moment participation ends inside the modal. The problem was <strong>the “the app was opened via this event” signal.</strong> Since this is something the app side has to send the moment it opens, the marketer can't make it with Braze alone, so I asked the dev team to “send a signal whenever the app opens via this deep link” and designed it together. (If the service already has the same signal, you can just reuse it.) Drawing the line between what to do directly and where you need the dev team's help was also part of the design.</p>
+
+  <h3>Challenge 2. “How do I tell which event this signal is for?”</h3>
+  <p>Once I'd built the “app was opened” signal, the next question followed immediately. That signal name is the same one every download promotion uses (<code>deeplink_open_promotion</code>), so then how do I distinguish a user who came in through this chess event from one who came in through a different promotion? The signal alone couldn't tell “which promotion.”</p>
+  <p>The solution was to attach tags to the signal. I asked the dev team to load the promotion identifier (<code>term</code>) and the event number (<code>event_id</code>) onto the signal when sending it, and Braze used these tags to pick only “users who came in through this event” and show them the modal. The signal itself is shared, but thanks to the tags it splits cleanly per promotion. This was also a value the app sends, so it had to be decided together with the dev team.</p>
+
+  <h3>Challenge 3. The hidden requirements that “result on the spot” dragged in</h3>
+  <p>Next was immediacy. In the early design, immediacy was just a screen requirement at the level of “show the win result right away.” But once I actually started building, I realized that to make that one line hold, three invisible data requirements come along.</p>
+  <ul class="bullet">
+    <li><strong>Participation-count limit</strong> — if you give the result instantly, a user might try to re-draw by refreshing. To enforce one-time participation, participation status has to be recorded somewhere</li>
+    <li><strong>Prize total / depletion tracking</strong> — to confirm a win on the spot, you have to know whether that prize remains at that moment. If stock is gone, they have to be routed to a different result</li>
+    <li><strong>Per-user win record</strong> — to send the “distributed in bulk after the event” notice and follow-up messages, who won what has to remain on record</li>
+  </ul>
+  <p>With a backend this would be done with a few tables, but those resources weren't there. So I split the storage — participation status and win results in Braze Custom Attributes (Chapter 7), and prize totals/depletion in a Google Spreadsheet as the ledger via GAS (Chapter 9). What looked like a screen requirement — “immediacy” — was actually a data-design problem.</p>
+
+  <h3>Challenge 4. “What if they turn notifications off on the device?” — consent pops up first, right after install and before login</h3>
+  <p>When implementation was nearly ripe, a question came from a developer. “What happens if the user has notifications turned off in their device settings?” The deeper I dug, the more the problem turned out to be in the <strong>order</strong>, more than the permission itself. A user who just installed the app is in a pre-login state, but with this flow, a screen asking for consent and permission pops up before they've even logged in. And since one of this campaign's goals was securing app-push consent, it got more tangled — for a user with notifications off at the OS level, push won't reach them even if you get their consent.</p>
+  <p>So I added a branch that checks the permission state right before the game (Chapter 6, Step 2.5). Instead of just popping up the system dialog, I handled the permission state in three branches.</p>
+  <ul class="bullet">
+    <li><strong>Never-asked user (<code>not_determined</code>)</strong> → show the OS permission prompt right away</li>
+    <li><strong>Already-denied user (<code>denied</code>)</strong> → since the OS won't show the prompt again, guide them with a deep link to the settings screen</li>
+    <li><strong>Already-allowed user (<code>authorized</code>)</strong> → straight to the game</li>
+  </ul>
+  <p>And I wrapped the permission request not in a dry “please turn on notifications,” but in game lore about freeing a chained knight. Whichever path, the result is recorded as a <code>push_permission {status, source}</code> signal, so I could even measure which path it was allowed through by whether <code>source</code> was <code>prompt</code> or <code>settings</code>. Allow and they go to the game; deny or close and they branch to a can't-participate notice. One unanticipated question ended up making the screen that most directly lifts the campaign's core goal (securing push consent).</p>
+
+  <h3>Challenge 5. “I changed the Braze attribute, but how do I change the service DB?”</h3>
+  <p>After collecting consent and even turning on the flag in Braze, I paused for a moment — <em>wait, this way only Braze knows this user consented, while the service server (DB) doesn't, right?</em> Marketing opt-in isn't used only when sending messages from Braze — it's a legal state value shared across the whole service, so if it changes only inside Braze, it goes out of sync with the service DB.</p>
+  <p>So the moment the modal closes, I made it pack which items were consented to onto a deep link and hand them to the app. The app receives those values and calls the API that reflects the consent state to the service server — this app↔server connection was designed together with the dev team. As a result, <strong>consent is left in two places at once.</strong> In Braze, by the modal directly (for targeting/segments); in the service DB, by the app that received the deep link, via the API (for the legal consent state). If only one side had been recorded, the consent state in one of the two places would have been false.</p>
+  <p><strong>A later improvement — Braze straight to the server, bypassing the app.</strong> Initially, consent was synced as above via <em>modal → deep link → app → server API</em>. Since the structure had the modal hand a value to the app and the app call the server, the sync was only complete if the app received and processed that deep link. Later, as an API to send the consent state directly from Braze to the server was developed, it was simplified to reflect <strong>Braze → server</strong> in one go, without going through the app. The payload Braze sends looks roughly like this (values are illustrative).</p>
+  <details class="code-fold"><summary><span class="dot">▌</span> Braze → server consent-sync payload</summary><div class="code"><pre>{
+  "userId": "{{${user_id}}}",   <span class="cm">// user identifier injected via Braze Liquid</span>
+  "userRole": "customer",
+  "eventSourceType": "braze",   <span class="cm">// which path the consent came in through</span>
+  "term": "r-99999",            <span class="cm">// promotion identifier (example)</span>
+  "allowNewsLetters": true,     <span class="cm">// consent to receive marketing notifications</span>
+  "useMarketing": true          <span class="cm">// consent for marketing use of personal data</span>
+}</pre></div></details>
+  <p>→ What this code does: when consent happens, Braze sends this JSON directly to the service server, so the consent state in the service DB is updated even without the app's relay. The modal focuses only on collecting and recording consent, and the DB reflection is finished between Braze and the server.</p>
+
+  <h3>Challenge 6. Drag doesn't work in Braze Preview</h3>
+  <p>I thought I'd finished implementation and went into QA, but the piece (the knight) wouldn't move. It was fine locally, but in Braze Preview the drag didn't take. The code was the same yet it didn't work just because the environment changed — the most baffling kind of problem from a non-developer's standpoint. The cause was that touch events are handled differently in the Braze Web Preview environment versus a mobile WebView. In particular, the way global <code>touchmove preventDefault</code> was handled could conflict with the in-IAM interaction.</p>
+  <p>Direction of the fix:</p>
+  <ul class="bullet">
+    <li>Remove the global <code>touchmove preventDefault</code></li>
+    <li>Apply <code>touch-action: none</code> only to the drag-target element</li>
+    <li>Register mouse and touch events separately, but register the touch listener with <code>{passive:false}</code> to block conflicts with screen scrolling during the drag</li>
+  </ul>
+  <details class="code-fold"><summary><span class="dot">▌</span> Register drag events</summary><div class="code"><pre>knight.addEventListener('mousedown', onStart);
+knight.addEventListener('touchstart', onStart, {passive:false});
+document.addEventListener('touchmove', onMove, {passive:false});</pre></div></details>
+  <p>→ What this code does: it connects the PC mouse and the mobile finger with the same drag logic, while preventing the screen from scrolling along during a drag on mobile.</p>
+  <p>For the record, the brazeBridge call itself was also environment-dependent. I added both a fallback that accepts the new and old bridge, and handling that initializes only after the bridge is ready.</p>
+  <details class="code-fold"><summary><span class="dot">▌</span> Wait for the bridge to be ready</summary><div class="code"><pre>function getBridge(){ return window.brazeBridge || window.appboyBridge || null; }
+
+if(window.brazeBridge || window.appboyBridge) initTermsVisibility();
+else window.addEventListener('ab.BridgeReady', initTermsVisibility);</pre></div></details>
+  <p>→ What this code does: it uses whichever bridge exists, new (brazeBridge) or old (appboyBridge), and if the bridge isn't in place yet, it waits for the “ready” signal before starting.</p>
+
+  <h3>Challenge 7. The send-time value and the real-time value differ</h3>
+  <p>The last one was a timing problem. For values that can change even while the user is viewing the modal — like push permission — trusting only the snapshot stamped at send time (the Liquid-injected value) goes out of sync. As in showing the primer again to a user who turned the setting on in the push primer and came back.</p>
+  <p>The solution was a two-tier structure. I used brazeBridge's real-time permission check (<code>isPushPermissionGranted</code>) first, and judged by the send-time snapshot value only in environments where that doesn't work (see the Chapter 6, Step 2.5 code).</p>
+
+  <h3>And — keeping the HTML from carrying everything</h3>
+  <p>Solving the seven challenges, one principle naturally followed. If you handle terms, the game, the draw, permissions, and inventory all inside the HTML, the code quickly gets complicated. So I divided the roles — conditions fixed before send (participation history, the consent×device-allow combination) in Canvas/segments, inventory and win state injected via Connected Content (GAS), and the HTML focused only on screen transitions and real-time branching.</p>
+
+  <figure class="artifact tall">
+    <a class="art-frame" href="../artifacts/qa.html" target="_blank" rel="noopener">
+      <span class="art-badge">↗ QA test cases</span>
+      <img src="../artifacts/previews/qa.png" alt="QA test cases — 46 cases by OS, in 7 sections" loading="lazy"/>
+    </a>
+    <figcaption>Design artifact ④ <b>QA test cases</b> — 46 cases by OS, in 7 sections (web→app entry · terms×push combination · draw·result · duplicate participation · edge·regression). The drag bug from Challenge 6 was also caught in this QA.</figcaption>
+  </figure>
+</div></section>
+
+<!-- 11.5 -->
+<section><div class="wrap">
+  <p class="sec-label">Flow comparison</p>
+  <h2>The flow I first drew vs. the flow I actually built</h2>
+  <p>What's interesting is that the flowchart in the first plan and the final flowchart were quite different. The seven challenges made that difference.</p>
+  <p><strong>The flow I first drew (the plan)</strong> — the picture in my head was a clean straight line.</p>
+  <blockquote>Install/access the app via deep link → check participation status → check consent status → if consent complete, play chess → check the win result</blockquote>
+  <p>I thought five boxes would do it.</p>
+  <p><strong>The flow I actually built (final)</strong> — every time I solved a challenge, a branch sprouted.</p>
+  <blockquote>Event click → (filter for “participation entry” only via apply_event) → app-ownership branch (new/already installed) → check participation history → check whether terms are met → push-permission state (3 kinds) branch → game → draw (inventory check) → result-screen branch → consent sync</blockquote>
+  <p>Only after finishing did I realize — those five boxes in my head were the entire flowchart I pasted at the very front of this article as “Design artifact ①.” One line in the plan, a long scroll in reality. In campaigns, “I thought it'd be simple” almost always ends this way.</p>
+  <p>The reason is clear. “People who just looked vs. people who came to participate” (Challenge 1 · apply_event), “people who already participated” (Challenge 3), “people who haven't given terms consent yet” (the terms branch), “people with notifications off” (Challenge 4) — real users all come in with different states. The plan drew “one ideal user,” and the final version drew “users in every state that can come in.”</p>
+</div></section>
+
+<!-- 11.6 -->
+<section><div class="wrap">
+  <p class="sec-label">The possible cases</p>
+  <h2>So, the cases a user can hit</h2>
+  <p>Sorting out the cases that split by the user's state at entry time in the final flow looks like this. Two axes are the base — <strong>app ownership</strong> (new install / already installed) and <strong>state at entry</strong> (participation history · terms consent · push permission).</p>
+  <figure class="diagram"><div class="mtable"><table>
+    <thead><tr><th>#</th><th>User state</th><th>Path after entry</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>New · terms unmet · push allowed</td><td>Terms consent → game → result</td></tr>
+      <tr><td>2</td><td>New · terms unmet · push not allowed</td><td>Terms consent → push primer → (allow) game / (deny) can't participate</td></tr>
+      <tr><td>3</td><td>New · terms met · push allowed</td><td>Straight to game → result</td></tr>
+      <tr><td>4</td><td>New · terms met · push not allowed</td><td>Push primer → (allow) game / (deny) can't participate</td></tr>
+      <tr><td>5</td><td>Installed · terms unmet · push allowed</td><td>Installed notice → terms consent → game → result</td></tr>
+      <tr><td>6</td><td>Installed · terms unmet · push not allowed</td><td>Installed notice → terms consent → push primer → (allow) game / (deny) can't participate</td></tr>
+      <tr><td>7</td><td>Installed · terms met · push allowed</td><td>Straight to game → result</td></tr>
+      <tr><td>8</td><td>Installed · terms met · push not allowed</td><td>Push primer → (allow) game / (deny) can't participate</td></tr>
+      <tr><td>9</td><td>(common) Already-participated user</td><td>Split into an “already participated” notice</td></tr>
+    </tbody>
+  </table></div></figure>
+  <p>That's <strong>nine</strong> entry branches alone. On top of that, the push-not-allowed paths (2·4·6·8) split once more into “never-asked users” and “already-denied users” (two of the three permission states), and once you add the post-game draw result (the screen by win tier, stock depletion), the screen combinations a user can actually hit grow further.</p>
+
+  <figure class="diagram"><svg width="100%" viewBox="0 0 680 360" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
+<title>Case matrix by user entry state</title>
+<text x="40" y="32" fill="#1f1f2b" font-size="14" font-weight="600">9 entry branches — combinations of three axes</text>
+<text x="40" y="52" fill="#5b5670" font-size="12">App ownership × terms consent × push permission. The plan drew only one of these (③·⑦).</text>
+<text x="250" y="86" text-anchor="middle" fill="#1f1f2b" font-size="12" font-weight="600">Push allowed</text>
+<text x="400" y="86" text-anchor="middle" fill="#1f1f2b" font-size="12" font-weight="600">Push not allowed</text>
+<text x="160" y="116" text-anchor="end" fill="#5b5670" font-size="11">New · terms unmet</text>
+<rect x="180" y="100" width="140" height="30" rx="6" fill="#f3f2ef" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="250" y="115" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="11">① consent→game</text>
+<rect x="330" y="100" width="140" height="30" rx="6" fill="#FFFFFF" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="400" y="115" text-anchor="middle" dominant-baseline="central" fill="#5b5670" font-size="11">② consent→primer</text>
+<text x="160" y="151" text-anchor="end" fill="#5b5670" font-size="11">New · terms met</text>
+<rect x="180" y="135" width="140" height="30" rx="6" fill="#f3f2ef" stroke="#1f1f2b" stroke-width="0.8"/>
+<text x="250" y="150" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="11" font-weight="600">③ straight to game ★</text>
+<rect x="330" y="135" width="140" height="30" rx="6" fill="#FFFFFF" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="400" y="150" text-anchor="middle" dominant-baseline="central" fill="#5b5670" font-size="11">④ primer→game</text>
+<text x="160" y="186" text-anchor="end" fill="#5b5670" font-size="11">Installed · terms unmet</text>
+<rect x="180" y="170" width="140" height="30" rx="6" fill="#f3f2ef" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="250" y="185" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="11">⑤ notice→consent→game</text>
+<rect x="330" y="170" width="140" height="30" rx="6" fill="#FFFFFF" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="400" y="185" text-anchor="middle" dominant-baseline="central" fill="#5b5670" font-size="10.5">⑥ notice→consent→primer</text>
+<text x="160" y="221" text-anchor="end" fill="#5b5670" font-size="11">Installed · terms met</text>
+<rect x="180" y="205" width="140" height="30" rx="6" fill="#f3f2ef" stroke="#1f1f2b" stroke-width="0.8"/>
+<text x="250" y="220" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="11" font-weight="600">⑦ straight to game ★</text>
+<rect x="330" y="205" width="140" height="30" rx="6" fill="#FFFFFF" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="400" y="220" text-anchor="middle" dominant-baseline="central" fill="#5b5670" font-size="11">⑧ primer→game</text>
+<rect x="180" y="250" width="290" height="32" rx="6" fill="#FFFFFF" stroke="#8a8694" stroke-width="0.5" stroke-dasharray="4 3"/>
+<text x="325" y="266" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="11">⑨ (common) already-participated → “already participated” notice</text>
+<rect x="180" y="304" width="14" height="14" rx="3" fill="#f3f2ef" stroke="#1f1f2b" stroke-width="0.8"/>
+<text x="200" y="311" dominant-baseline="central" fill="#5b5670" font-size="11">★ the ideal user the plan assumed</text>
+<rect x="400" y="304" width="14" height="14" rx="3" fill="#FFFFFF" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="420" y="311" dominant-baseline="central" fill="#5b5670" font-size="11">push not allowed → splits once more by permission state</text>
+</svg>
+<figcaption>Case matrix by user entry state — the plan covered only ③·⑦; the rest are the real users that surfaced while building.</figcaption></figure>
+
+  <p>What the first plan drew was just one of these paths — number 3 or 7 (the ideal user who already meets both terms and push). The other eight branches were the real users that surfaced one by one as I built.</p>
+</div></section>
+
+<!-- 12 -->
+<section id="ch12"><div class="wrap">
+  <p class="sec-label">What I learned</p>
+  <h2>Extending the IAM into an interactive campaign interface</h2>
+  <p>A Braze Custom HTML IAM isn't just a feature for making pretty modals. Designed well, it can extend a CRM campaign to the next level.</p>
+  <ul class="bullet">
+    <li>You can make users act directly inside the message,</li>
+    <li>store that action as Braze data instantly,</li>
+    <li>and based on the stored data, automatically branch the next message in Canvas.</li>
+  </ul>
+  <p>In this campaign, the IAM was not a message but a conversion device. The primary conversion of app download and the embedded conversion of marketing opt-in happened together within a single participation flow, and as a result, it wasn't just install counts that grew but <strong>users you can reach who come back repeatedly.</strong></p>
+  <p>And this structure isn't a one-off. The skeleton of consent → interaction → result → follow-up branching, and the role-separated Liquid · Connected Content · GAS · JS structure, can be reused in the next campaign by swapping only the content. The more repetitive the campaign — like app activation — the more this reusability becomes operational efficiency.</p>
+  <p>In other words, you can extend a CRM message from a simple send channel into <strong>an interactive campaign interface that collects user behavior and designs the next action.</strong></p>
+  <div class="pull"><p>What mattered most wasn't reducing dependence on developers, but that the marketer understood and designed the campaign logic and data flow firsthand.</p></div>
+  <p>As I said at the start, the heart of this record isn't “a non-developer built some HTML” — it's that if you look at a campaign like a small product and design the state values, events, branches, and operational screens first, the implementation follows within your marketing tool. Combine Custom HTML, Liquid, brazeBridge, and Canvas, and even a CRM marketer can go beyond running simple messages to create a product-style campaign experience. And this isn't something that requires a special technical background. Any marketer who can define the state values and branches a campaign needs can build the same structure within the tools they already use.</p>
+</div></section>
+
+<!-- FAQ -->
+<section id="faq"><div class="wrap">
+  <p class="sec-label">FAQ</p>
+  <h2>Frequently asked questions</h2>
+  <h3>Q1. What should I check when brazeBridge isn't working?</h3>
+  <p>Check the environment first. <code>window.brazeBridge</code> is only injected in an actual IAM display environment; it isn't present in a local browser or some Preview environments. On older SDK environments it may exist as <code>appboyBridge</code>, so handle both cases with a fallback function (the getBridge pattern). Hook your initialization code to run after the <code>ab.BridgeReady</code> event. If it still doesn't work, verify your SDK version and the IAM type (whether it's Custom HTML).</p>
+  <h3>Q2. I recorded a Custom Attribute, but it isn't reflected in my segment / Canvas branch right away.</h3>
+  <p>The SDK batches data and sends it to the server on a fixed interval. If you need an immediate downstream branch within the same session, call <code>requestImmediateDataFlush()</code> right after writing the attribute. If a timing issue still remains at the branch point, adding a delay step before the branch-condition evaluation is another option.</p>
+  <h3>Q3. Is managing prize inventory really possible without a backend?</h3>
+  <p>Yes. Use a Google Spreadsheet as your inventory ledger and build read (<code>get</code>) and write (<code>claim</code>) endpoints with a GAS web app. Connected Content calls the read endpoint at message render time, and the modal's JS POSTs to the write endpoint the moment a win is confirmed. Just be careful about exposing the web app URL and about request validation, and if it's a campaign with heavy per-second traffic, check GAS processing limits in advance.</p>
+  <h3>Q4. How do I connect events from a promotional IAM to funnel analysis?</h3>
+  <p>If you record each step inside the modal as a separate Custom Event (impression → consent → interaction complete → result viewed), that alone becomes a mini-funnel you can query in your funnel-analysis tool. The key is to design the events for “measuring step-by-step drop-off,” not for “tallying results.” Which step has the biggest drop-off becomes the hypothesis for your next A/B test (impression-trigger timing, interaction difficulty, reward wording, and so on).</p>
+  <h3>Q5. When should I use a Custom HTML IAM instead of a regular IAM?</h3>
+  <p>If a single message plus a simple CTA is enough, a regular IAM is better — it's lighter and more stable to operate. You need Custom HTML in one of three cases: (1) when you have to collect user responses inside the modal as structured data, (2) when a multi-step flow (consent → interaction → result) has to be handled inside one modal, or (3) when the screen itself needs to change based on per-user data (Liquid) or operational state (Connected Content).</p>
+</div></section>
+
+</article>
+
+<footer><div class="wrap">
+  <p class="slogan">Growth is a structure, not a moment.</p>
+  <div class="foot-row">
+    <a href="/index.html">← dainahys.com</a>
+    <span>Hayeon Song · Growth Marketer</span>
+  </div>
+</div></footer>
+
+</body>
+</html>

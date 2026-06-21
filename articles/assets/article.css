@@ -27,6 +27,11 @@ body{
 .brand{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:-0.01em;text-decoration:none;color:var(--ink)}
 .back{font-family:var(--mono);font-size:12px;letter-spacing:0.04em;text-decoration:none;color:var(--muted);transition:color .2s}
 .back:hover{color:var(--accent)}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.langtoggle{display:inline-flex;font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:9999px;overflow:hidden}
+.langtoggle a{padding:4px 10px;text-decoration:none;color:var(--muted);transition:background .15s,color .15s;cursor:pointer}
+.langtoggle a.on{background:var(--ink);color:#fff;font-weight:600}
+.langtoggle a:not(.on):hover{color:var(--accent)}
 
 /* ── Hero ────────────────────────────────────────────────── */
 .hero{padding:72px 0 0}

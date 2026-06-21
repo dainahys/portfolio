@@ -43,7 +43,11 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@graph": [
+    {
   "@type": "Person",
+  "@id": "https://dainahys.com/#person",
+  "email": "mailto:ttthayeon@gmail.com",
   "name": "Daina Hayeon Song",
   "alternateName": ["송하연", "다이나", "Daina", "Hayeon Song"],
   "url": "https://dainahys.com",
@@ -99,6 +103,25 @@
   "sameAs": [
     "https://linkedin.com/in/dainahysong",
     "https://github.com/dainahys"
+  ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://dainahys.com/#website",
+      "url": "https://dainahys.com",
+      "name": "Daina Hayeon Song — Growth & CRM Marketer",
+      "inLanguage": "ko-KR",
+      "publisher": { "@id": "https://dainahys.com/#person" }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://dainahys.com/#profilepage",
+      "url": "https://dainahys.com",
+      "name": "Daina Hayeon Song — Portfolio",
+      "isPartOf": { "@id": "https://dainahys.com/#website" },
+      "about": { "@id": "https://dainahys.com/#person" },
+      "inLanguage": "ko-KR"
+    }
   ]
 }
 </script>

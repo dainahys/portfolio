@@ -16,6 +16,39 @@
     body.embed-phone #root > div > div:first-child > h2 { display: none !important; }
   </style>
   <script>document.addEventListener('DOMContentLoaded',function(){if(/[?&]phone/.test(location.search))document.body.classList.add('embed-phone');});</script>
+  <script>
+  // EN i18n: when ?lang=en, swap rendered Korean UI strings to English (post-React-render)
+  (function(){
+    if(!/[?&]lang=en/.test(location.search)) return;
+    var D={
+      "서비스 앱 다운로드":"Download the Service App","지금 앱 설치하고":"Install the app now and","특별한 혜택 받아가세요!":"grab a special reward!","앱 다운로드 경품":"App-download prizes","앱 다운로드하고 혜택 받기":"Download the app & get the reward","ⓘ CTA = 에어브릿지 단일 링크":"ⓘ CTA = single Airbridge link",
+      "에어브릿지 라우팅":"Airbridge routing","앱 설치 상태를 선택하세요":"Choose the app-install state","미설치":"Not installed","App Store / Play Store 이동":"Go to App Store / Play Store","기설치":"Already installed","앱 바로 열기 (Deep Link)":"Open app directly (Deep Link)",
+      "서비스 앱":"Service App","⭐ 4.8 · 라이프스타일":"⭐ 4.8 · Lifestyle","이탈":"Leave","설치":"Install","← 서비스":"← Service","서비스":"Service","서비스 홈":"Service home","확인":"Confirm",
+      "시뮬레이션 설정":"Simulation settings","신규 설치":"New install","유저 플로우":"User flow","신규":"New","예상 분기":"Expected branch","약관 4개 attr 충족 여부":"Whether the 4 consent attrs are met","약관 4개 충족 + Foreground Push = false":"4 consents met + Foreground Push = false","false (첫 참여)":"false (first entry)","true (이미 참여)":"true (already entered)","attr 생성":"create attr","모두 충족":"All met","미충족 있음":"Some unmet","분기":"Branch","분기 A: 이미 참여":"Branch A: already entered","모두 동의 + 푸시 OK → 바로 완료":"All consented + push OK → straight to done","모두 동의 + 푸시 미허용":"All consented + push not allowed","기설치 + 약관 미충족":"Installed + terms unmet","신규 + 약관 미충족":"New + terms unmet","플로우 시작":"Start flow","플로우 종료":"End flow","모두 동의":"All consented",
+      "약관 동의":"Consent","개인정보 마케팅 활용 동의":"Consent to marketing use of personal data","마케팅 알림 수신 동의":"Consent to marketing notifications","응모 완료하기":"Complete entry","이벤트 참여를":"Your event entry","완료되었습니다":"has been completed","응모가 완료돼요":"your entry completes","이벤트 참여가 완료돼요!":"Your entry will be complete!","이벤트 참여 완료!":"Entry complete!","이미 참여 완료":"Already entered","이미 이벤트 참여가":"Event entry has already","이미 서비스 앱이":"The Service App is already","설치되어 있어요!":"installed!","완료할 수 없어요":"can't be completed",
+      "알림":"Notifications","알림 허용":"Allow notifications","알림 허용하기":"Allow notifications","허용":"Allow","허용하기":"Allow","허용 안 함":"Don't allow","거부 유지":"Keep denied","닫기":"Close","설정에서 켜기":"Turn on in Settings","설정에서 알림을 켜주셔야":"You need to enable notifications in Settings","기기 알림을 켜주셔야":"You need to turn on device notifications","마케팅 앱 알림을 켜주셔야":"You need to enable marketing app notifications","마케팅 수신 동의와 알림 권한이":"Marketing consent and notification permission","모두 켜져야 이벤트 참여가 완료됩니다.":"must both be on to complete your entry.","알림을 허용하면 이벤트 참여가 완료됩니다.":"Allow notifications to complete your entry.",
+      "\"서비스\"이(가) 알림을":"“Service” Would Like to Send You","보내고자 합니다":"Notifications","경고, 사운드 및 아이콘 배지가":"Alerts, sounds, and icon badges","알림에 포함될 수 있습니다.":"may be included.",
+      "당첨 결과는 추후 개별 안내드립니다":"Winners will be notified individually later","당첨 결과는 추후 안내드립니다":"Results will be announced later",
+      "✅ 이벤트 완료":"✅ Event complete","❌ 이벤트 미완료":"❌ Event not completed","❌ 이벤트 미완료 → 서비스 홈":"❌ Event not completed → Service home","✅ [확인] → 서비스 홈":"✅ [Confirm] → Service home","✅ 설치 완료 → 앱 첫 실행 (Deferred Deep Link)":"✅ Install done → first launch (Deferred Deep Link)","❌ 스토어 이탈 → 플로우 종료":"❌ Left store → flow ended","✕ [닫기] → push_permission denied":"✕ [Close] → push_permission denied","⚙️ [설정에서 켜기] → 설정 앱 딥링크":"⚙️ [Turn on in Settings] → Settings deep link","CTA를 클릭하면 로그가 기록됩니다":"Logs appear when you tap the CTA","🌐 웹 CTA 클릭 → 에어브릿지 링크 호출":"🌐 Web CTA tap → Airbridge link called","🔀 미설치 → 스토어 이동":"🔀 Not installed → to store","🎯 Braze 분기 → D. 모두 동의 + 푸시 OK":"🎯 Braze branch → D. all consented + push OK"
+    };
+    var SUB={"뱅앤올룹슨 스피커":"Bang & Olufsen Speaker","맥북 Pro M4 1TB":"MacBook Pro M4 1TB","파인다이닝 식사권":"Fine-dining voucher","서비스 앱":"Service App"};
+    function swap(root){
+      var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);
+      var n; while(n=w.nextNode()){
+        var t=n.nodeValue.trim();
+        if(t&&D[t]){ n.nodeValue=n.nodeValue.replace(t,D[t]); continue; }
+        for(var k in SUB){ if(n.nodeValue.indexOf(k)!==-1) n.nodeValue=n.nodeValue.split(k).join(SUB[k]); }
+      }
+    }
+    function run(){ try{ swap(document.body); }catch(e){} }
+    var tries=0, iv=setInterval(function(){ run(); if(++tries>=15) clearInterval(iv); }, 120);
+    document.addEventListener('DOMContentLoaded',function(){
+      run();
+      var root=document.getElementById('root');
+      if(root&&window.MutationObserver){ new MutationObserver(function(){ run(); }).observe(root,{childList:true,subtree:true,characterData:true}); }
+    });
+  })();
+  </script>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script>"use strict";
@@ -439,7 +472,7 @@ var AppDownloadPromoPrototype = function AppDownloadPromoPrototype() {
         fontWeight: 700,
         fontSize: 15
       }
-    }, "\uC11C\uBE44\uC2A4 - \uC0DD\uD65C\uC11C\uBE44\uC2A4 \uC804\uBB38\uAC00 \uB9E4\uCE6D"), /*#__PURE__*/React.createElement("div", {
+    }, "\uC11C\uBE44\uC2A4 \uC571"), /*#__PURE__*/React.createElement("div", {
       style: {
         fontSize: 12,
         color: '#94a3b8'
