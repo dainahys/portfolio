@@ -649,9 +649,9 @@ function logParticipation(prize){
 <text x="370" y="562" text-anchor="middle" dominant-baseline="central" fill="#FFFFFF" font-size="13" font-weight="500">Follow-up messages by result (reminder · win notice)</text>
 </svg>
 <figcaption>Canvas branching diagram — login/app-ownership → participation status → variant sent per consent×device-allow combination.</figcaption></figure>
-  <figure class="img">
-    <a href="../artifacts/canvas.png?v=3" target="_blank" rel="noopener"><img src="../artifacts/canvas.png?v=3" alt="The actual Braze Canvas — login, tier, participation, consent/device-allow branching" loading="lazy"/></a>
-    <figcaption>The actual Braze Canvas — login status → participation status → HTML messages branching by the consent × device-permission combination (Korean console UI). Click to open full size.</figcaption>
+  <figure class="img canvas-embed">
+    <a class="canvas-frame" href="../artifacts/canvas.png?v=4" target="_blank" rel="noopener"><img src="../artifacts/canvas.png?v=4" alt="The actual Braze Canvas — login, participation, consent/device-permission branching" loading="lazy"/></a>
+    <figcaption>The actual Braze Canvas — login status → participation status → HTML messages branching by the consent × device-permission combination (Korean console UI). <a href="../artifacts/canvas.png?v=4" target="_blank" rel="noopener">↗ Open full size</a></figcaption>
   </figure>
 
   <p>One design principle emerges here. <strong>Conditions already fixed before the user sees the modal (participation history, the send-time consent/permission state) are split in Canvas and segments, while conditions that can change while viewing the modal (push permission) are re-checked in real time inside the HTML via brazeBridge.</strong> Liquid values are a snapshot from send time, so they can't keep up with cases where the user changes a setting inside the modal and comes back.</p>
