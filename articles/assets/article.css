@@ -167,3 +167,20 @@ footer{border-top:1px solid var(--line);padding:40px 0 64px;margin-top:8px}
 /* ── A11y / responsive ───────────────────────────────────── */
 a:focus-visible,.next:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 @media (max-width:520px){ body{font-size:16px} .hero{padding:48px 0 0} section{padding:38px 0} }
+
+/* ── Anchor offset for sticky topbar (목차 점프) ───────────── */
+section[id]{scroll-margin-top:72px}
+
+/* ── Collapsible code blocks (details.code-fold) ──────────── */
+details.code-fold{margin:6px 0 22px}
+details.code-fold>summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--code-dim);background:#100e16;border-radius:10px;padding:9px 16px}
+details.code-fold>summary::-webkit-details-marker{display:none}
+details.code-fold>summary::before{content:"▸ 코드 보기 · ";color:var(--code-accent)}
+details.code-fold[open]>summary::before{content:"▾ "}
+details.code-fold[open]>summary{border-radius:10px 10px 0 0;padding-bottom:7px}
+details.code-fold .code{margin:0;border-radius:0 0 10px 10px;box-shadow:none}
+details.code-fold[open] .code{border-top:1px solid rgba(255,255,255,0.06)}
+
+/* ── TOC anchor links ─────────────────────────────────────── */
+ol.num a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--accent-border)}
+ol.num a:hover{color:var(--accent);border-bottom-color:var(--accent)}

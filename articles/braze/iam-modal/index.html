@@ -208,23 +208,23 @@
 
   <p><strong>이 글에서 다루는 것</strong></p>
   <ol class="num">
-    <li>목적 — 앱 유저를 늘려야 했다: 리텐션과 LTV가 높은 채널로의 전환</li>
-    <li>문제 — 퍼포먼스만으로는 부족했다: 신규/기존 가입 유저 대상 앱 활성화 필요성</li>
-    <li>질문 — 앱 다운로드를 ‘이벤트 참여 경험’으로 어떻게 연결할까</li>
-    <li>캠페인 컨셉 — 체크메이트: 다운로드를 유도하고, 참여 과정에서 마케팅 수신 동의까지 연결하기</li>
-    <li>왜 Custom HTML IAM이 필요했나 — 개발 스펙을 최소화하면서 참여·기록·분기를 처리하기</li>
-    <li>구현한 모달 플로우</li>
-    <li>brazeBridge로 유저 행동 기록하기</li>
-    <li>Canvas와 후속 메시지 자동 분기</li>
-    <li>Liquid · Connected Content · GAS · JavaScript 역할 분리</li>
-    <li>운영 모니터링 구조</li>
-    <li>구현하면서 마주친 일곱 가지 챌린지 (+ 11.5 처음 그린 플로우 vs 실제 플로우 · 11.6 유저가 만날 수 있는 경우의 수)</li>
-    <li>배운 점 — IAM을 앱 활성화와 리텐션을 위한 인터랙티브 캠페인 인터페이스로 확장하기</li>
+    <li><a href="#ch1">목적 — 앱 유저를 늘려야 했다: 리텐션과 LTV가 높은 채널로의 전환</a></li>
+    <li><a href="#ch2">문제 — 퍼포먼스만으로는 부족했다: 신규/기존 가입 유저 대상 앱 활성화 필요성</a></li>
+    <li><a href="#ch3">질문 — 앱 다운로드를 ‘이벤트 참여 경험’으로 어떻게 연결할까</a></li>
+    <li><a href="#ch4">캠페인 컨셉 — 체크메이트: 다운로드를 유도하고, 참여 과정에서 마케팅 수신 동의까지 연결하기</a></li>
+    <li><a href="#ch5">왜 Custom HTML IAM이 필요했나 — 개발 스펙을 최소화하면서 참여·기록·분기를 처리하기</a></li>
+    <li><a href="#ch6">구현한 모달 플로우</a></li>
+    <li><a href="#ch7">brazeBridge로 유저 행동 기록하기</a></li>
+    <li><a href="#ch8">Canvas와 후속 메시지 자동 분기</a></li>
+    <li><a href="#ch9">Liquid · Connected Content · GAS · JavaScript 역할 분리</a></li>
+    <li><a href="#ch10">운영 모니터링 구조</a></li>
+    <li><a href="#ch11">구현하면서 마주친 일곱 가지 챌린지 (+ 11.5 처음 그린 플로우 vs 실제 플로우 · 11.6 유저가 만날 수 있는 경우의 수)</a></li>
+    <li><a href="#ch12">배운 점 — IAM을 앱 활성화와 리텐션을 위한 인터랙티브 캠페인 인터페이스로 확장하기</a></li>
   </ol>
 </div></section>
 
 <!-- 1 -->
-<section><div class="wrap">
+<section id="ch1"><div class="wrap">
   <p class="sec-label">목적</p>
   <h2>앱 유저를 늘려야 했다 — 리텐션·LTV가 높은 채널로의 전환</h2>
   <p>같은 유저라도 어느 지면에서 서비스를 쓰느냐에 따라 이후 행동이 달랐다. 앱 유저는 웹 유저보다 재방문 주기가 짧고, 인당 핵심 행동 수가 확연히 높았다 — 리텐션과 LTV 모두에서 차이가 분명했다. 즉 앱 전환은 단순한 채널 이동이 아니라 리텐션과 LTV가 높은 유저군으로의 전환이었다.</p>
@@ -232,7 +232,7 @@
 </div></section>
 
 <!-- 2 -->
-<section><div class="wrap">
+<section id="ch2"><div class="wrap">
   <p class="sec-label">문제</p>
   <h2>퍼포먼스만으로는 부족했다</h2>
   <p>앱 설치 캠페인의 기본기는 퍼포먼스 광고다. 하지만 퍼포먼스는 외부 트래픽에서 신규 설치를 만들어내는 도구이고, 이미 서비스를 알고 있는 유저 — 웹으로 가입했지만 앱은 설치하지 않은 유저, 앱을 설치했다가 삭제한 유저 — 에게는 비효율적이다. 이 유저들은 광고비를 들여 다시 데려올 대상이 아니라, 이미 가진 접점(웹, CRM 채널) 안에서 앱으로 옮겨올 이유를 만들어줘야 할 대상이었다.</p>
@@ -240,7 +240,7 @@
 </div></section>
 
 <!-- 3 -->
-<section><div class="wrap">
+<section id="ch3"><div class="wrap">
   <p class="sec-label">질문</p>
   <h2>다운로드를 ‘이벤트 참여 경험’으로 어떻게 연결할까</h2>
   <p>“앱을 설치하세요”라는 메시지는 유저에게 행동의 이유를 주지 못한다. 설치는 유저 입장에서 비용이고, 그 비용을 상쇄할 보상이 같은 자리에서 보여야 한다.</p>
@@ -249,7 +249,7 @@
 </div></section>
 
 <!-- 4 -->
-<section><div class="wrap">
+<section id="ch4"><div class="wrap">
   <p class="sec-label">캠페인 컨셉</p>
   <h2>체크메이트 — 다운로드 유도와 수신 동의를 한 플로우에</h2>
   <p>서베이가 가리킨 방향을 컨셉으로 옮긴 결과가 체스 테마의 게임형 이벤트였다. 유저는 체스 말(나이트)을 체스판 위로 드래그앤드롭해 게임을 완료하고, 그 자리에서 랜덤 리워드 결과를 확인한다.</p>
@@ -262,7 +262,7 @@
 </div></section>
 
 <!-- 5 -->
-<section><div class="wrap">
+<section id="ch5"><div class="wrap">
   <p class="sec-label">왜 Custom HTML IAM인가</p>
   <h2>개발 스펙을 최소화하면서 참여·기록·분기를 처리하기</h2>
   <p>한 줄로 먼저 말하면 — <strong>백엔드 없이 ‘참여 기록·1회 제한·결과 분기·재고 반영’을 해내는 방법이 필요했고, 그 답이 Custom HTML IAM이었다.</strong></p>
@@ -284,7 +284,7 @@
 </div></section>
 
 <!-- 6 -->
-<section><div class="wrap">
+<section id="ch6"><div class="wrap">
   <p class="sec-label">구현 · 모달 플로우</p>
   <h2>한 HTML 안에서 여러 화면을 전환한다</h2>
   <p>이번 IAM은 단일 Custom HTML 안에서 여러 화면(page)을 전환하는 구조로 설계했다. <code>page-id</code>를 가진 화면들을 겹쳐두고, <code>goToPage()</code> 함수로 활성 화면만 바꾸는 방식이다. 유저 입장의 경험은 단순하다 — 설치하고, 동의하고, 게임하고, 결과를 본다.</p>
@@ -316,7 +316,7 @@
 <text x="520" y="238" text-anchor="middle" dominant-baseline="central" fill="#5b5670" font-size="12">Direct Deep Link</text>
 <path d="M160 254 L160 282 L330 282" stroke="#8a8694" stroke-width="1.5" fill="none"/>
 <path d="M520 254 L520 282 L350 282" stroke="#8a8694" stroke-width="1.5" fill="none"/>
-<text x="160" y="274" text-anchor="middle" fill="#5b5670" font-size="12">설치 완료 후 자동 진입</text>
+<rect x="270" y="260" width="140" height="18" rx="3" fill="#FFFFFF"/><text x="340" y="270" text-anchor="middle" dominant-baseline="central" fill="#1f1f2b" font-size="11.5" font-weight="500">설치 완료 후 자동 진입</text>
 <line x1="340" y1="282" x2="340" y2="312" stroke="#8a8694" stroke-width="1.5" marker-end="url(#ar)"/>
 <rect x="55" y="312" width="570" height="218" rx="12" fill="none" stroke="#8a8694" stroke-width="0.5" stroke-dasharray="5 4"/>
 <text x="75" y="334" fill="#5b5670" font-size="12" font-weight="500">이건 어떻게 알지?</text>
@@ -339,14 +339,11 @@
 </svg>
 <figcaption>진입 사고 흐름 — 앱 보유는 Airbridge(자력), 이벤트 오픈 신호는 개발팀 협업, 참여 여부는 마케터가 직접.</figcaption></figure>
 
-  <div class="code">
-    <div class="code-label"><span class="dot">▌</span> goToPage()</div>
-<pre>function goToPage(id){
+  <details class="code-fold"><summary><span class="dot">▌</span> goToPage()</summary><div class="code"><pre>function goToPage(id){
   document.querySelectorAll('.bz-page').forEach(function(p){
     p.classList.toggle('active', p.getAttribute('page-id') === id);
   });
-}</pre>
-  </div>
+}</pre></div></details>
   <p>→ 이 코드가 하는 일: 한 HTML 안에 숨겨둔 여러 화면 중, 지금 보여줄 화면 하나만 켠다. 이 함수 하나가 다단계 플로우의 뼈대다.</p>
 
   <h3>Step 1. 앱 다운로드 / 앱 진입 유도</h3>
@@ -354,71 +351,64 @@
   <p>앱이 열리는 순간, 앱은 “이 이벤트 링크로 열렸다”는 신호를 보낸다(<code>deeplink_open_promotion</code>). 이 신호가 두 가지 역할을 한다. 하나는 <strong>이벤트 모달을 띄우는 방아쇠</strong>, 다른 하나는 <strong>누가 들어왔는지 세는 계기판</strong>이다. 신호에는 이 유저가 ‘앱을 새로 깔고 들어왔는지’(신규 설치) 아니면 ‘원래 앱이 있던 채로 들어왔는지’(기설치)를 알려주는 꼬리표(<code>link_type</code>)가 붙는다. 덕분에 같은 신호 하나로 신규 설치 유입과 기존 유저 재방문을 나눠서 볼 수 있다. (이 공용 신호로 여러 프로모션을 어떻게 구분했는지는 11장 챌린지 2에서 다룬다.)</p>
   <p>다만 같은 딥링크라도 항상 이벤트로 들어오는 건 아니다. 단순히 이벤트 페이지만 보려고 열 수도 있기 때문이다. 그래서 딥링크에 <code>apply_event</code>라는 표식을 두고, 이 값이 <code>true</code>일 때만 위 신호를 발송하게 했다. <code>false</code>이면 이벤트 페이지만 보여주고 Braze 신호는 보내지 않는다 — “그냥 열어본 것”과 “참여하러 들어온 것”을 입구에서 가르는 장치다.</p>
 
-  <figure class="diagram"><svg width="100%" viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
+  <figure class="diagram"><svg width="100%" viewBox="0 0 680 200" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
 <title>딥링크 구조 분해</title>
-<text x="40" y="36" fill="#1f1f2b" font-size="14" font-weight="600">딥링크 한 줄에 담긴 것</text>
-<rect x="40" y="56" width="600" height="48" rx="8" fill="#1f1f2b"/>
-<text x="60" y="80" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="14" fill="#8E86A8">app://event/</text>
-<text x="168" y="80" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="14" fill="#FFFFFF">{event_id}</text>
-<text x="256" y="80" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="14" fill="#8E86A8">?</text>
-<text x="266" y="80" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="14" fill="#E7E2F4">apply_event=true</text>
-<text x="416" y="80" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="14" fill="#8E86A8">&amp;</text>
-<text x="430" y="80" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="14" fill="#8E86A8">term=...</text>
-<line x1="105" y1="104" x2="105" y2="134" stroke="#8a8694" stroke-width="1.5"/>
-<rect x="40" y="134" width="180" height="56" rx="8" fill="#f3f2ef" stroke="#1f1f2b" stroke-width="0.5"/>
-<text x="52" y="154" dominant-baseline="central" fill="#1f1f2b" font-size="12" font-weight="600">스킴 · 경로</text>
-<text x="52" y="172" dominant-baseline="central" fill="#5b5670" font-size="11">앱의 이벤트 화면을</text>
-<text x="52" y="186" dominant-baseline="central" fill="#5b5670" font-size="11">여는 주소 (마스킹)</text>
-<line x1="208" y1="104" x2="208" y2="204" stroke="#8a8694" stroke-width="1.5"/>
-<rect x="240" y="134" width="180" height="56" rx="8" fill="#f3f2ef" stroke="#d9d7d2" stroke-width="0.5"/>
-<text x="252" y="154" dominant-baseline="central" fill="#1f1f2b" font-size="12" font-weight="600">event_id</text>
-<text x="252" y="172" dominant-baseline="central" fill="#5b5670" font-size="11">어느 이벤트인지</text>
-<text x="252" y="186" dominant-baseline="central" fill="#5b5670" font-size="11">식별 (챌린지 2)</text>
-<line x1="340" y1="104" x2="340" y2="214" stroke="#8a8694" stroke-width="1.5"/>
-<rect x="240" y="214" width="180" height="56" rx="8" fill="#FFFFFF" stroke="#d9d7d2" stroke-width="0.5"/>
-<text x="252" y="234" dominant-baseline="central" fill="#1f1f2b" font-size="12" font-weight="600">apply_event</text>
-<text x="252" y="252" dominant-baseline="central" fill="#5b5670" font-size="11">true일 때만 참여 신호</text>
-<text x="252" y="266" dominant-baseline="central" fill="#5b5670" font-size="11">발송 (그냥 열기 제외)</text>
-<line x1="455" y1="104" x2="455" y2="134" stroke="#8a8694" stroke-width="1.5"/>
-<rect x="440" y="134" width="200" height="56" rx="8" fill="#f3f2ef" stroke="#d9d7d2" stroke-width="0.5"/>
-<text x="452" y="154" dominant-baseline="central" fill="#1f1f2b" font-size="12" font-weight="600">term · link_type</text>
-<text x="452" y="172" dominant-baseline="central" fill="#5b5670" font-size="11">프로모션 식별 · 신규/기설치</text>
-<text x="452" y="186" dominant-baseline="central" fill="#5b5670" font-size="11">구분 꼬리표</text>
+<text x="40" y="30" fill="#1f1f2b" font-size="14" font-weight="600">딥링크 한 줄에 담긴 것</text>
+<rect x="40" y="46" width="600" height="42" rx="8" fill="#1f1f2b"/>
+<text x="58" y="67" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="13.5" fill="#8E86A8">app://event/</text>
+<text x="158" y="67" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="13.5" fill="#FFFFFF">{event_id}</text>
+<text x="238" y="67" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="13.5" fill="#8E86A8">?</text>
+<text x="248" y="67" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="13.5" fill="#E7E2F4">apply_event=true</text>
+<text x="392" y="67" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="13.5" fill="#8E86A8">&amp;</text>
+<text x="408" y="67" dominant-baseline="central" font-family="'DM Mono',monospace" font-size="13.5" fill="#8E86A8">term=...</text>
+<g stroke="#8a8694" stroke-width="1.2" fill="none">
+<path d="M102 88 L102 102 L97 102 L97 110"/>
+<path d="M195 88 L195 102 L259 102 L259 110"/>
+<path d="M306 88 L306 102 L421 102 L421 110"/>
+<path d="M434 88 L434 102 L583 102 L583 110"/>
+</g>
+<rect x="21" y="110" width="152" height="72" rx="8" fill="#f3f2ef" stroke="#1f1f2b" stroke-width="0.5"/>
+<text x="32" y="130" fill="#1f1f2b" font-size="12" font-weight="600">스킴 · 경로</text>
+<text x="32" y="149" fill="#5b5670" font-size="10.5">앱의 이벤트 화면을</text>
+<text x="32" y="164" fill="#5b5670" font-size="10.5">여는 주소 (마스킹)</text>
+<rect x="183" y="110" width="152" height="72" rx="8" fill="#f3f2ef" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="194" y="130" fill="#1f1f2b" font-size="12" font-weight="600">event_id</text>
+<text x="194" y="149" fill="#5b5670" font-size="10.5">어느 이벤트인지</text>
+<text x="194" y="164" fill="#5b5670" font-size="10.5">식별 (챌린지 2)</text>
+<rect x="345" y="110" width="152" height="72" rx="8" fill="#FFFFFF" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="356" y="130" fill="#1f1f2b" font-size="12" font-weight="600">apply_event</text>
+<text x="356" y="149" fill="#5b5670" font-size="10.5">true일 때만</text>
+<text x="356" y="164" fill="#5b5670" font-size="10.5">참여 신호 발송</text>
+<rect x="507" y="110" width="152" height="72" rx="8" fill="#f3f2ef" stroke="#d9d7d2" stroke-width="0.5"/>
+<text x="518" y="130" fill="#1f1f2b" font-size="12" font-weight="600">term · link_type</text>
+<text x="518" y="149" fill="#5b5670" font-size="10.5">프로모션 식별 ·</text>
+<text x="518" y="164" fill="#5b5670" font-size="10.5">신규/기설치 구분</text>
 </svg>
 <figcaption>딥링크 구조 분해 — 한 줄에 경로·이벤트 식별·참여 표식·프로모션 꼬리표가 함께 실린다.</figcaption></figure>
 
   <h3>Step 2. 약관/마케팅 수신 동의</h3>
   <p>이벤트 참여의 첫 화면에서 개인정보 마케팅 활용 동의와 마케팅 알림 수신 동의를 받는다. 여기에 운영 디테일이 네 가지 들어갔다.</p>
   <p><strong>첫째, 이미 동의한 항목은 보여주지 않는다.</strong> 유저의 기존 동의 상태를 Liquid로 주입해두고, 이미 동의한 항목의 체크박스는 숨긴다. 모든 항목에 이미 동의한 유저라면 동의 화면 자체가 형식적 확인으로 가벼워진다.</p>
-  <div class="code">
-    <div class="code-label"><span class="dot">▌</span> 동의 항목 숨김 (Liquid 주입)</div>
-<pre>&lt;span data-attr-marketing_info=&quot;{{custom_attribute.${is_marketing_info_opted_in}}}&quot;&gt;&lt;/span&gt;
-&lt;span data-attr-marketing_message=&quot;{{custom_attribute.${is_marketing_message_opted_in}}}&quot;&gt;&lt;/span&gt;</pre>
-  </div>
+  <details class="code-fold"><summary><span class="dot">▌</span> 동의 항목 숨김 (Liquid 주입)</summary><div class="code"><pre>&lt;span data-attr-marketing_info=&quot;{{custom_attribute.${is_marketing_info_opted_in}}}&quot;&gt;&lt;/span&gt;
+&lt;span data-attr-marketing_message=&quot;{{custom_attribute.${is_marketing_message_opted_in}}}&quot;&gt;&lt;/span&gt;</pre></div></details>
   <p>→ 이 코드가 하는 일: 메시지가 띄워지기 전에 Braze가 “이 유저는 어떤 동의를 이미 했는지”를 화면에 심어두고, JS는 그 값을 읽어 이미 동의한 체크박스를 숨긴다.</p>
   <p><strong>둘째, 동의 즉시 기록하고, 즉시 반영시킨다.</strong> 동의 버튼을 누르는 순간 동의 항목별 Custom Attribute를 기록하고 <code>requestImmediateDataFlush()</code>로 바로 서버에 보낸다.</p>
-  <div class="code">
-    <div class="code-label"><span class="dot">▌</span> 동의 기록 · 즉시 flush</div>
-<pre>if(consentedItems.indexOf('marketing_info') !== -1)
+  <details class="code-fold"><summary><span class="dot">▌</span> 동의 기록 · 즉시 flush</summary><div class="code"><pre>if(consentedItems.indexOf('marketing_info') !== -1)
   u.setCustomUserAttribute('is_marketing_info_opted_in', true);
 if(consentedItems.indexOf('marketing_message') !== -1)
   u.setCustomUserAttribute('is_marketing_message_opted_in', true);
 b.logCustomEvent('click_terms_submit_button', {checked_items: consentedItems.join(',')});
-b.requestImmediateDataFlush();</pre>
-  </div>
+b.requestImmediateDataFlush();</pre></div></details>
   <p>→ 이 코드가 하는 일: 어떤 항목에 동의했는지 이름표로 붙이고, 동의 행동을 도장으로 찍은 뒤, 기다리지 않고 즉시 Braze 서버로 보낸다.</p>
   <p><strong>셋째, 동의 사실을 고지한다.</strong> 동의 완료 직후 동의 일시와 동의 항목을 표로 보여주는 고지 화면을 거친다. 마케팅 수신 동의는 수집만큼 고지가 중요하다.</p>
   <p><strong>넷째, 동의를 두 곳에 동시에 남긴다.</strong> 마케팅 수신 동의는 Braze 메시지 발송용이 아니라 서비스 전체가 공유하는 법적 상태값이라, Braze에만 기록하면 서비스 DB와 어긋난다. 그래서 모달이 닫히는 순간 동의 항목을 딥링크에 담아 앱으로 넘기고, 앱이 그 값으로 서비스 서버 API를 호출해 DB에도 반영하게 했다(앱↔서버 연결은 개발팀과 함께 설계). 왜 이 처리가 필요했는지의 고민은 11장 챌린지 5에서 다룬다.</p>
-  <div class="code">
-    <div class="code-label"><span class="dot">▌</span> handleFinalClose() — 동의 동기화</div>
-<pre>function handleFinalClose(){
+  <details class="code-fold"><summary><span class="dot">▌</span> handleFinalClose() — 동의 동기화</summary><div class="code"><pre>function handleFinalClose(){
   var params = buildConsentParams();  <span class="cm">// 동의한 항목 목록</span>
   if(params.length &gt; 0){
     window.location = '{APP_SCHEME}/consent?' + params.join('&amp;');  <span class="cm">// → 앱이 받아 서버 API 호출</span>
   }
   setTimeout(closeModal, 300);  <span class="cm">// 잠깐 뒤 모달 닫기</span>
-}</pre>
-  </div>
+}</pre></div></details>
   <p>→ 이 코드가 하는 일: 모달이 닫히기 직전, 동의한 항목을 딥링크에 실어 앱에 건넨다. 앱이 이 신호를 받아 서비스 서버에 동의 상태를 알린다. 모달은 그러고 나서 닫힌다.</p>
 
   <figure class="diagram"><svg width="100%" viewBox="0 0 680 340" role="img" xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
@@ -479,17 +469,14 @@ b.requestImmediateDataFlush();</pre>
   <h3>Step 2.5. 푸시 상태 분기 — 프라이머</h3>
   <p>동의 확인 후, 유저의 앱푸시 권한 상태에 따라 화면이 갈린다. 권한이 켜져 있으면 바로 게임으로, 꺼져 있으면 <strong>푸시 프라이머</strong>로 간다 — 체인에 묶인 나이트와 “알림 키고 나이트 소환하기” 버튼. 권한 요청을 시스템 팝업이 아니라 게임 서사(“나이트를 풀어주려면 알림이 필요하다”)로 바꾼 화면이다. (이 분기는 처음 설계에 없다가 구현 중에 추가됐다. 권한 상태별 처리와 발견 경위는 11장 챌린지 4에서 다룬다.)</p>
   <p>판정에는 우선순위를 뒀다. brazeBridge가 제공하는 실시간 권한 체크를 먼저 쓰고, 그게 불가능한 환경에서만 Liquid로 주입된 발송 시점 스냅샷 값을 쓴다.</p>
-  <div class="code">
-    <div class="code-label"><span class="dot">▌</span> 푸시 권한 2단 판정</div>
-<pre>if(b &amp;&amp; typeof b.isPushPermissionGranted === 'function'){
+  <details class="code-fold"><summary><span class="dot">▌</span> 푸시 권한 2단 판정</summary><div class="code"><pre>if(b &amp;&amp; typeof b.isPushPermissionGranted === 'function'){
   if(b.isPushPermissionGranted()){ goToPage('chess-drop'); initDragDrop(); }
   else{ goToPage('push-primer'); }
 } else if(isPushOn()){            <span class="cm">// Liquid 스냅샷 fallback</span>
   goToPage('chess-drop'); initDragDrop();
 } else {
   goToPage('push-primer');
-}</pre>
-  </div>
+}</pre></div></details>
   <p>→ 이 코드가 하는 일: “지금 이 순간” 푸시가 켜져 있는지 다리에게 직접 물어보고, 물어볼 수 없으면 메시지를 보낼 때 적어둔 값으로 판단한다. 유저가 모달을 보는 도중 설정을 바꿀 수 있으므로 실시간 값이 우선이다.</p>
 
   <h3>Step 3. 드래그앤드롭 게임</h3>
@@ -501,7 +488,7 @@ b.requestImmediateDataFlush();</pre>
 </div></section>
 
 <!-- 7 -->
-<section><div class="wrap">
+<section id="ch7"><div class="wrap">
   <p class="sec-label">구현 · 데이터 기록</p>
   <h2>brazeBridge로 유저 행동 기록하기</h2>
   <p>한 줄로 먼저 말하면 — <strong>백엔드 테이블 대신 Braze가 참여 기록 저장소가 됐고, 모달의 모든 행동이 데이터로 남았다.</strong></p>
@@ -564,9 +551,7 @@ b.requestImmediateDataFlush();</pre>
   </table></div></figure>
   <p>설정 주체가 둘로 나뉘는 점이 핵심이다. 앱 SDK가 채우는 값(권한 상태)과 brazeBridge가 모달 안에서 채우는 값(동의·참여·당첨)이 공존하고, Canvas는 이 둘을 함께 읽어 분기한다.</p>
   <p>이벤트와 속성 기록은 실제 Braze 환경과 로컬 데모 환경을 동시에 고려해 작성했다.</p>
-  <div class="code">
-    <div class="code-label"><span class="dot">▌</span> logParticipation()</div>
-<pre>function getBridge(){ return window.brazeBridge || window.appboyBridge || null; }
+  <details class="code-fold"><summary><span class="dot">▌</span> logParticipation()</summary><div class="code"><pre>function getBridge(){ return window.brazeBridge || window.appboyBridge || null; }
 
 function logParticipation(prize){
   var b = getBridge(); if(!b) return;
@@ -576,15 +561,14 @@ function logParticipation(prize){
     prize_name: prize.name
   });
   b.requestImmediateDataFlush();
-}</pre>
-  </div>
+}</pre></div></details>
   <p>→ 이 코드가 하는 일: 참여가 끝나는 순간 “참여했다”는 이름표와 “무엇에 당첨됐다”는 이름표를 붙이고, 행동 도장을 찍고, 즉시 서버로 보낸다. 이 한 번의 기록이 재참여 차단과 후속 메시지 분기의 재료가 된다.</p>
   <p><code>requestImmediateDataFlush()</code>가 중요한 이유 — SDK는 데이터를 일정 주기로 모아 보내는데, 같은 세션 안에서 Canvas 분기가 이 속성을 바로 평가해야 하므로 기다리지 않고 즉시 전송한다.</p>
   <p>기록의 ‘순서’도 설계 대상이었다. 앱이 딥링크를 수신하면 <code>push_authorization_status</code> Attribute를 <strong>먼저</strong> 세팅한 뒤에 <code>deeplink_open_promotion</code> 이벤트를 발송하도록 순서를 보장했다. Canvas는 이 이벤트로 깨어나 Attribute 값을 읽고 분기하기 때문에, 순서가 뒤집히면 갱신 전의 낡은 권한 값으로 잘못된 메시지가 나간다. 무엇을 기록할지만큼, 어떤 순서로 기록되는지가 자동화의 정확도를 결정한다.</p>
 </div></section>
 
 <!-- 8 -->
-<section><div class="wrap">
+<section id="ch8"><div class="wrap">
   <p class="sec-label">구현 · Canvas 분기</p>
   <h2>Canvas와 후속 메시지 자동 분기</h2>
   <p>한 줄로 먼저 말하면 — <strong>발송 시점에 정해지는 분기는 Canvas가, 모달 안에서 실시간으로 변하는 분기는 brazeBridge가 맡는다.</strong></p>
@@ -654,31 +638,22 @@ function logParticipation(prize){
 </div></section>
 
 <!-- 9 -->
-<section><div class="wrap">
+<section id="ch9"><div class="wrap">
   <p class="sec-label">구현 · 역할 분리</p>
   <h2>Liquid · Connected Content · GAS · JavaScript 역할 분리</h2>
   <p>한 줄로 먼저 말하면 — <strong>유저 값은 Liquid가, 운영 값은 Connected Content와 GAS가, 화면은 JavaScript가 맡는다. 그러면 캠페인 운영 중에 코드를 다시 배포할 일이 사라진다.</strong></p>
   <p><strong>Liquid — 유저별 스냅샷 값 주입.</strong> 기존 동의 상태처럼 유저마다 다르지만 발송 시점에 확정되는 값은 Liquid로 주입한다. Liquid는 HTML이 렌더링되기 전에 서버에서 평가되므로, 복잡한 조건 처리보다 값 주입에만 쓰는 것이 안정적이다.</p>
   <p><strong>Connected Content — 운영 상태 조회.</strong> Connected Content는 맞춤 썸네일이나 상품 추천 이미지를 받아오는 개인화 기능으로 알려져 있지만, 본질은 그보다 넓다 — <strong>메시지가 렌더링되는 시점에 외부 URL로 요청을 보내고 그 응답을 메시지 안에서 쓰는 기능</strong>이다. 응답이 이미지면 썸네일 개인화가 되고, JSON이면 이번처럼 실시간 재고 조회가 된다. 경품 재고처럼 캠페인 진행 중에 계속 변하는 값은 이 방식으로 받아왔고, 이번 캠페인에서 그 외부가 바로 GAS 웹앱이었다.</p>
   <p><strong>GAS + 스프레드시트 — 재고 원장과 가벼운 API.</strong> 구글 스프레드시트에 경품별 재고를 적어두고, GAS 웹앱이 두 가지 요청을 받는다. <code>get</code>은 현재 재고를 JSON으로 돌려주고(Connected Content가 호출), <code>claim</code>은 당첨 기록을 시트에 적재한다(모달 JS가 호출). 백엔드 개발 없이 조회·기록·원장이 모두 해결된다.</p>
-  <div class="code">
-    <div class="code-label"><span class="dot">▌</span> Connected Content — 재고 조회</div>
-<pre>{% connected_content https://script.google.com/macros/s/{GAS_웹앱_ID}/exec?action=get :save inv %}</pre>
-  </div>
-  <div class="code">
-    <div class="code-label"><span class="dot">▌</span> 재고 값 화면 주입</div>
-<pre>&lt;div id=&quot;ld&quot; data-inv='{% if inv and inv.success %}{{ inv.inventory | json }}{% else %}{}{% endif %}'&gt;&lt;/div&gt;</pre>
-  </div>
+  <details class="code-fold"><summary><span class="dot">▌</span> Connected Content — 재고 조회</summary><div class="code"><pre>{% connected_content https://script.google.com/macros/s/{GAS_웹앱_ID}/exec?action=get :save inv %}</pre></div></details>
+  <details class="code-fold"><summary><span class="dot">▌</span> 재고 값 화면 주입</summary><div class="code"><pre>&lt;div id=&quot;ld&quot; data-inv='{% if inv and inv.success %}{{ inv.inventory | json }}{% else %}{}{% endif %}'&gt;&lt;/div&gt;</pre></div></details>
   <p>→ 이 코드가 하는 일: 모달이 띄워지는 순간 Braze가 GAS에 “지금 재고 어때?”라고 물어보고, 받은 답(JSON)을 화면에 심어둔다. JS는 그 값을 읽어 재고 소진 여부를 판단한다.</p>
-  <div class="code">
-    <div class="code-label"><span class="dot">▌</span> claimPrize() — 재고 차감</div>
-<pre>function claimPrize(prizeName){
+  <details class="code-fold"><summary><span class="dot">▌</span> claimPrize() — 재고 차감</summary><div class="code"><pre>function claimPrize(prizeName){
   fetch(GAS_WEBAPP_URL, {
     method: 'POST', mode: 'no-cors',
     body: JSON.stringify({ action: 'claim', prize: prizeName, braze_id: brazeId })
   });
-}</pre>
-  </div>
+}</pre></div></details>
   <p>→ 이 코드가 하는 일: 당첨이 확정되는 순간, 모달이 직접 GAS에 “이 경품 하나 나갔어요”라고 알려 시트에 한 줄을 적는다. 이 한 줄이 재고 차감이자 당첨자 기록이다.</p>
   <p><strong>JavaScript — 계산과 화면 렌더링.</strong> 추첨, 페이지 전환, 애니메이션, 재고 판단은 모두 JS가 처리한다.</p>
   <p>이 분리의 핵심 효과는 운영에 있다. 경품 재고를 조정하거나 마감하고 싶으면 <strong>마케터가 스프레드시트의 숫자만 바꾸면 된다.</strong> HTML을 수정하거나 캠페인을 재발행할 필요가 없다.</p>
@@ -689,7 +664,7 @@ function logParticipation(prize){
 </div></section>
 
 <!-- 10 -->
-<section><div class="wrap">
+<section id="ch10"><div class="wrap">
   <p class="sec-label">운영 모니터링</p>
   <h2>앱 전환·참여율·수신 동의·경품 소진을 한눈에</h2>
   <p>캠페인이 시작되면 마케터에게 필요한 숫자는 네 가지다. 앱 전환이 얼마나 일어나는가, 참여 퍼널이 어디서 새는가, 동의가 얼마나 쌓이는가, 경품이 얼마나 남았는가.</p>
@@ -699,7 +674,7 @@ function logParticipation(prize){
 </div></section>
 
 <!-- 11 -->
-<section><div class="wrap">
+<section id="ch11"><div class="wrap">
   <p class="sec-label">챌린지</p>
   <h2>구현하면서 마주친 일곱 가지 챌린지</h2>
   <p>이 캠페인은 처음부터 완성된 설계로 시작하지 않았다. 만들어가는 동안, 시작 단계의 질문부터 QA 막바지의 버그까지 일곱 번의 “어, 이건 어떻게 하지?”를 차례로 마주쳤다. 시간 순서대로 정리한다.</p>
@@ -735,17 +710,14 @@ function logParticipation(prize){
   <p>동의를 받아 Braze에 표시까지 켜고 나니, 문득 멈칫했다 — <em>가만, 이러면 Braze만 이 유저가 동의했다는 걸 알고, 정작 서비스 서버(DB)는 모르는 거 아닌가?</em> 마케팅 수신 동의는 Braze에서 메시지를 보낼 때만 쓰는 게 아니라 서비스 전체가 공유하는 법적 상태값인데, Braze 안에서만 바뀌면 서비스 DB와 어긋난다.</p>
   <p>그래서 모달이 닫히는 순간, 어떤 항목에 동의했는지를 딥링크에 담아 앱으로 넘기게 했다. 앱은 그 값을 받아 서비스 서버에 동의 상태를 반영하는 API를 호출한다 — 이 앱↔서버 연결은 개발팀과 함께 설계했다. 결과적으로 <strong>동의가 두 곳에 동시에 남는다.</strong> Braze에는 모달이 직접(타겟팅·세그먼트용), 서비스 DB에는 딥링크를 받은 앱이 API로(법적 동의 상태용). 한쪽만 기록했다면 둘 중 한 곳의 동의 상태가 거짓이 됐을 것이다.</p>
   <p><strong>이후 개선 — 앱을 거치지 않고 Braze가 서버로 직접.</strong> 초기에는 위처럼 <em>모달 → 딥링크 → 앱 → 서버 API</em>로 동의를 동기화했다. 모달이 앱에 값을 넘기고 앱이 서버를 호출하는 구조라, 앱이 그 딥링크를 받아 처리해야만 동기화가 완성됐다. 이후 Braze에서 서버로 동의 상태를 직접 전송하는 API가 개발되면서, 앱을 경유하지 않고 <strong>Braze → 서버</strong>로 한 번에 반영하도록 단순해졌다. Braze가 보내는 페이로드는 대략 이런 형태다(값은 예시).</p>
-  <div class="code">
-    <div class="code-label"><span class="dot">▌</span> Braze → 서버 동의 동기화 payload</div>
-<pre>{
+  <details class="code-fold"><summary><span class="dot">▌</span> Braze → 서버 동의 동기화 payload</summary><div class="code"><pre>{
   "userId": "{{${user_id}}}",   <span class="cm">// Braze Liquid로 주입되는 유저 식별자</span>
   "userRole": "customer",
   "eventSourceType": "braze",   <span class="cm">// 어느 경로로 들어온 동의인지</span>
   "term": "r-99999",            <span class="cm">// 프로모션 식별자 (예시)</span>
   "allowNewsLetters": true,     <span class="cm">// 마케팅 알림 수신 동의</span>
   "useMarketing": true          <span class="cm">// 개인정보 마케팅 활용 동의</span>
-}</pre>
-  </div>
+}</pre></div></details>
   <p>→ 이 코드가 하는 일: 동의가 일어나면 Braze가 이 JSON을 서비스 서버로 직접 보내, 앱의 중계 없이도 서비스 DB의 동의 상태가 갱신된다. 모달은 동의 수집·기록에만 집중하고, DB 반영은 Braze↔서버 사이에서 끝난다.</p>
 
   <h3>챌린지 6. Braze Preview에서 드래그가 작동하지 않음</h3>
@@ -756,21 +728,15 @@ function logParticipation(prize){
     <li>드래그 대상 요소에만 <code>touch-action: none</code> 적용</li>
     <li>마우스/터치 이벤트를 각각 등록하되, 터치 리스너는 <code>{passive:false}</code>로 등록해 드래그 중 화면 스크롤과의 충돌 차단</li>
   </ul>
-  <div class="code">
-    <div class="code-label"><span class="dot">▌</span> 드래그 이벤트 등록</div>
-<pre>knight.addEventListener('mousedown', onStart);
+  <details class="code-fold"><summary><span class="dot">▌</span> 드래그 이벤트 등록</summary><div class="code"><pre>knight.addEventListener('mousedown', onStart);
 knight.addEventListener('touchstart', onStart, {passive:false});
-document.addEventListener('touchmove', onMove, {passive:false});</pre>
-  </div>
+document.addEventListener('touchmove', onMove, {passive:false});</pre></div></details>
   <p>→ 이 코드가 하는 일: PC의 마우스와 모바일의 손가락을 같은 드래그 로직으로 연결하되, 모바일에서 드래그 중 화면이 같이 스크롤되는 것을 막는다.</p>
   <p>참고로 brazeBridge 호출 자체도 환경을 탔다. 신버전/구버전 브릿지를 모두 받는 fallback과, 브릿지가 준비된 뒤 초기화하는 처리를 함께 뒀다.</p>
-  <div class="code">
-    <div class="code-label"><span class="dot">▌</span> 브릿지 준비 대기</div>
-<pre>function getBridge(){ return window.brazeBridge || window.appboyBridge || null; }
+  <details class="code-fold"><summary><span class="dot">▌</span> 브릿지 준비 대기</summary><div class="code"><pre>function getBridge(){ return window.brazeBridge || window.appboyBridge || null; }
 
 if(window.brazeBridge || window.appboyBridge) initTermsVisibility();
-else window.addEventListener('ab.BridgeReady', initTermsVisibility);</pre>
-  </div>
+else window.addEventListener('ab.BridgeReady', initTermsVisibility);</pre></div></details>
   <p>→ 이 코드가 하는 일: 신버전(brazeBridge)이든 구버전(appboyBridge)이든 있는 다리를 쓰고, 다리가 아직 안 놓였으면 “준비됨” 신호를 기다렸다가 시작한다.</p>
 
   <h3>챌린지 7. 발송 시점 값과 실시간 값이 다르다</h3>
@@ -853,7 +819,7 @@ else window.addEventListener('ab.BridgeReady', initTermsVisibility);</pre>
 </div></section>
 
 <!-- 12 -->
-<section><div class="wrap">
+<section id="ch12"><div class="wrap">
   <p class="sec-label">배운 점</p>
   <h2>IAM을 인터랙티브 캠페인 인터페이스로 확장하기</h2>
   <p>Braze Custom HTML IAM은 단순히 예쁜 모달을 만드는 기능이 아니다. 잘 설계하면 CRM 캠페인을 다음 단계로 확장할 수 있다.</p>
@@ -870,7 +836,7 @@ else window.addEventListener('ab.BridgeReady', initTermsVisibility);</pre>
 </div></section>
 
 <!-- FAQ -->
-<section><div class="wrap">
+<section id="faq"><div class="wrap">
   <p class="sec-label">FAQ</p>
   <h2>자주 묻는 질문</h2>
   <h3>Q1. brazeBridge가 작동하지 않을 때 무엇을 확인해야 하나?</h3>
