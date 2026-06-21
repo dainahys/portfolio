@@ -3,11 +3,13 @@
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="only light">
   <title>앱 다운로드 프로모션 프로토타입</title>
   <style>
+    :root { color-scheme: only light; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f1f5f9; }
+    html, body { background: #f1f5f9; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
   </style>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -38,7 +40,14 @@ var AppDownloadPromoPrototype = function AppDownloadPromoPrototype() {
     _useState2 = _slicedToArray(_useState, 2),
     screen = _useState2[0],
     setScreen = _useState2[1];
-  var _useState3 = useState([]),
+  var _useState3 = useState((typeof location!=='undefined' && location.search.indexOf('demo')>=0) ? [
+    {time:'오후 4:45:01', action:'🌐 웹 CTA 클릭 → 에어브릿지 링크 호출', type:'action'},
+    {time:'오후 4:45:02', action:'🔀 미설치 → 스토어 이동', type:'branch'},
+    {time:'오후 4:45:09', action:'✅ 설치 완료 → 앱 첫 실행 (Deferred Deep Link)', type:'action'},
+    {time:'오후 4:45:10', action:"📤 setCustomAttribute('push_authorization_status', 'authorized')", type:'event'},
+    {time:'오후 4:45:10', action:"📤 logCustomEvent('deeplink_open_promotion', {link_type: 'deferred', term: 'appinstall_2603'})", type:'event'},
+    {time:'오후 4:45:11', action:'🎯 Braze 분기 → D. 모두 동의 + 푸시 OK', type:'branch'}
+  ] : []),
     _useState4 = _slicedToArray(_useState3, 2),
     history = _useState4[0],
     setHistory = _useState4[1];
