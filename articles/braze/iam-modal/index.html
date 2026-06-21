@@ -282,12 +282,11 @@
     <p style="font-size:13px;color:var(--faint);margin-top:6px">↗ 위 4개 산출물은 민감 정보를 마스킹한 실제 문서입니다 — 미리보기를 클릭하면 전체 문서가 새 탭으로 열립니다.</p>
   </div>
 
-  <figure class="artifact tall">
-    <a class="art-frame" href="artifacts/flowchart.html" target="_blank" rel="noopener">
-      <span class="art-badge">↗ 전체 플로우차트</span>
+  <figure class="artifact full">
+    <div class="art-frame">
       <img src="artifacts/previews/flowchart.png" alt="앱 다운로드 프로모션 유저 플로우차트 — 진입부터 분기 A~E까지 전체 여정" loading="lazy"/>
-    </a>
-    <figcaption>설계 산출물 ① <b>유저 플로우차트</b> — 진입 → 앱 보유 분기 → Braze 트리거 → 분기 A~E. 클릭하면 전체 플로우가 새 탭으로 열린다.</figcaption>
+    </div>
+    <figcaption>설계 산출물 ① <b>유저 플로우차트</b> — 진입 → 앱 보유 분기 → Braze 트리거 → 분기 A~E 전체 여정. <a href="artifacts/flowchart.html" target="_blank" rel="noopener">↗ 원본 전체 문서 열기</a></figcaption>
   </figure>
 </div></section>
 
@@ -784,11 +783,13 @@ else window.addEventListener('ab.BridgeReady', initTermsVisibility);</pre></div>
   <p class="sec-label">플로우 비교</p>
   <h2>처음 그린 플로우 vs 실제로 만든 플로우</h2>
   <p>흥미로운 건, 처음 기획안의 플로우차트와 최종 플로우차트가 꽤 달랐다는 점이다. 일곱 챌린지가 그 차이를 만들었다.</p>
-  <p><strong>처음 그린 플로우 (기획안)</strong> — 머릿속의 그림은 단순한 일직선이었다.</p>
-  <blockquote>이벤트 클릭 → 앱 설치/오픈 → 약관 동의 → 게임 → 당첨 결과</blockquote>
+  <p><strong>처음 그린 플로우 (기획안)</strong> — 머릿속의 그림은 깔끔한 일직선이었다.</p>
+  <blockquote>딥링크로 앱 설치/접속 → 참여 여부 확인 → 동의 여부 확인 → 동의 완료 시 체스 두기 → 당첨 결과 확인</blockquote>
+  <p>다섯 칸이면 끝날 줄 알았다.</p>
   <p><strong>실제로 만든 플로우 (최종)</strong> — 챌린지를 하나씩 풀 때마다 갈래가 생겼다.</p>
   <blockquote>이벤트 클릭 → (apply_event로 ‘참여 진입’만 걸러냄) → 앱 보유 분기(신규/기설치) → 참여 이력 확인 → 약관 충족 여부 확인 → 푸시 권한 상태(3가지) 분기 → 게임 → 추첨(재고 확인) → 결과 화면 분기 → 동의 동기화</blockquote>
-  <p>단순한 일직선이 여러 갈래의 분기 트리가 된 이유는 명확하다. “그냥 열어본 사람과 참여하러 온 사람”(챌린지 1·apply_event), “이미 참여한 사람”(챌린지 3), “약관을 아직 안 받은 사람”(약관 분기), “알림이 꺼진 사람”(챌린지 4) — 현실의 유저는 모두 다른 상태로 들어오기 때문이다. 기획안은 ‘한 명의 이상적인 유저’를 그렸고, 최종본은 ‘들어올 수 있는 모든 상태의 유저’를 그렸다.</p>
+  <p>그 다섯 칸짜리 일직선이, 이 글 맨 앞 ‘설계 산출물 ①’에 붙여둔 그 스크롤 압박 오는 플로우차트 전체로 자라났다. 기획은 한 줄로 적었는데, 현실은 스크롤바로 돌려줬다.</p>
+  <p>이유는 명확하다. “그냥 열어본 사람과 참여하러 온 사람”(챌린지 1·apply_event), “이미 참여한 사람”(챌린지 3), “약관을 아직 안 받은 사람”(약관 분기), “알림이 꺼진 사람”(챌린지 4) — 현실의 유저는 모두 다른 상태로 들어오기 때문이다. 기획안은 ‘한 명의 이상적인 유저’를 그렸고, 최종본은 ‘들어올 수 있는 모든 상태의 유저’를 그렸다.</p>
 </div></section>
 
 <!-- 11.6 -->
