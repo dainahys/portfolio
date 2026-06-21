@@ -1,0 +1,68 @@
+/* ============================================================
+   dainahys.com · Project Case-Study System
+   v1.0 · 프로젝트(메인/서브) 상세 페이지가 링크한다.
+     <link rel="stylesheet" href="/assets/css/project.css"/>
+   토큰은 base.css, 본문 블록(callout·code·표·리스트 등)은 article.css를
+   그대로 재사용한다(@import). 여기서는 케이스스터디 전용 골격만 정의.
+
+   테마: <body data-theme="soomgo">(보라) / "nextunicorn"(블루) /
+        서브·그외는 data-theme 미지정(중립). 액센트는 자동 추종.
+   ============================================================ */
+
+@import url("/assets/css/base.css");
+@import url("/articles/assets/article.css");   /* prose·callout·code·mtable·dtable·finding·next 재사용 */
+
+/* 프로젝트는 본문보다 넓은 컨테이너 */
+.case-wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+/* ── Top bar ─────────────────────────────────────────────── */
+.case-top{border-bottom:1px solid var(--line);background:rgba(252,251,249,0.85);backdrop-filter:blur(8px);position:sticky;top:0;z-index:20}
+.case-top .case-wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.case-top .brand{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:-0.01em;text-decoration:none;color:var(--ink)}
+.case-top .back{font-family:var(--mono);font-size:12px;letter-spacing:0.04em;text-decoration:none;color:var(--muted);transition:color .2s}
+.case-top .back:hover{color:var(--accent)}
+
+/* ── Hero + metrics ──────────────────────────────────────── */
+.case-hero{padding:64px 0 40px}
+.case-hero .eyebrow{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:0.14em;color:var(--accent);margin-bottom:16px}
+.case-hero h1{font-family:var(--display);font-weight:700;font-size:clamp(34px,5vw,52px);line-height:1.12;letter-spacing:-0.02em;margin-bottom:18px}
+.case-hero .deck{font-size:clamp(17px,2.2vw,20px);line-height:1.6;color:var(--muted);max-width:46em}
+.metrics{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px;padding-top:28px;border-top:1px solid var(--line)}
+.metric{flex:1 1 160px;min-width:140px}
+.metric .num{font-family:var(--display);font-weight:700;font-size:clamp(26px,3vw,34px);line-height:1.1;color:var(--accent);letter-spacing:-0.01em}
+.metric .lbl{font-family:var(--mono);font-size:11.5px;letter-spacing:0.03em;color:var(--faint);margin-top:6px}
+
+/* ── Sections ────────────────────────────────────────────── */
+.case-section{padding:42px 0;border-top:1px solid var(--line)}
+.case-section .sec-label{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:0.14em;color:var(--accent-2);margin-bottom:12px}
+.case-section h2{font-family:var(--display);font-weight:600;font-size:clamp(23px,3vw,30px);line-height:1.3;letter-spacing:-0.015em;margin-bottom:18px}
+.case-section h3{font-family:var(--display);font-weight:600;font-size:19px;line-height:1.4;margin:18px 0 10px}
+.case-section p{font-family:var(--body);font-size:16.5px;line-height:1.8;color:var(--ink);margin:0 0 16px}
+
+/* ── Tag chips ───────────────────────────────────────────── */
+.case-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.case-tags .chip{font-family:var(--mono);font-size:11.5px;letter-spacing:0.03em;color:var(--accent-2);border:1px solid var(--accent-border);background:var(--accent-tint);border-radius:9999px;padding:5px 11px}
+
+/* ── Image gallery ───────────────────────────────────────── */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:10px 0 6px}
+.gallery figure{margin:0}
+.gallery img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:12px}
+.gallery figcaption{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-top:9px;line-height:1.5}
+.shot{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:12px;margin:10px 0 6px}
+
+/* ── Result band ─────────────────────────────────────────── */
+.result{margin:18px 0 6px;padding:22px 24px;border:1px solid var(--accent-border);border-radius:14px;background:linear-gradient(180deg,#fff,var(--accent-tint))}
+.result .k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);display:block;margin-bottom:10px}
+.result .rgrid{display:flex;flex-wrap:wrap;gap:20px}
+.result .r{flex:1 1 150px}
+.result .r .num{font-family:var(--display);font-weight:700;font-size:clamp(24px,2.6vw,30px);color:var(--accent);line-height:1.1}
+.result .r .lbl{font-size:13px;color:var(--muted);margin-top:4px}
+
+/* ── Footer ──────────────────────────────────────────────── */
+.case-foot{border-top:1px solid var(--line);padding:40px 0 64px;margin-top:8px}
+.case-foot .slogan{font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:-0.01em}
+.case-foot .row{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px}
+.case-foot a{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none}
+.case-foot a:hover{color:var(--accent)}
+
+@media (max-width:520px){ .case-hero{padding:44px 0 30px} .case-section{padding:34px 0} }

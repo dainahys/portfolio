@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!--
+  ARTICLE TEMPLATE · dainahys.com
+  새 글을 만들 때 이 폴더를 복사 → articles/<topic>/<slug>/index.html 로 두고,
+  {{ }} 플레이스홀더만 채운다. 컴포넌트 사용법은 /articles/_styleguide/ 참고.
+  체크리스트:
+   1) {{TITLE}} {{DESC}} {{SLUG_URL}} {{DATE}} {{READ_MIN}} {{KEYWORDS}} 채우기
+   2) JSON-LD 의 datePublished / FAQ 문항을 글 내용에 맞게 수정
+   3) 본문 작성 (컴포넌트는 styleguide 스니펫 복사)
+   4) index.html(홈) Articles 섹션에 카드 1장 추가 (KO/EN)
+   5) 상단/하단 링크 깊이 확인: 사이트 루트는 항상 / (루트절대경로) 사용
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>{{TITLE}} — Hayeon Song</title>
+<meta name="description" content="{{DESC}}"/>
+<meta name="author" content="Hayeon Song (송하연)"/>
+<meta name="keywords" content="{{KEYWORDS}}"/>
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+<meta name="theme-color" content="#6A3AF2"/>
+<link rel="canonical" href="https://dainahys.com/articles/{{SLUG_URL}}/"/>
+<!-- Open Graph -->
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="Hayeon Song — Growth Marketing Portfolio"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta property="og:title" content="{{TITLE}}"/>
+<meta property="og:description" content="{{DESC}}"/>
+<meta property="og:url" content="https://dainahys.com/articles/{{SLUG_URL}}/"/>
+<meta property="og:image" content="https://dainahys.com/articles/{{SLUG_URL}}/og.png"/>
+<meta property="article:published_time" content="{{DATE}}"/>
+<meta property="article:modified_time" content="{{DATE}}"/>
+<meta property="article:author" content="Hayeon Song"/>
+<meta property="article:section" content="Growth / CRM"/>
+<meta property="article:tag" content="{{TAG1}}"/>
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="{{TITLE}}"/>
+<meta name="twitter:description" content="{{DESC}}"/>
+<meta name="twitter:image" content="https://dainahys.com/articles/{{SLUG_URL}}/og.png"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" rel="stylesheet"/>
+<!-- Design system (공용) -->
+<link rel="stylesheet" href="/articles/assets/article.css"/>
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "Person", "@id": "https://dainahys.com/#person-hayeon",
+      "name": "Hayeon Song", "alternateName": ["송하연","Dana","Daina"],
+      "url": "https://dainahys.com", "jobTitle": "Growth Marketer",
+      "sameAs": ["https://github.com/dainahys","https://www.linkedin.com/in/dainahysong/","https://dainahys.com"] },
+    { "@type": "WebSite", "@id": "https://dainahys.com/#website",
+      "url": "https://dainahys.com", "name": "Hayeon Song — Growth Marketing Portfolio",
+      "inLanguage": "ko", "publisher": { "@id": "https://dainahys.com/#person-hayeon" } },
+    { "@type": "TechArticle", "@id": "https://dainahys.com/articles/{{SLUG_URL}}/#article",
+      "headline": "{{TITLE}}", "description": "{{DESC}}", "inLanguage": "ko",
+      "datePublished": "{{DATE}}", "dateModified": "{{DATE}}",
+      "author": { "@id": "https://dainahys.com/#person-hayeon" },
+      "publisher": { "@id": "https://dainahys.com/#person-hayeon" },
+      "isPartOf": { "@id": "https://dainahys.com/#website" },
+      "mainEntityOfPage": "https://dainahys.com/articles/{{SLUG_URL}}/",
+      "image": "https://dainahys.com/articles/{{SLUG_URL}}/og.png",
+      "articleSection": "Growth / CRM", "proficiencyLevel": "Expert",
+      "keywords": "{{KEYWORDS}}" },
+    { "@type": "BreadcrumbList", "@id": "https://dainahys.com/articles/{{SLUG_URL}}/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://dainahys.com" },
+        { "@type": "ListItem", "position": 2, "name": "Articles", "item": "https://dainahys.com/#articles" },
+        { "@type": "ListItem", "position": 3, "name": "{{TITLE}}" } ] },
+    { "@type": "FAQPage", "@id": "https://dainahys.com/articles/{{SLUG_URL}}/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "{{Q1}}",
+          "acceptedAnswer": { "@type": "Answer", "text": "{{A1}}" } },
+        { "@type": "Question", "name": "{{Q2}}",
+          "acceptedAnswer": { "@type": "Answer", "text": "{{A2}}" } }
+      ] }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- ── Top bar ── -->
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="/index.html">Hayeon Song</a>
+  <a class="back" href="/index.html#articles">← Articles</a>
+</div></div>
+
+<!-- ── Hero ── -->
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">{{EYEBROW · 예: 구현 · Braze CRM}}</p>
+  <h1>{{TITLE}}</h1>
+  <p class="deck">{{한 문장 요약(deck)}}</p>
+  <div class="meta">
+    <span class="chip">{{TAG1}}</span>
+    <span class="chip">{{TAG2}}</span>
+    <span class="chip">{{TAG3}}</span>
+  </div>
+  <p class="byline">Hayeon (Dana) Song · {{YEAR}}</p>
+</div></header>
+
+<!-- ── Section ── (필요한 만큼 반복) -->
+<section><div class="wrap">
+  <p class="sec-label">{{섹션 라벨}}</p>
+  <h2>{{섹션 제목 — 주장을 담아}}</h2>
+  <p>{{본문…}}</p>
+
+  <!--
+    컴포넌트 스니펫은 /articles/_styleguide/ 에서 복사:
+    · ol.reasons   번호 리스트(이유·단계)
+    · ul.hyp       라벨 달린 불릿(가설·항목)
+    · .mtable      비교/매핑 표
+    · .dtable      데이터 추출·로그 표(mono)
+    · .code        코드블록(.code-label + <pre>)
+    · figure.diagram  인라인 SVG 다이어그램
+    · figure.img   이미지 + 캡션
+    · .callout / .takeaway / .pull / blockquote  강조 박스
+  -->
+</div></section>
+
+<!-- ── Series link (선택) ── -->
+<section><div class="wrap">
+  <a class="next" href="../{{NEXT_SLUG}}/">
+    <span class="k">다음 아티클</span>
+    <span class="t">{{다음 글 제목}}</span>
+    <span class="d">{{한 줄 설명}}</span>
+  </a>
+</div></section>
+
+<!-- ── Footer ── -->
+<footer><div class="wrap">
+  <p class="slogan">Growth is a structure, not a moment.</p>
+  <div class="foot-row">
+    <a href="/index.html">← dainahys.com</a>
+    <span>Hayeon Song · Growth Marketer</span>
+  </div>
+</div></footer>
+
+</body>
+</html>
