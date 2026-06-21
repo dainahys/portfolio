@@ -297,7 +297,7 @@
   <p>이번 IAM은 단일 Custom HTML 안에서 여러 화면(page)을 전환하는 구조로 설계했다. <code>page-id</code>를 가진 화면들을 겹쳐두고, <code>goToPage()</code> 함수로 활성 화면만 바꾸는 방식이다. 유저 입장의 경험은 단순하다 — 설치하고, 동의하고, 게임하고, 결과를 본다.</p>
 
   <figure class="artifact embed">
-    <iframe class="art-embed" src="artifacts/prototype.html?demo=1" title="앱 다운로드 프로모션 인터랙티브 프로토타입" loading="lazy"></iframe>
+    <iframe class="art-embed" src="artifacts/prototype.html?demo=1&v=2" title="앱 다운로드 프로모션 인터랙티브 프로토타입" loading="lazy"></iframe>
     <figcaption>설계 산출물 ② <b>인터랙티브 프로토타입</b> — 구현 전 이해관계자 검증용 동작 시안. 위에서 바로 눌러볼 수 있고, <a href="artifacts/prototype.html" target="_blank" rel="noopener">↗ 새 탭으로 크게 보기</a></figcaption>
   </figure>
   <p>하지만 화면을 만들기 전에, 마케터로서 풀어야 할 질문이 먼저 있었다. 웹에서 이벤트를 누른 유저를 앱 보유 여부에 따라 스토어로 보내거나 앱을 열고, 그렇게 들어온 유저가 이 이벤트를 통해 온 게 맞는지, 이미 참여한 유저는 아닌지를 알아야 했다. 결론만 먼저 적으면 — 앱 보유 분기는 어트리뷰션 툴(Airbridge)이, 참여 여부는 마케터가 직접 만든 Custom Attribute가, 이 이벤트로 열렸다는 신호는 개발팀과 함께 만든 Custom Event(<code>deeplink_open_promotion</code>)가 답이 됐다. 이 답에 이르기까지의 고민은 11장 챌린지 1·2에서 따로 다룬다.</p>
