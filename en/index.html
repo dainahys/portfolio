@@ -124,12 +124,23 @@
   <button onclick="location.href='/'" class="px-3 py-1.5 text-xs font-semibold transition-colors bg-transparent text-text-secondary hover:text-black">KO</button>
   <button class="px-3 py-1.5 text-xs font-semibold transition-colors bg-black text-white">EN</button>
 </div>
-<button aria-label="menu" class="md:hidden">
+<button aria-label="menu" class="md:hidden" onclick="document.getElementById('mobileNav').classList.toggle('hidden')">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </div>
 </div>
 </header>
+<div id="mobileNav" class="hidden md:hidden fixed top-20 left-0 right-0 z-40 bg-bg-light border-b border-border px-6 py-5 flex flex-col gap-4 text-sm font-medium">
+<a href="/en/" class="text-text-secondary hover:text-black">About</a>
+<a href="#work-en" class="text-text-secondary hover:text-black" onclick="document.getElementById('mobileNav').classList.add('hidden'); document.getElementById('work-en').scrollIntoView({behavior:'smooth'}); return false;">Portfolio</a>
+<a href="/resume/en/" class="text-text-secondary hover:text-black">Resume</a>
+<a href="/articles/en/" class="text-text-secondary hover:text-black">Articles</a>
+<a href="#contact-en" class="text-text-secondary hover:text-black" onclick="document.getElementById('mobileNav').classList.add('hidden'); document.getElementById('contact-en').scrollIntoView({behavior:'smooth'}); return false;">Contact</a>
+<div class="flex items-center gap-0 text-xs font-mono border border-border rounded-pill overflow-hidden w-fit">
+<button onclick="location.href='/'" class="px-3 py-1.5 font-semibold text-text-secondary hover:text-black">KO</button>
+<button class="px-3 py-1.5 font-semibold bg-black text-white">EN</button>
+</div>
+</div>
 <main class="flex-grow pt-20">
 <div id="view-home-en">
 <div class="mx-auto max-w-container px-6">
