@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  프로젝트 케이스스터디 템플릿 · /projects/_template/
+  새 프로젝트 추가:
+   1) 이 폴더를 /projects/<slug>/ 로 복사 (예: projects/soomgo/)
+   2) <body data-theme="..."> 지정 — 메인만:
+        숨고  → data-theme="soomgo"      (보라)
+        넥유  → data-theme="nextunicorn" (블루)
+        서브/그외 → data-theme 속성 제거 (중립, 기본)
+   3) {{PLACEHOLDER}} 채우기 (title·deck·metric·section·image)
+   4) 이미지: /assets/<slug>/... 에 두고 .shot / .gallery 로 삽입
+   5) 홈 index.html 의 Projects 카드에 이 페이지로 링크 추가
+        <a href="/projects/<slug>/"> ... </a>
+  색·토큰은 /assets/css/base.css, 본문 블록은 article.css 재사용.
+============================================================ -->
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>{{TITLE}} — Hayeon Song</title>
+<meta name="description" content="{{DESC}}"/>
+<link rel="canonical" href="https://dainahys.com/projects/{{SLUG}}/"/>
+<meta name="theme-color" content="#1f1f2b"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" rel="stylesheet"/>
+<!-- base.css 는 project.css 가 @import 하므로 별도 링크 불필요 -->
+<link rel="stylesheet" href="/assets/css/project.css"/>
+</head>
+<!-- 메인 프로젝트만 data-theme. 서브/그외는 아래 속성을 지운다. -->
+<body data-theme="{{THEME_OR_REMOVE}}">
+
+<div class="case-top"><div class="case-wrap">
+  <a class="brand" href="/index.html">Hayeon Song</a>
+  <a class="back" href="/index.html#work">← Work</a>
+</div></div>
+
+<header class="case-hero"><div class="case-wrap">
+  <p class="eyebrow">{{KICKER · 예: MARKETPLACE · CRM}}</p>
+  <h1>{{TITLE}}</h1>
+  <p class="deck">{{DECK — 한두 문장 요약}}</p>
+  <div class="metrics">
+    <div class="metric"><div class="num">{{+43.3%}}</div><div class="lbl">{{지표명}}</div></div>
+    <div class="metric"><div class="num">{{+32%}}</div><div class="lbl">{{지표명}}</div></div>
+    <div class="metric"><div class="num">{{1,249%}}</div><div class="lbl">{{지표명}}</div></div>
+  </div>
+  <div class="case-tags">
+    <span class="chip">{{Tag}}</span><span class="chip">{{Tag}}</span><span class="chip">{{Tag}}</span>
+  </div>
+</div></header>
+
+<section class="case-section"><div class="case-wrap">
+  <p class="sec-label">Background</p>
+  <h2>{{문제 정의}}</h2>
+  <p>{{배경. <strong>핵심은 굵게</strong>, <em>키워드는 액센트</em>, 코드값 <code>event_name</code>.}}</p>
+</div></section>
+
+<section class="case-section"><div class="case-wrap">
+  <p class="sec-label">Execution</p>
+  <h2>{{실행}}</h2>
+  <ol class="reasons">
+    <li><span class="lead">{{단계 1}}</span> {{설명}}</li>
+    <li><span class="lead">{{단계 2}}</span> {{설명}}</li>
+  </ol>
+  <div class="gallery">
+    <figure><img class="shot" src="/assets/{{SLUG}}/{{image-1}}.png" alt=""/><figcaption>{{캡션}}</figcaption></figure>
+    <figure><img class="shot" src="/assets/{{SLUG}}/{{image-2}}.png" alt=""/><figcaption>{{캡션}}</figcaption></figure>
+  </div>
+</div></section>
+
+<section class="case-section"><div class="case-wrap">
+  <p class="sec-label">Result</p>
+  <h2>{{성과}}</h2>
+  <div class="result">
+    <span class="k">Result</span>
+    <div class="rgrid">
+      <div class="r"><div class="num">{{+43.3%}}</div><div class="lbl">{{지표명}}</div></div>
+      <div class="r"><div class="num">{{1,249%}}</div><div class="lbl">{{지표명}}</div></div>
+    </div>
+  </div>
+  <div class="takeaway"><span class="k">Takeaway</span><p>{{가장 기억할 결론 하나.}}</p></div>
+</div></section>
+
+<footer class="case-foot"><div class="case-wrap">
+  <p class="slogan">Growth is a structure, not a moment.</p>
+  <div class="row">
+    <a href="/index.html">← dainahys.com</a>
+    <span style="font-family:var(--mono);font-size:11.5px;color:var(--faint)">Project Case Study</span>
+  </div>
+</div></footer>
+
+</body>
+</html>

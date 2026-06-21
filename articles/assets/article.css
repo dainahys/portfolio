@@ -1,0 +1,169 @@
+/* ============================================================
+   dainahys.com · Article Design System (components)
+   v1.2 · 디자인 토큰은 /assets/css/base.css (단일 소스)에서 온다.
+   링크 순서: base.css → article.css.
+     <link rel="stylesheet" href="/assets/css/base.css"/>
+     <link rel="stylesheet" href="/articles/assets/article.css"/>
+   톤·컴포넌트는 이 파일, 색·테마 토큰은 base.css 에서 고친다.
+   컴포넌트 사용법: /articles/_styleguide/
+   ============================================================ */
+
+@import url("/assets/css/base.css");
+
+/* ── Base ────────────────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--body); font-size:16.5px; line-height:1.85;
+  font-feature-settings:"ss01","ss02","cv01","cv02";
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px}
+
+/* ── Top bar ─────────────────────────────────────────────── */
+.topbar{border-bottom:1px solid var(--line);background:rgba(252,251,249,0.85);backdrop-filter:blur(8px);position:sticky;top:0;z-index:20}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:-0.01em;text-decoration:none;color:var(--ink)}
+.back{font-family:var(--mono);font-size:12px;letter-spacing:0.04em;text-decoration:none;color:var(--muted);transition:color .2s}
+.back:hover{color:var(--accent)}
+
+/* ── Hero ────────────────────────────────────────────────── */
+.hero{padding:72px 0 0}
+.eyebrow{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:0.14em;color:var(--accent);margin-bottom:18px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(32px,5.2vw,46px);line-height:1.16;letter-spacing:-0.02em;margin-bottom:18px}
+.deck{font-size:clamp(17px,2.4vw,19px);line-height:1.7;color:var(--muted);max-width:38em}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;padding-bottom:36px;border-bottom:1px solid var(--line)}
+.chip{font-family:var(--mono);font-size:11.5px;letter-spacing:0.03em;color:var(--accent-2);border:1px solid var(--accent-border);background:var(--accent-tint);border-radius:9999px;padding:5px 11px}
+.byline{font-family:var(--mono);font-size:12px;color:var(--faint);margin-top:18px;padding-bottom:8px}
+
+/* ── Sections ────────────────────────────────────────────── */
+section{padding:46px 0}
+section + section{border-top:1px solid var(--line)}
+.sec-label{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:0.14em;color:var(--accent-2);margin-bottom:12px}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(23px,3vw,29px);line-height:1.32;letter-spacing:-0.015em;margin-bottom:22px}
+h3{font-family:var(--display);font-weight:600;font-size:18px;line-height:1.4;letter-spacing:-0.01em;margin:6px 0 12px}
+p{margin:0 0 18px}
+p:last-child{margin-bottom:0}
+em{font-style:normal;color:var(--accent);font-weight:600}
+strong{font-weight:700}
+.lead{font-weight:600}
+
+/* ── Inline code ─────────────────────────────────────────── */
+code{font-family:var(--mono);font-size:0.88em;background:var(--accent-tint);color:var(--accent-strong);border:1px solid var(--accent-border);border-radius:5px;padding:1px 6px}
+
+/* ── Hypothesis / bordered list (ul.hyp) ─────────────────── */
+ul.hyp{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:8px}
+ul.hyp li{position:relative;padding:10px 14px 10px 16px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;background:#fff;font-size:15px;line-height:1.6}
+ul.hyp li b{font-family:var(--mono);font-size:12px;color:var(--accent);margin-right:8px;text-transform:uppercase;letter-spacing:0.04em}
+
+/* ── Numbered reasons (ol.reasons) ───────────────────────── */
+ol.reasons{list-style:none;counter-reset:r;margin:2px 0 22px;padding:0;display:grid;gap:12px}
+ol.reasons li{position:relative;counter-increment:r;padding:14px 16px 14px 54px;border:1px solid var(--line);border-radius:10px;background:#fff;line-height:1.78}
+ol.reasons li::before{content:counter(r);position:absolute;left:14px;top:13px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:13px;color:#fff;background:var(--accent);border-radius:8px}
+ol.reasons .lead{font-weight:700;color:var(--ink)}
+
+/* ── Plain ordered/unordered list (in prose) ─────────────── */
+.wrap ul.bullet,.wrap ol.num{margin:0 0 18px;padding-left:22px;line-height:1.8}
+.wrap ul.bullet li,.wrap ol.num li{margin:0 0 6px}
+.wrap ul.bullet li::marker{color:var(--accent)}
+.wrap ol.num li::marker{color:var(--accent);font-family:var(--mono);font-weight:500}
+
+/* ── Code blocks (다크 서피스 · 테마 무관) ──────────────────── */
+.code{margin:6px 0 22px;border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.06);box-shadow:0 10px 30px rgba(22,19,31,0.12)}
+.code-label{font-family:var(--mono);font-size:11.5px;letter-spacing:0.04em;color:var(--code-dim);background:#100e16;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.code-label .dot{color:var(--code-accent)}
+pre{background:var(--code-bg);color:var(--code-ink);font-family:var(--mono);font-size:13px;line-height:1.7;padding:16px 18px;overflow-x:auto}
+pre .cm{color:var(--code-dim)}
+pre .kw{color:var(--code-accent)}
+
+/* ── Pull quote / punchline ──────────────────────────────── */
+.pull{margin:8px 0 22px;padding:20px 24px;border-left:3px solid var(--accent);background:var(--accent-tint);border-radius:0 10px 10px 0}
+.pull p{font-family:var(--display);font-weight:500;font-size:18px;line-height:1.55;color:var(--ink);margin:0}
+.pull .fig{color:var(--accent);font-weight:700}
+
+/* ── Callout / note ──────────────────────────────────────── */
+.callout{margin:8px 0 22px;padding:15px 18px;border:1px solid var(--accent-border);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;background:var(--accent-tint);font-size:15px;line-height:1.7}
+.callout .k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);display:block;margin-bottom:4px}
+.callout p:last-child{margin-bottom:0}
+
+/* ── Key takeaway ────────────────────────────────────────── */
+.takeaway{margin:8px 0 22px;padding:18px 20px;border:1px solid var(--accent-border);border-radius:12px;background:linear-gradient(180deg,#ffffff,var(--accent-tint))}
+.takeaway .k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:6px;display:block}
+.takeaway p{font-family:var(--display);font-weight:500;font-size:17px;line-height:1.55;margin:0}
+
+/* ── Blockquote ──────────────────────────────────────────── */
+blockquote{margin:8px 0 22px;padding:6px 0 6px 20px;border-left:3px solid var(--accent-border);color:var(--muted);font-size:16px;line-height:1.8}
+blockquote cite{display:block;margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--faint);font-style:normal}
+
+/* ── Result paragraphs (.finding) ────────────────────────── */
+.finding{margin-bottom:18px}
+.finding .lead{display:block;margin-bottom:2px}
+.finding .fig{color:var(--accent);font-weight:700}
+
+/* ── Diagram (inline SVG) ────────────────────────────────── */
+/* 인라인 SVG 도형은 fill/stroke에 currentColor 또는 var(--accent*)를
+   직접 쓰면 테마가 따라온다. (하드코딩 hex 대신 권장) */
+.diagram{margin:8px 0 4px;color:var(--accent)}
+.diagram svg{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:12px;background:#fff;padding:10px 6px}
+.diagram figcaption{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-top:10px;text-align:center;line-height:1.5}
+
+/* ── Image figure ────────────────────────────────────────── */
+figure.img{margin:8px 0 6px}
+figure.img img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:12px}
+figure.img figcaption{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-top:10px;text-align:center;line-height:1.5}
+
+/* ── UI mockups (.ui-gallery) ────────────────────────────── */
+.ui-gallery{margin:10px 0 4px;display:grid;grid-template-columns:repeat(auto-fit,minmax(208px,1fr));gap:14px}
+.ui-screen{background:#ECECF1;border:1px solid var(--line);border-radius:16px;padding:16px 13px}
+.ui-cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;color:var(--faint);margin-bottom:9px;text-align:center}
+.ui-modal{background:#fff;border-radius:12px;padding:15px 13px;box-shadow:0 6px 18px rgba(0,0,0,.07);font-family:var(--body)}
+.um-title{font-size:14.5px;font-weight:700;line-height:1.35;color:#1C242F;text-align:center;margin:2px 0 4px}
+.um-desc{font-size:11px;color:#6B7684;text-align:center;line-height:1.5;margin-bottom:10px}
+.um-img{height:62px;border-radius:8px;background:#F1F0F6;border:1px dashed #D9D5E6;display:flex;align-items:center;justify-content:center;color:#A99FCB;font-size:10px;font-family:var(--mono)}
+.ui-card{border:2px solid #EFF1F5;border-radius:12px;padding:9px;text-align:center;margin-bottom:10px}
+.ui-card .um-img{margin-bottom:6px;height:54px}
+.um-label{font-size:11px;font-weight:600;color:#1C242F}
+.ui-opts{display:flex;flex-direction:column;gap:6px}
+.ui-opt{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #EFF1F5;border-radius:8px;font-size:12px;color:#1C242F}
+.ui-opt.sel{border-color:var(--accent);background:var(--accent-tint)}
+.ui-dot{width:15px;height:15px;border-radius:50%;border:2px solid #E0E5EB;flex-shrink:0}
+.ui-opt.sel .ui-dot{border-color:var(--accent);background:var(--accent)}
+.ui-sq{border-radius:4px}
+.ui-scale{display:flex;gap:5px}
+.ui-scale .ui-opt{flex:1;flex-direction:column;align-items:center;gap:4px;padding:8px 3px}
+.ui-scale-lab{display:flex;justify-content:space-between;font-size:9.5px;color:#6B7684;margin-top:6px}
+.ui-btn{margin-top:12px;height:36px;border-radius:8px;background:var(--accent);color:#fff;font-size:12.5px;font-weight:600;display:flex;align-items:center;justify-content:center}
+
+/* ── Data table (.dtable) — mono, 데이터 추출/로그용 ───────── */
+.dtable{margin:6px 0 4px;border:1px solid var(--line);border-radius:10px;overflow-x:auto}
+.dtable table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11px;min-width:560px}
+.dtable th{background:var(--accent-tint);color:var(--accent-strong);text-align:left;padding:8px 10px;font-weight:500;letter-spacing:.02em;white-space:nowrap;border-bottom:1px solid var(--accent-border)}
+.dtable td{padding:8px 10px;border-top:1px solid var(--line);color:#1a1a1a;vertical-align:top;line-height:1.6;white-space:nowrap}
+.dtable td.j{color:#5b5670;white-space:normal;word-break:break-all;min-width:320px}
+
+/* ── Matrix table (.mtable) — 본문 비교/매핑용 ─────────────── */
+.mtable{margin:4px 0 6px;border:1px solid var(--line);border-radius:10px;overflow-x:auto}
+.mtable table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.6;min-width:520px}
+.mtable th{background:var(--accent-tint);color:var(--accent-strong);text-align:left;font-weight:600;padding:10px 14px;border-bottom:1px solid var(--accent-border);font-size:12.5px;letter-spacing:.02em;white-space:nowrap}
+.mtable td{padding:10px 14px;border-top:1px solid var(--line);vertical-align:top;color:var(--ink)}
+.mtable td:first-child{font-family:var(--mono);font-size:12.5px;color:var(--accent);white-space:nowrap;font-weight:500}
+
+/* ── Series link card (.next) ────────────────────────────── */
+.next{display:block;margin-top:10px;padding:22px 24px;border:1px solid var(--accent-border);border-radius:12px;background:#fff;text-decoration:none;color:inherit;transition:border-color .2s,box-shadow .2s}
+.next:hover{border-color:var(--accent);box-shadow:0 10px 30px rgba(0,0,0,0.10)}
+.next .k{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent)}
+.next .t{font-family:var(--display);font-weight:600;font-size:18px;line-height:1.4;margin-top:6px}
+.next .d{font-size:14px;color:var(--muted);margin-top:6px}
+
+/* ── Footer ──────────────────────────────────────────────── */
+footer{border-top:1px solid var(--line);padding:40px 0 64px;margin-top:8px}
+.slogan{font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:-0.01em}
+.foot-row{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px}
+.foot-row a{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:none}
+.foot-row a:hover{color:var(--accent)}
+.foot-row span{font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+
+/* ── A11y / responsive ───────────────────────────────────── */
+a:focus-visible,.next:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+@media (max-width:520px){ body{font-size:16px} .hero{padding:48px 0 0} section{padding:38px 0} }

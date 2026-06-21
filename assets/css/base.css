@@ -1,0 +1,48 @@
+/* ============================================================
+   dainahys.com · Design Tokens (single source of truth)
+   v1.0 · 사이트 전체(홈·아티클)가 이 파일 하나를 링크한다.
+     <link rel="stylesheet" href="/assets/css/base.css"/>
+
+   브랜드 액센트는 --accent* 추상 토큰. 영역을 data-theme로 감싸면
+   그 안의 accent 유틸·var(--accent*)가 브랜드색으로 전환된다.
+     · 기본(미지정)        = 그 외 / promotion → 중립 잉크
+     · data-theme="soomgo"      → 보라 #6A3AF2
+     · data-theme="nextunicorn" → 블루 #0064FF
+   ※ 아티클은 회사 비노출 정책 → data-theme 미지정(중립) 유지.
+   ============================================================ */
+
+:root{
+  /* base palette (테마 무관) */
+  --bg:#fcfbf9; --ink:#1a1a1a; --muted:#5b5670; --faint:#8a8694;
+  --line:rgba(0,0,0,0.08);
+  --display:"Poppins",sans-serif;
+  --body:"Pretendard","Noto Sans KR",system-ui,sans-serif;
+  --mono:"DM Mono",monospace;
+
+  /* code block (다크 서피스 · 테마 무관) */
+  --code-bg:#16131f; --code-ink:#E7E2F4; --code-dim:#8E86A8; --code-accent:#B49BFA;
+
+  /* brand families (참조용) */
+  --sg:#6A3AF2; --sg-2:#8B68F8; --sg-3:#B49BFA; --sg-tint:#F3F0FF; --sg-border:#E0D8FF; --sg-text:#1F1F2B; --sg-muted:#5B5670;
+  --nu:#0064FF; --nu-2:#4C8DFF; --nu-tint:#F0F6FF; --nu-border:#D9E7FF; --nu-text:#111827; --nu-muted:#42526B;
+
+  /* themed accent — default = 그 외/promotion (중립) */
+  --accent:#1F1F2B; --accent-2:#5B5670; --accent-3:#8A8694;
+  --accent-tint:#F3F2EF; --accent-border:rgba(0,0,0,0.12); --accent-strong:#111111;
+}
+
+/* 숨고 영역 */
+[data-theme="soomgo"]{
+  --accent:var(--sg); --accent-2:var(--sg-2); --accent-3:var(--sg-3);
+  --accent-tint:var(--sg-tint); --accent-border:var(--sg-border); --accent-strong:#4a2bb8;
+}
+/* 넥스트유니콘 영역 */
+[data-theme="nextunicorn"]{
+  --accent:var(--nu); --accent-2:var(--nu-2); --accent-3:#66AFFF;
+  --accent-tint:var(--nu-tint); --accent-border:var(--nu-border); --accent-strong:#0048b3;
+}
+/* promotion 명시(=기본 중립) */
+[data-theme="promotion"]{
+  --accent:#1F1F2B; --accent-2:#5B5670; --accent-3:#8A8694;
+  --accent-tint:#F3F2EF; --accent-border:rgba(0,0,0,0.12); --accent-strong:#111111;
+}

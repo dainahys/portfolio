@@ -109,6 +109,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;family=Nanum+Square:wght@400;700;800&amp;display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- 디자인 토큰 단일 소스 (사이트 전체 공유) -->
+<link href="/assets/css/base.css" rel="stylesheet"/>
 <script>
     tailwind.config = {
       darkMode: "class",
@@ -117,6 +119,12 @@
           colors: {
             soomgo: "#6A3AF2",
             nextunicorn: "#0064FF",
+            // themed accent — resolves per data-theme scope (see :root blocks)
+            accent: "var(--accent)",
+            "accent-2": "var(--accent-2)",
+            "accent-tint": "var(--accent-tint)",
+            "accent-border": "var(--accent-border)",
+            "accent-strong": "var(--accent-strong)",
             "bg-light": "#fcfbf9",
             "bg-dark": "#1a1a1a",
             "text-primary": "#1a1a1a",
@@ -179,6 +187,7 @@
       --nu-border: #D9E7FF;
       --nu-text: #111827;
       --nu-muted: #42526B;
+      /* --accent* 테마 토큰은 /assets/css/base.css (단일 소스)에서 옴 */
     }
 
     .type-label,
@@ -1841,7 +1850,7 @@
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
 <!-- Soomgo -->
-<button aria-label="Open Soomgo case study" class="group text-left" onclick="showView('sg');">
+<button data-theme="soomgo" aria-label="Open Soomgo case study" class="group text-left" onclick="showView('sg');">
 <div class="relative overflow-hidden rounded-card bg-[#6A3AF2] aspect-[4/3] mb-6 shadow-soft transition-all duration-500 group-hover:shadow-lift group-hover:shadow-[rgba(106,58,242,0.15)] border border-border">
 <div class="absolute inset-0 bg-soomgo/5 opacity-0 group-hover:opacity-100 transition-opacity z-10 duration-500"></div>
 <!-- TODO: cover -->
@@ -1864,7 +1873,7 @@
 </div>
 </button>
 <!-- Nextunicorn -->
-<button aria-label="Open Nextunicorn case study" class="group text-left" onclick="showView('nu');">
+<button data-theme="nextunicorn" aria-label="Open Nextunicorn case study" class="group text-left" onclick="showView('nu');">
 <div class="relative overflow-hidden rounded-card bg-[#0064FF] aspect-[4/3] mb-6 shadow-soft transition-all duration-500 group-hover:shadow-lift group-hover:shadow-[rgba(0,100,255,0.15)] border border-border">
 <div class="absolute inset-0 bg-nextunicorn/5 opacity-0 group-hover:opacity-100 transition-opacity z-10 duration-500"></div>
 <div class="absolute inset-0 overflow-hidden rounded-[inherit] bg-[#0064FF]">
@@ -2760,7 +2769,7 @@ function closeLeadModal() {
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
 <!-- Soomgo -->
-<button aria-label="Open Soomgo case study" class="group text-left" onclick="showView('sg-en');">
+<button data-theme="soomgo" aria-label="Open Soomgo case study" class="group text-left" onclick="showView('sg-en');">
 <div class="relative overflow-hidden rounded-card bg-[#6A3AF2] aspect-[4/3] mb-6 shadow-soft transition-all duration-500 group-hover:shadow-lift group-hover:shadow-[rgba(106,58,242,0.15)] border border-border">
 <div class="absolute inset-0 bg-soomgo/5 opacity-0 group-hover:opacity-100 transition-opacity z-10 duration-500"></div>
 <!-- TODO: cover -->
@@ -2783,7 +2792,7 @@ function closeLeadModal() {
 </div>
 </button>
 <!-- Nextunicorn -->
-<button aria-label="Open Nextunicorn case study" class="group text-left" onclick="showView('nu-en');">
+<button data-theme="nextunicorn" aria-label="Open Nextunicorn case study" class="group text-left" onclick="showView('nu-en');">
 <div class="relative overflow-hidden rounded-card bg-[#0064FF] aspect-[4/3] mb-6 shadow-soft transition-all duration-500 group-hover:shadow-lift group-hover:shadow-[rgba(0,100,255,0.15)] border border-border">
 <div class="absolute inset-0 bg-nextunicorn/5 opacity-0 group-hover:opacity-100 transition-opacity z-10 duration-500"></div>
 <div class="absolute inset-0 overflow-hidden rounded-[inherit] bg-[#0064FF]">
@@ -3612,7 +3621,7 @@ function closeLeadModal() {
            VIEW: CASE (SOOMGO)
       ========================== -->
 
-<div id="view-sg" style="display:none">
+<div id="view-sg" data-theme="soomgo" style="display:none">
 <!-- Back -->
 <div class="mx-auto max-w-container px-6 py-6">
 <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home')">
@@ -6593,7 +6602,7 @@ Back to Top
            VIEW: CASE (NEXTUNICORN)
       ========================== -->
 
-<div id="view-nu" style="display:none">
+<div id="view-nu" data-theme="nextunicorn" style="display:none">
 <div style="background:#ffffff;">
 <div class="mx-auto max-w-container px-6 py-6">
 <button class="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-black transition-colors" onclick="showView('home')">
@@ -9254,24 +9263,27 @@ Back to Top
 <!-- Article List -->
 <section class="pb-section-m md:pb-section">
 
+  <!-- ── Series group: Braze CRM ── (새 카드는 아래 <a>…</a> 블록을 복사) -->
+  <p class="font-mono text-[12px] uppercase tracking-[0.14em] text-[#6A3AF2] pt-2">Braze · CRM 시리즈</p>
+  <p class="text-[13px] leading-[1.6] text-text-secondary mt-1 mb-3">인앱 메시지(IAM)로 만든 실험과 구현 기록</p>
   <!-- ── Article 1 ── -->
-  <a href="articles/braze/iam-modal/" class="group block py-8 md:py-10 border-b border-border hover:border-black/20 transition-colors duration-300">
+  <a href="articles/braze/survey-modal/" class="group block py-8 md:py-10 border-b border-border hover:border-black/20 transition-colors duration-300">
     <div class="flex items-center gap-3 mb-3">
-      <span class="font-mono text-[10px] text-text-secondary tracking-[0.05em]">2026.05.02</span>
+      <span class="font-mono text-[10px] text-text-secondary tracking-[0.05em]">2026.02.28</span>
       <span class="inline-block bg-[#F4F2EC] text-text-secondary text-[10px] font-mono font-medium px-2 py-0.5 rounded-[3px] tracking-[0.04em]">Guide</span>
-      <span class="font-mono text-[10px] text-text-secondary">· 8 min read</span>
+      <span class="font-mono text-[10px] text-text-secondary">· 12 min read</span>
     </div>
     <h2 class="font-display font-bold text-[22px] md:text-[24px] leading-[1.35] tracking-[-0.01em] text-text-primary mb-2 group-hover:text-black/70 transition-colors">
-      Braze Custom HTML IAM 구현 가이드 — brazeBridge로 인터랙티브 모달 만들기
+      Braze IAM으로 다단계 분기 설문 만들기 — 응답을 행동 데이터와 교차검증하기
     </h2>
     <p class="text-[14px] leading-[1.7] text-text-secondary mb-4 max-w-[680px]">
-      약관 동의 → 드래그앤드롭 게임 → 경품 추첨까지 단일 모달에서 처리하는 다단계 IAM을 brazeBridge API로 구현한 실전 기록과 코드.
+      단일 IAM 메시지 안에 page-id 라우터로 다단계 분기 설문 엔진을 구현하고, 응답을 Custom Attribute·Event로 적립해 행동 데이터와 교차검증한 기록과 코드.
     </p>
     <div class="flex flex-wrap gap-1.5">
       <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Braze</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">brazeBridge</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Liquid</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">HTML/JS</span>
+      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">IAM</span>
+      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">SQL</span>
+      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Segmentation</span>
     </div>
   </a>
 
@@ -9557,24 +9569,27 @@ Back to Top
 <!-- Article List -->
 <section class="pb-section-m md:pb-section">
 
+  <!-- ── Series group: Braze CRM ── (copy the <a>…</a> block below for a new card) -->
+  <p class="font-mono text-[12px] uppercase tracking-[0.14em] text-[#6A3AF2] pt-2">Braze · CRM Series</p>
+  <p class="text-[13px] leading-[1.6] text-text-secondary mt-1 mb-3">In-app message experiments &amp; build logs</p>
   <!-- ── Article 1 ── -->
-  <a href="articles/braze/iam-modal/" class="group block py-8 md:py-10 border-b border-border hover:border-black/20 transition-colors duration-300">
+  <a href="articles/braze/survey-modal/" class="group block py-8 md:py-10 border-b border-border hover:border-black/20 transition-colors duration-300">
     <div class="flex items-center gap-3 mb-3">
-      <span class="font-mono text-[10px] text-text-secondary tracking-[0.05em]">2026.05.02</span>
+      <span class="font-mono text-[10px] text-text-secondary tracking-[0.05em]">2026.02.28</span>
       <span class="inline-block bg-[#F4F2EC] text-text-secondary text-[10px] font-mono font-medium px-2 py-0.5 rounded-[3px] tracking-[0.04em]">Guide</span>
-      <span class="font-mono text-[10px] text-text-secondary">· 8 min read</span>
+      <span class="font-mono text-[10px] text-text-secondary">· 12 min read</span>
     </div>
     <h2 class="font-display font-bold text-[22px] md:text-[24px] leading-[1.35] tracking-[-0.01em] text-text-primary mb-2 group-hover:text-black/70 transition-colors">
-      Braze Custom HTML IAM — Building Interactive Modals with brazeBridge
+      Building a Multi-Step Branching Survey Inside a Braze IAM — Cross-Validating Responses with Behavioral Data
     </h2>
     <p class="text-[14px] leading-[1.7] text-text-secondary mb-4 max-w-[680px]">
-      A real-world record (and the code) of building a multi-step IAM that handles consent → drag-and-drop game → prize draw in a single modal using the brazeBridge API.
+      How I built a multi-step, branching survey engine inside a single IAM with a page-id router, then stored responses as Custom Attributes and Events to cross-validate them against behavioral data — with the code.
     </p>
     <div class="flex flex-wrap gap-1.5">
       <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Braze</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">brazeBridge</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Liquid</span>
-      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">HTML/JS</span>
+      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">IAM</span>
+      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">SQL</span>
+      <span class="inline-block bg-white border border-border text-text-secondary text-[10px] font-mono px-2 py-1 rounded-[3px]">Segmentation</span>
     </div>
   </a>
 

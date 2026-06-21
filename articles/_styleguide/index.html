@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Article Design System — Styleguide · dainahys.com</title>
+<meta name="robots" content="noindex, follow"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/articles/assets/article.css"/>
+<style>
+  /* styleguide 전용(시스템 아님) */
+  .demo{margin:10px 0 14px}
+  .demo .snippet{margin-top:10px;font-size:12px;opacity:.96}
+  .guide-note{font-size:14px;color:var(--muted);margin:2px 0 12px}
+  .tok-row{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 20px}
+  .tok{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .tok i{width:22px;height:22px;border-radius:6px;border:1px solid var(--line);display:inline-block}
+  .comp-h{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--sg-2);margin:30px 0 2px}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <a class="brand" href="/index.html">Hayeon Song</a>
+  <a class="back" href="/index.html#articles">← Articles</a>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">Design System</p>
+  <h1>Article Styleguide</h1>
+  <p class="deck">모든 아티클이 공유하는 컴포넌트 라이브러리. 새 글은 <code>/articles/_template/</code>를 복사하고, 본문 블록은 여기서 스니펫을 가져다 쓴다. 톤을 바꾸려면 <code>/articles/assets/article.css</code> 한 파일만 고친다.</p>
+  <p class="byline">v1.0 · dainahys.com</p>
+</div></header>
+
+<section><div class="wrap">
+  <p class="sec-label">Workflow</p>
+  <h2>새 아티클 추가하는 법</h2>
+  <ol class="reasons">
+    <li><span class="lead">폴더 복사.</span> <code>/articles/_template/</code>를 <code>/articles/&lt;topic&gt;/&lt;slug&gt;/index.html</code>로 둔다. (예: <code>articles/braze/survey-modal/</code>)</li>
+    <li><span class="lead">플레이스홀더 채우기.</span> <code>{{TITLE}}</code> <code>{{DESC}}</code> <code>{{SLUG_URL}}</code> <code>{{DATE}}</code> 등과 JSON-LD의 <code>datePublished</code>·FAQ 문항을 글 내용에 맞게 수정.</li>
+    <li><span class="lead">본문 작성.</span> 아래 컴포넌트 스니펫을 복사해 블록을 채운다. 링크·캐노니컬은 항상 루트절대경로 <code>/</code> 기준.</li>
+    <li><span class="lead">목록 카드 추가.</span> 홈 <code>index.html</code>의 Articles 섹션(KO·EN)에 카드 1장 추가.</li>
+  </ol>
+</div></section>
+
+<section><div class="wrap">
+  <p class="sec-label">Themes</p>
+  <h2>브랜드 테마 — 글마다 액센트 1개</h2>
+  <p class="guide-note">컴포넌트는 모두 <code>--accent*</code> 토큰만 참조한다. 글 최상위(<code>&lt;body&gt;</code>)에 <code>data-theme</code> 한 줄로 액센트가 일괄 전환된다. 기본(미지정)은 그 외/promotion = 중립 잉크.</p>
+  <div class="mtable"><table>
+    <thead><tr><th>테마</th><th>data-theme</th><th>--accent</th><th>쓰임</th></tr></thead>
+    <tbody>
+      <tr><td>그 외 / promotion</td><td><code>(없음)</code></td><td>#1F1F2B 중립</td><td>일반·프로모션 글(기본값)</td></tr>
+      <tr><td>숨고</td><td><code>soomgo</code></td><td>#6A3AF2 보라</td><td>숨고 관련 글</td></tr>
+      <tr><td>넥스트유니콘</td><td><code>nextunicorn</code></td><td>#0064FF 블루</td><td>넥스트유니콘 관련 글</td></tr>
+    </tbody>
+  </table></div>
+  <div class="code"><div class="code-label"><span class="dot">▌</span> 적용 · 글 최상위에 한 줄</div>
+<pre>&lt;body data-theme="soomgo"&gt;        <span class="cm">// 숨고 글 → 보라</span>
+&lt;body data-theme="nextunicorn"&gt;  <span class="cm">// 넥유 글 → 블루</span>
+&lt;body&gt;                           <span class="cm">// 그 외 → 중립(기본)</span></pre></div>
+  <p class="guide-note">인라인 SVG <code>.diagram</code>은 fill/stroke에 <code>currentColor</code> 또는 <code>var(--accent)</code>를 쓰면 테마를 따라온다(하드코딩 hex 지양).</p>
+</div></section>
+
+<section><div class="wrap">
+  <p class="sec-label">Tokens</p>
+  <h2>색 · 타이포</h2>
+  <div class="tok-row">
+    <span class="tok"><i style="background:var(--accent)"></i>--accent</span>
+    <span class="tok"><i style="background:var(--accent-2)"></i>--accent-2</span>
+    <span class="tok"><i style="background:var(--accent-tint)"></i>--accent-tint</span>
+    <span class="tok"><i style="background:#fcfbf9;border:1px solid #ddd"></i>--bg</span>
+    <span class="tok"><i style="background:#1a1a1a"></i>--ink</span>
+    <span class="tok"><i style="background:#16131f"></i>--code-bg</span>
+  </div>
+  <p class="guide-note">액센트는 테마 토큰(<code>--accent*</code>). 그 외 base = <code>--bg #fcfbf9</code> · <code>--ink #1a1a1a</code> · <code>--muted</code> · <code>--line</code> (테마 무관). Display = Poppins · Body = Pretendard · Mono = DM Mono · 본문폭 720px</p>
+
+  <p class="comp-h">prose · 본문</p>
+  <p class="guide-note">기본 문단. 강조는 <code>&lt;strong&gt;</code>(굵게), <code>&lt;em&gt;</code>(보라 키워드), <code>.lead</code>(굵은 리드), 인라인 <code>&lt;code&gt;</code>.</p>
+  <div class="demo"><div class="demo-live">
+    <p><span class="lead">리드 문장.</span> 일반 본문이고 <strong>핵심은 굵게</strong>, <em>중요 키워드</em>는 보라로, 코드값은 <code>external_user_id</code>처럼 표기한다.</p>
+  </div></div>
+
+  <p class="comp-h">ul.hyp · 라벨 불릿</p>
+  <p class="guide-note">가설·항목처럼 "라벨 + 설명" 나열에. 좌측 보라 보더 + mono 라벨.</p>
+  <div class="demo"><div class="demo-live">
+    <ul class="hyp">
+      <li><b>H1 노출</b>도달이 낮아 인지하지 못했다</li>
+      <li><b>H2 가치</b>혜택 매력이 부족했다</li>
+    </ul>
+  </div></div>
+
+  <p class="comp-h">ol.reasons · 번호 리스트</p>
+  <p class="guide-note">이유·단계처럼 순서 있는 나열에. 보라 번호 배지 + 굵은 리드.</p>
+  <div class="demo"><div class="demo-live">
+    <ol class="reasons">
+      <li><span class="lead">대상을 행동으로 정의했다.</span> 활동 빈도·참여 패턴으로 세그먼트를 도출했다.</li>
+      <li><span class="lead">편향을 설계로 막았다.</span> 1차는 리워드 없이 돌렸다.</li>
+    </ol>
+  </div></div>
+
+  <p class="comp-h">.mtable · 비교/매핑 표</p>
+  <p class="guide-note">세그먼트×가설처럼 본문용 매트릭스. sg-tint 헤더, 첫 열은 mono 보라.</p>
+  <div class="demo"><div class="demo-live">
+    <div class="mtable"><table>
+      <thead><tr><th>세그먼트</th><th>정의</th><th>가설</th></tr></thead>
+      <tbody>
+        <tr><td>A 미인지</td><td>본 적 없음</td><td>노출 (H1)</td></tr>
+        <tr><td>B 참여자</td><td>참여함</td><td>가치 (H2)</td></tr>
+      </tbody>
+    </table></div>
+  </div></div>
+
+  <p class="comp-h">.dtable · 데이터 추출 표</p>
+  <p class="guide-note">쿼리 결과·로그처럼 raw 데이터. mono 폰트, 가로 스크롤. 긴 JSON 셀은 <code>class="j"</code>.</p>
+  <div class="demo"><div class="demo-live">
+    <div class="dtable"><table>
+      <thead><tr><th>EXTERNAL_ID</th><th>EVENT_TIME</th><th>PROPERTIES</th></tr></thead>
+      <tbody>
+        <tr><td>u_10··abcd</td><td>2026-02-23</td><td class="j">{"segment":"A", …}</td></tr>
+      </tbody>
+    </table></div>
+  </div></div>
+
+  <p class="comp-h">.code · 코드블록</p>
+  <p class="guide-note">라벨(<code>.code-label</code>) + <code>&lt;pre&gt;</code>. 주석은 <code>.cm</code>. <code>&lt;</code>·<code>&gt;</code>는 <code>&amp;lt;</code>·<code>&amp;gt;</code>로 이스케이프.</p>
+  <div class="demo"><div class="demo-live">
+    <div class="code">
+      <div class="code-label"><span class="dot">▌</span> Braze 쿼리 빌더 · SQL</div>
+<pre>SELECT external_user_id AS external_id
+FROM   USERS_BEHAVIORS_CUSTOMEVENT_SHARED
+WHERE  name = 'promo_survey_completed'  <span class="cm">// 완료 이벤트</span></pre>
+    </div>
+  </div></div>
+
+  <p class="comp-h">figure.diagram · SVG 다이어그램</p>
+  <p class="guide-note">플로우·구조도. 인라인 <code>&lt;svg&gt;</code> + <code>&lt;figcaption&gt;</code>. 보더·라운드 자동.</p>
+  <div class="demo"><div class="demo-live">
+    <figure class="diagram">
+      <svg viewBox="0 0 320 70" xmlns="http://www.w3.org/2000/svg" font-family="DM Mono, monospace" font-size="11">
+        <rect x="8" y="20" width="80" height="30" rx="6" fill="#F3F0FF" stroke="#6A3AF2"/>
+        <text x="48" y="39" text-anchor="middle" fill="#4a2bb8">스크리닝</text>
+        <line x1="88" y1="35" x2="120" y2="35" stroke="#B49BFA" marker-end="url(#a)"/>
+        <rect x="120" y="20" width="80" height="30" rx="6" fill="#fff" stroke="#E0D8FF"/>
+        <text x="160" y="39" text-anchor="middle" fill="#5b5670">분기</text>
+        <line x1="200" y1="35" x2="232" y2="35" stroke="#B49BFA" marker-end="url(#a)"/>
+        <rect x="232" y="20" width="80" height="30" rx="6" fill="#fff" stroke="#E0D8FF"/>
+        <text x="272" y="39" text-anchor="middle" fill="#5b5670">합류</text>
+        <defs><marker id="a" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#B49BFA"/></marker></defs>
+      </svg>
+      <figcaption>스크리닝 → 분기 → 공통 합류</figcaption>
+    </figure>
+  </div></div>
+
+  <p class="comp-h">.callout / .takeaway / .pull · 강조 박스</p>
+  <p class="guide-note">callout=보조 노트, takeaway=핵심 정리, pull=문장 punchline.</p>
+  <div class="demo"><div class="demo-live">
+    <div class="callout"><span class="k">Note</span><p>본문 흐름에서 잠깐 짚는 보조 설명·주의점.</p></div>
+    <div class="takeaway"><span class="k">Takeaway</span><p>이 글에서 가장 기억할 한 가지 결론.</p></div>
+    <div class="pull"><p>급감의 원인은 계절성이 아니라 <span class="fig">구조</span>였다.</p></div>
+  </div></div>
+
+  <p class="comp-h">blockquote · 인용</p>
+  <div class="demo"><div class="demo-live">
+    <blockquote>설문의 질은 화면을 만들기 전에 갈린다.<cite>— 본문 중</cite></blockquote>
+  </div></div>
+
+  <p class="comp-h">.next · 시리즈 링크 카드</p>
+  <div class="demo"><div class="demo-live">
+    <a class="next" href="#">
+      <span class="k">다음 아티클</span>
+      <span class="t">brazeBridge로 인터랙티브 모달 만들기</span>
+      <span class="d">설문에서 얻은 인사이트로 설계한 다음 실험.</span>
+    </a>
+  </div></div>
+</div></section>
+
+<footer><div class="wrap">
+  <p class="slogan">Growth is a structure, not a moment.</p>
+  <div class="foot-row">
+    <a href="/index.html">← dainahys.com</a>
+    <span>Article Design System · v1.0</span>
+  </div>
+</div></footer>
+
+<script>
+  // 각 .demo-live의 실제 마크업을 복사용 스니펫으로 자동 출력
+  document.querySelectorAll('.demo').forEach(function(d){
+    var live=d.querySelector('.demo-live');
+    if(!live) return;
+    var html=live.innerHTML.replace(/^\n+|\s+$/g,'');
+    // 공통 들여쓰기 제거
+    var lines=html.split('\n');
+    var indent=Math.min.apply(null,lines.filter(function(l){return l.trim();})
+      .map(function(l){return l.match(/^\s*/)[0].length;}));
+    html=lines.map(function(l){return l.slice(indent);}).join('\n').trim();
+    var pre=document.createElement('pre');
+    pre.className='snippet';
+    pre.textContent=html;           // textContent가 자동 이스케이프
+    d.appendChild(pre);
+  });
+</script>
+</body>
+</html>
