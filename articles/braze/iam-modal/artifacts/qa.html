@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)./qa.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 3월 앱 다운로드 유도 QA Test Case — 통합</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #fff;
+      --border: #e2e8f0;
+      --primary: #6366f1;
+      --success: #22c55e;
+      --fail: #ef4444;
+      --pending: #94a3b8;
+      --android: #3ddc84;
+      --ios: #007aff;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 20px; background: var(--bg); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; color: #1e293b; }
+    h1 { text-align: center; font-size: 1.5rem; margin-bottom: 4px; }
+    .sub { text-align: center; color: #64748b; font-size: 0.85rem; margin-bottom: 20px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 20px; padding: 16px; background: var(--card); border-radius: 12px; border: 1px solid var(--border); }
+    .toolbar label { font-weight: 600; color: #475569; }
+    .toolbar select { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); font-size: 13px; }
+    .toolbar .filter-group { display: flex; align-items: center; gap: 8px; }
+    .section { margin-bottom: 28px; }
+    .section-title { font-size: 1.1rem; font-weight: 700; color: var(--primary); padding: 10px 16px; background: linear-gradient(135deg, #eef2ff, #e0e7ff); border-radius: 8px; margin-bottom: 12px; border-left: 4px solid var(--primary); }
+    .tc-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); font-size: 13px; }
+    .tc-table th { background: #f1f5f9; padding: 12px 14px; text-align: left; font-weight: 600; color: #475569; border-bottom: 2px solid var(--border); white-space: nowrap; }
+    .tc-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .tc-table tr:hover { background: #f8fafc; }
+    .tc-table tr.hidden { display: none; }
+    .tc-id { font-weight: 700; color: var(--primary); white-space: nowrap; }
+    .os-badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+    .os-android { background: #dcfce7; color: #166534; }
+    .os-ios { background: #dbeafe; color: #1e40af; }
+    .os-both { background: #f3e8ff; color: #6b21a8; }
+    .precond { font-size: 12px; color: #64748b; line-height: 1.5; }
+    .steps { line-height: 1.7; }
+    .steps ol { margin: 0; padding-left: 18px; }
+    .steps li { margin-bottom: 4px; }
+    .expected { color: #059669; font-weight: 500; }
+    .confirm { background: #f0fdf4; padding: 6px 10px; border-radius: 6px; font-size: 12px; border-left: 3px solid var(--success); }
+    .result-cell { min-width: 90px; }
+    .result-btn { padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600; transition: all 0.15s; }
+    .result-btn:hover { opacity: 0.9; }
+    .result-btn.active-pass { background: var(--success); color: #fff; border-color: var(--success); box-shadow: 0 0 0 2px var(--success); }
+    .result-btn.active-cpass { background: #F59E0B; color: #fff; border-color: #F59E0B; box-shadow: 0 0 0 2px #F59E0B; }
+    .result-btn.active-fail { background: var(--fail); color: #fff; border-color: var(--fail); box-shadow: 0 0 0 2px var(--fail); }
+    .result-btn.active-skip { background: var(--pending); color: #fff; border-color: var(--pending); box-shadow: 0 0 0 2px var(--pending); }
+    .summary-bar { display: flex; gap: 16px; flex-wrap: wrap; padding: 12px 20px; background: var(--card); border-radius: 10px; border: 1px solid var(--border); margin-bottom: 20px; }
+    .summary-item { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+    .summary-item .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .summary-item .dot.pass { background: var(--success); }
+    .summary-item .dot.fail { background: var(--fail); }
+    .summary-item .dot.skip { background: var(--pending); }
+    .summary-item .dot.none { background: var(--border); }
+    @media print { .toolbar, .result-btn, .no-print { display: none !important; } body { background: #fff; } }
+  </style>
+</head>
+<body>
+  <h1>2026 3월 앱 다운로드 유도 QA Test Case</h1>
+  <div class="toolbar no-print">
+    <div class="filter-group">
+      <label>OS</label>
+      <select id="filterOS">
+        <option value="">전체</option>
+        <option value="android">Android</option>
+        <option value="ios">iOS</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>섹션</label>
+      <select id="filterSection">
+        <option value="">전체</option>
+        <option value="web">웹 진입</option>
+        <option value="terms-push-no">약관 미동의 + 푸시 미허용</option>
+        <option value="terms-ok-push-no">약관 동의 + 푸시 미허용</option>
+        <option value="terms-push-ok">약관 동의 + 푸시 허용</option>
+        <option value="already">이미 참여 완료</option>
+        <option value="prize">경품 추첨 / 결과 분기</option>
+        <option value="edge">엣지/회귀</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <button class="result-btn" onclick="resetResults()">결과 초기화</button>
+    </div>
+  </div>
+
+  <div class="summary-bar no-print">
+    <span class="summary-item"><span class="dot pass"></span> Pass: <strong id="cntPass">0</strong></span>
+    <span class="summary-item"><span class="dot fail"></span> Fail: <strong id="cntFail">0</strong></span>
+    <span class="summary-item"><span class="dot skip"></span> Skip: <strong id="cntSkip">0</strong></span>
+    <span class="summary-item"><span class="dot none"></span> 미실행: <strong id="cntNone">46</strong></span>
+  </div>
+
+  <!-- 1. 웹 → 앱 진입 -->
+  <div class="section" data-section="web">
+    <div class="section-title">1. 웹 → 앱 진입 분기</div>
+    <table class="tc-table">
+      <thead>
+        <tr><th style="width:70px">TC#</th><th style="width:80px">OS</th><th style="width:180px">사전 조건</th><th>테스트 시나리오</th><th>기대 결과</th><th>확인 포인트</th><th class="result-cell">결과</th><th style="min-width:200px">노트</th></tr>
+      </thead>
+      <tbody>
+        <tr data-os="both" data-section="web">
+          <td class="tc-id">W-01</td>
+          <td><span class="os-badge os-both">공통</span></td>
+          <td class="precond">앱 미설치, 웹 접속 가능</td>
+          <td class="steps"><ol><li>웹 이벤트 페이지 CTA "앱 다운로드하고 혜택 받기" 클릭</li></ol></td>
+          <td class="expected">앱 설치 유도 모달 노출</td>
+          <td class="confirm">앱 미설치 시 설치 유도 모달 정상 노출</td>
+          <td class="result-cell"><button class="result-btn" data-tc="W-01" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="W-01" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="W-01" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="W-01" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="both" data-section="web">
+          <td class="tc-id">W-02</td>
+          <td><span class="os-badge os-both">공통</span></td>
+          <td class="precond">앱 미설치, 앱 설치 유도 모달 노출 상태</td>
+          <td class="steps"><ol><li>앱 설치 유도 모달 CTA "나이트 소환하기" 클릭</li></ol></td>
+          <td class="expected">App Store / Play Store 이동 (서비스 앱)</td>
+          <td class="confirm">에어브릿지 라우팅으로 스토어 정상 이동</td>
+          <td class="result-cell"><button class="result-btn" data-tc="W-02" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="W-02" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="W-02" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="W-02" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="both" data-section="web">
+          <td class="tc-id">W-03</td>
+          <td><span class="os-badge os-both">공통</span></td>
+          <td class="precond">앱 설치됨</td>
+          <td class="steps"><ol><li>CTA 클릭</li></ol></td>
+          <td class="expected">앱 오픈 (Deep Link 콜백)</td>
+          <td class="confirm">앱 정상 오픈</td>
+          <td class="result-cell"><button class="result-btn" data-tc="W-03" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="W-03" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="W-03" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="W-03" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="both" data-section="web">
+          <td class="tc-id">W-04</td>
+          <td><span class="os-badge os-both">공통</span></td>
+          <td class="precond">apply_event=false 딥링크</td>
+          <td class="steps"><ol><li>app://event/{id}?apply_event=false&amp;term={term} 로 진입</li></ol></td>
+          <td class="expected">Braze 이벤트 미발송, 이벤트 페이지만 표시</td>
+          <td class="confirm">deeplink_open_promotion 미발송</td>
+          <td class="result-cell"><button class="result-btn" data-tc="W-04" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="W-04" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="W-04" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="W-04" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="both" data-section="web">
+          <td class="tc-id">W-05</td>
+          <td><span class="os-badge os-both">공통</span></td>
+          <td class="precond">apply_event=true 딥링크</td>
+          <td class="steps"><ol><li>app://event/{id}?apply_event=true&amp;term={term} 로 진입</li></ol></td>
+          <td class="expected">deeplink_open_promotion 이벤트 발송 (link_type, term, event_id 포함)</td>
+          <td class="confirm">Braze 이벤트 + push_authorization_status attr 설정</td>
+          <td class="result-cell"><button class="result-btn" data-tc="W-05" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="W-05" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="W-05" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="W-05" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2. 약관 미동의 + push_authorization_status ≠ authorized -->
+  <div class="section" data-section="terms-push-no">
+    <div class="section-title">2. 약관 미동의 + 푸시 미허용</div>
+    <table class="tc-table">
+      <thead>
+        <tr><th style="width:70px">TC#</th><th style="width:80px">OS</th><th style="width:180px">사전 조건</th><th>테스트 시나리오</th><th>기대 결과</th><th>확인 포인트</th><th class="result-cell">결과</th><th style="min-width:200px">노트</th></tr>
+      </thead>
+      <tbody>
+        <tr data-os="android" data-section="terms-push-no">
+          <td class="tc-id">TC-01</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_marketing_info_opted_in ≠ true<br>is_marketing_message_opted_in ≠ true<br>push_authorization_status = <strong>denied</strong><br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>에어브릿지 딥링크로 앱 진입</li><li>약관 동의 모달 → 전체 동의 → [응모 완료하기]</li><li>동의 고지 확인 → [확인]</li><li>푸시 허용 유도 → [알림 허용하기]</li></ol></td>
+          <td class="expected">기기 알림 설정 화면으로 이동</td>
+          <td class="confirm">open-notification-settings 딥링크 수신, consent 파라미터 포함, 딥링크 1회 호출, allow_use_marketing=1&amp;allow_news_letters=1, consent DB 저장</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-01" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-01" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-01" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-01" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="android" data-section="terms-push-no">
+          <td class="tc-id">TC-01a</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_marketing_info_opted_in ≠ true<br>is_marketing_message_opted_in = true<br>push_authorization_status ≠ authorized<br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>약관 동의 모달 노출</li><li>개인정보 마케팅 활용 동의만 표시 확인</li><li>동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>[알림 허용하기]</li></ol></td>
+          <td class="expected">마케팅 활용 동의 항목만 노출, consent에 allow_use_marketing=1만 포함</td>
+          <td class="confirm">미동의 항목만 동적 노출, allow_news_letters 미포함</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-01a" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-01a" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-01a" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-01a" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="android" data-section="terms-push-no">
+          <td class="tc-id">TC-01b</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_marketing_info_opted_in = true<br>is_marketing_message_opted_in ≠ true<br>push_authorization_status ≠ authorized<br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>약관 동의 모달 노출</li><li>마케팅 알림 수신 동의만 표시 확인</li><li>동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>[알림 허용하기]</li></ol></td>
+          <td class="expected">마케팅 알림 수신 동의 항목만 노출, consent에 allow_news_letters=1만 포함</td>
+          <td class="confirm">미동의 항목만 동적 노출, allow_use_marketing 미포함</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-01b" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-01b" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-01b" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-01b" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="android" data-section="terms-push-no">
+          <td class="tc-id">TC-02</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_marketing_info_opted_in ≠ true<br>is_marketing_message_opted_in ≠ true<br>push_authorization_status ≠ authorized<br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>에어브릿지 딥링크로 앱 진입</li><li>약관 동의 모달 → 전체 동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>푸시 허용 유도 → 닫기(X) 클릭</li></ol></td>
+          <td class="expected">action=close 딥링크 수신, consent 포함, consent DB 저장</td>
+          <td class="confirm">닫기에도 consent DB 저장, push_permission 이벤트 발송</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-02" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-02" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-02" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-02" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="android" data-section="terms-push-no">
+          <td class="tc-id">TC-03</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_marketing_info_opted_in ≠ true<br>is_marketing_message_opted_in ≠ true<br>push_authorization_status = <strong>not_determined</strong><br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>에어브릿지 딥링크로 앱 진입</li><li>약관 동의 모달 → 전체 동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>푸시 허용 유도 → [알림 허용하기]</li><li>앱 내 바텀업 프롬프트 → 허용</li></ol></td>
+          <td class="expected">push_permission(granted, prompt), 참여 완료 모달, is_participated=true</td>
+          <td class="confirm">Android 13+ not_determined → 프롬프트 허용 시 참여 완료</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-03" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-03" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-03" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-03" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="android" data-section="terms-push-no">
+          <td class="tc-id">TC-03a</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_marketing_info_opted_in ≠ true<br>is_marketing_message_opted_in ≠ true<br>push_authorization_status = <strong>not_determined</strong><br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>에어브릿지 딥링크로 앱 진입</li><li>약관 동의 모달 → 전체 동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>푸시 허용 유도 → [알림 허용하기]</li><li>앱 내 바텀업 프롬프트 → 거부</li></ol></td>
+          <td class="expected">push_permission(denied, prompt), 이벤트 참여 불가 안내</td>
+          <td class="confirm">Android 13+ not_determined → 프롬프트 거부 시 미완료</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-03a" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-03a" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-03a" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-03a" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="android" data-section="terms-push-no">
+          <td class="tc-id">TC-03b</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_marketing_info_opted_in ≠ true<br>is_marketing_message_opted_in ≠ true<br>push_authorization_status = <strong>denied</strong><br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>에어브릿지 딥링크로 앱 진입</li><li>약관 동의 모달 → 전체 동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>푸시 허용 유도 → [설정에서 켜기]</li><li>기기 설정에서 알림 ON</li><li>앱으로 복귀</li></ol></td>
+          <td class="expected">push_permission(granted, settings), 참여 완료 모달, is_participated=true</td>
+          <td class="confirm">denied → 기기 설정 이동 → 허용 후 참여 완료</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-03b" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-03b" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-03b" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-03b" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="android" data-section="terms-push-no">
+          <td class="tc-id">TC-03c</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_marketing_info_opted_in ≠ true<br>is_marketing_message_opted_in ≠ true<br>push_authorization_status = <strong>denied</strong><br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>에어브릿지 딥링크로 앱 진입</li><li>약관 동의 모달 → 전체 동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>푸시 허용 유도 → [설정에서 켜기]</li><li>기기 설정에서 알림 OFF 유지</li><li>앱으로 복귀</li></ol></td>
+          <td class="expected">push_permission(denied, settings), 이벤트 참여 불가 안내</td>
+          <td class="confirm">denied → 기기 설정 이동 → 거부 유지 시 미완료</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-03c" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-03c" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-03c" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-03c" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-push-no">
+          <td class="tc-id">TC-04</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_marketing_info_opted_in ≠ true<br>is_marketing_message_opted_in ≠ true<br>push_authorization_status = <strong>denied</strong><br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>에어브릿지 딥링크로 앱 진입</li><li>약관 동의 모달 → 전체 동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>푸시 허용 유도 → [알림 허용하기]</li></ol></td>
+          <td class="expected">기기 알림 설정 화면으로 이동</td>
+          <td class="confirm">open-notification-settings 딥링크 수신, consent 파라미터 포함, consent DB 저장, iOS 동일 코드 검증</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-04" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-04" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-04" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-04" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-push-no">
+          <td class="tc-id">TC-04a</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_marketing_info_opted_in ≠ true<br>is_marketing_message_opted_in = true<br>push_authorization_status ≠ authorized</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>약관 동의 모달 노출</li><li>개인정보 마케팅 활용 동의만 표시 확인</li><li>동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>[알림 허용하기]</li></ol></td>
+          <td class="expected">마케팅 활용 동의 항목만 노출, consent에 allow_use_marketing=1만 포함</td>
+          <td class="confirm">allow_news_letters 미포함</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-04a" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-04a" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-04a" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-04a" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-push-no">
+          <td class="tc-id">TC-04b</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_marketing_info_opted_in = true<br>is_marketing_message_opted_in ≠ true<br>push_authorization_status ≠ authorized</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>약관 동의 모달 노출</li><li>마케팅 알림 수신 동의만 표시 확인</li><li>동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>[알림 허용하기]</li></ol></td>
+          <td class="expected">마케팅 알림 수신 동의 항목만 노출, consent에 allow_news_letters=1만 포함</td>
+          <td class="confirm">allow_use_marketing 미포함</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-04b" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-04b" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-04b" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-04b" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-push-no">
+          <td class="tc-id">TC-05</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_marketing_info_opted_in ≠ true<br>is_marketing_message_opted_in ≠ true<br>push_authorization_status ≠ authorized<br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>에어브릿지 딥링크로 앱 진입</li><li>약관 동의 모달 → 전체 동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>푸시 허용 유도 → 닫기(X) 클릭</li></ol></td>
+          <td class="expected">action=close 딥링크 수신, consent 포함, consent DB 저장, push_permission 이벤트 발송</td>
+          <td class="confirm">닫기에도 consent DB 저장</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-05" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-05" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-05" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-05" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-push-no">
+          <td class="tc-id">TC-06</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_marketing_info_opted_in ≠ true<br>is_marketing_message_opted_in ≠ true<br>push_authorization_status ≠ authorized<br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>에어브릿지 딥링크로 앱 진입</li><li>약관 동의 모달 → 전체 동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>[알림 허용하기] → OS 권한 프롬프트</li><li>허용 선택</li><li>앱으로 복귀</li></ol></td>
+          <td class="expected">push_permission(status:granted), 참여 완료 모달, is_participated=true</td>
+          <td class="confirm">완료 모달 정상 트리거</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-06" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-06" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-06" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-06" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-push-no">
+          <td class="tc-id">TC-06a</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_marketing_info_opted_in ≠ true<br>is_marketing_message_opted_in ≠ true<br>push_authorization_status = not_determined<br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>에어브릿지 딥링크로 앱 진입</li><li>약관 동의 모달 → 전체 동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>[알림 허용하기] → OS 권한 프롬프트</li><li>거부 선택</li><li>앱으로 복귀</li></ol></td>
+          <td class="expected">push_permission(status:denied), 이벤트 참여 불가 안내</td>
+          <td class="confirm">OS 프롬프트 거부 시 미완료 안내 정상</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-06a" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-06a" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-06a" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-06a" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-push-no">
+          <td class="tc-id">TC-06b</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_marketing_info_opted_in ≠ true<br>is_marketing_message_opted_in ≠ true<br>push_authorization_status = denied<br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>에어브릿지 딥링크로 앱 진입</li><li>약관 동의 모달 → 전체 동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>[알림 허용하기] → 기기 설정 이동</li><li>허용 선택</li><li>앱으로 복귀</li></ol></td>
+          <td class="expected">설정에서 허용 후 참여 완료</td>
+          <td class="confirm">denied → 설정 이동 플로우 정상</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-06b" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-06b" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-06b" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-06b" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-push-no">
+          <td class="tc-id">TC-06c</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_marketing_info_opted_in ≠ true<br>is_marketing_message_opted_in ≠ true<br>push_authorization_status = denied<br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>에어브릿지 딥링크로 앱 진입</li><li>약관 동의 모달 → 전체 동의 → [응모 완료하기]</li><li>동의 고지 → [확인]</li><li>[알림 허용하기] → 기기 설정 이동</li><li>변경 없이(OFF 유지) 앱 복귀</li></ol></td>
+          <td class="expected">push_permission(denied, settings), 이벤트 참여 불가 안내</td>
+          <td class="confirm">설정 변경 없이 복귀 시 미완료</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-06c" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-06c" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-06c" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-06c" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3. 약관 동의 + push_authorization_status ≠ authorized -->
+  <div class="section" data-section="terms-ok-push-no">
+    <div class="section-title">3. 약관 동의 완료 + 푸시 미허용</div>
+    <table class="tc-table">
+      <thead>
+        <tr><th style="width:70px">TC#</th><th style="width:80px">OS</th><th style="width:180px">사전 조건</th><th>테스트 시나리오</th><th>기대 결과</th><th>확인 포인트</th><th class="result-cell">결과</th><th style="min-width:200px">노트</th></tr>
+      </thead>
+      <tbody>
+        <tr data-os="android" data-section="terms-ok-push-no">
+          <td class="tc-id">TC-07</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_marketing_info_opted_in = true<br>is_marketing_message_opted_in = true<br>push_authorization_status = <strong>not_determined</strong><br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>푸시 허용 유도 모달 바로 노출</li><li>[알림 허용하기] → 앱 내 바텀업 프롬프트 → 허용</li></ol></td>
+          <td class="expected">push_permission(granted, prompt), 참여 완료 모달 노출</td>
+          <td class="confirm">Android 13+ not_determined → 프롬프트 허용 시 참여 완료</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-07" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-07" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-07" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-07" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="android" data-section="terms-ok-push-no">
+          <td class="tc-id">TC-07a</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_marketing_info_opted_in = true<br>is_marketing_message_opted_in = true<br>push_authorization_status = <strong>not_determined</strong><br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>푸시 허용 유도 모달 바로 노출</li><li>[알림 허용하기] → 앱 내 바텀업 프롬프트 → 거부</li></ol></td>
+          <td class="expected">push_permission(denied, prompt), 이벤트 참여 불가 안내</td>
+          <td class="confirm">Android 13+ not_determined → 프롬프트 거부 시 미완료</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-07a" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-07a" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-07a" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-07a" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="android" data-section="terms-ok-push-no">
+          <td class="tc-id">TC-07b</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_marketing_info_opted_in = true<br>is_marketing_message_opted_in = true<br>push_authorization_status = <strong>denied</strong><br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>푸시 허용 유도 모달 → [설정에서 켜기]</li><li>기기 설정에서 알림 ON → 앱 복귀</li></ol></td>
+          <td class="expected">push_permission(granted, settings), 참여 완료 모달 노출</td>
+          <td class="confirm">denied → 기기 설정 → 허용 후 참여 완료</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-07b" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-07b" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-07b" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-07b" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="android" data-section="terms-ok-push-no">
+          <td class="tc-id">TC-07c</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_marketing_info_opted_in = true<br>is_marketing_message_opted_in = true<br>push_authorization_status = <strong>denied</strong><br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>푸시 허용 유도 모달 → [설정에서 켜기]</li><li>기기 설정에서 알림 OFF 유지 → 앱 복귀</li></ol></td>
+          <td class="expected">push_permission(denied, settings), 이벤트 참여 불가 안내</td>
+          <td class="confirm">denied → 기기 설정 → 거부 유지 시 미완료</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-07c" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-07c" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-07c" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-07c" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="android" data-section="terms-ok-push-no">
+          <td class="tc-id">TC-07d</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_marketing_info_opted_in = true<br>is_marketing_message_opted_in = true<br>push_authorization_status ≠ authorized<br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>푸시 허용 유도 모달 → 닫기(X) 클릭</li></ol></td>
+          <td class="expected">action=close 딥링크 수신, consent 파라미터 없음, push_permission 이벤트 발송</td>
+          <td class="confirm">닫기 시 push_permission({status:'', source:''}) 발송</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-07d" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-07d" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-07d" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-07d" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-ok-push-no">
+          <td class="tc-id">TC-08</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_marketing_info_opted_in = true<br>is_marketing_message_opted_in = true<br>push_authorization_status = <strong>not_determined</strong><br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>푸시 허용 유도 모달 → [알림 허용하기]</li><li>OS 프롬프트 → 허용</li></ol></td>
+          <td class="expected">push_permission(granted, prompt), 참여 완료 모달 노출</td>
+          <td class="confirm">not_determined → OS 프롬프트 허용 시 참여 완료</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-08" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-08" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-08" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-08" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-ok-push-no">
+          <td class="tc-id">TC-08a</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_marketing_info_opted_in = true<br>is_marketing_message_opted_in = true<br>push_authorization_status = <strong>not_determined</strong><br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>푸시 허용 유도 모달 → [알림 허용하기]</li><li>OS 프롬프트 → 거부</li></ol></td>
+          <td class="expected">push_permission(denied, prompt), 이벤트 참여 불가 안내</td>
+          <td class="confirm">not_determined → OS 프롬프트 거부 시 미완료</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-08a" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-08a" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-08a" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-08a" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-ok-push-no">
+          <td class="tc-id">TC-08b</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_marketing_info_opted_in = true<br>is_marketing_message_opted_in = true<br>push_authorization_status = <strong>denied</strong><br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>푸시 허용 유도 모달 → [설정에서 켜기]</li><li>기기 설정 → 알림 ON → 앱 복귀</li></ol></td>
+          <td class="expected">push_permission(granted, settings), 참여 완료 모달 노출</td>
+          <td class="confirm">denied → 기기 설정 → 허용 후 참여 완료</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-08b" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-08b" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-08b" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-08b" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-ok-push-no">
+          <td class="tc-id">TC-08c</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_marketing_info_opted_in = true<br>is_marketing_message_opted_in = true<br>push_authorization_status = <strong>denied</strong><br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>푸시 허용 유도 모달 → [설정에서 켜기]</li><li>기기 설정 → 변경 없이(OFF 유지) 앱 복귀</li></ol></td>
+          <td class="expected">push_permission(denied, settings), 이벤트 참여 불가 안내</td>
+          <td class="confirm">denied → 기기 설정 → 거부 유지 시 미완료</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-08c" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-08c" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-08c" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-08c" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-ok-push-no">
+          <td class="tc-id">TC-08d</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_marketing_info_opted_in = true<br>is_marketing_message_opted_in = true<br>push_authorization_status ≠ authorized<br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>푸시 허용 유도 모달 → 닫기(X) 클릭</li></ol></td>
+          <td class="expected">action=close 딥링크 수신, push_permission 이벤트 발송</td>
+          <td class="confirm">닫기 시 push_permission({status:'', source:''}) 발송</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-08d" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-08d" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-08d" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-08d" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section" data-section="terms-push-ok">
+    <div class="section-title">4. 약관 동의 + 푸시 허용 → 체스 드롭 → 경품 추첨</div>
+    <table class="tc-table">
+      <thead>
+        <tr><th style="width:70px">TC#</th><th style="width:80px">OS</th><th style="width:180px">사전 조건</th><th>테스트 시나리오</th><th>기대 결과</th><th>확인 포인트</th><th class="result-cell">결과</th><th style="min-width:200px">노트</th></tr>
+      </thead>
+      <tbody>
+        <tr data-os="android" data-section="terms-push-ok">
+          <td class="tc-id">TC-09</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_marketing_info_opted_in = true<br>is_marketing_message_opted_in = true<br>push_authorization_status = authorized<br>foreground_push_enabled = true<br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>약관 동의 모달 → 동의하기</li><li>동의 고지 → [확인]</li><li>isPushOn() = true → 체스 드롭 페이지 노출</li><li>나이트 드래그 → 체스판에 드롭</li></ol></td>
+          <td class="expected">경품 추첨 실행, 결과 모달 노출, is_participated=true</td>
+          <td class="confirm">isPushOn() 판단 정상 (foreground_push_enabled 우선), 드롭 성공 시 추첨 실행, GAS 재고 차감 확인, Braze 속성 업데이트 (is_participated / prize / prize_tier)</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-09" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-09" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-09" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-09" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-push-ok">
+          <td class="tc-id">TC-10</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_marketing_info_opted_in = true<br>is_marketing_message_opted_in = true<br>push_authorization_status = authorized<br>foreground_push_enabled = true<br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>약관 동의 모달 → 동의하기</li><li>동의 고지 → [확인]</li><li>isPushOn() = true → 체스 드롭 페이지 노출</li><li>나이트 드래그 → 체스판에 드롭</li></ol></td>
+          <td class="expected">경품 추첨 실행, 결과 모달 노출, is_participated=true</td>
+          <td class="confirm">iOS isPushOn() 판단 정상, 드롭 성공 시 추첨 실행, Braze 속성 업데이트 확인</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-10" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-10" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-10" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-10" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="android" data-section="terms-push-ok">
+          <td class="tc-id">TC-11</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">기설치(link_type=direct)<br>is_marketing_info_opted_in = true<br>is_marketing_message_opted_in = true<br>push_authorization_status = authorized<br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>앱 설치 상태에서 딥링크로 진입</li><li>약관 동의 모달 → 동의하기</li><li>동의 고지 → [확인]</li><li>체스 드롭 페이지 노출</li><li>나이트 드래그 → 드롭</li></ol></td>
+          <td class="expected">경품 추첨 실행, 결과 모달 노출</td>
+          <td class="confirm">기설치(direct) 플로우 정상, link_type=direct 검증</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-11" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-11" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-11" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-11" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="terms-push-ok">
+          <td class="tc-id">TC-12</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">기설치(link_type=direct)<br>is_marketing_info_opted_in = true<br>is_marketing_message_opted_in = true<br>push_authorization_status = authorized<br>is_participated_promotion_{term} ≠ true</td>
+          <td class="steps"><ol><li>앱 설치 상태에서 딥링크로 진입</li><li>약관 동의 모달 → 동의하기</li><li>동의 고지 → [확인]</li><li>체스 드롭 페이지 노출</li><li>나이트 드래그 → 드롭</li></ol></td>
+          <td class="expected">경품 추첨 실행, 결과 모달 노출</td>
+          <td class="confirm">기설치(direct) 플로우 정상, link_type=direct 검증</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-12" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-12" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-12" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-12" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5. 경품 추첨 / 결과 분기 -->
+  <div class="section" data-section="prize">
+    <div class="section-title">5. 경품 추첨 / 결과 분기</div>
+    <table class="tc-table">
+      <thead>
+        <tr><th style="width:70px">TC#</th><th style="width:80px">OS</th><th style="width:180px">사전 조건</th><th>테스트 시나리오</th><th>기대 결과</th><th>확인 포인트</th><th class="result-cell">결과</th><th style="min-width:200px">노트</th></tr>
+      </thead>
+      <tbody>
+        <tr data-os="both" data-section="prize">
+          <td class="tc-id">P-01</td>
+          <td><span class="os-badge os-both">공통</span></td>
+          <td class="precond">체스 드롭 페이지 노출 상태<br>prize_tier = base</td>
+          <td class="steps"><ol><li>나이트를 체스판으로 드래그</li><li>드롭 성공 → 경품 추첨 실행</li><li>쿠폰 당첨 → confirm 모달 노출</li><li>[확인] 클릭</li></ol></td>
+          <td class="expected">confirm 모달 정상 노출, handleFinalClose() 실행, 모달 닫힘</td>
+          <td class="confirm">is_participated_promotion_{term}=true, promotion_prize_{term}=쿠폰명, promotion_prize_tier_{term}=base, promotion_coupon_amount_{term}=금액 설정 확인 / GAS 재고 차감 확인</td>
+          <td class="result-cell"><button class="result-btn" data-tc="P-01" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="P-01" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="P-01" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="P-01" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="both" data-section="prize">
+          <td class="tc-id">P-02</td>
+          <td><span class="os-badge os-both">공통</span></td>
+          <td class="precond">체스 드롭 페이지 노출 상태<br>prize_tier = top (macbook/ps5/dinner 재고 있음)</td>
+          <td class="steps"><ol><li>나이트를 체스판으로 드롭</li><li>top3 경품 당첨 → top3 결과 페이지 노출</li><li>[상세 내용 확인하기] 클릭</li></ol></td>
+          <td class="expected">제세공과금 입력 구글폼으로 랜딩, 모달 닫힘</td>
+          <td class="confirm">올바른 구글폼 URL로 이동 (macbook/ps5/dinner 각각), is_participated=true, promotion_prize_tier=top 설정 확인</td>
+          <td class="result-cell"><button class="result-btn" data-tc="P-02" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="P-02" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="P-02" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="P-02" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="both" data-section="prize">
+          <td class="tc-id">P-03</td>
+          <td><span class="os-badge os-both">공통</span></td>
+          <td class="precond">체스 드롭 페이지 노출 상태<br>prize_tier = mid (주유권 등)</td>
+          <td class="steps"><ol><li>나이트를 체스판으로 드롭</li><li>mid 경품 당첨 → confirm 모달 노출</li><li>[확인] 클릭</li></ol></td>
+          <td class="expected">confirm 모달 정상 노출, 모달 닫힘</td>
+          <td class="confirm">promotion_prize_tier_{term}=mid 설정 확인, GAS 재고 차감 확인</td>
+          <td class="result-cell"><button class="result-btn" data-tc="P-03" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="P-03" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="P-03" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="P-03" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="both" data-section="prize">
+          <td class="tc-id">P-04</td>
+          <td><span class="os-badge os-both">공통</span></td>
+          <td class="precond">체스 드롭 페이지 노출 상태<br>GAS 시트 특정 경품 재고 = 0</td>
+          <td class="steps"><ol><li>나이트를 체스판으로 드롭</li><li>재고 0 경품 당첨 케이스 시뮬레이션</li></ol></td>
+          <td class="expected">클라이언트 추첨은 정상 진행, GAS에서 차감 거부 처리</td>
+          <td class="confirm">재고 0이어도 모달 크래시 없음, GAS 응답 무관하게 결과 모달 노출 (fire-and-forget)</td>
+          <td class="result-cell"><button class="result-btn" data-tc="P-04" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="P-04" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="P-04" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="P-04" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="both" data-section="prize">
+          <td class="tc-id">P-05</td>
+          <td><span class="os-badge os-both">공통</span></td>
+          <td class="precond">결과 모달 노출 후 handleFinalClose() 실행</td>
+          <td class="steps"><ol><li>confirm 모달 [확인] 클릭</li><li>handleFinalClose() 실행</li></ol></td>
+          <td class="expected">동의 파라미터 있을 경우 consent deeplink 호출 후 300ms 내 closeMessage()</td>
+          <td class="confirm">app://braze/consent?allow_use_marketing=1&amp;allow_news_letters=1 정상 호출, 모달 정상 닫힘, 딥링크 1회만 호출</td>
+          <td class="result-cell"><button class="result-btn" data-tc="P-05" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="P-05" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="P-05" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="P-05" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="both" data-section="prize">
+          <td class="tc-id">P-06</td>
+          <td><span class="os-badge os-both">공통</span></td>
+          <td class="precond">드롭 성공 직후</td>
+          <td class="steps"><ol><li>드롭 성공 시 Braze 이벤트 확인</li></ol></td>
+          <td class="expected">view_participated_promotion_modal 이벤트 발송</td>
+          <td class="confirm">프로퍼티 포함 확인: prize_name, prize_detail, prize_tier, coupon_amount / is_participated_promotion_{term}=true 속성 설정 타이밍 확인</td>
+          <td class="result-cell"><button class="result-btn" data-tc="P-06" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="P-06" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="P-06" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="P-06" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 6. 이미 참여 완료 -->
+  <div class="section" data-section="already">
+    <div class="section-title">6. 이미 참여 완료</div>
+    <table class="tc-table">
+      <thead>
+        <tr><th style="width:70px">TC#</th><th style="width:80px">OS</th><th style="width:180px">사전 조건</th><th>테스트 시나리오</th><th>기대 결과</th><th>확인 포인트</th><th class="result-cell">결과</th><th style="min-width:200px">노트</th></tr>
+      </thead>
+      <tbody>
+        <tr data-os="android" data-section="already">
+          <td class="tc-id">TC-13</td>
+          <td><span class="os-badge os-android">Android</span></td>
+          <td class="precond">is_participated_promotion_{term} = true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>이미 참여 완료 안내 모달</li></ol></td>
+          <td class="expected">'이미 참여 완료' 메시지 노출</td>
+          <td class="confirm">중복 참여 차단</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-13" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-13" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-13" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-13" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="ios" data-section="already">
+          <td class="tc-id">TC-14</td>
+          <td><span class="os-badge os-ios">iOS</span></td>
+          <td class="precond">is_participated_promotion_{term} = true</td>
+          <td class="steps"><ol><li>딥링크로 앱 진입</li><li>이미 참여 완료 안내 모달</li></ol></td>
+          <td class="expected">'이미 참여 완료' 메시지 노출</td>
+          <td class="confirm">중복 참여 차단</td>
+          <td class="result-cell"><button class="result-btn" data-tc="TC-14" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="TC-14" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="TC-14" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="TC-14" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 6. 엣지 / 회귀 -->
+  <div class="section" data-section="edge">
+    <div class="section-title">7. 엣지 케이스 / 회귀</div>
+    <table class="tc-table">
+      <thead>
+        <tr><th style="width:70px">TC#</th><th style="width:80px">OS</th><th style="width:180px">사전 조건</th><th>테스트 시나리오</th><th>기대 결과</th><th>확인 포인트</th><th class="result-cell">결과</th><th style="min-width:200px">노트</th></tr>
+      </thead>
+      <tbody>
+        <tr data-os="both" data-section="edge">
+          <td class="tc-id">X-01</td>
+          <td><span class="os-badge os-both">공통</span></td>
+          <td class="precond">앱 미설치</td>
+          <td class="steps"><ol><li>CTA 클릭 → 스토어 이동</li><li>설치 없이 이탈</li></ol></td>
+          <td class="expected">플로우 종료, 크래시/에러 없음</td>
+          <td class="confirm">스토어 이탈 시 안정적 처리</td>
+          <td class="result-cell"><button class="result-btn" data-tc="X-01" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="X-01" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="X-01" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="X-01" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="both" data-section="edge">
+          <td class="tc-id">X-02</td>
+          <td><span class="os-badge os-both">공통</span></td>
+          <td class="precond">신규/기설치 각각</td>
+          <td class="steps"><ol><li>앱 미설치 → 스토어 설치 → Deferred Deep Link 콜백 (link_type=deferred)</li><li>앱 설치 상태에서 딥링크 클릭 (link_type=direct)</li></ol></td>
+          <td class="expected">link_type 정확히 deferred / direct 구분</td>
+          <td class="confirm">deeplink_open_promotion 이벤트 프로퍼티 검증</td>
+          <td class="result-cell"><button class="result-btn" data-tc="X-02" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="X-02" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="X-02" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="X-02" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+        <tr data-os="both" data-section="edge">
+          <td class="tc-id">X-03</td>
+          <td><span class="os-badge os-both">공통</span></td>
+          <td class="precond">설정 앱에서 알림 변경 가능</td>
+          <td class="steps"><ol><li>푸시 허용 유도 → 설정 이동</li><li>알림 ON/OFF 변경</li><li>앱으로 복귀</li></ol></td>
+          <td class="expected">push_authorization_status 재확인 및 push_permission 이벤트 발송</td>
+          <td class="confirm">앱 백그라운드 복귀 시 상태 반영</td>
+          <td class="result-cell"><button class="result-btn" data-tc="X-03" onclick="setResult(this,&#39;pass&#39;)">Pass</button><button class="result-btn" onclick="setResult(this,&#39;cpass&#39;)">C.Pass</button><button class="result-btn" data-tc="X-03" onclick="setResult(this,&#39;fail&#39;)">Fail</button><button class="result-btn" data-tc="X-03" onclick="setResult(this,&#39;skip&#39;)">Skip</button></td>
+          <td><textarea class="note-input" data-tc-note="X-03" rows="2" style="width:100%;font-size:12px;border:1px solid #e2e8f0;border-radius:6px;padding:6px;resize:vertical;font-family:inherit;" placeholder="메모..." oninput="saveNote(this)"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="text-align:center; color:#94a3b8; font-size:12px; margin-top:24px;">2026 3월 앱 다운로드 유도 QA Test Case — v2 (경품 추첨 / isPushOn() 분기 반영)</p>
+
+  <script>
+    const STORAGE_KEY = 'qa_tc_results_v2';
+    function loadResults() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      } catch { return {}; }
+    }
+    function saveResults(obj) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
+      updateSummary();
+    }
+    function setResult(btn, result) {
+      const tc = btn.getAttribute('data-tc') || btn.closest('td').querySelector('[data-tc]')?.getAttribute('data-tc');
+      const cell = btn.closest('td');
+      const isActive = btn.classList.contains('active-'+result);
+      cell.querySelectorAll('.result-btn').forEach(b => { b.className = 'result-btn'; });
+      const data = loadResults();
+      if (isActive) {
+        delete data[tc];
+      } else {
+        btn.classList.add('active-'+result);
+        data[tc] = result;
+      }
+      saveResults(data);
+      updateSummary();
+    }
+    function resetResults() {
+      if (confirm('모든 결과를 초기화할까요?')) {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(NOTES_KEY);
+        document.querySelectorAll('.note-input').forEach(el => el.value = '');
+        document.querySelectorAll('.result-btn').forEach(b => {
+          b.classList.remove('active','pass','fail','skip');
+        });
+        updateSummary();
+      }
+    }
+    function updateSummary() {
+      const data = loadResults();
+      let pass = 0, fail = 0, skip = 0;
+      for (const r of Object.values(data)) {
+        if (r === 'pass') pass++;
+        else if (r === 'fail') fail++;
+        else if (r === 'skip') skip++;
+      }
+      const total = document.querySelectorAll('.tc-table tbody tr').length;
+      const none = total - pass - fail - skip;
+      document.getElementById('cntPass').textContent = pass;
+      document.getElementById('cntFail').textContent = fail;
+      document.getElementById('cntSkip').textContent = skip;
+      document.getElementById('cntNone').textContent = none < 0 ? 0 : none;
+    }
+    function applyFilters() {
+      const os = document.getElementById('filterOS').value;
+      const section = document.getElementById('filterSection').value;
+      document.querySelectorAll('.tc-table tbody tr').forEach(tr => {
+        const trOs = tr.getAttribute('data-os');
+        const trSection = tr.getAttribute('data-section');
+        const matchOs = !os || trOs === os || trOs === 'both';
+        const matchSection = !section || trSection === section;
+        tr.classList.toggle('hidden', !(matchOs && matchSection));
+      });
+      document.querySelectorAll('.section').forEach(sec => {
+        const secId = sec.getAttribute('data-section');
+        const hasVisible = sec.querySelector('tbody tr:not(.hidden)');
+        sec.style.display = !section || secId === section ? 'block' : 'none';
+      });
+    }
+    document.getElementById('filterOS').addEventListener('change', applyFilters);
+    document.getElementById('filterSection').addEventListener('change', applyFilters);
+    document.querySelectorAll('.result-cell').forEach(cell => {
+      const btns = cell.querySelectorAll('.result-btn');
+      const tc = btns[0]?.getAttribute('data-tc');
+      const r = loadResults()[tc];
+      if (r) {
+        const idx = { pass:0, cpass:1, fail:2, skip:3 }[r];
+        if (btns[idx] !== undefined) {
+          btns[idx].classList.add('active-'+r);
+        }
+      }
+    });
+    updateSummary();
+
+    const NOTES_KEY = 'qa_tc_notes_v1';
+    function loadNotes() {
+      try { return JSON.parse(localStorage.getItem(NOTES_KEY) || '{}'); }
+      catch { return {}; }
+    }
+    function saveNote(el) {
+      const tc = el.getAttribute('data-tc-note');
+      const notes = loadNotes();
+      notes[tc] = el.value;
+      localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
+    }
+    // 페이지 로드 시 노트 복원
+    document.querySelectorAll('.note-input').forEach(el => {
+      const tc = el.getAttribute('data-tc-note');
+      const notes = loadNotes();
+      if (notes[tc]) el.value = notes[tc];
+    });
+
+  </script>
+
+
+</body></html>

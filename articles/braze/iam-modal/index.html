@@ -18,8 +18,8 @@
 <meta property="og:description" content="앱 다운로드를 약관 동의→드래그앤드롭 게임→랜덤 리워드로 이어지는 Custom HTML IAM으로 설계하고, 백엔드 없이 brazeBridge·Canvas·GAS로 참여·동의·재고를 처리한 기록."/>
 <meta property="og:url" content="https://dainahys.com/articles/braze/iam-modal/"/>
 <meta property="og:image" content="https://dainahys.com/articles/assets/braze-iam-modal-og.png"/>
-<meta property="article:published_time" content="2026-06-21"/>
-<meta property="article:modified_time" content="2026-06-21"/>
+<meta property="article:published_time" content="2026-04-10"/>
+<meta property="article:modified_time" content="2026-04-10"/>
 <meta property="article:author" content="Hayeon Song"/>
 <meta property="article:section" content="Growth / CRM"/>
 <meta property="article:tag" content="Braze"/>
@@ -64,8 +64,8 @@
       "headline": "앱 다운로드를 이벤트 참여 경험으로 — Braze Custom HTML IAM 실전",
       "description": "앱 다운로드를 약관 동의→드래그앤드롭 게임→랜덤 리워드로 이어지는 Braze Custom HTML IAM으로 설계하고, 백엔드 없이 brazeBridge·Canvas·GAS로 참여·동의·재고를 처리한 기록.",
       "inLanguage": "ko",
-      "datePublished": "2026-06-21",
-      "dateModified": "2026-06-21",
+      "datePublished": "2026-04-10",
+      "dateModified": "2026-04-10",
       "author": { "@id": "https://dainahys.com/#person-hayeon" },
       "publisher": { "@id": "https://dainahys.com/#person-hayeon" },
       "isPartOf": { "@id": "https://dainahys.com/#website" },
@@ -269,11 +269,11 @@
   <div class="callout">
     <span class="k">설계 산출물</span>
     <p>이 설계는 머릿속이 아니라 문서로 먼저 존재했다. 제품 개발이 거치는 산출물을 캠페인에 그대로 적용했다.</p>
-    <p>① <strong>유저 플로우차트</strong> — 진입부터 분기 A~E(참여 이력·약관·푸시 상태별), 참여 불가 케이스까지 전체 여정 정의<br/>
-    ② <strong>인터랙티브 프로토타입</strong> — 구현 전 이해관계자 검증용 동작 시안<br/>
-    ③ <strong>통합 기술 명세</strong> — 앱-Braze 통신 흐름도(PHASE 0~4), 이벤트별 프로퍼티 정의서, Attribute→Event 순서 보장 규칙<br/>
-    ④ <strong>QA 테스트 케이스</strong> — OS별 46개 케이스, 7개 섹션(웹→앱 진입 / 약관×푸시 조합별 / 추첨·결과 분기 / 중복 참여 / 엣지·회귀)</p>
-    <p style="font-size:13px;color:var(--faint);margin-top:6px">[산출물 링크: 민감 정보 마스킹 후 dainahys.com 이전 → 링크 삽입 예정]</p>
+    <p>① <strong><a href="artifacts/flowchart.html" target="_blank" rel="noopener">유저 플로우차트</a></strong> — 진입부터 분기 A~E(참여 이력·약관·푸시 상태별), 참여 불가 케이스까지 전체 여정 정의<br/>
+    ② <strong><a href="artifacts/prototype.html" target="_blank" rel="noopener">인터랙티브 프로토타입</a></strong> — 구현 전 이해관계자 검증용 동작 시안<br/>
+    ③ <strong><a href="artifacts/tech-doc.html" target="_blank" rel="noopener">통합 기술 명세</a></strong> — 앱-Braze 통신 흐름도(PHASE 0~4), 이벤트별 프로퍼티 정의서, Attribute→Event 순서 보장 규칙<br/>
+    ④ <strong><a href="artifacts/qa.html" target="_blank" rel="noopener">QA 테스트 케이스</a></strong> — OS별 46개 케이스, 7개 섹션(웹→앱 진입 / 약관×푸시 조합별 / 추첨·결과 분기 / 중복 참여 / 엣지·회귀)</p>
+    <p style="font-size:13px;color:var(--faint);margin-top:6px">↗ 위 4개 산출물은 민감 정보를 마스킹한 실제 문서입니다 — 새 탭으로 열립니다.</p>
   </div>
 </div></section>
 
@@ -490,15 +490,7 @@ b.requestImmediateDataFlush();</pre>
   <p>유저가 나이트를 체스판의 드롭존으로 드래그앤드롭한다. 드롭존 밖에 놓으면 나이트가 제자리로 튕겨 돌아가고, 성공하면 착지 애니메이션과 함께 추첨이 시작된다. (구현 과정의 환경별 이슈는 11장에서 다룬다.)</p>
 
   <h3>Step 4. 랜덤 리워드 결과</h3>
-  <p>추첨은 클라이언트에서 가중치 기반으로 이뤄진다. 경품별 당첨 확률을 가중치 테이블로 정의해두고, 난수로 하나를 뽑는다.</p>
-  <div class="code">
-    <div class="code-label"><span class="dot">▌</span> 가중치 추첨</div>
-<pre>var PRIZE_WEIGHTS = [ <span class="cm">/* 경품별 가중치 */</span> ];
-var total = PRIZE_WEIGHTS.reduce(function(a, b){ return a + b; }, 0);
-var rnd = Math.random() * total;
-<span class="cm">// 누적 합을 따라가며 당첨 경품 결정</span></pre>
-  </div>
-  <p>→ 이 코드가 하는 일: 경품마다 정해둔 가중치만큼 당첨 확률을 부여하고, 난수를 굴려 그 확률대로 하나를 뽑는다. 가중치를 0으로 두면 그 경품은 추첨에서 빠진다.</p>
+  <p>게임을 완료하면 추첨 결과가 그 자리에서 즉시 결정돼 유저에게 노출된다. (구체적인 추첨 로직은 대외비라 생략한다.)</p>
   <p>당첨 결과 화면도 경품 등급에 따라 갈린다. 고가 경품은 정보 수집 폼으로 연결되는 전용 화면, 쿠폰·상품권류는 “이벤트 종료 후 일괄 지급” 안내 화면이다. 재고 소진 여부는 모달이 띄워지는 시점에 Connected Content로 받아온 값으로 판단한다 — 이 구조는 9장에서 자세히 다룬다.</p>
 </div></section>
 

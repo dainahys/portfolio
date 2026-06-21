@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)./tech-doc.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 앱 다운로드 프로모션 — 통합 기술 문서</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#F4F6FA;font-family:'Noto Sans KR',sans-serif;color:#1C2A3A;font-size:14px;}
+
+/* ── HEADER ── */
+.page-header{background:#1C2A3A;color:#fff;padding:36px 48px 28px;}
+.page-header h1{font-size:26px;font-weight:700;margin-bottom:6px;}
+.page-header p{font-size:13px;color:rgba(255,255,255,.5);letter-spacing:.3px;}
+
+/* ── TAB NAV ── */
+.tab-nav{background:#fff;border-bottom:1px solid #DDE3EE;display:flex;gap:0;padding:0 48px;position:sticky;top:0;z-index:100;box-shadow:0 2px 6px rgba(0,0,0,.06);}
+.tab-btn{padding:14px 22px;font-size:13px;font-weight:600;cursor:pointer;color:#64748B;border-bottom:3px solid transparent;margin-bottom:-1px;transition:all .15s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:'Noto Sans KR',sans-serif;}
+.tab-btn.active{color:#1C2A3A;border-bottom-color:#2563EB;}
+.tab-btn:hover:not(.active){color:#1C2A3A;}
+
+/* ── PANELS ── */
+.panel{display:none;padding:36px 48px 60px;}
+.panel.active{display:block;}
+
+/* ── SECTION TITLE ── */
+.sec{margin-bottom:32px;}
+.sec-title{font-size:13px;font-weight:700;color:#64748B;letter-spacing:.6px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.sec-title::after{content:'';flex:1;height:1px;background:#DDE3EE;}
+
+/* ── CARDS ── */
+.card{background:#fff;border:1px solid #DDE3EE;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.card-header{padding:14px 20px;border-bottom:1px solid #EEF2F8;display:flex;align-items:center;gap:10px;}
+.card-header h3{font-size:13px;font-weight:700;}
+.card-body{padding:20px;}
+
+/* ── TABLES ── */
+.tbl{width:100%;border-collapse:collapse;font-size:12px;}
+.tbl th{background:#F8FAFC;padding:9px 14px;text-align:left;font-weight:700;font-size:11px;color:#475569;border-bottom:2px solid #DDE3EE;font-family:'JetBrains Mono',monospace;letter-spacing:.3px;white-space:nowrap;}
+.tbl td{padding:10px 14px;border-bottom:1px solid #EEF2F8;vertical-align:top;line-height:1.6;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:#FAFBFD;}
+
+code{font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(37,99,235,.08);border-radius:3px;padding:1px 5px;color:#1D4ED8;}
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+.tag-app{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE;}
+.tag-braze{background:#FFF1F2;color:#B91C1C;border:1px solid #FECACA;}
+.tag-brazejs{background:#F5F3FF;color:#6D28D9;border:1px solid #DDD6FE;}
+.tag-os{background:#F8FAFC;color:#475569;border:1px solid #CBD5E1;}
+.tag-web{background:#FFF7ED;color:#C2410C;border:1px solid #FED7AA;}
+
+/* ── GRID ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+/* ── SEQUENCE TABLE ── */
+.seq-wrap{overflow-x:auto;}
+.seq-tbl{border-collapse:collapse;width:100%;min-width:920px;background:#fff;border-radius:10px;border:1px solid #DDE3EE;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.seq-tbl thead th{padding:10px 10px;font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:.3px;text-align:center;border-bottom:2px solid #DDE3EE;border-right:1px solid #EEF2F8;background:#F8FAFC;white-space:nowrap;}
+.seq-tbl thead th:last-child{border-right:none;}
+.seq-tbl tr.ph td{background:#EEF2F8;padding:6px 12px;font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;color:#64748B;border-top:2px solid #DDE3EE;border-bottom:1px solid #DDE3EE;letter-spacing:.3px;}
+.seq-tbl tbody tr:not(.ph) td{padding:5px 5px;border-right:1px solid #EEF2F8;border-bottom:1px solid #EEF2F8;vertical-align:top;}
+.seq-tbl tbody tr:not(.ph) td:last-child{border-right:none;}
+.seq-tbl tbody tr:not(.ph) td.num{text-align:right;font-size:10px;font-family:'JetBrains Mono',monospace;color:#94A3B8;font-weight:600;padding:12px 6px;vertical-align:top;white-space:nowrap;}
+.nc{border-radius:6px;padding:8px 10px;font-size:11px;line-height:1.6;margin:2px;}
+.nc-web{background:#FFF7ED;border:1px solid #FED7AA;}
+.nc-air{background:#F5F3FF;border:1px solid #C4B0E8;}
+.nc-str{background:#F0FDF4;border:1px solid #86EFAC;}
+.nc-sdk{background:#EFF6FF;border:1px solid #BFDBFE;}
+.nc-iam{background:#FFF1F2;border:1px solid #FECACA;}
+.nc-os {background:#F8FAFC;border:1px solid #CBD5E1;}
+.nc-gs {background:#F0FDF4;border:1px solid #6EE7B7;}
+.nc-dec{background:#FEFCE8;border:1px dashed #FDE047;}
+.nc-lbl{font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:4px;margin-bottom:3px;}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0;}
+.cb{display:block;margin-top:4px;padding:5px 8px;background:#F1F5F9;border-radius:4px;color:#065F46;font-size:10px;line-height:1.7;font-family:'JetBrains Mono',monospace;}
+.sub{font-size:10px;color:#64748B;}
+
+/* ── FLOWCHART (Mermaid) ── */
+.mermaid-wrap{background:#fff;border:1px solid #DDE3EE;border-radius:10px;padding:28px;box-shadow:0 1px 4px rgba(0,0,0,.05);overflow-x:auto;}
+
+/* ── SPEC GRID ── */
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:960px){.spec-grid{grid-template-columns:1fr;}}
+
+/* ── NOTE BOX ── */
+.note{background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:12px 16px;font-size:12px;color:#92400E;margin-top:12px;line-height:1.6;}
+.note strong{font-weight:700;}
+
+/* ── LEGEND ── */
+.legend{display:flex;gap:14px;flex-wrap:wrap;background:#fff;border:1px solid #DDE3EE;border-radius:8px;padding:10px 16px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.li{display:flex;align-items:center;gap:6px;font-size:11px;color:#64748B;}
+.ld{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>2026 앱 다운로드 프로모션 — 통합 기술 문서</h1>
+  <p>통신 흐름도 · 유저 플로우차트 · 이벤트 속성 정의서 · 기술 스펙</p>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn" onclick="showTab(&#39;seq&#39;)">1&nbsp;&nbsp;앱-Braze 통신 흐름도</button>
+  <button class="tab-btn" onclick="showTab(&#39;flow&#39;)">2&nbsp;&nbsp;유저 플로우차트</button>
+  <button class="tab-btn active" onclick="showTab(&#39;events&#39;)">3&nbsp;&nbsp;이벤트 속성 정의서</button>
+  <button class="tab-btn" onclick="showTab(&#39;spec&#39;)">4&nbsp;&nbsp;프로모션 기술 스펙</button>
+</div>
+
+<!-- ════════════════════════════════
+     TAB 1 : 통신 흐름도
+════════════════════════════════ -->
+<div id="tab-seq" class="panel">
+
+  <div class="legend">
+    <div class="li"><div class="ld" style="background:#C2410C"></div>웹 (이벤트 페이지)</div>
+    <div class="li"><div class="ld" style="background:#7B3FA0"></div>에어브릿지</div>
+    <div class="li"><div class="ld" style="background:#15803D"></div>앱스토어</div>
+    <div class="li"><div class="ld" style="background:#2563EB"></div>앱 → Braze SDK</div>
+    <div class="li"><div class="ld" style="background:#B91C1C"></div>Braze 인앱 메시지</div>
+    <div class="li"><div class="ld" style="background:#475569"></div>OS</div>
+    <div class="li"><div class="ld" style="background:#166534"></div>구글시트 (앱스크립트)</div>
+  </div>
+
+  <div class="seq-wrap">
+  <table class="seq-tbl">
+    <thead>
+      <tr>
+        <th style="width:28px">#</th>
+        <th style="color:#C2410C;min-width:190px">🌐 웹</th>
+        <th style="color:#7B3FA0;min-width:140px">✖ 에어브릿지</th>
+        <th style="color:#15803D;min-width:140px">📦 스토어</th>
+        <th style="color:#2563EB;min-width:230px">📱 앱 → Braze SDK</th>
+        <th style="color:#B91C1C;min-width:220px">🔔 Braze 인앱</th>
+        <th style="color:#475569;min-width:150px">📲 OS</th>
+        <th style="color:#166534;min-width:170px">📊 구글시트</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <tr class="ph"><td colspan="8">PHASE 0 — 웹 · 앱 설치 판단</td></tr>
+    <tr>
+      <td class="num">0</td>
+      <td><div class="nc nc-web">
+        <div class="nc-lbl"><span class="dot" style="background:#C2410C"></span>CTA 클릭</div>
+        이벤트 페이지에서 앱 설치 여부 확인<br>
+        <span class="sub">미설치 → 앱 설치 모달 + 스토어 CTA<br>설치됨 → 딥링크 직접 진입</span>
+      </div></td>
+      <td></td>
+      <td><div class="nc nc-str">
+        <div class="nc-lbl"><span class="dot" style="background:#15803D"></span>Deferred Deep Link</div>
+        파라미터 저장<br><span class="sub">설치 완료 시 딥링크 자동 실행</span>
+      </div></td>
+      <td></td><td></td><td></td><td></td>
+    </tr>
+
+    <tr class="ph"><td colspan="8">PHASE 1 — 딥링크 수신 · SDK 전달</td></tr>
+    <tr>
+      <td class="num">1</td>
+      <td></td>
+      <td><div class="nc nc-air">
+        <div class="nc-lbl"><span class="dot" style="background:#7B3FA0"></span>에어브릿지</div>
+        딥링크 파싱 → 앱 오픈<br>
+        <code>app://event/{event_id}?apply_event=true</code><br>
+        <code>link_type: deferred | direct</code>
+      </div></td>
+      <td></td>
+      <td><div class="nc nc-sdk">
+        <div class="nc-lbl"><span class="dot" style="background:#2563EB"></span>앱 → Braze SDK</div>
+        <code>① setCustomAttribute</code><br>
+        &nbsp;&nbsp;<code>'push_authorization_status'</code><br>
+        &nbsp;&nbsp;<code>= 'not_determined' | 'denied' | 'authorized'</code><br><br>
+        <code>② logCustomEvent</code><br>
+        &nbsp;&nbsp;<code>'deeplink_open_promotion'</code><br>
+        &nbsp;&nbsp;<code>{link_type, term, event_id}</code><br>
+        <span style="color:#059669;font-size:10px;margin-top:3px;display:block">① → ② 순서 보장 필수 (Canvas 트리거 전 attr 선행)</span>
+      </div></td>
+      <td></td><td></td><td></td>
+    </tr>
+
+    <tr class="ph"><td colspan="8">PHASE 2 — Braze Canvas 분기</td></tr>
+    <tr>
+      <td class="num">2</td>
+      <td></td><td></td><td></td><td></td>
+      <td><div class="nc nc-iam">
+        <div class="nc-lbl"><span class="dot" style="background:#B91C1C"></span>Canvas Audience Path</div>
+        트리거: <code>deeplink_open_promotion</code><br><br>
+        <span class="sub">
+        A. <code>is_participated_{term}=true</code> → 이미 참여 IAM<br>
+        B. 약관 미동의 → 약관 동의 IAM<br>
+        C. 약관 OK + <code>push_authorization_status ≠ authorized</code> → Push Primer IAM<br>
+        D. 모두 OK → 참여 완료 IAM
+        </span>
+      </div></td>
+      <td></td><td></td>
+    </tr>
+
+    <tr class="ph"><td colspan="8">PHASE 3A — 약관 동의 모달</td></tr>
+    <tr>
+      <td class="num">3A</td>
+      <td></td><td></td><td></td>
+      <td><div class="nc nc-sdk">
+        <div class="nc-lbl"><span class="dot" style="background:#2563EB"></span>약관 동의 후 SDK</div>
+        <code>① setCustomAttribute</code><br>
+        &nbsp;&nbsp;<code>'is_marketing_info_opted_in' = true</code><br>
+        &nbsp;&nbsp;<code>'is_marketing_message_opted_in' = true</code><br>
+        <code>② logCustomEvent 'terms_agreed'</code><br>
+        딥링크: <code>app://braze/consent</code>
+      </div></td>
+      <td><div class="nc nc-iam">
+        <div class="nc-lbl"><span class="dot" style="background:#B91C1C"></span>약관 동의 IAM</div>
+        미동의 항목만 동적 표시<br>
+        <span class="sub">brazeBridge Liquid 변수 주입</span>
+      </div></td>
+      <td></td><td></td>
+    </tr>
+
+    <tr class="ph"><td colspan="8">PHASE 3B — Push Primer IAM (push_authorization_status ≠ authorized)</td></tr>
+    <tr>
+      <td class="num">3B‑1</td>
+      <td></td><td></td><td></td><td></td>
+      <td><div class="nc nc-iam">
+        <div class="nc-lbl"><span class="dot" style="background:#B91C1C"></span>Push Primer IAM</div>
+        <code>isPushOn()</code> 함수로 상태 판단<br>
+        <span class="cb">function isPushOn() {<br>
+  const b = getBridge();<br>
+  const s = b.getUser()<br>
+  &nbsp;.getCustomAttribute(<br>
+  &nbsp;&nbsp;'push_authorization_status');<br>
+  return s === 'authorized';<br>
+}</span>
+        <span style="color:#059669;font-size:10px;margin-top:4px;display:block">→ true: 참여 완료 처리 / → false: push 안내 분기</span>
+      </div></td>
+      <td><div class="nc nc-os">
+        <div class="nc-lbl"><span class="dot" style="background:#475569"></span>OS 권한 프롬프트</div>
+        <code>not_determined</code> 유저 전용<br>
+        iOS 시스템 팝업 / Android 13+ 바텀업<br>
+        <span class="sub" style="margin-top:3px;display:block">
+        허용 → <code>source: 'prompt'</code><br>
+        거부 → <code>source: 'prompt'</code>, denied<br>
+        닫기 → 이벤트 없이 IAM_FAIL 직결
+        </span>
+      </div></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="num">3B‑2</td>
+      <td></td><td></td><td></td>
+      <td><div class="nc nc-sdk">
+        <div class="nc-lbl"><span class="dot" style="background:#2563EB"></span>푸시 허용 후 SDK</div>
+        <code>① setCustomAttribute</code><br>
+        &nbsp;&nbsp;<code>'push_authorization_status' = 'authorized'</code><br>
+        <code>② logCustomEvent 'push_permission'</code><br>
+        &nbsp;&nbsp;<code>{status: 'granted',</code><br>
+        &nbsp;&nbsp;<code>&nbsp;source: 'prompt' | 'settings',</code><br>
+        &nbsp;&nbsp;<code>&nbsp;event_name, event_id}</code>
+      </div></td>
+      <td></td><td></td><td></td>
+    </tr>
+
+    <tr class="ph"><td colspan="8">PHASE 4 — 참여 완료 모달</td></tr>
+    <tr>
+      <td class="num">4</td>
+      <td></td><td></td><td></td><td></td>
+      <td><div class="nc nc-iam">
+        <div class="nc-lbl"><span class="dot" style="background:#B91C1C"></span>참여 완료 IAM</div>
+        Liquid: <code>term</code>, <code>event_id</code> 주입<br>
+        <code>setCustomUserAttribute</code><br>
+        &nbsp;&nbsp;<code>'is_participated_{term}' = true</code><br>
+        <code>logCustomEvent</code><br>
+        &nbsp;&nbsp;<code>'view_participated_promotion_modal'</code><br>
+        &nbsp;&nbsp;<code>{event_name, event_id}</code>
+      </div></td>
+      <td></td><td></td>
+    </tr>
+
+    <tr class="ph"><td colspan="8">PHASE 5 — 구글시트 앱스크립트 · Canvas 퍼포먼스 자동 fetch</td></tr>
+    <tr>
+      <td class="num">5</td>
+      <td></td><td></td><td></td><td></td>
+      <td><div class="nc nc-iam">
+        <div class="nc-lbl"><span class="dot" style="background:#B91C1C"></span>Braze REST API</div>
+        <code>GET /canvas/data_summary</code><br>
+        <span class="sub">Canvas Analytics 데이터 반환</span>
+      </div></td>
+      <td></td>
+      <td><div class="nc nc-gs">
+        <div class="nc-lbl"><span class="dot" style="background:#166534"></span>Google Apps Script</div>
+        <code>mapping_input</code> 시트 → <code>Canvas_Id</code><br>
+        BigQuery UNNEST 배치 쿼리 1회<br>
+        <code>그로스챕터용</code> 시트 자동 기입<br>
+        <span class="sub" style="margin-top:3px;display:block">CRM 리포트 → 🚀 배치 실행<br>Status 빈 행 전체 → <code>'완료'</code></span>
+      </div></td>
+    </tr>
+
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     TAB 2 : 유저 플로우차트
+════════════════════════════════ -->
+<div id="tab-flow" class="panel" style="padding:24px 32px;overflow-x:auto;">
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#f8fafc;font-family:'Noto Sans KR',sans-serif;padding:24px;}
+
+/* legend */
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.legend span{padding:4px 12px;border-radius:6px;font-size:11px;font-weight:600;color:#fff;}
+
+/* flow canvas */
+.flow{display:flex;flex-direction:column;align-items:center;gap:0;position:relative;width:100%;overflow-x:auto;}
+
+/* columns wrapper */
+.cols{display:grid;gap:0;width:100%;min-width:1200px;}
+
+/* node styles */
+.nd{border-radius:8px;padding:10px 12px;font-size:11px;line-height:1.55;font-family:'Noto Sans KR',sans-serif;position:relative;text-align:left;}
+.nd b{font-family:'JetBrains Mono',monospace;font-size:10px;display:block;margin-bottom:3px;}
+.nd code{font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(0,0,0,.1);border-radius:3px;padding:1px 4px;}
+
+/* node color classes */
+.web   {background:#7c3aed;color:#fff;border:2px solid #6d28d9;}
+.air   {background:#f59e0b;color:#fff;border:2px solid #d97706;}
+.store {background:#3b82f6;color:#fff;border:2px solid #2563eb;}
+.event {background:#8b5cf6;color:#fff;border:2px solid #7c3aed;}
+.braze {background:#ec4899;color:#fff;border:2px solid #db2777;}
+.bhtml {background:#f43f5e;color:#fff;border:2px solid #e11d48;}
+.logic {background:#14b8a6;color:#fff;border:2px solid #0d9488;}
+.os    {background:#6b7280;color:#fff;border:2px solid #4b5563;}
+.db    {background:#10b981;color:#fff;border:2px solid #059669;}
+.ok    {background:#22c55e;color:#fff;border:2px solid #16a34a;border-radius:20px;}
+.fail  {background:#ef4444;color:#fff;border:2px solid #dc2626;border-radius:20px;}
+.dec   {background:#fbbf24;color:#000;border:2px solid #f59e0b;border-radius:0;transform:rotate(0);clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);}
+.set   {background:#9ca3af;color:#fff;border:2px solid #6b7280;}
+
+/* row layout */
+.row{display:flex;align-items:flex-start;width:100%;min-width:1200px;position:relative;}
+.row.center{justify-content:center;}
+.col{flex:1;display:flex;flex-direction:column;align-items:center;padding:4px;}
+
+/* arrows */
+.arrow-down{display:flex;flex-direction:column;align-items:center;color:#64748b;font-size:10px;gap:1px;padding:2px 0;}
+.arrow-down::after{content:'▼';font-size:12px;color:#94a3b8;}
+.arrow-right{display:flex;align-items:center;color:#64748b;font-size:10px;gap:4px;padding:0 4px;}
+.arrow-right::after{content:'▶';font-size:11px;color:#94a3b8;}
+
+/* section label */
+.section{background:#e2e8f0;border-left:4px solid #64748b;padding:6px 16px;font-size:11px;font-weight:700;color:#475569;font-family:'JetBrains Mono',monospace;letter-spacing:.3px;width:100%;min-width:1200px;margin:12px 0 4px;}
+
+/* connector lines using CSS */
+.vline{width:2px;background:#cbd5e1;min-height:16px;margin:0 auto;}
+.hline{height:2px;background:#cbd5e1;flex:1;}
+.junction{display:flex;align-items:center;}
+
+</style>
+<div class="legend">
+  <span style="background:#7c3aed">🌐 웹</span>
+  <span style="background:#f59e0b">🔀 에어브릿지</span>
+  <span style="background:#3b82f6">🏪 스토어</span>
+  <span style="background:#8b5cf6">📤 앱→Braze SDK 이벤트</span>
+  <span style="background:#ec4899">📡 Braze 인앱 메시지</span>
+  <span style="background:#f43f5e">📝 Braze Custom HTML IAM</span>
+  <span style="background:#14b8a6">🎯 Braze 세그먼트 분기</span>
+  <span style="background:#6b7280">🔔 OS 권한</span>
+  <span style="background:#10b981">💾 DB</span>
+  <span style="background:#22c55e">✅ 완료</span>
+  <span style="background:#ef4444">❌ 미완료</span>
+</div>
+
+<!-- ========== PHASE 0 ========== -->
+<div class="section">PHASE 0 — 웹 · 앱 설치 판단</div>
+<div class="row" style="justify-content:flex-start;gap:8px;padding:8px 0;">
+  <div style="display:flex;flex-direction:column;align-items:center;min-width:200px;">
+    <div class="nd web" style="width:196px;">
+      <b>🌐 웹 이벤트 페이지</b>
+      CTA: 앱 다운로드하고 혜택 받기<br>
+      딥링크: app://event/{eventId}<br>
+      ?apply_event=true&amp;term={term}
+    </div>
+    <div class="arrow-down">CTA 클릭</div>
+  </div>
+  <div style="display:flex;align-items:center;margin-top:30px;">→</div>
+  <div style="display:flex;flex-direction:column;align-items:center;min-width:160px;margin-top:8px;">
+    <div class="nd air" style="width:156px;">
+      <b>🔀 에어브릿지 라우팅</b>
+    </div>
+    <div style="display:flex;gap:40px;margin-top:4px;">
+      <div class="arrow-down" style="font-size:9px;">미설치</div>
+      <div class="arrow-down" style="font-size:9px;">기설치</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:16px;margin-top:8px;align-items:flex-start;">
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div class="nd store" style="width:140px;">
+        <b>🏪 App Store</b>서비스 앱
+      </div>
+      <div style="display:flex;gap:20px;margin-top:4px;">
+        <div class="arrow-down" style="font-size:9px;">이탈</div>
+        <div class="arrow-down" style="font-size:9px;">설치</div>
+      </div>
+      <div style="display:flex;gap:16px;">
+        <div class="nd fail" style="width:90px;font-size:10px;text-align:center;">❌ 이탈</div>
+        <div class="nd" style="width:90px;background:#1e293b;color:#94a3b8;border:1px solid #334155;font-size:10px;">
+          📱 앱 첫 실행<br><small>(Deferred DL)</small>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;margin-top:44px;">
+      <div class="nd" style="width:130px;background:#1e293b;color:#94a3b8;border:1px solid #334155;font-size:10px;">
+        📱 앱 오픈<br><small>(Deep Link 콜백)</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PHASE 1 ========== -->
+<div class="section">PHASE 1 — apply_event 체크 · SDK 이벤트 발송</div>
+<div class="row" style="gap:16px;padding:8px 0;flex-wrap:wrap;">
+
+  <!-- 신규 -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+    <div style="font-size:10px;color:#64748b;font-weight:700;margin-bottom:4px;">신규 설치</div>
+    <div class="nd" style="width:130px;background:#fbbf24;color:#000;border:2px solid #f59e0b;font-size:10px;text-align:center;padding:8px;">
+      apply_event == true?
+    </div>
+    <div style="display:flex;gap:24px;">
+      <div class="arrow-down" style="font-size:9px;color:#22c55e;">true</div>
+      <div class="arrow-down" style="font-size:9px;color:#ef4444;">false</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:flex-start;">
+      <div class="nd event" style="width:220px;">
+        <b>📤 앱 → Braze SDK (신규)</b>
+        ① setCustomAttribute<br>
+        &nbsp;&nbsp;'push_authorization_status'<br>
+        &nbsp;&nbsp;= not_determined/denied/authorized<br>
+        ② logCustomEvent<br>
+        &nbsp;&nbsp;'deeplink_open_promotion'<br>
+        &nbsp;&nbsp;{link_type:'deferred', term, event_id}
+      </div>
+      <div class="nd web" style="width:140px;font-size:10px;">
+        <b>🌐 이벤트 페이지만</b>Braze 이벤트 미발송
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:20px;color:#cbd5e1;align-self:center;padding:0 8px;">|</div>
+
+  <!-- 기설치 -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+    <div style="font-size:10px;color:#64748b;font-weight:700;margin-bottom:4px;">기설치</div>
+    <div class="nd" style="width:130px;background:#fbbf24;color:#000;border:2px solid #f59e0b;font-size:10px;text-align:center;padding:8px;">
+      apply_event == true?
+    </div>
+    <div style="display:flex;gap:24px;">
+      <div class="arrow-down" style="font-size:9px;color:#22c55e;">true</div>
+      <div class="arrow-down" style="font-size:9px;color:#ef4444;">false</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:flex-start;">
+      <div class="nd event" style="width:220px;">
+        <b>📤 앱 → Braze SDK (기설치)</b>
+        ① setCustomAttribute<br>
+        &nbsp;&nbsp;'push_authorization_status'<br>
+        &nbsp;&nbsp;= not_determined/denied/authorized<br>
+        ② logCustomEvent<br>
+        &nbsp;&nbsp;'deeplink_open_promotion'<br>
+        &nbsp;&nbsp;{link_type:'direct', term, event_id}
+      </div>
+      <div class="nd web" style="width:140px;font-size:10px;">
+        <b>🌐 이벤트 페이지만</b>Braze 이벤트 미발송
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== Braze 분기 ========== -->
+<div class="section">PHASE 2 — Braze 대상자 선별 · Canvas 분기</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 0;width:100%;min-width:1200px;">
+  <div class="arrow-down"></div>
+  <div class="nd logic" style="width:380px;text-align:center;">
+    <b>🎯 Braze 대상자 선별</b>
+    트리거: deeplink_open_promotion<br>
+    WHERE term = {동적} 또는 event_id = {동적}<br>
+    ─────────────────<br>
+    세그먼트 필터:<br>
+    ① is_participated_promotion_{term} attr<br>
+    ② 약관 동의 2개 attr (marketing_info / marketing_message)<br>
+    ③ push_authorization_status<br>
+    ④ link_type 프로퍼티
+  </div>
+  <div class="arrow-down" style="margin-bottom:4px;"></div>
+
+  <!-- 5개 분기 가로 배치 -->
+  <div style="display:flex;gap:8px;width:100%;min-width:1200px;align-items:flex-start;justify-content:center;">
+
+    <!-- A -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;max-width:200px;">
+      <div style="font-size:9px;color:#fbbf24;font-weight:700;background:#1e293b;border:1px solid #fbbf24;border-radius:4px;padding:2px 8px;white-space:nowrap;">분기 A — 이미 참여</div>
+      <div class="arrow-down" style="font-size:9px;">is_participated = true</div>
+      <div class="nd braze" style="width:180px;">
+        <b>📡 이미 참여 완료 IAM</b>
+        ✅ 이미 이벤트 참여가<br>완료되었습니다<br>
+        <small>Liquid: event_properties로<br>term/event_id 동적 처리</small>
+      </div>
+      <div class="arrow-down">확인</div>
+      <div class="nd ok" style="width:100px;text-align:center;font-size:10px;">🏠 서비스 홈</div>
+    </div>
+
+    <!-- B -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;max-width:210px;">
+      <div style="font-size:9px;color:#fbbf24;font-weight:700;background:#1e293b;border:1px solid #fbbf24;border-radius:4px;padding:2px 8px;white-space:nowrap;">분기 B — 기설치+약관미충족</div>
+      <div class="arrow-down" style="font-size:9px;">미참여+미충족+direct</div>
+      <div class="nd braze" style="width:190px;">
+        <b>📡 기설치 안내 IAM</b>
+        이미 서비스 앱이 설치되어 있어요!<br>마케팅 앱 알림을 켜주셔야<br>응모가 완료돼요
+      </div>
+      <div class="arrow-down" style="font-size:9px;">응모 완료하기 →</div>
+      <!-- TERMS (공유) -->
+      <div class="nd bhtml" style="width:190px;">
+        <b>📝 약관 동의 Custom HTML IAM</b>
+        미동의 항목만 동적 노출<br>
+        ☐ 개인정보 마케팅 활용 동의<br>
+        ☐ 마케팅 알림 수신 동의
+      </div>
+      <div class="arrow-down" style="font-size:9px;">[동의하기] 클릭</div>
+      <div class="nd bhtml" style="width:190px;font-size:10px;">
+        <b>📝 brazeBridge 실행</b>
+        ① logCustomEvent 'click_terms_submit_button'<br>
+        ② setCustomUserAttribute<br>
+        &nbsp;is_marketing_info_opted_in=true<br>
+        &nbsp;is_marketing_message_opted_in=true<br>
+        ③ requestImmediateDataFlush()<br>
+        ④ goToPage('terms-notice')
+      </div>
+      <div class="arrow-down" style="font-size:9px;">[확인] → isPushOn()?</div>
+      <div style="display:flex;gap:8px;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+          <div style="font-size:9px;color:#22c55e;">true→</div>
+          <div class="nd bhtml" style="width:88px;font-size:10px;">📝 체스 드래그앤드롭<br>PAGE 3A</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+          <div style="font-size:9px;color:#ef4444;">false→</div>
+          <div class="nd bhtml" style="width:88px;font-size:10px;">📝 Push Primer<br>PAGE 3B</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;max-width:200px;">
+      <div style="font-size:9px;color:#fbbf24;font-weight:700;background:#1e293b;border:1px solid #fbbf24;border-radius:4px;padding:2px 8px;white-space:nowrap;">분기 C — 신규+약관미충족</div>
+      <div class="arrow-down" style="font-size:9px;">미참여+미충족+deferred</div>
+      <div class="nd bhtml" style="width:180px;">
+        <b>📝 약관 동의 IAM (바로)</b>
+        분기 B와 동일한 약관 동의 모달<br>
+        <small>(기설치 안내 모달 없이 직접)</small>
+      </div>
+      <div class="arrow-down" style="font-size:9px;">→ 분기 B와 동일 처리</div>
+      <div class="nd" style="width:180px;background:#1e293b;color:#64748b;border:1px dashed #334155;font-size:10px;text-align:center;">
+        ↑ B와 동일한 flow
+      </div>
+    </div>
+
+    <!-- D -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;max-width:210px;">
+      <div style="font-size:9px;color:#fbbf24;font-weight:700;background:#1e293b;border:1px solid #fbbf24;border-radius:4px;padding:2px 8px;white-space:nowrap;">분기 D — 모두동의+Push OK</div>
+      <div class="arrow-down" style="font-size:9px;">미참여+약관충족+authorized</div>
+      <div class="nd braze" style="width:190px;">
+        <b>📡 이벤트 참여 완료 IAM</b>
+        🎉 이벤트 참여 완료!<br>
+        setCustomUserAttribute<br>
+        'is_participated_'+term = true<br>
+        logCustomEvent<br>
+        'view_participated_promotion_modal'
+      </div>
+      <div class="arrow-down">확인</div>
+      <div class="nd ok" style="width:120px;text-align:center;font-size:10px;">🏠 서비스 홈<br>✅ 이벤트 완료</div>
+    </div>
+
+    <!-- E -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;max-width:360px;">
+      <div style="font-size:9px;color:#fbbf24;font-weight:700;background:#1e293b;border:1px solid #fbbf24;border-radius:4px;padding:2px 8px;white-space:nowrap;">분기 E — 모두동의+Push 미허용</div>
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+
+        <!-- E-1 not_determined -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <div style="font-size:9px;color:#64748b;">E-1 not_determined</div>
+          <div class="nd braze" style="width:168px;font-size:10px;">
+            <b>📡 Push Primer IAM</b>
+            🔔 기기 알림을 켜주셔야<br>이벤트 참여가 완료돼요!<br>
+            버튼: [알림 허용하기]<br>
+            source: 'prompt'
+          </div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+              <div style="font-size:9px;color:#22c55e;">허용</div>
+              <div class="nd event" style="width:100px;font-size:9px;">
+                <b>📤 SDK</b>status:authorized<br>push_permission<br>{granted,prompt}
+              </div>
+              <div style="font-size:9px;">↓</div>
+              <div class="nd ok" style="width:100px;font-size:9px;text-align:center;">→ 참여완료 IAM</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+              <div style="font-size:9px;color:#ef4444;">거부</div>
+              <div class="nd event" style="width:100px;font-size:9px;">
+                <b>📤 SDK</b>status:denied<br>push_permission<br>{denied,prompt}
+              </div>
+              <div style="font-size:9px;">↓</div>
+              <div class="nd fail" style="width:100px;font-size:9px;text-align:center;">→ IAM_FAIL</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+              <div style="font-size:9px;color:#94a3b8;">닫기</div>
+              <div class="nd event" style="width:100px;font-size:9px;">
+                <b>📤 SDK</b>attr 업데이트 없음<br>push_permission<br>{status:'',source:''}
+              </div>
+              <div style="font-size:9px;">↓</div>
+              <div class="nd fail" style="width:100px;font-size:9px;text-align:center;">→ IAM_FAIL</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- E-2 denied -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <div style="font-size:9px;color:#64748b;">E-2 denied</div>
+          <div class="nd braze" style="width:168px;font-size:10px;">
+            <b>📡 Push Primer IAM</b>
+            🔔 설정에서 알림을 켜주셔야<br>이벤트 참여가 완료돼요!<br>
+            버튼: [설정에서 켜기]<br>
+            source: 'settings'
+          </div>
+          <div style="display:flex;gap:4px;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+              <div class="nd os" style="width:100px;font-size:9px;">⚙️ 기기 설정 앱<br>서비스 &gt; 알림</div>
+              <div style="display:flex;gap:4px;">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:1px;">
+                  <div style="font-size:8px;color:#22c55e;">허용후복귀</div>
+                  <div class="nd event" style="width:82px;font-size:8px;"><b>📤</b>authorized<br>push_permission<br>{granted,settings}</div>
+                  <div style="font-size:8px;">↓ 참여완료IAM</div>
+                </div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:1px;">
+                  <div style="font-size:8px;color:#ef4444;">거부유지</div>
+                  <div class="nd event" style="width:82px;font-size:8px;"><b>📤</b>attr없음<br>push_permission<br>{denied,settings}</div>
+                  <div style="font-size:8px;">↓ IAM_FAIL</div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+              <div style="font-size:9px;color:#94a3b8;">닫기</div>
+              <div class="nd event" style="width:82px;font-size:9px;"><b>📤 SDK</b>attr없음<br>{status:'',source:''}</div>
+              <div style="font-size:9px;">↓</div>
+              <div class="nd fail" style="width:82px;font-size:9px;text-align:center;">IAM_FAIL</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end 5 branches -->
+</div>
+
+<!-- ========== IAM_FAIL ========== -->
+<div class="section">CASE FAIL — 이벤트 참여 불가</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 0;width:100%;min-width:1200px;">
+  <div class="nd braze" style="width:420px;text-align:left;">
+    <b>📡 IAM_FAIL — 이벤트 참여 불가 안내</b>
+    트리거: push_permission WHERE status ≠ granted (denied 또는 빈값)<br>
+    알림을 켠 후 다시 시도해 주세요 → closeModal()<br>
+    📌 별도 속성 업데이트 없음
+  </div>
+  <div class="arrow-down">확인</div>
+  <div class="nd fail" style="width:160px;text-align:center;">🏠 서비스 홈<br>❌ 이벤트 미완료</div>
+</div>
+
+<!-- ========== 경품 추첨 ========== -->
+<div class="section">PHASE 3 — 체스 드롭 · 경품 추첨 · 종료</div>
+<div style="display:flex;gap:12px;padding:8px 0;width:100%;min-width:1200px;align-items:flex-start;flex-wrap:wrap;">
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+    <div class="nd bhtml" style="width:210px;">
+      <b>📝 PAGE 3A: 체스 드래그앤드롭</b>
+      나이트를 체스판으로 드래그<br>드롭 성공 → 경품 추첨 즉시 실행
+    </div>
+    <div class="arrow-down" style="font-size:9px;">드롭 성공 (onDropSuccess)</div>
+    <div class="nd bhtml" style="width:210px;font-size:10px;">
+      <b>📝 경품 추첨 + 동시 처리</b>
+      ① 랜덤 추첨 (prize_tier: top/mid/base)<br>
+      ② claimPrize() → GAS POST (no-cors)<br>
+      ③ setCustomUserAttribute<br>
+      &nbsp;'is_participated_'+promoTerm = true<br>
+      &nbsp;'promotion_prize_'+promoTerm = prize<br>
+      &nbsp;'promotion_prize_tier_'+promoTerm = tier<br>
+      ④ logCustomEvent 'view_participated_promotion_modal'
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:40px;">
+    <div class="arrow-right" style="font-size:9px;">GAS doPost</div>
+    <div class="nd db" style="width:160px;font-size:10px;">
+      <b>💾 Google Apps Script</b>
+      시트 재고 차감<br>prize 컬럼 -1<br>braze_id 로그 기록
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:40px;">
+    <div class="arrow-right" style="font-size:9px;">경품 종류 판단</div>
+    <div class="nd" style="width:130px;background:#fbbf24;color:#000;border:2px solid #f59e0b;text-align:center;font-size:10px;padding:10px;">
+      경품 결과 분기<br>gasKey 기준
+    </div>
+    <div style="display:flex;gap:8px;margin-top:4px;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+        <div style="font-size:9px;">macbook/ps5/dinner</div>
+        <div class="nd bhtml" style="width:140px;font-size:10px;">
+          <b>📝 top3 당첨</b>
+          맥북/PS5/파인다이닝<br>구글폼 직접 랜딩<br>(제세공과금 입력)
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+        <div style="font-size:9px;">gas/dept/conv/coupon</div>
+        <div class="nd bhtml" style="width:140px;font-size:10px;">
+          <b>📝 confirm 모달</b>
+          당첨을 축하드려요!<br>경품 아이콘+상세<br>이벤트 종료 후 4/6 지급
+        </div>
+      </div>
+    </div>
+    <div class="arrow-down" style="font-size:9px;">handleFinalClose()</div>
+    <div class="nd bhtml" style="width:200px;font-size:10px;">
+      <b>📝 handleFinalClose()</b>
+      동의 파라미터 있을 경우:<br>
+      app://braze/consent<br>
+      ?allow_use_marketing=1<br>
+      &amp;allow_news_letters=1<br>
+      → 300ms 후 brazeBridge.closeMessage()
+    </div>
+    <div class="arrow-down">완료</div>
+    <div class="nd ok" style="width:140px;text-align:center;font-size:10px;">🏠 서비스 홈<br>✅ 이벤트 완료</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:40px;margin-left:16px;">
+    <div class="nd bhtml" style="width:180px;font-size:10px;">
+      <b>📝 PAGE 3B: Push Primer</b>
+      알림이 꺼져 있어요<br>
+      CTA: 알림 키고 나이트 소환하기<br>
+      app://braze/open-notification-settings<br>
+      ?action=open_settings&amp;term={promoTerm}<br>
+      닫기: ?action=close
+    </div>
+    <div class="arrow-down" style="font-size:9px;">설정 후 앱 재진입</div>
+    <div class="nd" style="width:180px;background:#1e293b;color:#94a3b8;border:1px dashed #334155;font-size:10px;text-align:center;">
+      → 새 IAM으로 재분기<br>→ PAGE 3A로 이동
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ════════════════════════════════
+     TAB 3 : 이벤트 속성 정의서
+════════════════════════════════ -->
+<div id="tab-events" class="panel active">
+
+  <div class="sec">
+    <div class="sec-title">Custom Events</div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+
+      <!-- deeplink_open_promotion -->
+      <div class="card">
+        <div class="card-header">
+          <code style="font-size:13px">deeplink_open_promotion</code>
+          <span class="tag tag-app">앱 SDK</span>
+          <span style="font-size:12px;color:#64748B;margin-left:auto">Canvas 트리거 이벤트 — 딥링크 수신 직후 발송</span>
+        </div>
+        <div class="card-body">
+          <table class="tbl">
+            <thead><tr><th>Property</th><th>Type</th><th>값</th><th>설명</th></tr></thead>
+            <tbody>
+              <tr><td><code>link_type</code></td><td>String</td><td><code>deferred</code> / <code>direct</code></td><td>신규 설치(deferred) / 기설치 유저(direct)</td></tr>
+              <tr><td><code>term</code></td><td>String</td><td><code>appinstall_2603</code></td><td>프로모션 식별자 (Canvas Audience Path 분기에 사용)</td></tr>
+              <tr><td><code>event_id</code></td><td>String</td><td>예: <code>{event_id}</code></td><td>이벤트 고유 ID</td></tr>
+            </tbody>
+          </table>
+          <div class="note">⚠️ <strong>순서 보장 필수:</strong> <code>setCustomAttribute('push_authorization_status', ...)</code> 설정 후 이 이벤트를 발송해야 Canvas Audience Path에서 attribute 값을 정확히 읽을 수 있음</div>
+        </div>
+      </div>
+
+      <!-- terms_agreed -->
+      <div class="card">
+        <div class="card-header">
+          <code style="font-size:13px">terms_agreed</code>
+          <span class="tag tag-app">앱 SDK</span>
+          <span style="font-size:12px;color:#64748B;margin-left:auto">약관 동의 완료 후 발송</span>
+        </div>
+        <div class="card-body">
+          <table class="tbl">
+            <thead><tr><th>Property</th><th>Type</th><th>값</th><th>설명</th></tr></thead>
+            <tbody>
+              <tr><td><code>term</code></td><td>String</td><td><code>appinstall_2603</code></td><td>프로모션 식별자</td></tr>
+              <tr><td><code>event_id</code></td><td>String</td><td>예: <code>{event_id}</code></td><td>이벤트 고유 ID</td></tr>
+            </tbody>
+          </table>
+          <div class="note" style="margin-top:10px">딥링크 <code>app://braze/consent</code> 호출로 앱에 동의 완료 신호 전달. 동시에 <code>is_marketing_info_opted_in</code>, <code>is_marketing_message_opted_in</code> attribute 세팅</div>
+        </div>
+      </div>
+
+      <!-- push_permission -->
+      <div class="card">
+        <div class="card-header">
+          <code style="font-size:13px">push_permission</code>
+          <span class="tag tag-app">앱 SDK</span>
+          <span style="font-size:12px;color:#64748B;margin-left:auto">OS 권한 요청 결과 또는 설정 앱 복귀 후 발송</span>
+        </div>
+        <div class="card-body">
+          <table class="tbl">
+            <thead><tr><th>Property</th><th>Type</th><th>값</th><th>설명</th></tr></thead>
+            <tbody>
+              <tr><td><code>status</code></td><td>String</td><td><code>granted</code> / <code>denied</code></td><td>허용 / 거부</td></tr>
+              <tr><td><code>source</code></td><td>String</td><td><code>prompt</code> / <code>settings</code></td><td>OS 프롬프트에서 결정 / 설정 앱에서 변경 후 복귀</td></tr>
+              <tr><td><code>event_name</code></td><td>String</td><td><code>appinstall_2603</code></td><td>프로모션 식별자</td></tr>
+              <tr><td><code>event_id</code></td><td>String</td><td>예: <code>{event_id}</code></td><td>이벤트 고유 ID</td></tr>
+            </tbody>
+          </table>
+          <div class="note" style="margin-top:10px">⚠️ <strong>닫기 시 미발송:</strong> Push Primer에서 닫기 클릭 시 이 이벤트를 발송하지 않음. Braze IAM dismiss 자동 트래킹으로 대체. <code>push_authorization_status</code> attribute도 업데이트 안 함.</div>
+        </div>
+      </div>
+
+      <!-- view_participated_promotion_modal -->
+      <div class="card">
+        <div class="card-header">
+          <code style="font-size:13px">view_participated_promotion_modal</code>
+          <span class="tag tag-brazejs">brazeBridge</span>
+          <span style="font-size:12px;color:#64748B;margin-left:auto">참여 완료 IAM 조회 시 Custom HTML IAM 내부에서 발송</span>
+        </div>
+        <div class="card-body">
+          <table class="tbl">
+            <thead><tr><th>Property</th><th>Type</th><th>값</th><th>설명</th></tr></thead>
+            <tbody>
+              <tr><td><code>event_name</code></td><td>String</td><td><code>appinstall_2603</code></td><td>Liquid로 주입: <code>{{canvas_entry_properties.${term}}}</code></td></tr>
+              <tr><td><code>event_id</code></td><td>String</td><td>예: <code>{event_id}</code></td><td>Liquid로 주입: <code>{{canvas_entry_properties.${event_id}}}</code></td></tr>
+            </tbody>
+          </table>
+          <div class="note" style="margin-top:10px">이 이벤트 발송과 동시에 <code>setCustomUserAttribute('is_participated_{term}', true)</code> 실행. 이후 재진입 시 "이미 참여 완료" 분기로 라우팅됨.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">Custom Attributes</div>
+    <div class="card">
+      <div class="card-body">
+        <table class="tbl">
+          <thead><tr><th>Attribute Key</th><th>Type</th><th>값</th><th>세팅 주체</th><th>세팅 시점</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>push_authorization_status</code></td>
+              <td>String</td>
+              <td><code>not_determined</code> / <code>denied</code> / <code>authorized</code></td>
+              <td><span class="tag tag-app">앱 SDK</span></td>
+              <td>딥링크 수신 직후 (<code>deeplink_open_promotion</code> 발송 전)</td>
+            </tr>
+            <tr>
+              <td><code>is_participated_{term}</code></td>
+              <td>Boolean</td>
+              <td><code>true</code></td>
+              <td><span class="tag tag-brazejs">brazeBridge</span></td>
+              <td>참여 완료 IAM 조회 시 (impression)</td>
+            </tr>
+            <tr>
+              <td><code>is_marketing_info_opted_in</code></td>
+              <td>Boolean</td>
+              <td><code>true</code></td>
+              <td><span class="tag tag-app">앱 SDK</span></td>
+              <td>약관 동의 완료 후</td>
+            </tr>
+            <tr>
+              <td><code>is_marketing_message_opted_in</code></td>
+              <td>Boolean</td>
+              <td><code>true</code></td>
+              <td><span class="tag tag-app">앱 SDK</span></td>
+              <td>약관 동의 완료 후</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════
+     TAB 4 : 기술 스펙
+════════════════════════════════ -->
+<div id="tab-spec" class="panel">
+
+  <div class="sec">
+    <div class="sec-title">Canvas 세그먼트 분기 조건</div>
+    <div class="card">
+      <div class="card-body">
+        <table class="tbl">
+          <thead><tr><th>분기</th><th>세그먼트 조건</th><th>노출 IAM</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>A — 이미 참여</strong></td>
+              <td><code>is_participated_{term} = true</code></td>
+              <td>이미 참여 완료 안내 IAM</td>
+            </tr>
+            <tr>
+              <td><strong>B — 약관 미동의</strong></td>
+              <td><code>is_participated_{term} ≠ true</code><br>+ <code>is_marketing_info_opted_in ≠ true</code> OR <code>is_marketing_message_opted_in ≠ true</code></td>
+              <td>약관 동의 IAM (미동의 항목 동적 표시)</td>
+            </tr>
+            <tr>
+              <td><strong>C — Push 미허용</strong></td>
+              <td><code>is_participated_{term} ≠ true</code><br>+ 약관 2개 모두 <code>true</code><br>+ <code>push_authorization_status ≠ authorized</code></td>
+              <td>Push Primer IAM</td>
+            </tr>
+            <tr>
+              <td><strong>D — 모두 OK</strong></td>
+              <td><code>is_participated_{term} ≠ true</code><br>+ 약관 2개 모두 <code>true</code><br>+ <code>push_authorization_status = authorized</code></td>
+              <td>참여 완료 IAM</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">UI 유형 구분</div>
+    <div class="card">
+      <div class="card-body">
+        <table class="tbl">
+          <thead><tr><th>UI</th><th>유형</th><th>트리거</th></tr></thead>
+          <tbody>
+            <tr><td>📝 약관 동의 모달</td><td><span class="tag tag-braze">Braze Custom HTML IAM</span></td><td>Canvas 분기 B</td></tr>
+            <tr><td>🔔 Push Primer IAM</td><td><span class="tag tag-braze">Braze Custom HTML IAM</span></td><td>Canvas 분기 C — <code>isPushOn()</code> 내부 분기</td></tr>
+            <tr><td>🎉 참여 완료</td><td><span class="tag tag-braze">Braze Custom HTML IAM</span></td><td>Canvas 분기 D (또는 C → 허용 후)</td></tr>
+            <tr><td>✅ 이미 참여 완료</td><td><span class="tag tag-braze">Braze Custom HTML IAM</span></td><td>Canvas 분기 A</td></tr>
+            <tr><td>🔕 미완료 안내 (IAM_FAIL)</td><td><span class="tag tag-braze">Braze Custom HTML IAM</span></td><td>Push Primer 닫기 → dismiss</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">isPushOn() 함수 스펙</div>
+    <div class="card">
+      <div class="card-body">
+        <p style="font-size:12px;color:#64748B;margin-bottom:12px">Custom HTML IAM 내부 JS — <code>push_authorization_status</code> attribute를 읽어 분기 판단</p>
+        <div style="background:#F1F5F9;border-radius:8px;padding:16px;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12px;line-height:1.8;color:#1C2A3A">
+          <span style="color:#64748B">// Push Primer IAM 내부</span><br>
+          <span style="color:#2563EB">function</span> <span style="color:#0F172A;font-weight:700">isPushOn</span>() {<br>
+          &nbsp;&nbsp;<span style="color:#2563EB">const</span> b = getBridge(); &nbsp;<span style="color:#64748B">// brazeBridge 또는 appboyBridge</span><br>
+          &nbsp;&nbsp;<span style="color:#2563EB">const</span> s = b.getUser()<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;.getCustomAttribute(<span style="color:#166534">'push_authorization_status'</span>);<br>
+          &nbsp;&nbsp;<span style="color:#2563EB">return</span> s === <span style="color:#166534">'authorized'</span>;<br>
+          }<br><br>
+          <span style="color:#64748B">// 약관 동의 완료 후 분기 (handleAfterTerms)</span><br>
+          <span style="color:#2563EB">function</span> <span style="color:#0F172A;font-weight:700">handleAfterTerms</span>() {<br>
+          &nbsp;&nbsp;<span style="color:#2563EB">if</span> (isPushOn()) {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;goToPage(<span style="color:#166534">'participation-complete'</span>); <span style="color:#64748B">// 참여 완료 바로 이동</span><br>
+          &nbsp;&nbsp;} <span style="color:#2563EB">else</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;goToPage(<span style="color:#166534">'push-guide'</span>); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#64748B">// Push Primer 표시</span><br>
+          &nbsp;&nbsp;}<br>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">구글시트 앱스크립트 연동</div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-header"><h3>mapping_input 시트 구조</h3></div>
+        <div class="card-body">
+          <table class="tbl">
+            <thead><tr><th>열</th><th>항목</th><th>설명</th></tr></thead>
+            <tbody>
+              <tr><td>A</td><td>Promotion_Name</td><td>프로모션명</td></tr>
+              <tr><td>B</td><td>Year_Month</td><td>연월 (예: 2603)</td></tr>
+              <tr><td>C</td><td>User_Type</td><td>유저 타입</td></tr>
+              <tr><td>D</td><td>Canvas_Id</td><td>Braze Canvas ID</td></tr>
+              <tr><td>E</td><td>Primary_Conv</td><td>주요 전환 이벤트명</td></tr>
+              <tr><td>F</td><td>Secondary_Conv</td><td>보조 전환 (쉼표 구분)</td></tr>
+              <tr><td>G</td><td>Event_Title</td><td>BigQuery 이벤트명</td></tr>
+              <tr><td>H</td><td>Landing_URL</td><td>랜딩 URL</td></tr>
+              <tr><td>I</td><td>Status</td><td>완료 / 오류 자동 기입</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>실행 방법 및 결과</h3></div>
+        <div class="card-body">
+          <table class="tbl">
+            <tbody>
+              <tr><td style="font-weight:600;color:#64748B;font-size:11px">실행</td><td>상단 메뉴 <strong>CRM 리포트 → 🚀 배치 실행</strong><br><span class="sub">Status 빈 행 전체를 1회 쿼리로 처리</span></td></tr>
+              <tr><td style="font-weight:600;color:#64748B;font-size:11px">쿼리 방식</td><td>BigQuery UNNEST 배치 쿼리<br><span class="sub">Canvas step별 지표 추출</span></td></tr>
+              <tr><td style="font-weight:600;color:#64748B;font-size:11px">결과 시트</td><td><code>그로스챕터용</code><br><span class="sub">채널별 Recipient / Impression / Click / Conversion / CTR / CVR 자동 기입</span></td></tr>
+              <tr><td style="font-weight:600;color:#64748B;font-size:11px">완료 표시</td><td>Status 열 → <code>'완료'</code> 자동 기입</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+    b.classList.toggle('active', ['seq','flow','events','spec'][i]===id);
+  });
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  // mermaid가 숨겨진 탭에서 렌더링 안 되는 문제 해결
+  if(id === 'flow' && window.mermaid) {
+    setTimeout(() => mermaid.contentLoaded(), 100);
+  }
+}
+</script>
+
+
+</body></html>
