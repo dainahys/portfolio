@@ -69,10 +69,13 @@ ol.reasons li::before{content:counter(r);position:absolute;left:14px;top:13px;wi
 ol.reasons .lead{font-weight:700;color:var(--ink)}
 
 /* ── Plain ordered/unordered list (in prose) ─────────────── */
-.wrap ul.bullet,.wrap ol.num{margin:0 0 18px;padding-left:22px;line-height:1.8}
-.wrap ul.bullet li,.wrap ol.num li{margin:0 0 6px}
+.wrap ul.bullet{margin:0 0 18px;padding-left:22px;line-height:1.8}
+.wrap ul.bullet li{margin:0 0 6px}
 .wrap ul.bullet li::marker{color:var(--accent)}
-.wrap ol.num li::marker{color:var(--accent);font-family:var(--mono);font-weight:500}
+/* numbered prose list: number aligned to left margin (no overhang), text hangs */
+.wrap ol.num{list-style:none;counter-reset:n;margin:0 0 18px;padding-left:0;line-height:1.8}
+.wrap ol.num li{counter-increment:n;position:relative;padding-left:2.4em;margin:0 0 6px}
+.wrap ol.num li::before{content:counter(n) ".";position:absolute;left:0;top:0;color:var(--accent);font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums}
 
 /* ── Code blocks (다크 서피스 · 테마 무관) ──────────────────── */
 .code{margin:6px 0 22px;border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.06);box-shadow:0 10px 30px rgba(22,19,31,0.12)}
